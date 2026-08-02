@@ -14,49 +14,75 @@ from Routes.tutorRoutes import tutor_bp
 from Routes.notebookRoutes import notebook_bp
 from Routes.quizCreatorRoutes import quiz_bp
 from Routes.circuitRoutes import circuit_bp
+
+# Load environment variables (.env for local development)
 load_dotenv()
 
+# Use non-GUI backend for matplotlib (required on Render/Linux)
 matplotlib.use("Agg")
 
+# Create Flask app
 app = Flask(__name__)
 
-# ── Bug #5 Fix: SECRET_KEY validation ──────────────────────────────────────
-# The old key was "123456" — trivially weak and easy to forge session cookies.
-# This block validates the key at startup and refuses to run if it is unsafe.
+# ============================================================
+# SECRET KEY VALIDATION
+# ============================================================
 
-_WEAK_KEYS = {"123456", "secret", "password", "dev", "test", "flask", "change_me"}
+_WEAK_KEYS = {
+    "123456",
+    "secret",
+    "password",
+    "dev",
+    "test",
+    "flask",
+    "change_me",
+}
 
 _secret_key = os.getenv("SECRET_KEY", "")
 
 if not _secret_key:
     raise SystemExit(
-        "\n[SECURITY ERROR] SECRET_KEY is not set in your .env file.\n"
-        "Run this command to generate one:\n"
-        "  python -c \"import secrets; print(secrets.token_hex(32))\"\n"
-        "Then add it to your .env file as: SECRET_KEY=<generated_value>\n"
+        "\n[SECURITY ERROR] SECRET_KEY is not set.\n"
+        "Generate one using:\n"
+        'python -c "import secrets; print(secrets.token_hex(32))"\n'
+        "Then add it to your .env file:\n"
+        "SECRET_KEY=<your_generated_key>"
     )
 
 if len(_secret_key) < 32 or _secret_key.lower() in _WEAK_KEYS:
     raise SystemExit(
-        f"\n[SECURITY ERROR] SECRET_KEY is too weak ('{_secret_key[:6]}...').\n"
-        "It must be at least 32 characters long and not a common word.\n"
-        "Run this command to generate a secure key:\n"
-        "  python -c \"import secrets; print(secrets.token_hex(32))\"\n"
-        "Then update SECRET_KEY in your .env file.\n"
+        "\n[SECURITY ERROR] SECRET_KEY is too weak.\n"
+        "Generate a stronger key using:\n"
+        'python -c "import secrets; print(secrets.token_hex(32))"\n'
     )
 
 app.config["SECRET_KEY"] = _secret_key
 
-# Bug #1 Fix: Session security configuration
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)  # Session lasts 7 days
-app.config["SESSION_COOKIE_HTTPONLY"]    = True               # JS cannot read the cookie (XSS protection)
-app.config["SESSION_COOKIE_SAMESITE"]    = "Lax"              # CSRF protection
-app.config["SESSION_COOKIE_SECURE"]      = False              # Set True in production (HTTPS only)
+# ============================================================
+# SESSION CONFIGURATION
+# ============================================================
+
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
+# HTTPS-only cookies in production
+app.config["SESSION_COOKIE_SECURE"] = (
+    os.getenv("FLASK_ENV", "").lower() == "production"
+)
+
+# ============================================================
+# STATIC FOLDER
+# ============================================================
 
 STATIC_FOLDER = os.path.join(app.root_path, "static")
 os.makedirs(STATIC_FOLDER, exist_ok=True)
 
 app.config["STATIC_FOLDER"] = STATIC_FOLDER
+
+# ============================================================
+# REGISTER BLUEPRINTS
+# ============================================================
 
 app.register_blueprint(home_bp)
 app.register_blueprint(simulation_bp)
@@ -65,9 +91,18 @@ app.register_blueprint(profile_bp)
 app.register_blueprint(course_bp)
 app.register_blueprint(user_course_bp)
 app.register_blueprint(notebook_bp)
-
 app.register_blueprint(tutor_bp)
 app.register_blueprint(quiz_bp)
 app.register_blueprint(circuit_bp)
+
+# ============================================================
+# RUN APPLICATION
+# ============================================================
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
