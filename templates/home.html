@@ -2996,29 +2996,58 @@ body::before {
         <a href="#docs" class="nav-link">Docs</a>
       </nav>
 
-      <!-- Right Controls -->
-      <div class="navbar-controls">
-        <button class="nav-icon-btn" aria-label="Notifications" id="notifBtn">
-          <i class="fa-regular fa-bell"></i>
-          <span class="notif-dot"></span>
-        </button>
-        <button class="nav-icon-btn" aria-label="Search" id="globalSearchBtn">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <div class="nav-locale">
-          <i class="fa-solid fa-globe"></i>
-          <span>EN</span>
-        </div>
-        <a href="login" class="btn-ghost-sm">Sign in</a>
-        <a href="signup" class="btn-primary-sm">Get started</a>
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+     <!-- Right Controls -->
+<div class="navbar-controls">
+  <button class="nav-icon-btn" aria-label="Notifications" id="notifBtn">
+    <i class="fa-regular fa-bell"></i>
+    <span class="notif-dot"></span>
+  </button>
+
+  <button class="nav-icon-btn" aria-label="Search" id="globalSearchBtn">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+
+  <div class="nav-locale">
+    <i class="fa-solid fa-globe"></i>
+    <span>EN</span>
+  </div>
+
+  <!-- Guest Buttons -->
+  <div id="guestButtons">
+    <a href="login" class="btn-ghost-sm">Sign in</a>
+    <a href="signup" class="btn-primary-sm">Get started</a>
+  </div>
+
+  <!-- Dashboard Button -->
+  <a href="/dashboard" class="btn-primary-sm" id="dashboardBtn" style="display: none;">
+    Go to Dashboard
+  </a>
+
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
 
     </div>
   </header>
+<script>document.addEventListener("DOMContentLoaded", function () {
 
+    const token = localStorage.getItem("token");
+
+    const guestButtons = document.getElementById("guestButtons");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+
+    if (token && token.trim() !== "") {
+        // User Logged In
+        guestButtons.style.display = "none";
+        dashboardBtn.style.display = "inline-flex";
+    } else {
+        // User Not Logged In
+        guestButtons.style.display = "flex";
+        dashboardBtn.style.display = "none";
+    }
+
+});</script>
   <!-- Mobile Nav Overlay -->
   <div class="mobile-nav" id="mobileNav" aria-hidden="true">
     <div class="mobile-nav-inner">
