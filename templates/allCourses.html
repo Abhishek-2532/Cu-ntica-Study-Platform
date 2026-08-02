@@ -1,0 +1,2746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse all Quantum Machine Learning courses on Cuántica — filter by difficulty, topic, and duration." />
+  <title>All Courses | Cuántica — Quantum ML Academy</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Cuántica design system -->
+<style>
+
+    /* =============================================================
+   CUÁNTICA — All Courses Page
+   allCourse.css  |  Light Theme
+   Palette mirrors index.css exactly.
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.35);
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+  --max-w:            1280px;
+  --nav-h:            68px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. UTILITY
+============================================================= */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.w-full { width: 100%; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Section badge */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-soft);
+  margin-bottom: 1rem;
+}
+
+.section-badge i { font-size: .7rem; }
+
+/* Buttons */
+.btn-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .875rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary-sm:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+.btn-primary-md {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .9375rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary-md:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 15px 32px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+  justify-content: center;
+}
+
+.btn-primary-lg:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-outline-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-strong);
+  transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+  justify-content: center;
+}
+
+.btn-outline-lg:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   4. ANNOUNCEMENT BAR
+============================================================= */
+.announcement-bar {
+  background: var(--text);
+  color: #fff;
+  padding: 10px 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  font-size: .8125rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 200;
+}
+
+.announcement-bar.hidden { display: none; }
+
+.announcement-inner {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.announcement-icon {
+  color: var(--primary);
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+
+.announcement-link {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.announcement-link:hover {
+  color: var(--primary-soft);
+  text-decoration-color: currentColor;
+}
+
+.announcement-link i {
+  font-size: .7rem;
+  margin-left: 2px;
+}
+
+.announcement-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  opacity: .6;
+  font-size: .875rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.announcement-close:hover {
+  opacity: 1;
+  background: rgba(255,255,255,.12);
+}
+
+/* ============================================================
+   5. NAVBAR
+============================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(247,254,255,.88);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(247,254,255,.97);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  gap: 1.5rem;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.navbar-logo:hover .logo-mark {
+  transform: rotate(12deg) scale(1.05);
+}
+
+.logo-mark--sm {
+  width: 30px;
+  height: 30px;
+  font-size: .875rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1875rem;
+  color: var(--text);
+  letter-spacing: -.025em;
+}
+
+/* Nav links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.nav-link--active {
+  color: var(--primary-deeper);
+  font-weight: 600;
+  background: var(--surface-alt);
+}
+
+.nav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2px;
+  background: var(--primary-dark);
+  border-radius: 2px;
+}
+
+.nav-chevron {
+  font-size: .625rem;
+  opacity: .7;
+  transition: transform var(--transition-base);
+}
+
+/* Dropdown */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.nav-dropdown-wrapper:hover .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  min-width: 260px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  pointer-events: none;
+  z-index: 300;
+}
+
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.nav-dropdown-item:hover {
+  background: var(--surface-alt);
+}
+
+.nav-dropdown-item > i {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-dropdown-item:hover > i {
+  background: var(--primary);
+  color: var(--text);
+}
+
+.nav-dropdown-item span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-dropdown-item strong {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+}
+
+.nav-dropdown-item small {
+  font-size: .75rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* Nav right controls */
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.nav-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  position: relative;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.notif-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: 1.5px solid var(--bg);
+}
+
+.nav-locale {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-locale:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.nav-locale i { font-size: .75rem; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.hamburger:hover { background: var(--surface-alt); }
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   6. MOBILE NAV
+============================================================= */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: var(--surface);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--nav-h) + 1rem) 1.5rem 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-slow);
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.mobile-nav-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition-fast), padding-left var(--transition-base);
+}
+
+.mobile-nav-link:hover {
+  color: var(--primary-deeper);
+  padding-left: 6px;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+/* ============================================================
+   7. SEARCH OVERLAY
+============================================================= */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.search-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,41,59,.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.search-modal {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 90%;
+  max-width: 640px;
+  overflow: hidden;
+  transform: translateY(-20px) scale(.97);
+  transition: transform var(--transition-spring);
+}
+
+.search-overlay.open .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-modal-icon {
+  color: var(--text-muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.search-modal-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: var(--text);
+  background: transparent;
+}
+
+.search-modal-input::placeholder { color: var(--text-faint); }
+
+.search-modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.search-modal-close:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.search-modal-results {
+  padding: 16px 20px 20px;
+  min-height: 100px;
+}
+
+.search-hint {
+  color: var(--text-faint);
+  font-size: .875rem;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.search-result-item:hover { background: var(--surface-alt); }
+
+.search-result-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.search-result-text strong {
+  display: block;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.search-result-text small {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   8. COURSES HERO
+============================================================= */
+.courses-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 4.5rem;
+  background: linear-gradient(148deg, #E5FCF4 0%, #EFF9FF 38%, var(--bg) 62%, #E8F5FF 100%);
+}
+
+.courses-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 50% at 50% -5%, rgba(108,229,191,.26) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 90% 90%, rgba(99,102,241,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.courses-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.courses-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.courses-hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  margin-bottom: 1.125rem;
+}
+
+.courses-hero-heading em {
+  font-style: italic;
+  color: var(--primary-deeper);
+}
+
+.courses-hero-sub {
+  font-size: clamp(.9375rem, 1.6vw, 1.0625rem);
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+/* Mini stats row */
+.courses-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.chero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.chero-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+
+.chero-stat-label {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.chero-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border-strong);
+}
+
+/* Hero visual side */
+.courses-hero-visual {
+  position: relative;
+  flex-shrink: 0;
+  width: 340px;
+  height: 260px;
+}
+
+.hero-mini-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(224,250,244,.8) 0%, rgba(227,237,254,.6) 100%);
+  border: 1px solid var(--border);
+}
+
+/* Floating badges on the visual */
+.chero-float-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 8px 14px;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  animation: floatBadge 3.5s ease-in-out infinite;
+}
+
+.chero-float-badge i {
+  color: var(--primary-deeper);
+  font-size: .8rem;
+}
+
+.chero-float-1 {
+  top: 24px;
+  left: -20px;
+  animation-delay: 0s;
+}
+
+.chero-float-2 {
+  bottom: 28px;
+  right: -16px;
+  animation-delay: 1.75s;
+}
+
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   9. FILTER SECTION
+============================================================= */
+.filter-section {
+  padding: 1.75rem 0 0;
+  background: var(--bg);
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.25rem;
+}
+
+/* Search input */
+.filter-search {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: .875rem;
+  pointer-events: none;
+}
+
+.filter-search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px 0 40px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.filter-search-input:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+.filter-search-input::placeholder { color: var(--text-faint); }
+
+.filter-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: .8rem;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.filter-search-clear:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+/* Select wrappers */
+.filter-select-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.filter-select-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: .8rem;
+  pointer-events: none;
+}
+
+.filter-select {
+  height: 44px;
+  padding: 0 36px 0 34px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  white-space: nowrap;
+}
+
+.filter-select:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+.filter-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: .625rem;
+  pointer-events: none;
+}
+
+/* Result count pill */
+.filter-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0 14px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-count i { font-size: .8rem; color: var(--primary-darker); }
+
+/* Active tag filter chips */
+.filter-chips {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  min-height: 0;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  border: 1px solid var(--primary-soft);
+  color: var(--primary-deeper);
+  font-size: .8125rem;
+  font-weight: 600;
+  padding: 4px 12px 4px 10px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.filter-chip:hover {
+  background: rgba(108,229,191,.25);
+  border-color: var(--primary-dark);
+}
+
+.filter-chip i {
+  font-size: .7rem;
+  opacity: .8;
+}
+
+/* ============================================================
+   10. COURSES GRID
+============================================================= */
+.courses-section {
+  padding: 3rem 0 5rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.75rem;
+}
+
+/* ============================================================
+   11. COURSE CARD
+============================================================= */
+.course-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  opacity: 0;
+  transform: translateY(18px);
+  animation: cardReveal var(--transition-slow) forwards;
+}
+
+@keyframes cardReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-soft);
+}
+
+/* Thumbnail */
+.course-card-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+
+.course-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(.4,0,.2,1);
+}
+
+.course-card:hover .course-card-thumb img {
+  transform: scale(1.05);
+}
+
+/* Image fallback */
+.course-thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--surface-alt) 0%, var(--secondary) 100%);
+}
+
+.course-thumb-fallback i {
+  font-size: 2.5rem;
+  color: var(--primary-deeper);
+  opacity: .45;
+}
+
+/* Difficulty badge overlaid on thumbnail */
+.course-difficulty-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid transparent;
+}
+
+.course-difficulty-badge.beginner {
+  background: rgba(108,229,191,.88);
+  color: #0F5C42;
+  border-color: rgba(108,229,191,.4);
+}
+
+.course-difficulty-badge.intermediate {
+  background: rgba(227,237,254,.92);
+  color: #3730A3;
+  border-color: rgba(99,102,241,.25);
+}
+
+.course-difficulty-badge.advanced {
+  background: rgba(254,226,226,.92);
+  color: #991B1B;
+  border-color: rgba(239,68,68,.2);
+}
+
+/* Bookmark icon */
+.course-bookmark {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,.9);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-spring);
+  border: none;
+}
+
+.course-bookmark:hover {
+  color: var(--primary-deeper);
+  background: rgba(255,255,255,1);
+  transform: scale(1.1);
+}
+
+.course-bookmark.saved {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+/* Card body */
+.course-card-body {
+  padding: 1.25rem 1.375rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.course-card-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: .5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-card-desc {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* Meta row */
+.course-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .875rem;
+  padding-bottom: .875rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.course-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.course-meta-item i {
+  font-size: .75rem;
+  color: var(--primary-darker);
+}
+
+/* Tags */
+.course-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-bottom: 1.125rem;
+}
+
+.course-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border: 1px solid var(--primary-soft);
+  font-size: .72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  letter-spacing: .025em;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.course-tag:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary-dark);
+  color: #0F5C42;
+}
+
+.course-tag.secondary {
+  background: var(--secondary);
+  border-color: rgba(99,102,241,.2);
+  color: var(--secondary-dark);
+}
+
+.course-tag.secondary:hover {
+  background: rgba(99,102,241,.18);
+  border-color: var(--secondary-dark);
+}
+
+/* CTA button */
+.course-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 20px;
+  background: var(--text);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+  letter-spacing: .01em;
+}
+
+.course-card-cta i {
+  font-size: .8rem;
+  transition: transform var(--transition-base);
+}
+
+.course-card-cta:hover {
+  background: var(--primary-deeper);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(31,168,128,.28);
+}
+
+.course-card-cta:hover i {
+  transform: translateX(3px);
+}
+
+/* Card animation stagger delays */
+.course-card:nth-child(2)  { animation-delay: 60ms; }
+.course-card:nth-child(3)  { animation-delay: 120ms; }
+.course-card:nth-child(4)  { animation-delay: 180ms; }
+.course-card:nth-child(5)  { animation-delay: 240ms; }
+.course-card:nth-child(6)  { animation-delay: 300ms; }
+.course-card:nth-child(7)  { animation-delay: 360ms; }
+.course-card:nth-child(8)  { animation-delay: 420ms; }
+.course-card:nth-child(9)  { animation-delay: 480ms; }
+.course-card:nth-child(10) { animation-delay: 540ms; }
+.course-card:nth-child(11) { animation-delay: 600ms; }
+.course-card:nth-child(12) { animation-delay: 660ms; }
+
+/* ============================================================
+   12. SKELETON LOADER
+============================================================= */
+.course-skeleton {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.skel-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(90deg, #eaf5f5 25%, #d4f0ea 50%, #eaf5f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skel-body {
+  padding: 1.25rem 1.375rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.skel-line {
+  height: 14px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eaf5f5 25%, #d4f0ea 50%, #eaf5f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skel-line--wide  { width: 90%; height: 18px; }
+.skel-line--med   { width: 68%; }
+.skel-line--short { width: 45%; }
+
+.skel-tags {
+  display: flex;
+  gap: .5rem;
+  margin-top: .3rem;
+}
+
+.skel-tag {
+  height: 22px;
+  width: 64px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #eaf5f5 25%, #d4f0ea 50%, #eaf5f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skel-btn {
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, #eaf5f5 25%, #d4f0ea 50%, #eaf5f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-top: .4rem;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+   13. EMPTY & ERROR STATES
+============================================================= */
+.empty-state,
+.error-state {
+  text-align: center;
+  padding: 6rem 2rem;
+  max-width: 440px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-state-icon,
+.error-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.875rem;
+  margin-bottom: .5rem;
+}
+
+.empty-state-icon {
+  background: var(--surface-alt);
+  color: var(--primary-dark);
+  border: 2px solid var(--primary-soft);
+}
+
+.error-state-icon {
+  background: rgba(254,226,226,.7);
+  color: #DC2626;
+  border: 2px solid rgba(239,68,68,.25);
+}
+
+.empty-state-title,
+.error-state-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.empty-state-sub,
+.error-state-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   14. FEATURE STRIP
+============================================================= */
+.feature-strip {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 0;
+}
+
+.feature-strip-inner {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.fstrip-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.fstrip-item:first-child { padding-left: 0; }
+.fstrip-item:last-child  { padding-right: 0; }
+
+.fstrip-divider {
+  width: 1px;
+  background: var(--border-strong);
+  align-self: stretch;
+  flex-shrink: 0;
+  opacity: .7;
+}
+
+.fstrip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-deeper);
+  font-size: .9375rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-spring);
+}
+
+.fstrip-item:hover .fstrip-icon {
+  background: var(--primary);
+  border-color: var(--primary-dark);
+  transform: scale(1.08);
+}
+
+.fstrip-text strong {
+  display: block;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+}
+
+.fstrip-text span {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ============================================================
+   15. FOOTER
+============================================================= */
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.footer-logo {
+  margin-bottom: 1rem;
+}
+
+.footer-brand-desc {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 280px;
+  margin-bottom: 1.25rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: .5rem;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: .9rem;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast), transform var(--transition-spring);
+}
+
+.footer-social-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+  transform: translateY(-2px);
+}
+
+.footer-group-title {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-faint);
+  margin-bottom: 1rem;
+}
+
+.footer-links-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+
+.footer-links-group ul a {
+  font-size: .9rem;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), padding-left var(--transition-base);
+}
+
+.footer-links-group ul a:hover {
+  color: var(--primary-deeper);
+  padding-left: 4px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-size: .8125rem;
+  color: var(--text-faint);
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-bottom-links a {
+  font-size: .8125rem;
+  color: var(--text-faint);
+  transition: color var(--transition-fast);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   16. BACK TO TOP
+============================================================= */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-base), background var(--transition-fast);
+  z-index: 80;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--primary-deeper);
+  color: #fff;
+}
+
+/* ============================================================
+   17. RESPONSIVE
+============================================================= */
+@media (max-width: 1024px) {
+  .navbar-links { display: none; }
+  .hamburger    { display: flex; }
+  .nav-locale   { display: none; }
+
+  .courses-hero-visual { width: 260px; height: 200px; }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .courses-hero {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .courses-hero-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .courses-hero-visual {
+    width: 100%;
+    height: 180px;
+    max-width: 420px;
+    align-self: center;
+  }
+
+  .courses-hero-heading { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+
+  .filter-section {
+    position: relative;
+    top: unset;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .filter-search    { min-width: 100%; }
+  .filter-select-wrap { width: 100%; }
+  .filter-select    { width: 100%; }
+  .filter-count     { align-self: flex-start; }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-strip-inner {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .fstrip-item {
+    padding: 0;
+  }
+
+  .fstrip-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .back-to-top {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .courses-hero-stats { gap: .75rem; }
+  .chero-stat-num     { font-size: 1.25rem; }
+  .courses-grid       { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- ============================================================
+       SEARCH OVERLAY
+  ============================================================= -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay-backdrop" id="searchBackdrop"></div>
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <i class="fa-solid fa-magnifying-glass search-modal-icon"></i>
+        <input type="text" class="search-modal-input" id="searchInput" placeholder="Search courses, topics, or algorithms..." autocomplete="off" />
+        <button class="search-modal-close" id="searchClose" aria-label="Close search">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="search-modal-results" id="searchResults">
+        <p class="search-hint">Type to search across all courses...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE HEADER
+  ============================================================= -->
+  <section class="courses-hero">
+    <div class="courses-hero-bg"></div>
+    <div class="container">
+      <div class="courses-hero-inner">
+        <div class="courses-hero-text">
+          <div class="section-badge">
+            <i class="fa-solid fa-layer-group"></i>
+            Course Catalog
+          </div>
+          <h1 class="courses-hero-heading">
+            Learn Quantum ML,<br />
+            <em>one circuit at a time.</em>
+          </h1>
+          <p class="courses-hero-sub">
+            Browse our complete curriculum — from foundational qubits to advanced variational algorithms. Every course is crafted by leading researchers and engineers.
+          </p>
+          <div class="courses-hero-stats">
+            <div class="chero-stat">
+              <span class="chero-stat-num" id="statTotal">—</span>
+              <span class="chero-stat-label">Courses</span>
+            </div>
+            <div class="chero-stat-divider"></div>
+            <div class="chero-stat">
+              <span class="chero-stat-num">25+</span>
+              <span class="chero-stat-label">Topics</span>
+            </div>
+            <div class="chero-stat-divider"></div>
+            <div class="chero-stat">
+              <span class="chero-stat-num">Free</span>
+              <span class="chero-stat-label">to start</span>
+            </div>
+          </div>
+        </div>
+        <div class="courses-hero-visual" aria-hidden="true">
+          <canvas class="hero-mini-canvas" id="heroMiniCanvas"></canvas>
+          <div class="chero-float-badge chero-float-1">
+            <i class="fa-solid fa-atom"></i>
+            <span>Quantum Ready</span>
+          </div>
+          <div class="chero-float-badge chero-float-2">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Expert-led</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FILTER & SEARCH BAR
+  ============================================================= -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="filter-bar">
+
+        <!-- Search input -->
+        <div class="filter-search">
+          <i class="fa-solid fa-magnifying-glass filter-search-icon"></i>
+          <input
+            type="text"
+            id="courseSearch"
+            class="filter-search-input"
+            placeholder="Search courses..."
+            autocomplete="off"
+          />
+          <button class="filter-search-clear" id="searchClear" aria-label="Clear search" style="display:none;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Difficulty filter -->
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-signal filter-select-icon"></i>
+          <select id="difficultyFilter" class="filter-select" aria-label="Filter by difficulty">
+            <option value="">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+          <i class="fa-solid fa-chevron-down filter-select-arrow"></i>
+        </div>
+
+        <!-- Sort -->
+        <div class="filter-select-wrap">
+          <i class="fa-solid fa-arrow-up-wide-short filter-select-icon"></i>
+          <select id="sortFilter" class="filter-select" aria-label="Sort courses">
+            <option value="default">Sort: Default</option>
+            <option value="title-asc">Title A–Z</option>
+            <option value="title-desc">Title Z–A</option>
+            <option value="difficulty-asc">Beginner first</option>
+            <option value="difficulty-desc">Advanced first</option>
+          </select>
+          <i class="fa-solid fa-chevron-down filter-select-arrow"></i>
+        </div>
+
+        <!-- Results count -->
+        <div class="filter-count" id="filterCount">
+          <i class="fa-solid fa-grid-2"></i>
+          <span id="filterCountText">Loading...</span>
+        </div>
+
+      </div>
+
+      <!-- Active tag filters -->
+      <div class="filter-chips" id="filterChips" role="list" aria-label="Active tag filters"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COURSE GRID
+  ============================================================= -->
+  <main class="courses-section" id="main-content">
+    <div class="container">
+
+      <!-- Skeleton loader -->
+      <div class="courses-grid" id="skeletonGrid" aria-hidden="true">
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+        <div class="course-skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line skel-line--wide"></div><div class="skel-line skel-line--med"></div><div class="skel-line skel-line--short"></div><div class="skel-tags"><span class="skel-tag"></span><span class="skel-tag"></span></div><div class="skel-btn"></div></div></div>
+      </div>
+
+      <!-- Real course grid -->
+      <div class="courses-grid" id="coursesGrid" style="display:none;"></div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-state-icon">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div>
+        <h3 class="empty-state-title">No courses found</h3>
+        <p class="empty-state-sub">Try adjusting your search terms or clearing the active filters.</p>
+        <button class="btn-primary-md" id="clearAllFilters">
+          <i class="fa-solid fa-rotate-left"></i>
+          Clear filters
+        </button>
+      </div>
+
+      <!-- Error state -->
+      <div class="error-state" id="errorState" style="display:none;">
+        <div class="error-state-icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3 class="error-state-title">Could not load courses</h3>
+        <p class="error-state-sub">There was a problem connecting to the server. Please try again.</p>
+        <button class="btn-primary-md" id="retryBtn">
+          <i class="fa-solid fa-rotate-right"></i>
+          Retry
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FEATURE STRIP
+  ============================================================= -->
+  <section class="feature-strip">
+    <div class="container">
+      <div class="feature-strip-inner">
+        <div class="fstrip-item">
+          <div class="fstrip-icon">
+            <i class="fa-solid fa-check-double"></i>
+          </div>
+          <div class="fstrip-text">
+            <strong>Everything in one place</strong>
+            <span>Every quantum ML topic, from fundamentals to frontier research.</span>
+          </div>
+        </div>
+        <div class="fstrip-divider"></div>
+        <div class="fstrip-item">
+          <div class="fstrip-icon">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div class="fstrip-text">
+            <strong>Filter for what you need</strong>
+            <span>Search by difficulty, duration, or topic to find your next course.</span>
+          </div>
+        </div>
+        <div class="fstrip-divider"></div>
+        <div class="fstrip-item">
+          <div class="fstrip-icon">
+            <i class="fa-solid fa-lock-open"></i>
+          </div>
+          <div class="fstrip-text">
+            <strong>Free to start</strong>
+            <span>No credit card required. Begin your quantum journey today.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="/index.html" class="navbar-logo footer-logo">
+            <div class="logo-mark logo-mark--sm" style="background: transparent;">
+              <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+            </div>
+            <span class="logo-text">Cuántica</span>
+          </a>
+          <p class="footer-brand-desc">
+            The quantum machine learning platform for researchers, engineers, and curious minds.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="footer-social-btn" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-group-title">Platform</h4>
+          <ul>
+            <li><a href="#">Quantum Circuits</a></li>
+            <li><a href="#">QML Models</a></li>
+            <li><a href="#">Datasets</a></li>
+            <li><a href="#">Benchmarks</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-group-title">Learn</h4>
+          <ul>
+            <li><a href="/allCourse.html">All Courses</a></li>
+            <li><a href="#">Research Papers</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Playground</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4 class="footer-group-title">Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2025 Cuántica. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+
+    /* =============================================================
+   CUÁNTICA — All Courses Page
+   allCourse.js
+   All original API logic preserved.
+   Added: navbar, filters, search, skeleton, animations.
+============================================================= */
+
+(function () {
+  'use strict';
+
+  /* ----------------------------------------------------------
+     STATE
+  ---------------------------------------------------------- */
+  var allCourses = [];       // raw data from API
+  var filtered   = [];       // currently displayed subset
+  var savedIds   = JSON.parse(localStorage.getItem('cuántica_saved') || '[]');
+
+  /* ----------------------------------------------------------
+     DOM REFS
+  ---------------------------------------------------------- */
+  var skeletonGrid    = document.getElementById('skeletonGrid');
+  var coursesGrid     = document.getElementById('coursesGrid');
+  var emptyState      = document.getElementById('emptyState');
+  var errorState      = document.getElementById('errorState');
+  var statTotal       = document.getElementById('statTotal');
+  var filterCountText = document.getElementById('filterCountText');
+  var courseSearch    = document.getElementById('courseSearch');
+  var difficultyFilter= document.getElementById('difficultyFilter');
+  var sortFilter      = document.getElementById('sortFilter');
+  var searchClear     = document.getElementById('searchClear');
+  var filterChips     = document.getElementById('filterChips');
+  var clearAllBtn     = document.getElementById('clearAllFilters');
+  var retryBtn        = document.getElementById('retryBtn');
+
+  /* ----------------------------------------------------------
+     GLOBAL SEARCH OVERLAY (navbar icon)
+  ---------------------------------------------------------- */
+  var searchToggle  = document.getElementById('searchToggle');
+  var searchOverlay = document.getElementById('searchOverlay');
+  var searchBackdrop= document.getElementById('searchBackdrop');
+  var searchInput   = document.getElementById('searchInput');
+  var searchClose   = document.getElementById('searchClose');
+  var searchResults = document.getElementById('searchResults');
+
+  function openSearchOverlay() {
+    searchOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { searchInput && searchInput.focus(); }, 80);
+  }
+
+  function closeSearchOverlay() {
+    searchOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '<p class="search-hint">Type to search across all courses...</p>';
+  }
+
+  if (searchToggle) searchToggle.addEventListener('click', openSearchOverlay);
+  if (searchClose)  searchClose.addEventListener('click', closeSearchOverlay);
+  if (searchBackdrop) searchBackdrop.addEventListener('click', closeSearchOverlay);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('open')) {
+      closeSearchOverlay();
+    }
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      var q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        searchResults.innerHTML = '<p class="search-hint">Type to search across all courses...</p>';
+        return;
+      }
+      var hits = allCourses.filter(function (c) {
+        return (
+          c.title.toLowerCase().includes(q) ||
+          (c.description || '').toLowerCase().includes(q) ||
+          (c.tags || []).some(function (t) { return t.toLowerCase().includes(q); })
+        );
+      }).slice(0, 6);
+
+      if (!hits.length) {
+        searchResults.innerHTML = '<p class="search-hint">No courses match your query.</p>';
+        return;
+      }
+
+      searchResults.innerHTML = hits.map(function (c) {
+        return (
+          '<div class="search-result-item" role="button" tabindex="0" onclick="window.location=\'/course/' + c.id + '\'">' +
+            '<div class="search-result-icon"><i class="fa-solid fa-atom"></i></div>' +
+            '<div class="search-result-text">' +
+              '<strong>' + escHtml(c.title) + '</strong>' +
+              '<small>' + escHtml(c.difficulty || '') + (c.estimated_time ? ' &middot; ' + escHtml(c.estimated_time) : '') + '</small>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    });
+  }
+
+  /* ----------------------------------------------------------
+     HERO MINI CANVAS — subtle quantum network
+  ---------------------------------------------------------- */
+  var heroMiniCanvas = document.getElementById('heroMiniCanvas');
+
+  if (heroMiniCanvas) {
+    (function () {
+      var ctx   = heroMiniCanvas.getContext('2d');
+      var W, H, nodes = [], raf;
+      var NODE_COUNT = 28;
+      var EDGE_DIST  = 110;
+
+      function resize() {
+        W = heroMiniCanvas.offsetWidth;
+        H = heroMiniCanvas.offsetHeight;
+        heroMiniCanvas.width  = W * window.devicePixelRatio;
+        heroMiniCanvas.height = H * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        init();
+      }
+
+      function init() {
+        nodes = [];
+        for (var i = 0; i < NODE_COUNT; i++) {
+          nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - .5) * .35,
+            vy: (Math.random() - .5) * .35,
+            r: 1.5 + Math.random() * 2.5,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function draw(time) {
+        ctx.clearRect(0, 0, W, H);
+        time *= .001;
+
+        // Move nodes
+        nodes.forEach(function (n) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+
+        // Edges
+        for (var i = 0; i < nodes.length; i++) {
+          for (var j = i + 1; j < nodes.length; j++) {
+            var dx   = nodes[i].x - nodes[j].x;
+            var dy   = nodes[i].y - nodes[j].y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < EDGE_DIST) {
+              var alpha = (1 - dist / EDGE_DIST) * 0.13;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = 'rgba(62,207,166,' + alpha + ')';
+              ctx.lineWidth   = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Nodes
+        nodes.forEach(function (n) {
+          var pulse  = .55 + .45 * Math.sin(time * 1.8 + n.phase);
+          var radius = n.r * pulse;
+          var alpha  = .15 + .2 * pulse;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(62,207,166,' + alpha + ')';
+          ctx.fill();
+        });
+
+        raf = requestAnimationFrame(draw);
+      }
+
+      resize();
+      raf = requestAnimationFrame(draw);
+
+      var ro = new ResizeObserver(resize);
+      ro.observe(heroMiniCanvas);
+    }());
+  }
+
+  /* ----------------------------------------------------------
+     BACK TO TOP
+  ---------------------------------------------------------- */
+  var backToTop = document.getElementById('backToTop');
+
+  if (backToTop) {
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ----------------------------------------------------------
+     HELPERS
+  ---------------------------------------------------------- */
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  var difficultyOrder = { Beginner: 0, Intermediate: 1, Advanced: 2 };
+
+  function getDifficultyClass(d) {
+    if (!d) return '';
+    var dl = d.toLowerCase();
+    if (dl === 'beginner')     return 'beginner';
+    if (dl === 'intermediate') return 'intermediate';
+    if (dl === 'advanced')     return 'advanced';
+    return '';
+  }
+
+  function buildTagClass(tag, index) {
+    // Alternate between primary and secondary style for visual variety
+    return index % 3 === 2 ? 'secondary' : '';
+  }
+
+  /* ----------------------------------------------------------
+     RENDER COURSES
+  ---------------------------------------------------------- */
+  function renderCourses(list) {
+    // Update count
+    filterCountText.textContent = list.length + ' course' + (list.length !== 1 ? 's' : '');
+
+    if (!list.length) {
+      coursesGrid.style.display  = 'none';
+      emptyState.style.display   = 'flex';
+      return;
+    }
+
+    emptyState.style.display  = 'none';
+    coursesGrid.style.display = 'grid';
+
+    coursesGrid.innerHTML = list.map(function (course) {
+      var diffClass = getDifficultyClass(course.difficulty);
+      var tags      = Array.isArray(course.tags) ? course.tags : [];
+      var isSaved   = savedIds.indexOf(String(course.id)) !== -1;
+
+      var thumbHtml;
+      if (course.main_image) {
+        thumbHtml =
+          '<img src="' + escHtml(course.main_image) + '" ' +
+          'alt="' + escHtml(course.title) + '" ' +
+          'loading="lazy" ' +
+          'onerror="this.onerror=null; this.parentElement.innerHTML=\'<div class=\\\'course-thumb-fallback\\\'><i class=\\\'fa-solid fa-atom\\\'></i></div>\'" />';
+      } else {
+        thumbHtml = '<div class="course-thumb-fallback"><i class="fa-solid fa-atom"></i></div>';
+      }
+
+      var tagsHtml = tags.map(function (tag, i) {
+        var cls = buildTagClass(tag, i);
+        return (
+          '<span class="course-tag ' + cls + '" ' +
+          'onclick="window.filterByTag(\'' + escHtml(tag) + '\')" ' +
+          'role="button" tabindex="0">' +
+            escHtml(tag) +
+          '</span>'
+        );
+      }).join('');
+
+      return (
+        '<article class="course-card" role="article">' +
+          '<div class="course-card-thumb">' +
+            thumbHtml +
+            (diffClass
+              ? '<span class="course-difficulty-badge ' + diffClass + '">' +
+                  '<i class="fa-solid fa-signal"></i> ' + escHtml(course.difficulty) +
+                '</span>'
+              : '') +
+            '<button class="course-bookmark' + (isSaved ? ' saved' : '') + '" ' +
+              'aria-label="' + (isSaved ? 'Remove from saved' : 'Save course') + '" ' +
+              'onclick="window.toggleSave(event, \'' + escHtml(String(course.id)) + '\', this)">' +
+              '<i class="fa-' + (isSaved ? 'solid' : 'regular') + ' fa-bookmark"></i>' +
+            '</button>' +
+          '</div>' +
+          '<div class="course-card-body">' +
+            '<h3 class="course-card-title">' + escHtml(course.title) + '</h3>' +
+            '<p class="course-card-desc">' + escHtml(course.description) + '</p>' +
+            '<div class="course-card-meta">' +
+              (course.difficulty
+                ? '<div class="course-meta-item"><i class="fa-solid fa-signal"></i>' + escHtml(course.difficulty) + '</div>'
+                : '') +
+              (course.estimated_time
+                ? '<div class="course-meta-item"><i class="fa-regular fa-clock"></i>' + escHtml(course.estimated_time) + '</div>'
+                : '') +
+            '</div>' +
+            (tagsHtml
+              ? '<div class="course-card-tags">' + tagsHtml + '</div>'
+              : '') +
+            '<button class="course-card-cta" onclick="window.openCourse(\'' + escHtml(String(course.id)) + '\')">' +
+              'View Course <i class="fa-solid fa-arrow-right"></i>' +
+            '</button>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+  }
+
+  /* ----------------------------------------------------------
+     FILTER & SORT
+  ---------------------------------------------------------- */
+  function applyFilters() {
+    var q    = (courseSearch.value || '').trim().toLowerCase();
+    var diff = (difficultyFilter.value || '').trim();
+    var sort = (sortFilter.value || '');
+    var activeTags = getActiveTagFilters();
+
+    // Clear button visibility
+    if (q) {
+      searchClear.style.display = 'flex';
+    } else {
+      searchClear.style.display = 'none';
+    }
+
+    var result = allCourses.filter(function (c) {
+      // Text search
+      if (q) {
+        var haystack = [c.title, c.description, (c.tags || []).join(' ')].join(' ').toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+
+      // Difficulty
+      if (diff && c.difficulty !== diff) return false;
+
+      // Tag chips
+      if (activeTags.length) {
+        var ctags = (c.tags || []).map(function (t) { return t.toLowerCase(); });
+        var match = activeTags.every(function (at) {
+          return ctags.indexOf(at.toLowerCase()) !== -1;
+        });
+        if (!match) return false;
+      }
+
+      return true;
+    });
+
+    // Sort
+    if (sort === 'title-asc') {
+      result.sort(function (a, b) { return a.title.localeCompare(b.title); });
+    } else if (sort === 'title-desc') {
+      result.sort(function (a, b) { return b.title.localeCompare(a.title); });
+    } else if (sort === 'difficulty-asc') {
+      result.sort(function (a, b) {
+        return (difficultyOrder[a.difficulty] || 0) - (difficultyOrder[b.difficulty] || 0);
+      });
+    } else if (sort === 'difficulty-desc') {
+      result.sort(function (a, b) {
+        return (difficultyOrder[b.difficulty] || 0) - (difficultyOrder[a.difficulty] || 0);
+      });
+    }
+
+    filtered = result;
+    renderCourses(filtered);
+  }
+
+  /* ----------------------------------------------------------
+     TAG CHIP FILTERS
+  ---------------------------------------------------------- */
+  var activeTagFilters = [];
+
+  function getActiveTagFilters() { return activeTagFilters; }
+
+  function renderTagChips() {
+    filterChips.innerHTML = activeTagFilters.map(function (tag) {
+      return (
+        '<button class="filter-chip" role="listitem" onclick="window.removeTagFilter(\'' + escHtml(tag) + '\')">' +
+          '<i class="fa-solid fa-tag"></i>' + escHtml(tag) +
+          ' <i class="fa-solid fa-xmark"></i>' +
+        '</button>'
+      );
+    }).join('');
+  }
+
+  window.filterByTag = function (tag) {
+    if (activeTagFilters.indexOf(tag) === -1) {
+      activeTagFilters.push(tag);
+      renderTagChips();
+      applyFilters();
+    }
+  };
+
+  window.removeTagFilter = function (tag) {
+    activeTagFilters = activeTagFilters.filter(function (t) { return t !== tag; });
+    renderTagChips();
+    applyFilters();
+  };
+
+  /* ----------------------------------------------------------
+     CLEAR ALL FILTERS
+  ---------------------------------------------------------- */
+  function clearAll() {
+    courseSearch.value     = '';
+    difficultyFilter.value = '';
+    sortFilter.value       = 'default';
+    activeTagFilters       = [];
+    searchClear.style.display = 'none';
+    renderTagChips();
+    applyFilters();
+  }
+
+  if (clearAllBtn) clearAllBtn.addEventListener('click', clearAll);
+
+  /* ----------------------------------------------------------
+     FILTER EVENTS
+  ---------------------------------------------------------- */
+  var debounceTimer;
+
+  function debounce(fn, ms) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(fn, ms);
+  }
+
+  if (courseSearch) {
+    courseSearch.addEventListener('input', function () {
+      debounce(applyFilters, 220);
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      courseSearch.value = '';
+      searchClear.style.display = 'none';
+      applyFilters();
+      courseSearch.focus();
+    });
+  }
+
+  if (difficultyFilter) difficultyFilter.addEventListener('change', applyFilters);
+  if (sortFilter)       sortFilter.addEventListener('change', applyFilters);
+
+  /* ----------------------------------------------------------
+     BOOKMARK / SAVE TOGGLE
+  ---------------------------------------------------------- */
+  window.toggleSave = function (e, id, btn) {
+    e.stopPropagation();
+    var idx = savedIds.indexOf(id);
+    if (idx === -1) {
+      savedIds.push(id);
+      btn.classList.add('saved');
+      btn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+      btn.setAttribute('aria-label', 'Remove from saved');
+    } else {
+      savedIds.splice(idx, 1);
+      btn.classList.remove('saved');
+      btn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+      btn.setAttribute('aria-label', 'Save course');
+    }
+    localStorage.setItem('cuántica_saved', JSON.stringify(savedIds));
+  };
+
+  /* ----------------------------------------------------------
+     OPEN COURSE — original logic preserved exactly
+  ---------------------------------------------------------- */
+  window.openCourse = function (id) {
+    window.location = '/course/' + id;
+  };
+
+  /* ----------------------------------------------------------
+     LOAD COURSES — original API call preserved exactly
+  ---------------------------------------------------------- */
+  function loadCourses() {
+    // Show skeletons, hide error
+    skeletonGrid.style.display  = 'grid';
+    coursesGrid.style.display   = 'none';
+    errorState.style.display    = 'none';
+    emptyState.style.display    = 'none';
+
+    fetch('/api/course/all')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        // Hide skeleton
+        skeletonGrid.style.display = 'none';
+
+        if (!data.success) {
+          errorState.style.display = 'flex';
+          filterCountText.textContent = '0 courses';
+          return;
+        }
+
+        allCourses = data.courses || [];
+
+        // Update hero stat counter
+        if (statTotal) {
+          animateCounter(statTotal, allCourses.length);
+        }
+
+        // Initial render
+        applyFilters();
+      })
+      .catch(function (err) {
+        console.log(err);
+        skeletonGrid.style.display = 'none';
+        errorState.style.display   = 'flex';
+        filterCountText.textContent = '0 courses';
+      });
+  }
+
+  /* ----------------------------------------------------------
+     RETRY BUTTON
+  ---------------------------------------------------------- */
+  if (retryBtn) {
+    retryBtn.addEventListener('click', function () {
+      errorState.style.display = 'none';
+      loadCourses();
+    });
+  }
+
+  /* ----------------------------------------------------------
+     ANIMATE COUNTER
+  ---------------------------------------------------------- */
+  function animateCounter(el, target) {
+    var start    = 0;
+    var duration = 900;
+    var startTime;
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var ease     = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + (target - start) * ease);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  /* ----------------------------------------------------------
+     INTERSECTION OBSERVER — entry animations for filter section
+  ---------------------------------------------------------- */
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fstrip-item, .courses-hero-text, .courses-hero-visual').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  /* ----------------------------------------------------------
+     KEYBOARD — Enter on tag chips
+  ---------------------------------------------------------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.classList.contains('filter-chip')) {
+      e.target.click();
+    }
+    if (e.key === 'Enter' && e.target.classList.contains('course-tag')) {
+      e.target.click();
+    }
+  });
+
+  /* ----------------------------------------------------------
+     INIT
+  ---------------------------------------------------------- */
+  loadCourses();
+
+}());
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuántica — Quantum Notebook</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- RequireJS & Marked -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        /* =============================================================
+   CUÁNTICA — Quantum Notebook
+   notebook.css  |  Light Theme
+   Mirrors the Cuántica design system from index.css
+   Palette:
+     --bg:            #F7FEFF  Arctic White
+     --surface:       #FFFFFF  Cards
+     --surface-alt:   #E0FAF4  Section backgrounds
+     --primary:       #6CE5BF  Main brand teal
+     --primary-dark:  #3ECFA6
+     --primary-deeper:#1FA880
+     --text:          #1E293B
+     --text-muted:    #64748B
+     --border:        #DCEEF2
+============================================================= */
+
+/* ============================================================
+   1. DESIGN TOKENS
+============================================================= */
+:root {
+  /* Palette */
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --surface-raised:   #F0FDFB;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --accent-amber:     #F59E0B;
+  --accent-rose:      #F43F5E;
+  --accent-sky:       #38BDF8;
+
+  /* Typography */
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --text-invert:      #FFFFFF;
+
+  /* Borders */
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --border-focus:     var(--primary-dark);
+
+  /* Shadows */
+  --shadow-xs:  0 1px 2px rgba(30,41,59,.04);
+  --shadow-sm:  0 1px 4px rgba(30,41,59,.07), 0 1px 2px rgba(30,41,59,.05);
+  --shadow-md:  0 4px 16px rgba(30,41,59,.09), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:  0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:  0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary: 0 6px 28px rgba(108,229,191,.35);
+
+  /* Radii */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   22px;
+  --radius-full: 9999px;
+
+  /* Fonts */
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Sora', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Transitions */
+  --t-fast:   140ms cubic-bezier(.4,0,.2,1);
+  --t-base:   240ms cubic-bezier(.4,0,.2,1);
+  --t-slow:   380ms cubic-bezier(.4,0,.2,1);
+  --t-spring: 440ms cubic-bezier(.34,1.56,.64,1);
+
+  /* Layout */
+  --header-h:  58px;
+  --sidebar-w: 220px;
+  --cell-max:  960px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: var(--bg);
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a       { color: inherit; text-decoration: none; }
+button  { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+ul, ol  { list-style: none; }
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. SHARED BUTTON SYSTEM
+============================================================= */
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: .8125rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition:
+    background var(--t-base),
+    border-color var(--t-base),
+    color var(--t-base),
+    box-shadow var(--t-base),
+    transform var(--t-fast);
+  white-space: nowrap;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.nb-btn:active { transform: scale(.97); }
+
+/* Primary */
+.nb-btn--primary {
+  background: var(--text);
+  color: var(--primary);
+  border-color: var(--text);
+}
+.nb-btn--primary:hover {
+  background: var(--primary-deeper);
+  border-color: var(--primary-deeper);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+/* Ghost */
+.nb-btn--ghost {
+  background: var(--surface);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.nb-btn--ghost:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+  border-color: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+/* Run */
+.nb-btn--run {
+  background: var(--primary);
+  color: var(--text);
+  border-color: var(--primary);
+}
+.nb-btn--run:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+/* Danger */
+.nb-btn--danger {
+  background: #FFF1F2;
+  color: var(--accent-rose);
+  border-color: #FECDD3;
+}
+.nb-btn--danger:hover {
+  background: #FFF0F1;
+  border-color: var(--accent-rose);
+  box-shadow: 0 4px 14px rgba(244,63,94,.18);
+  transform: translateY(-1px);
+}
+
+/* Icon-only */
+.nb-btn--icon {
+  padding: 7px;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Small */
+.nb-btn--sm {
+  font-size: .75rem;
+  padding: 5px 10px;
+  gap: 4px;
+}
+
+/* ============================================================
+   4. APP HEADER
+============================================================= */
+.nb-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  background: rgba(247,254,255,.95);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ----- Brand / Logo ----- */
+.nb-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-shrink: 0;
+}
+
+.nb-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nb-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  transition: transform var(--t-spring);
+  flex-shrink: 0;
+}
+
+.nb-logo:hover .nb-logo-mark {
+  transform: rotate(12deg) scale(1.06);
+}
+
+.nb-logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+
+.nb-brand-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border-strong);
+  flex-shrink: 0;
+}
+
+.nb-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nb-title-icon {
+  color: var(--text-faint);
+  font-size: .8125rem;
+  flex-shrink: 0;
+}
+
+.nb-title-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--text);
+  width: 180px;
+  padding: 4px 6px;
+  border-radius: var(--radius-xs);
+  transition: background var(--t-fast), box-shadow var(--t-fast), width var(--t-base);
+}
+
+.nb-title-input:hover {
+  background: var(--surface-alt);
+}
+
+.nb-title-input:focus {
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--primary-soft);
+  width: 240px;
+}
+
+.nb-title-ext {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ----- Kernel badge ----- */
+.nb-kernel-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: .75rem;
+  font-weight: 600;
+  border: 1px solid;
+  transition: background var(--t-base), border-color var(--t-base), color var(--t-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nb-kernel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* States */
+.nb-kernel-badge.idle {
+  background: #F0FDF9;
+  border-color: var(--primary-soft);
+  color: var(--primary-deeper);
+}
+.nb-kernel-badge.idle .nb-kernel-dot {
+  background: var(--primary-dark);
+}
+
+.nb-kernel-badge.busy {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+  color: #92400E;
+}
+.nb-kernel-badge.busy .nb-kernel-dot {
+  background: var(--accent-amber);
+  animation: kernelPulse 1s ease-in-out infinite;
+}
+
+.nb-kernel-badge.error {
+  background: #FFF1F2;
+  border-color: #FECDD3;
+  color: var(--accent-rose);
+}
+.nb-kernel-badge.error .nb-kernel-dot {
+  background: var(--accent-rose);
+}
+
+@keyframes kernelPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.75); }
+}
+
+/* ----- Toolbar ----- */
+.nb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  flex-wrap: nowrap;
+}
+
+.nb-btn-group {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.nb-toolbar-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   5. NOTEBOOK CANVAS LAYOUT
+============================================================= */
+.nb-canvas {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - var(--header-h));
+  overflow: hidden;
+}
+
+/* ----- Sidebar ----- */
+.nb-sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width var(--t-base), opacity var(--t-base);
+}
+
+.nb-sidebar.collapsed {
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nb-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.nb-sidebar-title {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.nb-sidebar-toggle {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-xs);
+  color: var(--text-faint);
+  font-size: .75rem;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.nb-sidebar-toggle:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.nb-sidebar-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nb-sidebar-list::-webkit-scrollbar { width: 4px; }
+.nb-sidebar-list::-webkit-scrollbar-track { background: transparent; }
+.nb-sidebar-list::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+.nb-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--t-fast);
+  min-width: 0;
+}
+
+.nb-sidebar-item:hover {
+  background: var(--surface-alt);
+}
+
+.nb-sidebar-item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nb-sidebar-item-dot--code     { background: var(--primary-dark); }
+.nb-sidebar-item-dot--markdown { background: var(--secondary-dark); }
+
+.nb-sidebar-item-label {
+  font-size: .75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nb-sidebar-item-num {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  color: var(--text-faint);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ----- Editor area ----- */
+.nb-editor-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding: 2rem 2.5rem;
+  gap: 0;
+}
+
+.nb-editor-area::-webkit-scrollbar { width: 6px; }
+.nb-editor-area::-webkit-scrollbar-track { background: transparent; }
+.nb-editor-area::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+.nb-editor-area::-webkit-scrollbar-thumb:hover { background: var(--primary-soft); }
+
+/* ----- Cells wrapper ----- */
+.nb-cells {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: var(--cell-max);
+  width: 100%;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   6. NOTEBOOK CELL
+============================================================= */
+.notebook-cell {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  transition:
+    border-color var(--t-base),
+    box-shadow var(--t-base),
+    transform var(--t-base);
+  animation: cellAppear var(--t-spring) both;
+}
+
+@keyframes cellAppear {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.notebook-cell:hover {
+  border-color: var(--primary-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Left accent bar */
+.notebook-cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  transition: background var(--t-base), opacity var(--t-base);
+  opacity: 0;
+}
+
+.notebook-cell:hover::before,
+.notebook-cell:focus-within::before {
+  opacity: 1;
+}
+
+.notebook-cell.cell-code::before    { background: var(--primary-dark); }
+.notebook-cell.cell-markdown::before { background: var(--secondary-dark); }
+
+/* Focus state */
+.notebook-cell:focus-within {
+  border-color: var(--primary-soft);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.14), var(--shadow-md);
+}
+
+/* ----- Cell header ----- */
+.cell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  gap: .75rem;
+  min-height: 44px;
+}
+
+.cell-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cell-type-badge {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+.cell-code    .cell-type-badge {
+  background: #F0FDF9;
+  color: var(--primary-deeper);
+  border-color: var(--primary-soft);
+}
+
+.cell-markdown .cell-type-badge {
+  background: #EEF2FF;
+  color: var(--secondary-dark);
+  border-color: #C7D2FE;
+}
+
+.prompt-label {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--text-faint);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Cell actions row */
+.cell-actions {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  flex-shrink: 0;
+}
+
+.cell-type-select {
+  font-family: var(--font-sans);
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--t-fast), background var(--t-fast);
+  appearance: none;
+  padding-right: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%2394A3B8' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+}
+
+.cell-type-select:hover,
+.cell-type-select:focus {
+  border-color: var(--primary-soft);
+  background-color: var(--surface-alt);
+}
+
+/* Inline cell action buttons */
+.cell-actions .btn,
+.cell-actions .nb-btn {
+  padding: 5px 9px;
+  font-size: .75rem;
+  gap: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.cell-actions .btn.btn-run,
+.cell-actions .btn-run {
+  background: var(--primary);
+  color: var(--text);
+  border: 1px solid var(--primary);
+}
+
+.cell-actions .btn.btn-run:hover,
+.cell-actions .btn-run:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+}
+
+.cell-actions .btn.btn-danger,
+.cell-actions .btn-danger {
+  background: transparent;
+  color: var(--text-faint);
+  border: 1px solid transparent;
+}
+
+.cell-actions .btn.btn-danger:hover,
+.cell-actions .btn-danger:hover {
+  background: #FFF1F2;
+  color: var(--accent-rose);
+  border-color: #FECDD3;
+}
+
+.cell-actions .btn.btn-icon,
+.cell-actions .btn-icon {
+  background: transparent;
+  color: var(--text-faint);
+  border: 1px solid transparent;
+}
+
+.cell-actions .btn.btn-icon:hover,
+.cell-actions .btn-icon:hover {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+/* Original .btn system mapping */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-sans);
+  font-size: .78125rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  line-height: 1;
+  white-space: nowrap;
+}
+.btn:hover   { background: var(--surface-alt); color: var(--text); border-color: var(--primary-soft); transform: translateY(-1px); }
+.btn:active  { transform: scale(.97); }
+
+.btn.btn-primary {
+  background: var(--text);
+  color: var(--primary);
+  border-color: var(--text);
+}
+.btn.btn-primary:hover {
+  background: var(--primary-deeper);
+  border-color: var(--primary-deeper);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn.btn-run {
+  background: var(--primary);
+  color: var(--text);
+  border-color: var(--primary-dark);
+}
+.btn.btn-run:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-deeper);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn.btn-danger {
+  background: #FFF1F2;
+  color: var(--accent-rose);
+  border-color: #FECDD3;
+}
+.btn.btn-danger:hover {
+  background: var(--accent-rose);
+  color: #fff;
+  border-color: var(--accent-rose);
+}
+
+.btn.btn-icon {
+  padding: 6px 8px;
+}
+
+.btn-text-small {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: var(--radius-xs);
+  transition: color var(--t-fast), background var(--t-fast);
+  font-family: var(--font-sans);
+}
+
+.btn-text-small:hover {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+
+.btn-icon:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+/* ----- Cell body ----- */
+.cell-body {
+  position: relative;
+  background: var(--surface);
+}
+
+.editor-container {
+  min-height: 100px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+/* Monaco override — remove harsh dark background corner */
+.editor-container .monaco-editor {
+  border-radius: 0 !important;
+}
+
+/* Light Monaco theme patching via CSS */
+.editor-container .monaco-editor,
+.editor-container .monaco-editor .margin,
+.editor-container .monaco-editor .monaco-editor-background {
+  background-color: #FAFFFE !important;
+}
+
+.editor-container .monaco-editor .view-line {
+  font-family: var(--font-mono) !important;
+}
+
+.editor-container .monaco-scrollbar-shadow {
+  display: none !important;
+}
+
+/* Hide monaco editor */
+.editor-container.hidden {
+  display: none;
+}
+
+/* ----- Markdown preview ----- */
+.markdown-preview {
+  padding: 1.5rem 1.75rem;
+  font-size: .9375rem;
+  line-height: 1.75;
+  color: var(--text);
+  min-height: 60px;
+  cursor: pointer;
+}
+
+.markdown-preview.hidden { display: none; }
+
+.markdown-preview h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: .75rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--primary-soft);
+  letter-spacing: -.02em;
+}
+
+.markdown-preview h2 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5rem 0 .6rem;
+}
+
+.markdown-preview h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.25rem 0 .5rem;
+}
+
+.markdown-preview p {
+  margin-bottom: .875rem;
+  color: var(--text-muted);
+}
+
+.markdown-preview code {
+  font-family: var(--font-mono);
+  font-size: .875em;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--primary-soft);
+}
+
+.markdown-preview pre {
+  background: #F8FFFE;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.markdown-preview pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: .875rem;
+  color: var(--text);
+}
+
+.markdown-preview blockquote {
+  border-left: 3px solid var(--primary-dark);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--surface-alt);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: .75rem 1rem;
+}
+
+.markdown-preview ul,
+.markdown-preview ol {
+  padding-left: 1.5rem;
+  margin-bottom: .875rem;
+}
+
+.markdown-preview ul { list-style: disc; }
+.markdown-preview ol { list-style: decimal; }
+
+.markdown-preview li {
+  margin-bottom: .25rem;
+  color: var(--text-muted);
+}
+
+.markdown-preview a {
+  color: var(--primary-deeper);
+  text-decoration: underline;
+  text-decoration-color: var(--primary-soft);
+  transition: color var(--t-fast);
+}
+.markdown-preview a:hover { color: var(--primary-dark); }
+
+.markdown-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-preview th {
+  background: var(--surface-alt);
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.markdown-preview td {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.markdown-preview tr:nth-child(even) td {
+  background: #F8FFFE;
+}
+
+/* ----- Cell output ----- */
+.cell-output-container {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.cell-output-container.hidden { display: none; }
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.output-title {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  user-select: none;
+}
+
+.cell-output {
+  padding: 14px 18px;
+  overflow-x: auto;
+}
+
+/* Output types */
+.output-item {
+  margin-bottom: .75rem;
+}
+
+.output-item:last-child { margin-bottom: 0; }
+
+.stream-stdout {
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  line-height: 1.65;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+}
+
+.stream-stderr {
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  line-height: 1.65;
+  color: #B45309;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #FFFBEB;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent-amber);
+  margin: 0;
+}
+
+.output-error-box {
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  color: var(--accent-rose);
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+  border-left: 3px solid var(--accent-rose);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.6;
+}
+
+.output-error-traceback {
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+
+.output-error-traceback pre {
+  color: var(--accent-rose);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+
+.output-image {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: block;
+  margin: .25rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Running spinner */
+.running-spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .8125rem;
+  color: var(--primary-deeper);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.running-spinner i {
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   7. EMPTY STATE
+============================================================= */
+.nb-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem;
+  max-width: var(--cell-max);
+  width: 100%;
+  margin-inline: auto;
+  gap: 1rem;
+  animation: fadeIn 600ms ease both;
+}
+
+.nb-empty-state.hidden { display: none; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nb-empty-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--surface-alt);
+  border: 1.5px solid var(--primary-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: var(--primary-deeper);
+  margin-bottom: .5rem;
+}
+
+.nb-empty-title {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+
+.nb-empty-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.nb-empty-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .5rem;
+}
+
+/* ============================================================
+   8. PACKAGE MANAGER MODAL
+============================================================= */
+.nb-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(30,41,59,.38);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: overlayIn var(--t-base) ease both;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.nb-modal-overlay.hidden {
+  display: none;
+}
+
+.nb-modal-card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 580px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: cardIn var(--t-spring) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Modal header */
+.nb-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.nb-modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nb-modal-icon-badge {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 1.5px solid var(--primary-soft);
+  flex-shrink: 0;
+}
+
+.nb-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 2px;
+}
+
+.nb-modal-sub {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.nb-modal-close {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: .9375rem;
+  transition: color var(--t-fast), background var(--t-fast);
+  flex-shrink: 0;
+}
+
+.nb-modal-close:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+/* Modal body */
+.nb-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nb-modal-body::-webkit-scrollbar { width: 5px; }
+.nb-modal-body::-webkit-scrollbar-track { background: transparent; }
+.nb-modal-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+/* Package install section */
+.nb-pkg-install-section {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.nb-field-label {
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nb-field-label i { color: var(--primary-deeper); }
+
+.nb-pkg-form {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.nb-pkg-input-wrap {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+.nb-pkg-input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-size: .875rem;
+  pointer-events: none;
+}
+
+.nb-pkg-input {
+  width: 100%;
+  padding: 9px 12px 9px 34px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+
+.nb-pkg-input::placeholder { color: var(--text-faint); }
+
+.nb-pkg-input:focus {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+/* Alias for the original .input-field */
+.input-field {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  font-family: var(--font-sans);
+  font-size: .875rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.input-field::placeholder { color: var(--text-faint); }
+
+.input-field:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+.nb-pkg-hint {
+  font-size: .75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.nb-inline-code {
+  font-family: var(--font-mono);
+  font-size: .8125em;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--primary-soft);
+}
+
+/* Install log terminal */
+.nb-log-terminal,
+.log-terminal {
+  background: #0F1623;
+  border: 1px solid #1E293B;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: .78125rem;
+  color: #A3E635;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+  animation: terminalIn var(--t-base) ease both;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.3);
+}
+
+@keyframes terminalIn {
+  from { opacity: 0; transform: scaleY(.95); transform-origin: top; }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+.nb-log-terminal.hidden,
+.log-terminal.hidden { display: none; }
+
+.nb-log-terminal::-webkit-scrollbar { width: 4px; }
+.nb-log-terminal::-webkit-scrollbar-thumb { background: #2D3748; }
+
+/* Package list section */
+.nb-pkg-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+}
+
+.nb-pkg-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Installed packages grid */
+.nb-pkg-grid,
+.installed-pkgs-grid,
+.pkg-install-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.pkg-install-form {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.pkg-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--surface-alt);
+  border: 1px solid var(--primary-soft);
+  border-radius: var(--radius-full);
+  font-size: .75rem;
+  color: var(--text);
+  transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+}
+
+.pkg-tag:hover {
+  border-color: var(--primary-dark);
+  background: #C8F8EC;
+  transform: translateY(-1px);
+}
+
+.pkg-tag strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pkg-version {
+  font-family: var(--font-mono);
+  font-size: .6875rem;
+  color: var(--text-faint);
+  background: var(--surface);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+}
+
+/* ============================================================
+   9. TOAST NOTIFICATION
+============================================================= */
+.nb-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--text);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: .875rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 300ms var(--t-spring) both;
+  pointer-events: none;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.nb-toast.hidden { display: none; }
+
+.nb-toast-icon {
+  color: var(--primary);
+  font-size: .9375rem;
+  flex-shrink: 0;
+}
+
+.nb-toast-msg {
+  color: #fff;
+}
+
+/* ============================================================
+   10. SCROLLBARS (global)
+============================================================= */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* ============================================================
+   11. RESPONSIVE
+============================================================= */
+@media (max-width: 1024px) {
+  .nb-sidebar {
+    width: 180px;
+  }
+
+  :root {
+    --sidebar-w: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-h: 54px;
+    --cell-max: 100%;
+  }
+
+  /* Collapse sidebar by default on mobile */
+  .nb-sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform var(--t-base);
+    width: 220px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nb-sidebar.open-mobile {
+    transform: translateX(0);
+  }
+
+  .nb-canvas {
+    height: calc(100vh - var(--header-h));
+  }
+
+  .nb-editor-area {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Hide text labels from toolbar on mobile */
+  .nb-btn span,
+  .nb-btn--ghost span {
+    display: none;
+  }
+
+  .nb-toolbar-sep:nth-child(3),
+  .nb-toolbar-sep:nth-child(5) {
+    display: none;
+  }
+
+  .nb-toolbar {
+    gap: .25rem;
+  }
+
+  .nb-logo-text {
+    display: none;
+  }
+
+  .nb-brand-sep {
+    display: none;
+  }
+
+  .nb-title-input {
+    width: 120px;
+  }
+
+  .nb-title-input:focus {
+    width: 160px;
+  }
+
+  .nb-title-ext {
+    display: none;
+  }
+
+  .nb-empty-actions {
+    flex-direction: column;
+  }
+
+  .cell-header {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  .cell-actions {
+    flex-wrap: wrap;
+    gap: .25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nb-header {
+    padding: 0 .875rem;
+    gap: .5rem;
+  }
+
+  .nb-modal-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .nb-modal-header {
+    padding: 1rem 1.125rem;
+  }
+
+  .nb-modal-body {
+    padding: 1.125rem;
+  }
+
+  .nb-pkg-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nb-empty-state {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .nb-kernel-badge {
+    display: none;
+  }
+}
+
+/* ============================================================
+   12. UTILITY
+============================================================= */
+.hidden { display: none !important; }
+
+.text-muted { color: var(--text-muted); }
+.text-faint { color: var(--text-faint); }
+.font-mono  { font-family: var(--font-mono); }
+
+/* Focus-visible ring */
+:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   13. ANIMATIONS
+============================================================= */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fa-spin-pulse {
+  animation: spin 2.4s linear infinite;
+}
+
+/* Skeleton loader */
+.nb-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-alt) 25%,
+    rgba(255,255,255,.6) 50%,
+    var(--surface-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Cell drag placeholder */
+.cell-drag-over {
+  border: 2px dashed var(--primary-dark) !important;
+  background: rgba(108,229,191,.06) !important;
+}
+
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     APP HEADER / TOOLBAR
+============================================================= -->
+<header class="nb-header">
+
+    <!-- Left: Brand + Title -->
+    <div class="nb-brand">
+        <a href="/" class="nb-logo" title="Back to Cuántica">
+            <div class="nb-logo-mark" style="background: transparent;">
+                <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+            </div>
+            <span class="nb-logo-text">Cuántica</span>
+        </a>
+        <div class="nb-brand-sep"></div>
+        <div class="nb-title-wrap">
+            <i class="fa-solid fa-book-open nb-title-icon"></i>
+            <input
+                type="text"
+                id="notebookTitleInput"
+                class="nb-title-input"
+                value="Untitled_Notebook"
+                placeholder="Notebook title"
+                spellcheck="false"
+            >
+            <span class="nb-title-ext">.ipynb</span>
+        </div>
+    </div>
+
+    <!-- Center: Kernel status -->
+    <div id="kernelStatusBadge" class="nb-kernel-badge idle">
+        <span class="nb-kernel-dot"></span>
+        <span class="nb-kernel-label">Idle</span>
+    </div>
+
+    <!-- Right: Toolbar actions -->
+    <div class="nb-toolbar">
+
+        <!-- Cell insert -->
+        <div class="nb-btn-group">
+            <button id="addCodeCellBtn" class="nb-btn nb-btn--primary" title="Add Code Cell (Alt+C)">
+                <i class="fa-solid fa-code"></i>
+                <span>Code</span>
+            </button>
+            <button id="addMarkdownCellBtn" class="nb-btn nb-btn--ghost" title="Add Markdown Cell (Alt+M)">
+                <i class="fa-solid fa-paragraph"></i>
+                <span>Markdown</span>
+            </button>
+        </div>
+
+        <div class="nb-toolbar-sep"></div>
+
+        <!-- Run controls -->
+        <div class="nb-btn-group">
+            <button id="runAllBtn" class="nb-btn nb-btn--run" title="Run All Cells">
+                <i class="fa-solid fa-forward-step"></i>
+                <span>Run All</span>
+            </button>
+            <button id="clearOutputsBtn" class="nb-btn nb-btn--ghost" title="Clear All Outputs">
+                <i class="fa-solid fa-eraser"></i>
+                <span>Clear</span>
+            </button>
+        </div>
+
+        <div class="nb-toolbar-sep"></div>
+
+        <!-- Kernel controls -->
+        <div class="nb-btn-group">
+            <button id="restartKernelBtn" class="nb-btn nb-btn--icon nb-btn--ghost" title="Restart Kernel">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button id="interruptKernelBtn" class="nb-btn nb-btn--icon nb-btn--danger" title="Interrupt Execution">
+                <i class="fa-solid fa-hand"></i>
+            </button>
+        </div>
+
+        <div class="nb-toolbar-sep"></div>
+
+        <!-- Packages -->
+        <div class="nb-btn-group">
+            <button id="openPkgModalBtn" class="nb-btn nb-btn--ghost" title="Manage Packages">
+                <i class="fa-solid fa-box-open"></i>
+                <span>Packages</span>
+            </button>
+        </div>
+
+        <div class="nb-toolbar-sep"></div>
+
+        <!-- File operations -->
+        <div class="nb-btn-group">
+            <button id="saveNotebookBtn" class="nb-btn nb-btn--ghost" title="Save Notebook">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>Save</span>
+            </button>
+            <button id="exportNotebookBtn" class="nb-btn nb-btn--icon nb-btn--ghost" title="Export .ipynb">
+                <i class="fa-solid fa-download"></i>
+            </button>
+            <label class="nb-btn nb-btn--icon nb-btn--ghost" title="Import .ipynb file" style="cursor:pointer;">
+                <i class="fa-solid fa-upload"></i>
+                <input type="file" id="importNotebookInput" accept=".ipynb,.json" style="display:none;">
+            </label>
+        </div>
+
+    </div>
+</header>
+
+<!-- ============================================================
+     NOTEBOOK CANVAS
+============================================================= -->
+<main class="nb-canvas">
+
+    <!-- Sidebar: cell navigator -->
+    <aside class="nb-sidebar" id="nbSidebar">
+        <div class="nb-sidebar-header">
+            <span class="nb-sidebar-title">Cells</span>
+            <button class="nb-sidebar-toggle" id="sidebarToggleBtn" title="Toggle sidebar">
+                <i class="fa-solid fa-sidebar"></i>
+            </button>
+        </div>
+        <div class="nb-sidebar-list" id="sidebarCellList"></div>
+    </aside>
+
+    <!-- Main editor area -->
+    <section class="nb-editor-area">
+        <!-- Cell container -->
+        <div id="cells" class="nb-cells"></div>
+
+        <!-- Empty state -->
+        <div class="nb-empty-state" id="nbEmptyState">
+            <div class="nb-empty-icon">
+                <i class="fa-solid fa-atom fa-spin-pulse"></i>
+            </div>
+            <h3 class="nb-empty-title">Quantum Notebook Ready</h3>
+            <p class="nb-empty-sub">Add a code or markdown cell to begin your quantum experiment.</p>
+            <div class="nb-empty-actions">
+                <button class="nb-btn nb-btn--primary" onclick="document.getElementById('addCodeCellBtn').click()">
+                    <i class="fa-solid fa-code"></i> Add Code Cell
+                </button>
+                <button class="nb-btn nb-btn--ghost" onclick="document.getElementById('addMarkdownCellBtn').click()">
+                    <i class="fa-solid fa-paragraph"></i> Add Markdown
+                </button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ============================================================
+     PACKAGE MANAGER MODAL
+============================================================= -->
+<div id="packageModal" class="nb-modal-overlay hidden">
+    <div class="nb-modal-card">
+
+        <!-- Modal header -->
+        <div class="nb-modal-header">
+            <div class="nb-modal-title-wrap">
+                <div class="nb-modal-icon-badge">
+                    <i class="fa-solid fa-cubes"></i>
+                </div>
+                <div>
+                    <h3 class="nb-modal-title">Package Manager</h3>
+                    <p class="nb-modal-sub">Install Python libraries via pip into this environment</p>
+                </div>
+            </div>
+            <button class="nb-modal-close" id="closePkgModalBtn" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="nb-modal-body">
+
+            <!-- Install form -->
+            <div class="nb-pkg-install-section">
+                <label class="nb-field-label">
+                    <i class="fa-solid fa-download"></i> Install a package
+                </label>
+                <form id="installPkgForm" class="nb-pkg-form">
+                    <div class="nb-pkg-input-wrap">
+                        <i class="fa-brands fa-python nb-pkg-input-icon"></i>
+                        <input
+                            type="text"
+                            id="packageNameInput"
+                            class="nb-pkg-input"
+                            placeholder="e.g. numpy, pandas, matplotlib, requests"
+                            required
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                    </div>
+                    <button type="submit" class="nb-btn nb-btn--primary">
+                        <i class="fa-solid fa-circle-down"></i>
+                        <span>Install</span>
+                    </button>
+                </form>
+                <p class="nb-pkg-hint">
+                    Once installed, import immediately in notebook cells — e.g.&nbsp;
+                    <code class="nb-inline-code">import numpy</code>,
+                    <code class="nb-inline-code">import matplotlib</code>
+                </p>
+            </div>
+
+            <!-- Install log terminal -->
+            <div id="packageInstallLog" class="nb-log-terminal hidden"></div>
+
+            <!-- Installed packages list -->
+            <div class="nb-pkg-list-section">
+                <div class="nb-pkg-list-header">
+                    <span class="nb-field-label"><i class="fa-solid fa-boxes-stacked"></i> Installed Libraries</span>
+                    <button id="refreshPkgListBtn" class="nb-btn nb-btn--ghost nb-btn--sm">
+                        <i class="fa-solid fa-rotate"></i> Refresh
+                    </button>
+                </div>
+                <div id="installedPackagesList" class="nb-pkg-grid"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Toast notification -->
+<div id="nbToast" class="nb-toast hidden">
+    <i class="nb-toast-icon fa-solid fa-circle-check"></i>
+    <span class="nb-toast-msg"></span>
+</div>
+
+<script>
+    /**
+ * Cuántica — Quantum Notebook
+ * notebook.js
+ *
+ * All original API calls and logic are preserved exactly.
+ * Only UI interactions, DOM helpers, and visual feedback are added.
+ */
+
+/* ============================================================
+   STATE
+============================================================= */
+let cellsContainer;
+let cellCounter = 0;
+let cellList = []; // { id, type, editor, element, executionCount }
+let isKernelBusy = false;
+
+/* ============================================================
+   INIT
+============================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    cellsContainer = document.getElementById("cells");
+
+    // RequireJS → Monaco
+    if (window.require) {
+        require.config({
+            paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs" }
+        });
+
+        require(["vs/editor/editor.main"], function () {
+            // Define light theme that matches Cuántica palette
+            monaco.editor.defineTheme("cuántica-light", {
+                base: "vs",
+                inherit: true,
+                rules: [
+                    { token: "keyword",           foreground: "1FA880", fontStyle: "bold" },
+                    { token: "string",            foreground: "0E7490" },
+                    { token: "number",            foreground: "7C3AED" },
+                    { token: "comment",           foreground: "94A3B8", fontStyle: "italic" },
+                    { token: "type",              foreground: "1FA880" },
+                    { token: "function",          foreground: "0369A1", fontStyle: "bold" },
+                    { token: "variable",          foreground: "1E293B" },
+                    { token: "delimiter",         foreground: "64748B" },
+                    { token: "identifier",        foreground: "1E293B" },
+                ],
+                colors: {
+                    "editor.background":              "#FAFFFE",
+                    "editor.foreground":              "#1E293B",
+                    "editor.lineHighlightBackground": "#EFF9F7",
+                    "editor.selectionBackground":     "#ADF1DD66",
+                    "editorLineNumber.foreground":    "#94A3B8",
+                    "editorLineNumber.activeForeground": "#3ECFA6",
+                    "editorCursor.foreground":        "#3ECFA6",
+                    "editorGutter.background":        "#F4FDFB",
+                    "editorWidget.background":        "#FFFFFF",
+                    "editorWidget.border":            "#DCEEF2",
+                    "list.hoverBackground":           "#E0FAF4",
+                    "list.activeSelectionBackground": "#ADF1DD",
+                    "list.activeSelectionForeground": "#1E293B",
+                    "scrollbar.shadow":               "#00000000",
+                    "scrollbarSlider.background":     "#B8D9E440",
+                    "scrollbarSlider.hoverBackground":"#3ECFA666",
+                    "editor.inactiveSelectionBackground": "#ADF1DD44",
+                    "editorIndentGuide.background":   "#DCEEF2",
+                    "editorIndentGuide.activeBackground": "#6CE5BF",
+                }
+            });
+
+            addCell(
+                "code",
+                "# Welcome to Cuántica — Quantum Notebook\n# Write Python code here and press Shift+Enter to run\nimport sys\nprint(f'Python version: {sys.version}')\n"
+            );
+        });
+    }
+
+    // Toolbar bindings
+    document.getElementById("addCodeCellBtn")    ?.addEventListener("click", () => addCell("code"));
+    document.getElementById("addMarkdownCellBtn")?.addEventListener("click", () => addCell("markdown"));
+    document.getElementById("runAllBtn")          ?.addEventListener("click", runAllCells);
+    document.getElementById("restartKernelBtn")   ?.addEventListener("click", restartKernel);
+    document.getElementById("interruptKernelBtn") ?.addEventListener("click", interruptKernel);
+    document.getElementById("clearOutputsBtn")    ?.addEventListener("click", clearAllOutputs);
+    document.getElementById("openPkgModalBtn")    ?.addEventListener("click", openPackageModal);
+    document.getElementById("saveNotebookBtn")    ?.addEventListener("click", saveNotebook);
+    document.getElementById("exportNotebookBtn")  ?.addEventListener("click", exportNotebook);
+    document.getElementById("importNotebookInput")?.addEventListener("change", importNotebook);
+
+    // Package modal
+    document.getElementById("closePkgModalBtn")   ?.addEventListener("click", closePackageModal);
+    document.getElementById("installPkgForm")     ?.addEventListener("submit", handleInstallPackage);
+    document.getElementById("refreshPkgListBtn")  ?.addEventListener("click", loadInstalledPackages);
+
+    // Modal overlay click-outside to close
+    document.getElementById("packageModal")?.addEventListener("click", function (e) {
+        if (e.target === this) closePackageModal();
+    });
+
+    // Keyboard: Escape closes modal
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePackageModal();
+    });
+
+    // Sidebar toggle
+    document.getElementById("sidebarToggleBtn")?.addEventListener("click", toggleSidebar);
+
+    // Initial package list
+    loadInstalledPackages();
+
+    // Update empty state
+    updateEmptyState();
+});
+
+/* ============================================================
+   KERNEL STATUS
+============================================================= */
+function setKernelStatus(status, text) {
+    const badge = document.getElementById("kernelStatusBadge");
+    if (!badge) return;
+    badge.className = `nb-kernel-badge ${status}`;
+    badge.innerHTML = `<span class="nb-kernel-dot"></span><span class="nb-kernel-label">${text}</span>`;
+    isKernelBusy = (status === "busy");
+}
+
+/* ============================================================
+   SIDEBAR
+============================================================= */
+function toggleSidebar() {
+    const sidebar = document.getElementById("nbSidebar");
+    if (!sidebar) return;
+    sidebar.classList.toggle("collapsed");
+}
+
+function updateSidebarList() {
+    const list = document.getElementById("sidebarCellList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    if (cellList.length === 0) {
+        list.innerHTML = `<p style="font-size:.75rem;color:var(--text-faint);padding:8px;text-align:center;">No cells</p>`;
+        return;
+    }
+
+    cellList.forEach((cell, idx) => {
+        const item = document.createElement("div");
+        item.className = "nb-sidebar-item";
+        item.title = `Cell ${idx + 1} — ${cell.type}`;
+
+        const dotClass = cell.type === "code"
+            ? "nb-sidebar-item-dot--code"
+            : "nb-sidebar-item-dot--markdown";
+
+        const preview = cell.editor
+            ? cell.editor.getValue().trim().split("\n")[0].slice(0, 28) || `${cell.type} cell`
+            : `${cell.type} cell`;
+
+        item.innerHTML = `
+            <span class="nb-sidebar-item-dot ${dotClass}"></span>
+            <span class="nb-sidebar-item-label">${escapeHtml(preview)}</span>
+            <span class="nb-sidebar-item-num">${idx + 1}</span>
+        `;
+
+        item.addEventListener("click", () => {
+            cell.element.scrollIntoView({ behavior: "smooth", block: "center" });
+            cell.element.classList.add("cell-flash");
+            setTimeout(() => cell.element.classList.remove("cell-flash"), 700);
+        });
+
+        list.appendChild(item);
+    });
+}
+
+/* ============================================================
+   EMPTY STATE
+============================================================= */
+function updateEmptyState() {
+    const emptyState = document.getElementById("nbEmptyState");
+    if (!emptyState) return;
+    emptyState.classList.toggle("hidden", cellList.length > 0);
+}
+
+/* ============================================================
+   ADD CELL
+============================================================= */
+function addCell(type = "code", initialContent = "", targetCellId = null) {
+    cellCounter++;
+    const cellId = `cell_${cellCounter}`;
+
+    const cellDiv = document.createElement("div");
+    cellDiv.className = `notebook-cell cell-${type}`;
+    cellDiv.dataset.cellId = cellId;
+    cellDiv.dataset.cellType = type;
+
+    const isCode = type === "code";
+    const runBtnHtml = isCode
+        ? `<button class="btn btn-icon btn-run" onclick="runCell('${cellId}')" title="Run Cell (Shift+Enter)"><i class="fa-solid fa-play"></i> Run</button>`
+        : `<button class="btn btn-icon btn-run" onclick="renderMarkdownCell('${cellId}')" title="Render Markdown"><i class="fa-solid fa-eye"></i> Render</button>`;
+
+    cellDiv.innerHTML = `
+        <div class="cell-header">
+            <div class="cell-info">
+                <span class="cell-type-badge">${type.toUpperCase()}</span>
+                <span class="prompt-label" id="prompt_${cellId}">${isCode ? 'In [ ]:' : 'Markdown'}</span>
+            </div>
+            <div class="cell-actions">
+                <select class="cell-type-select" onchange="changeCellType('${cellId}', this.value)" title="Change cell type">
+                    <option value="code"     ${isCode ? 'selected' : ''}>Code</option>
+                    <option value="markdown" ${!isCode ? 'selected' : ''}>Markdown</option>
+                </select>
+                ${runBtnHtml}
+                <button class="btn btn-icon" onclick="moveCellUp('${cellId}')"   title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+                <button class="btn btn-icon" onclick="moveCellDown('${cellId}')" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+                <button class="btn btn-icon btn-danger" onclick="deleteCell('${cellId}')" title="Delete Cell"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+        <div class="cell-body">
+            <div class="editor-container" id="editor_${cellId}"></div>
+            <div class="markdown-preview hidden" id="preview_${cellId}"></div>
+        </div>
+        <div class="cell-output-container hidden" id="output_container_${cellId}">
+            <div class="output-header">
+                <span class="output-title">Output</span>
+                <button class="btn-text-small" onclick="clearCellOutput('${cellId}')">
+                    <i class="fa-solid fa-xmark"></i> Clear
+                </button>
+            </div>
+            <div class="cell-output" id="output_${cellId}"></div>
+        </div>
+    `;
+
+    // Insert position
+    if (targetCellId) {
+        const targetEl = document.querySelector(`[data-cell-id="${targetCellId}"]`);
+        if (targetEl?.nextSibling) {
+            cellsContainer.insertBefore(cellDiv, targetEl.nextSibling);
+        } else {
+            cellsContainer.appendChild(cellDiv);
+        }
+    } else {
+        cellsContainer.appendChild(cellDiv);
+    }
+
+    // Monaco editor
+    let editorInstance = null;
+    if (window.monaco) {
+        editorInstance = monaco.editor.create(document.getElementById(`editor_${cellId}`), {
+            value:                  initialContent,
+            language:               isCode ? "python" : "markdown",
+            theme:                  "cuántica-light",
+            automaticLayout:        true,
+            minimap:                { enabled: false },
+            fontSize:               13.5,
+            fontFamily:             "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
+            fontLigatures:          true,
+            lineNumbers:            "on",
+            lineNumbersMinChars:    3,
+            scrollBeyondLastLine:   false,
+            padding:                { top: 12, bottom: 12 },
+            renderLineHighlight:    "line",
+            smoothScrolling:        true,
+            cursorBlinking:         "smooth",
+            cursorSmoothCaretAnimation: "on",
+            renderWhitespace:       "none",
+            bracketPairColorization: { enabled: true },
+            occurrencesHighlight:   false,
+            selectionHighlight:     false,
+            overviewRulerLanes:     0,
+            hideCursorInOverviewRuler: true,
+            scrollbar: {
+                verticalScrollbarSize:   6,
+                horizontalScrollbarSize: 6,
+                verticalSliderSize:      6,
+            },
+        });
+
+        // Shift+Enter → run/render
+        editorInstance.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+            if (type === "code") runCell(cellId);
+            else renderMarkdownCell(cellId);
+        });
+
+        // Auto-resize editor height to content
+        const updateEditorHeight = () => {
+            const lineCount = editorInstance.getModel()?.getLineCount() || 1;
+            const lineHeight  = editorInstance.getOption(monaco.editor.EditorOption.lineHeight);
+            const padding     = 24; // top + bottom padding
+            const minHeight   = 80;
+            const newHeight   = Math.max(minHeight, lineCount * lineHeight + padding);
+            const container   = document.getElementById(`editor_${cellId}`);
+            if (container) container.style.height = newHeight + "px";
+            editorInstance.layout();
+        };
+
+        editorInstance.getModel()?.onDidChangeContent(updateEditorHeight);
+        updateEditorHeight();
+    }
+
+    const cellData = {
+        id: cellId,
+        type,
+        editor: editorInstance,
+        element: cellDiv,
+        executionCount: null
+    };
+
+    cellList.push(cellData);
+    updateEmptyState();
+    updateSidebarList();
+
+    // Scroll new cell into view
+    setTimeout(() => {
+        cellDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 60);
+
+    return cellData;
+}
+
+/* ============================================================
+   RUN CELL — original logic preserved
+============================================================= */
+async function runCell(cellId) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj || cellObj.type !== "code") return;
+
+    const code            = cellObj.editor ? cellObj.editor.getValue() : "";
+    const promptEl        = document.getElementById(`prompt_${cellId}`);
+    const outputContainer = document.getElementById(`output_container_${cellId}`);
+    const outputEl        = document.getElementById(`output_${cellId}`);
+
+    if (promptEl) promptEl.innerText = "In [*]:";
+    outputContainer.classList.remove("hidden");
+    outputEl.innerHTML = `<div class="running-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Executing…</div>`;
+
+    setKernelStatus("busy", "Busy");
+
+    try {
+        const response = await fetch("/execute", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code })
+        });
+
+        const result = await response.json();
+        setKernelStatus("idle", "Idle");
+
+        if (promptEl) {
+            promptEl.innerText = `In [${result.execution_count || '-'}]:`;
+        }
+        cellObj.executionCount = result.execution_count;
+        outputEl.innerHTML = "";
+
+        if (!result.outputs || result.outputs.length === 0) {
+            if (result.error) {
+                outputEl.innerHTML = `<div class="output-error-box">${result.error}</div>`;
+            } else {
+                outputContainer.classList.add("hidden");
+            }
+            updateSidebarList();
+            return;
+        }
+
+        renderOutputs(outputEl, result.outputs);
+
+    } catch (err) {
+        setKernelStatus("error", "Kernel Error");
+        if (promptEl) promptEl.innerText = "In [!]:";
+        outputEl.innerHTML = `<div class="output-error-box">Failed to connect to execution server: ${err.message}</div>`;
+    }
+
+    updateSidebarList();
+}
+
+/* ============================================================
+   RENDER OUTPUTS — original logic preserved
+============================================================= */
+function renderOutputs(container, outputs) {
+    outputs.forEach(out => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = `output-item output-${out.type}`;
+
+        if (out.type === "stream") {
+            const pre = document.createElement("pre");
+            pre.className = out.name === "stderr" ? "stream-stderr" : "stream-stdout";
+            pre.innerText = out.text;
+            itemDiv.appendChild(pre);
+
+        } else if (out.type === "text") {
+            const pre = document.createElement("pre");
+            pre.className = "stream-stdout";
+            pre.innerText = out.data;
+            itemDiv.appendChild(pre);
+
+        } else if (out.type === "html") {
+            itemDiv.innerHTML = out.data;
+
+        } else if (out.type === "image") {
+            const img = document.createElement("img");
+            img.src       = out.data;
+            img.className = "output-image";
+            img.alt       = "Cell output image";
+            itemDiv.appendChild(img);
+
+        } else if (out.type === "svg") {
+            itemDiv.innerHTML = out.data;
+
+        } else if (out.type === "error") {
+            const errDiv = document.createElement("div");
+            errDiv.className = "output-error-traceback";
+            errDiv.innerHTML  = out.html || `<pre>${escapeHtml(out.raw || "")}</pre>`;
+            itemDiv.appendChild(errDiv);
+        }
+
+        container.appendChild(itemDiv);
+    });
+}
+
+/* ============================================================
+   MARKDOWN RENDER — original logic preserved
+============================================================= */
+function renderMarkdownCell(cellId) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj || cellObj.type !== "markdown") return;
+
+    const editorEl  = document.getElementById(`editor_${cellId}`);
+    const previewEl = document.getElementById(`preview_${cellId}`);
+    const content   = cellObj.editor ? cellObj.editor.getValue() : "";
+
+    if (previewEl.classList.contains("hidden")) {
+        const html = window.marked ? marked.parse(content) : `<pre>${escapeHtml(content)}</pre>`;
+        previewEl.innerHTML = html;
+        editorEl.classList.add("hidden");
+        previewEl.classList.remove("hidden");
+    } else {
+        previewEl.classList.add("hidden");
+        editorEl.classList.remove("hidden");
+    }
+}
+
+/* ============================================================
+   RUN ALL — original logic preserved
+============================================================= */
+async function runAllCells() {
+    const btn = document.getElementById("runAllBtn");
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Running…`;
+    }
+
+    for (const cell of cellList) {
+        if (cell.type === "code") await runCell(cell.id);
+        else renderMarkdownCell(cell.id);
+    }
+
+    if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-forward-step"></i> <span>Run All</span>`;
+    }
+}
+
+/* ============================================================
+   CHANGE CELL TYPE — original logic preserved
+============================================================= */
+function changeCellType(cellId, newType) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj) return;
+
+    cellObj.type                       = newType;
+    cellObj.element.dataset.cellType   = newType;
+    cellObj.element.className          = `notebook-cell cell-${newType}`;
+
+    const typeBadge = cellObj.element.querySelector(".cell-type-badge");
+    if (typeBadge) typeBadge.innerText = newType.toUpperCase();
+
+    const promptLabel = document.getElementById(`prompt_${cellId}`);
+    if (promptLabel) promptLabel.innerText = newType === "code" ? "In [ ]:" : "Markdown";
+
+    if (cellObj.editor) {
+        monaco.editor.setModelLanguage(
+            cellObj.editor.getModel(),
+            newType === "code" ? "python" : "markdown"
+        );
+    }
+
+    updateSidebarList();
+}
+
+/* ============================================================
+   DELETE CELL — original logic preserved
+============================================================= */
+function deleteCell(cellId) {
+    const idx = cellList.findIndex(c => c.id === cellId);
+    if (idx === -1) return;
+
+    const cellObj = cellList[idx];
+
+    // Animate out
+    cellObj.element.style.transition = "opacity 200ms ease, transform 200ms ease";
+    cellObj.element.style.opacity    = "0";
+    cellObj.element.style.transform  = "scale(.98) translateY(-6px)";
+
+    setTimeout(() => {
+        if (cellObj.editor) cellObj.editor.dispose();
+        cellObj.element.remove();
+        cellList.splice(idx, 1);
+        updateEmptyState();
+        updateSidebarList();
+    }, 220);
+}
+
+/* ============================================================
+   MOVE CELLS — original logic preserved
+============================================================= */
+function moveCellUp(cellId) {
+    const el = document.querySelector(`[data-cell-id="${cellId}"]`);
+    if (el?.previousElementSibling) {
+        cellsContainer.insertBefore(el, el.previousElementSibling);
+        syncCellListOrder();
+        updateSidebarList();
+    }
+}
+
+function moveCellDown(cellId) {
+    const el = document.querySelector(`[data-cell-id="${cellId}"]`);
+    if (el?.nextElementSibling) {
+        cellsContainer.insertBefore(el.nextElementSibling, el);
+        syncCellListOrder();
+        updateSidebarList();
+    }
+}
+
+function syncCellListOrder() {
+    const domCells = Array.from(cellsContainer.children);
+    cellList.sort((a, b) => {
+        return domCells.indexOf(a.element) - domCells.indexOf(b.element);
+    });
+}
+
+/* ============================================================
+   CLEAR OUTPUT — original logic preserved
+============================================================= */
+function clearCellOutput(cellId) {
+    const outputEl        = document.getElementById(`output_${cellId}`);
+    const outputContainer = document.getElementById(`output_container_${cellId}`);
+    if (outputEl)        outputEl.innerHTML = "";
+    if (outputContainer) outputContainer.classList.add("hidden");
+}
+
+function clearAllOutputs() {
+    cellList.forEach(c => clearCellOutput(c.id));
+    showToast("All outputs cleared");
+}
+
+/* ============================================================
+   KERNEL CONTROLS — original logic preserved
+============================================================= */
+async function restartKernel() {
+    if (!confirm("Restart the Python kernel? All variables will be lost.")) return;
+    setKernelStatus("busy", "Restarting…");
+
+    try {
+        const res  = await fetch("/restart-kernel", { method: "POST" });
+        const data = await res.json();
+        setKernelStatus("idle", "Idle");
+        showToast(data.message || "Kernel restarted");
+    } catch (e) {
+        setKernelStatus("error", "Error");
+        showToast("Failed to restart kernel");
+    }
+}
+
+async function interruptKernel() {
+    try {
+        const res  = await fetch("/interrupt-kernel", { method: "POST" });
+        const data = await res.json();
+        showToast(data.message || "Kernel interrupted");
+    } catch (e) {
+        showToast("Failed to interrupt kernel");
+    }
+}
+
+/* ============================================================
+   PACKAGE MANAGER — original logic preserved
+============================================================= */
+function openPackageModal() {
+    document.getElementById("packageModal")?.classList.remove("hidden");
+    loadInstalledPackages();
+}
+
+function closePackageModal() {
+    document.getElementById("packageModal")?.classList.add("hidden");
+}
+
+async function handleInstallPackage(e) {
+    e.preventDefault();
+    const pkgInput = document.getElementById("packageNameInput");
+    const pkgName  = pkgInput?.value.trim() ?? "";
+    const logEl    = document.getElementById("packageInstallLog");
+    if (!pkgName) return;
+
+    const submitBtn = e.target.querySelector("[type=submit]");
+    if (submitBtn) {
+        submitBtn.disabled     = true;
+        submitBtn.innerHTML    = `<i class="fa-solid fa-circle-notch fa-spin"></i> Installing…`;
+    }
+
+    logEl?.classList.remove("hidden");
+    if (logEl) logEl.innerText = `> pip install ${pkgName}\n\nInstalling… please wait.\n`;
+
+    try {
+        const res  = await fetch("/install-package", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ package: pkgName })
+        });
+        const data = await res.json();
+
+        if (logEl) logEl.innerText += `\n${data.output || data.message}`;
+
+        if (data.success) {
+            if (pkgInput) pkgInput.value = "";
+            loadInstalledPackages();
+            showToast(`${pkgName} installed successfully`);
+        }
+    } catch (err) {
+        if (logEl) logEl.innerText += `\nError: ${err.message}`;
+        showToast("Installation failed");
+    } finally {
+        if (submitBtn) {
+            submitBtn.disabled  = false;
+            submitBtn.innerHTML = `<i class="fa-solid fa-circle-down"></i> <span>Install</span>`;
+        }
+    }
+}
+
+async function loadInstalledPackages() {
+    const pkgListEl = document.getElementById("installedPackagesList");
+    if (!pkgListEl) return;
+
+    pkgListEl.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;color:var(--text-faint);font-size:.8125rem;padding:4px 0;">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Loading…
+        </div>`;
+
+    try {
+        const res  = await fetch("/packages");
+        const data = await res.json();
+
+        if (data.packages?.length > 0) {
+            pkgListEl.innerHTML = data.packages.map(p =>
+                `<div class="pkg-tag">
+                    <strong>${escapeHtml(p.name)}</strong>
+                    <span class="pkg-version">v${escapeHtml(p.version)}</span>
+                </div>`
+            ).join("");
+        } else {
+            pkgListEl.innerHTML = `
+                <p style="font-size:.8125rem;color:var(--text-faint);">No packages found.</p>`;
+        }
+    } catch (e) {
+        pkgListEl.innerHTML = `
+            <p style="font-size:.8125rem;color:var(--accent-rose);">
+                <i class="fa-solid fa-triangle-exclamation"></i> Failed to load packages.
+            </p>`;
+    }
+}
+
+/* ============================================================
+   NOTEBOOK SAVE / EXPORT / IMPORT — original logic preserved
+============================================================= */
+function getNotebookCellsData() {
+    // Re-sync order before exporting
+    syncCellListOrder();
+    return cellList.map(c => ({
+        cell_type:       c.type,
+        source:          c.editor ? c.editor.getValue() : "",
+        execution_count: c.executionCount
+    }));
+}
+
+async function saveNotebook() {
+    const titleInput = document.getElementById("notebookTitleInput");
+    const filename   = (titleInput?.value.trim() || "untitled") + ".ipynb";
+    const cellsData  = getNotebookCellsData();
+
+    const btn = document.getElementById("saveNotebookBtn");
+    if (btn) {
+        btn.disabled    = true;
+        btn.innerHTML   = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Saving…</span>`;
+    }
+
+    try {
+        const res  = await fetch("/save-notebook", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, cells: cellsData })
+        });
+        const data = await res.json();
+        if (data.success) showToast(`Saved as '${data.filename}'`);
+    } catch (e) {
+        showToast("Failed to save notebook");
+    } finally {
+        if (btn) {
+            btn.disabled  = false;
+            btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>Save</span>`;
+        }
+    }
+}
+
+async function exportNotebook() {
+    const titleInput = document.getElementById("notebookTitleInput");
+    const filename   = (titleInput?.value.trim() || "notebook") + ".ipynb";
+    const cellsData  = getNotebookCellsData();
+
+    try {
+        const res  = await fetch("/export-notebook", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, cells: cellsData })
+        });
+        const data = await res.json();
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement("a");
+        a.href     = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(`Exported as ${filename}`);
+    } catch (e) {
+        showToast("Failed to export notebook");
+    }
+}
+
+async function importNotebook(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    showToast("Importing notebook…");
+
+    try {
+        const res  = await fetch("/import-notebook", { method: "POST", body: formData });
+        const data = await res.json();
+
+        if (data.success && data.cells) {
+            // Clear existing cells
+            cellsContainer.innerHTML = "";
+            cellList.forEach(c => { if (c.editor) c.editor.dispose(); });
+            cellList = [];
+
+            // Rebuild from import
+            data.cells.forEach(c => {
+                const cellObj = addCell(c.cell_type, c.source);
+                if (c.outputs?.length > 0) {
+                    const outputContainer = document.getElementById(`output_container_${cellObj.id}`);
+                    const outputEl        = document.getElementById(`output_${cellObj.id}`);
+                    outputContainer.classList.remove("hidden");
+                    renderOutputs(outputEl, c.outputs);
+                }
+            });
+
+            const titleInput = document.getElementById("notebookTitleInput");
+            if (titleInput) titleInput.value = file.name.replace(".ipynb", "");
+
+            showToast(`Imported ${file.name}`);
+            updateEmptyState();
+            updateSidebarList();
+        } else {
+            showToast(data.message || "Failed to import notebook");
+        }
+    } catch (err) {
+        showToast("Error importing notebook file");
+    }
+
+    // Reset file input so re-importing same file works
+    e.target.value = "";
+}
+
+/* ============================================================
+   TOAST
+============================================================= */
+let toastTimer = null;
+
+function showToast(message, duration = 3000) {
+    const toast   = document.getElementById("nbToast");
+    const msgEl   = toast?.querySelector(".nb-toast-msg");
+    if (!toast || !msgEl) return;
+
+    msgEl.textContent = message;
+    toast.classList.remove("hidden");
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.add("hidden");
+    }, duration);
+}
+
+/* ============================================================
+   UTILITIES
+============================================================= */
+function escapeHtml(str) {
+    if (typeof str !== "string") return String(str ?? "");
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+</script>
+</body>
+</html>

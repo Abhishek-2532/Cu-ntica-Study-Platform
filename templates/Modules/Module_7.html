@@ -1,0 +1,1237 @@
+<main>
+<h1>
+ Module 7 – Why Quantum Machine Learning (QML)?
+</h1>
+<h2>
+ Chapter 1: Limitations of Classical Machine Learning
+</h2>
+<h3>
+ 1.1 Introduction
+</h3>
+<p>
+ Machine Learning (ML) has transformed many industries including healthcare, finance, robotics, autonomous driving, cybersecurity, and recommendation systems. However, as datasets become larger and more complex, classical computers face several limitations.
+</p>
+<p>
+ Quantum Machine Learning (QML) aims to overcome some of these limitations by utilizing the principles of quantum mechanics.
+</p>
+<h3>
+ 1.2 What is Classical Machine Learning?
+</h3>
+<p>
+ Classical ML uses algorithms running on classical computers to learn patterns from data.
+</p>
+<p>
+ General Workflow:
+</p>
+<ol>
+ <li>
+  Data Collection
+ </li>
+ <li>
+  Data Cleaning
+ </li>
+ <li>
+  Feature Engineering
+ </li>
+ <li>
+  Model Training
+ </li>
+ <li>
+  Prediction
+ </li>
+</ol>
+<p>
+ Popular algorithms include:
+</p>
+<ul>
+ <li>
+  Linear Regression
+ </li>
+ <li>
+  Logistic Regression
+ </li>
+ <li>
+  Decision Trees
+ </li>
+ <li>
+  Random Forest
+ </li>
+ <li>
+  SVM
+ </li>
+ <li>
+  Neural Networks
+ </li>
+ <li>
+  Deep Learning
+ </li>
+</ul>
+<h3>
+ 1.3 Major Limitations
+</h3>
+<h4>
+ A. Large Dataset Problem
+</h4>
+<p>
+ Modern applications generate enormous amounts of data.
+</p>
+<p>
+ Examples:
+</p>
+<ul>
+ <li>
+  YouTube videos
+ </li>
+ <li>
+  Medical imaging
+ </li>
+ <li>
+  Satellite images
+ </li>
+ <li>
+  Genomic data
+ </li>
+ <li>
+  Social media
+ </li>
+</ul>
+<p>
+ Training models becomes increasingly time-consuming.
+</p>
+<p>
+ Example:
+ <br/>
+ Suppose a dataset contains
+ <br/>
+ 10 Billion Images
+ <br/>
+ Training a CNN may take weeks.
+</p>
+<h4>
+ B. Curse of Dimensionality
+</h4>
+<p>
+ Many datasets contain thousands or millions of features.
+</p>
+<p>
+ Example
+</p>
+<p>
+ Medical dataset
+</p>
+<ul>
+ <li>
+  Patient
+  <ul>
+   <li>
+    Age
+   </li>
+   <li>
+    Blood Pressure
+   </li>
+   <li>
+    Heart Rate
+   </li>
+   <li>
+    DNA
+   </li>
+   <li>
+    Protein Levels
+   </li>
+   <li>
+    Gene Expression
+   </li>
+   <li>
+    MRI Pixels
+   </li>
+  </ul>
+ </li>
+</ul>
+<p>
+ Thousands of Features
+</p>
+<p>
+ As dimensions increase:
+</p>
+<ul>
+ <li>
+  Distance calculations become difficult.
+ </li>
+ <li>
+  Sparse data increases.
+ </li>
+ <li>
+  Model accuracy decreases.
+ </li>
+</ul>
+<h4>
+ C. Computational Cost
+</h4>
+<p>
+ Large neural networks require:
+</p>
+<ul>
+ <li>
+  GPUs
+ </li>
+ <li>
+  TPUs
+ </li>
+ <li>
+  Huge memory
+ </li>
+ <li>
+  Long training times
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<p>
+ GPT-like models require:
+</p>
+<ul>
+ <li>
+  Thousands of GPUs
+ </li>
+ <li>
+  Months of training
+ </li>
+ <li>
+  Massive electricity consumption
+ </li>
+</ul>
+<h4>
+ D. Optimization Problems
+</h4>
+<p>
+ Deep learning involves optimizing millions or billions of parameters.
+</p>
+<p>
+ Optimization becomes difficult because of
+</p>
+<ul>
+ <li>
+  Local minima
+ </li>
+ <li>
+  Saddle points
+ </li>
+ <li>
+  Vanishing gradients
+ </li>
+ <li>
+  Exploding gradients
+ </li>
+</ul>
+<h4>
+ E. Feature Engineering
+</h4>
+<p>
+ Traditional ML often requires manually selecting useful features.
+</p>
+<p>
+ Example
+</p>
+<p>
+ Image Classification
+</p>
+<ol>
+ <li>
+  Raw Image
+ </li>
+ <li>
+  Edge Detection
+ </li>
+ <li>
+  Texture
+ </li>
+ <li>
+  Shape
+ </li>
+ <li>
+  Classifier
+ </li>
+</ol>
+<p>
+ Poor feature engineering reduces performance.
+</p>
+<h4>
+ F. Memory Bottleneck
+</h4>
+<p>
+ Large datasets cannot fit entirely into RAM.
+</p>
+<p>
+ Example:
+</p>
+<ol>
+ <li>
+  100 TB Dataset
+ </li>
+ <li>
+  Cannot fit into memory
+ </li>
+ <li>
+  Repeated disk access
+ </li>
+ <li>
+  Slower training
+ </li>
+</ol>
+<h4>
+ G. Energy Consumption
+</h4>
+<p>
+ Modern AI consumes enormous energy.
+</p>
+<p>
+ Example:
+</p>
+<p>
+ Training large language models can require electricity comparable to that used by thousands of homes over an extended period.
+</p>
+<h3>
+ 1.4 Why Classical ML Cannot Always Scale
+</h3>
+<p>
+ As data grows:
+</p>
+<ol>
+ <li>
+  More Data
+ </li>
+ <li>
+  More Features
+ </li>
+ <li>
+  More Parameters
+ </li>
+ <li>
+  Longer Training
+ </li>
+ <li>
+  Higher Cost
+ </li>
+</ol>
+<h3>
+ 1.5 Need for Better Computing
+</h3>
+<p>
+ Researchers seek
+</p>
+<ul>
+ <li>
+  Faster optimization
+ </li>
+ <li>
+  Better pattern recognition
+ </li>
+ <li>
+  Efficient high-dimensional processing
+ </li>
+ <li>
+  Lower computational cost (where possible)
+ </li>
+</ul>
+<p>
+ Quantum computing is one possible approach.
+</p>
+<h3>
+ Chapter Summary
+</h3>
+<p>
+ Classical ML struggles with
+</p>
+<ul>
+ <li>
+  Massive datasets
+ </li>
+ <li>
+  High-dimensional data
+ </li>
+ <li>
+  Optimization
+ </li>
+ <li>
+  Memory limitations
+ </li>
+ <li>
+  Energy consumption
+ </li>
+ <li>
+  Long training time
+ </li>
+</ul>
+<p>
+ These challenges motivate research into QML.
+</p>
+<h2>
+ Chapter 2: Computational Complexity
+</h2>
+<h3>
+ 2.1 What is Computational Complexity?
+</h3>
+<p>
+ Computational complexity measures how much
+</p>
+<ul>
+ <li>
+  Time
+ </li>
+ <li>
+  Memory
+ </li>
+</ul>
+<p>
+ an algorithm requires.
+</p>
+<h3>
+ 2.2 Time Complexity
+</h3>
+<p>
+ Measures execution time as input size increases.
+</p>
+<p>
+ Example:
+</p>
+<p>
+ Input = n
+</p>
+<p>
+ Algorithms:
+</p>
+<dl>
+ <dt>
+  Linear Search
+ </dt>
+ <dd>
+  O(n)
+ </dd>
+ <dt>
+  Binary Search
+ </dt>
+ <dd>
+  O(log n)
+ </dd>
+ <dt>
+  Matrix Multiplication
+ </dt>
+ <dd>
+  O(n³)
+ </dd>
+</dl>
+<h3>
+ 2.3 Space Complexity
+</h3>
+<p>
+ Measures memory usage.
+</p>
+<p>
+ Example
+ <br/>
+ Large matrices
+ <br/>
+ 100000 × 100000
+ <br/>
+ require enormous memory.
+</p>
+<h3>
+ 2.4 Complexity Classes
+</h3>
+<h3>
+ 2.5 ML Complexity
+</h3>
+<p>
+ Training complexity depends on:
+</p>
+<ul>
+ <li>
+  Samples
+ </li>
+ <li>
+  Features
+ </li>
+ <li>
+  Parameters
+ </li>
+ <li>
+  Epochs
+ </li>
+</ul>
+<p>
+ Example
+</p>
+<p>
+ Gradient Descent
+</p>
+<ol>
+ <li>
+  Epoch
+ </li>
+ <li>
+  Forward Pass
+ </li>
+ <li>
+  Backward Pass
+ </li>
+ <li>
+  Parameter Update
+ </li>
+</ol>
+<p>
+ Repeated thousands of times.
+</p>
+<h3>
+ 2.6 Why Complexity Matters
+</h3>
+<p>
+ Huge datasets increase
+</p>
+<ul>
+ <li>
+  CPU time
+ </li>
+ <li>
+  GPU time
+ </li>
+ <li>
+  Memory
+ </li>
+ <li>
+  Electricity
+ </li>
+</ul>
+<h3>
+ 2.7 Quantum Perspective
+</h3>
+<p>
+ Some quantum algorithms offer polynomial or, for certain structured problems, exponential speedups compared with the best known classical algorithms. Such advantages are problem-dependent and do not apply universally.
+</p>
+<p>
+ Examples include:
+</p>
+<ul>
+ <li>
+  Shor's Algorithm
+ </li>
+ <li>
+  Grover's Search
+ </li>
+ <li>
+  HHL (under specific assumptions)
+ </li>
+</ul>
+<h3>
+ Chapter Summary
+</h3>
+<p>
+ Computational complexity determines
+</p>
+<ul>
+ <li>
+  speed
+ </li>
+ <li>
+  memory usage
+ </li>
+ <li>
+  scalability
+ </li>
+</ul>
+<p>
+ Quantum algorithms may reduce complexity for specific tasks.
+</p>
+<h2>
+ Chapter 3: High-Dimensional Feature Spaces
+</h2>
+<h3>
+ 3.1 Features
+</h3>
+<p>
+ Features are measurable properties of data.
+</p>
+<p>
+ Example
+</p>
+<p>
+ House Price Features:
+</p>
+<ul>
+ <li>
+  Area
+ </li>
+ <li>
+  Bedrooms
+ </li>
+ <li>
+  Bathrooms
+ </li>
+ <li>
+  Location
+ </li>
+ <li>
+  Age
+ </li>
+ <li>
+  Garage
+ </li>
+ <li>
+  School Distance
+ </li>
+</ul>
+<h3>
+ 3.2 Feature Space
+</h3>
+<p>
+ Each feature forms one dimension.
+</p>
+<p>
+ Example
+ <br/>
+ Two features
+ <br/>
+ Height
+ <br/>
+ Weight
+ <br/>
+ ↓
+ <br/>
+ 2D Space
+</p>
+<p>
+ Three features
+ <br/>
+ ↓
+ <br/>
+ 3D Space
+</p>
+<p>
+ 1000 features
+ <br/>
+ ↓
+ <br/>
+ 1000D Space
+</p>
+<h3>
+ 3.3 High-Dimensional Data
+</h3>
+<p>
+ Applications
+</p>
+<ul>
+ <li>
+  Genomics
+ </li>
+ <li>
+  Climate Science
+ </li>
+ <li>
+  Medical Imaging
+ </li>
+ <li>
+  NLP
+ </li>
+ <li>
+  Computer Vision
+ </li>
+</ul>
+<h3>
+ 3.4 Curse of Dimensionality
+</h3>
+<p>
+ As dimensions increase:
+</p>
+<ul>
+ <li>
+  Data becomes sparse.
+ </li>
+ <li>
+  Distance metrics lose effectiveness.
+ </li>
+ <li>
+  More samples are needed.
+ </li>
+</ul>
+<h3>
+ 3.5 Kernel Trick
+</h3>
+<p>
+ Classical ML often maps data to higher dimensions.
+</p>
+<p>
+ Example
+</p>
+<ol>
+ <li>
+  Original Space
+ </li>
+ <li>
+  Kernel Mapping
+ </li>
+ <li>
+  Higher Dimension
+ </li>
+ <li>
+  Linear Separation
+ </li>
+</ol>
+<h3>
+ 3.6 Quantum Feature Space
+</h3>
+<p>
+ Quantum states naturally exist in exponentially large Hilbert spaces.
+</p>
+<p>
+ n qubits
+ <br/>
+ ↓
+ <br/>
+ 2ⁿ-dimensional quantum state
+</p>
+<p>
+ This enables compact representations of certain high-dimensional structures, though practical advantages depend on the encoding method and the task.
+</p>
+<h3>
+ Chapter Summary
+</h3>
+<p>
+ Quantum states naturally represent high-dimensional spaces, making them an interesting tool for feature mapping.
+</p>
+<h2>
+ Chapter 4: Quantum Parallelism
+</h2>
+<h3>
+ 4.1 What is Quantum Parallelism?
+</h3>
+<p>
+ Quantum computers exploit
+ <strong>
+  superposition
+ </strong>
+ to process many computational paths simultaneously within a quantum state.
+</p>
+<h3>
+ 4.2 Classical Bit
+</h3>
+<p>
+ 0
+ <br/>
+ or
+ <br/>
+ 1
+</p>
+<p>
+ Only one value at a time.
+</p>
+<h3>
+ 4.3 Qubit
+</h3>
+<p>
+ |ψ⟩ = α|0⟩ + β|1⟩
+</p>
+<p>
+ Can exist in a superposition of 0 and 1.
+</p>
+<h3>
+ 4.4 Example
+</h3>
+<p>
+ Three classical bits
+ <br/>
+ Need 8 separate states.
+</p>
+<p>
+ Three qubits
+ <br/>
+ Represent amplitudes for
+</p>
+<ul>
+ <li>
+  000
+ </li>
+ <li>
+  001
+ </li>
+ <li>
+  010
+ </li>
+ <li>
+  011
+ </li>
+ <li>
+  100
+ </li>
+ <li>
+  101
+ </li>
+ <li>
+  110
+ </li>
+ <li>
+  111
+ </li>
+</ul>
+<p>
+ simultaneously in a quantum state.
+</p>
+<h3>
+ 4.5 Important Note
+</h3>
+<p>
+ Quantum parallelism does
+ <strong>
+  not
+ </strong>
+ mean all answers can be read out at once. Measurement yields one outcome, so quantum algorithms must use interference to increase the probability of correct answers.
+</p>
+<h3>
+ 4.6 Benefits
+</h3>
+<p>
+ Potentially
+</p>
+<ul>
+ <li>
+  Faster search
+ </li>
+ <li>
+  Efficient simulation
+ </li>
+ <li>
+  Better optimization
+ </li>
+ <li>
+  Rich feature representations
+ </li>
+</ul>
+<p>
+ for suitable problems.
+</p>
+<h3>
+ Chapter Summary
+</h3>
+<p>
+ Quantum parallelism is a fundamental resource that allows quantum algorithms to manipulate many amplitudes simultaneously, but extracting useful information requires carefully designed algorithms.
+</p>
+<h2>
+ Chapter 5: Potential Quantum Advantage
+</h2>
+<h3>
+ 5.1 What is Quantum Advantage?
+</h3>
+<p>
+ Quantum advantage occurs when a quantum computer performs a specific computational task better than the best known classical approach under meaningful conditions.
+</p>
+<h3>
+ 5.2 Possible Areas
+</h3>
+<p>
+ <strong>
+  Optimization
+ </strong>
+</p>
+<ul>
+ <li>
+  Portfolio optimization
+ </li>
+ <li>
+  Traffic routing
+ </li>
+ <li>
+  Scheduling
+ </li>
+ <li>
+  Supply chain
+ </li>
+</ul>
+<p>
+ <strong>
+  Machine Learning
+ </strong>
+</p>
+<p>
+ Potential improvements in
+</p>
+<ul>
+ <li>
+  Kernel methods
+ </li>
+ <li>
+  Feature mapping
+ </li>
+ <li>
+  Optimization
+ </li>
+ <li>
+  Sampling
+ </li>
+</ul>
+<p>
+ for particular problems.
+</p>
+<p>
+ <strong>
+  Chemistry
+ </strong>
+</p>
+<ul>
+ <li>
+  Simulation of molecules
+ </li>
+ <li>
+  Drug discovery
+ </li>
+ <li>
+  Material design
+ </li>
+</ul>
+<p>
+ <strong>
+  Cryptography
+ </strong>
+</p>
+<ul>
+ <li>
+  Shor's Algorithm
+ </li>
+ <li>
+  Quantum Key Distribution (QKD)
+ </li>
+</ul>
+<p>
+ <strong>
+  Physics
+ </strong>
+</p>
+<ul>
+ <li>
+  Quantum simulation
+ </li>
+ <li>
+  Many-body systems
+ </li>
+ <li>
+  Particle interactions
+ </li>
+</ul>
+<h3>
+ 5.3 Quantum ML Examples
+</h3>
+<p>
+ Algorithms under active research include:
+</p>
+<ul>
+ <li>
+  Variational Quantum Classifier (VQC)
+ </li>
+ <li>
+  Quantum Support Vector Machine (QSVM)
+ </li>
+ <li>
+  Quantum Neural Network (QNN)
+ </li>
+ <li>
+  Quantum Kernel Methods
+ </li>
+ <li>
+  Quantum PCA
+ </li>
+ <li>
+  Quantum Autoencoders
+ </li>
+</ul>
+<h3>
+ 5.4 Current Reality
+</h3>
+<p>
+ Although many algorithms show promise, practical quantum advantage for everyday machine learning tasks has
+ <strong>
+  not yet been conclusively demonstrated
+ </strong>
+ on current hardware.
+</p>
+<h3>
+ Chapter Summary
+</h3>
+<p>
+ Quantum advantage is an active area of research. It has been demonstrated for certain computational tasks, but broad, real-world advantages in machine learning remain an open research question.
+</p>
+<h2>
+ Chapter 6: Current Challenges
+</h2>
+<h3>
+ 6.1 Hardware Limitations
+</h3>
+<p>
+ Today's quantum computers are in the
+ <strong>
+  NISQ (Noisy Intermediate-Scale Quantum)
+ </strong>
+ era.
+</p>
+<p>
+ Challenges include:
+</p>
+<ul>
+ <li>
+  Limited qubits
+ </li>
+ <li>
+  Noise
+ </li>
+ <li>
+  Decoherence
+ </li>
+ <li>
+  Gate errors
+ </li>
+</ul>
+<h3>
+ 6.2 Data Encoding
+</h3>
+<p>
+ Classical data must be converted into quantum states.
+</p>
+<p>
+ Encoding methods include:
+</p>
+<ul>
+ <li>
+  Basis Encoding
+ </li>
+ <li>
+  Angle Encoding
+ </li>
+ <li>
+  Amplitude Encoding
+ </li>
+ <li>
+  IQP Encoding
+ </li>
+</ul>
+<p>
+ Data loading can become a computational bottleneck.
+</p>
+<h3>
+ 6.3 Error Correction
+</h3>
+<p>
+ Large-scale fault-tolerant quantum computers require quantum error correction, which demands many physical qubits to create reliable logical qubits.
+</p>
+<h3>
+ 6.4 Algorithm Design
+</h3>
+<p>
+ Many QML algorithms remain experimental.
+</p>
+<p>
+ Researchers continue improving:
+</p>
+<ul>
+ <li>
+  Training methods
+ </li>
+ <li>
+  Optimization
+ </li>
+ <li>
+  Generalization
+ </li>
+ <li>
+  Scalability
+ </li>
+</ul>
+<h3>
+ 6.5 Software Ecosystem
+</h3>
+<p>
+ Popular frameworks include:
+</p>
+<ul>
+ <li>
+  Qiskit
+ </li>
+ <li>
+  PennyLane
+ </li>
+ <li>
+  Cirq
+ </li>
+ <li>
+  TensorFlow Quantum
+ </li>
+</ul>
+<p>
+ The ecosystem is evolving rapidly.
+</p>
+<h3>
+ 6.6 Skilled Workforce
+</h3>
+<p>
+ QML requires knowledge from multiple fields:
+</p>
+<ul>
+ <li>
+  Quantum Mechanics
+ </li>
+ <li>
+  Linear Algebra
+ </li>
+ <li>
+  Machine Learning
+ </li>
+ <li>
+  Programming
+ </li>
+ <li>
+  Optimization
+ </li>
+</ul>
+<h3>
+ 6.7 Cost
+</h3>
+<p>
+ Quantum hardware remains expensive and is often accessed through cloud services.
+</p>
+<h3>
+ 6.8 Future Directions
+</h3>
+<p>
+ Research focuses on:
+</p>
+<ul>
+ <li>
+  Fault-tolerant quantum computing
+ </li>
+ <li>
+  Better quantum hardware
+ </li>
+ <li>
+  Improved data encoding
+ </li>
+ <li>
+  Quantum-classical hybrid algorithms
+ </li>
+ <li>
+  Practical industrial applications
+ </li>
+</ul>
+<h2>
+ Overall Module Summary
+</h2>
+<h3>
+ Why Quantum Machine Learning?
+</h3>
+<p>
+ Classical ML faces challenges with computation, optimization, and very high-dimensional data. Quantum computing introduces new computational tools such as
+ <strong>
+  superposition
+ </strong>
+ ,
+ <strong>
+  entanglement
+ </strong>
+ , and
+ <strong>
+  quantum interference
+ </strong>
+ , which may provide advantages for certain machine learning tasks. However, current quantum hardware is still limited, and Quantum Machine Learning remains an active research area rather than a replacement for classical ML.
+</p>
+<h3>
+ Key Takeaways
+</h3>
+<ul>
+ <li>
+  Classical ML struggles with scalability, computational cost, and high-dimensional datasets.
+ </li>
+ <li>
+  Computational complexity is a major factor in AI training and inference.
+ </li>
+ <li>
+  Quantum states naturally represent exponentially large state spaces.
+ </li>
+ <li>
+  Quantum parallelism enables new algorithmic approaches but does not automatically solve problems faster.
+ </li>
+ <li>
+  Quantum advantage is problem-specific and still under investigation for ML applications.
+ </li>
+ <li>
+  Current challenges include noisy hardware, data encoding, error correction, and algorithm development.
+ </li>
+ <li>
+  Hybrid quantum-classical systems are expected to play a significant role in the near future until large-scale fault-tolerant quantum computers become available.
+ </li>
+</ul>
+<table>
+ <thead>
+  <tr>
+   <th>
+    Class
+   </th>
+   <th>
+    Meaning
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>
+    O(1)
+   </td>
+   <td>
+    Constant
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(log n)
+   </td>
+   <td>
+    Logarithmic
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(n)
+   </td>
+   <td>
+    Linear
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(n log n)
+   </td>
+   <td>
+    Efficient
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(n²)
+   </td>
+   <td>
+    Quadratic
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(2ⁿ)
+   </td>
+   <td>
+    Exponential
+   </td>
+  </tr>
+  <tr>
+   <td>
+    O(n!)
+   </td>
+   <td>
+    Factorial
+   </td>
+  </tr>
+ </tbody>
+</table>
+</main>

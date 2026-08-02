@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quantum Quiz</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{display:flex;height:100vh;background:#f3f6fb}
+aside{width:300px;background:#0f172a;color:#fff;padding:20px;overflow:auto}
+aside h2{margin-bottom:20px}
+.course{padding:12px;border-radius:8px;background:#1e293b;margin-bottom:10px;cursor:pointer}
+.course:hover,.active{background:#2563eb}
+main{flex:1;padding:25px;overflow:auto}
+button{padding:12px 20px;border:none;border-radius:8px;background:#2563eb;color:#fff;cursor:pointer}
+#quiz,#result{display:none}
+.option{padding:12px;border:1px solid #ccc;border-radius:8px;margin:10px 0;cursor:pointer}
+.option.selected{background:#2563eb;color:#fff}
+#timer{font-size:20px;font-weight:bold;color:#dc2626}
+.progress{height:8px;background:#ddd;border-radius:10px;margin:15px 0}
+.progress div{height:100%;background:#2563eb;width:0;border-radius:10px}
+</style>
+</head>
+<body>
+<aside>
+<h2><i class="fa-solid fa-layer-group"></i> Courses</h2>
+<div id="courseList">Loading...</div>
+</aside>
+
+<main>
+
+<div id="home">
+<h1>Select a Course</h1>
+<p>Choose a course from the sidebar and generate a fresh AI quiz.</p>
+<br>
+<h2 id="courseTitle"></h2>
+<p id="courseDesc"></p><br>
+<button id="generateBtn" style="display:none;">Generate Quiz</button>
+</div>
+
+<div id="quiz">
+<div style="display:flex;justify-content:space-between">
+<h2 id="qNo"></h2>
+<div id="timer"></div>
+</div>
+<div class="progress"><div id="bar"></div></div>
+<h3 id="question"></h3>
+<div id="options"></div>
+<br>
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+<button id="submit">Submit Quiz</button>
+</div>
+
+<div id="result">
+<h1>Quiz Result</h1>
+<br>
+<h2 id="score"></h2>
+<p id="correct"></p>
+<p id="wrong"></p>
+<p id="percentage"></p>
+<br>
+<button onclick="location.reload()">Generate New Quiz</button>
+</div>
+
+</main>
+
+<script>
+let selectedCourse=null;
+let quiz=null;
+let index=0;
+let answers={};
+let time=1800;
+let interval;
+
+fetch("/api/course/all")
+.then(r=>r.json())
+.then(data=>{
+let box=document.getElementById("courseList");
+box.innerHTML="";
+data.courses.forEach(c=>{
+let d=document.createElement("div");
+d.className="course";
+d.innerHTML="<b>"+c.title+"</b><br><small>"+c.difficulty+"</small>";
+d.onclick=()=>{
+document.querySelectorAll(".course").forEach(x=>x.classList.remove("active"));
+d.classList.add("active");
+selectedCourse=c;
+document.getElementById("courseTitle").innerText=c.title;
+document.getElementById("courseDesc").innerText=c.description;
+document.getElementById("generateBtn").style.display="inline-block";
+};
+box.appendChild(d);
+});
+});
+
+document.getElementById("generateBtn").onclick=()=>{
+fetch("/api/quiz/generate",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({course_id:selectedCourse.id})
+})
+.then(r=>r.json())
+.then(d=>{
+quiz=d.quiz;
+document.getElementById("home").style.display="none";
+document.getElementById("quiz").style.display="block";
+startTimer();
+showQuestion();
+});
+};
+
+function startTimer(){
+interval=setInterval(()=>{
+time--;
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("timer").innerText=`${m}:${String(s).padStart(2,"0")}`;
+if(time<=0){
+clearInterval(interval);
+finish();
+}
+},1000);
+}
+
+function showQuestion(){
+let q=quiz.questions[index];
+document.getElementById("qNo").innerText=`Question ${index+1}/${quiz.questions.length}`;
+document.getElementById("question").innerText=q.question;
+document.getElementById("bar").style.width=((index+1)/quiz.questions.length*100)+"%";
+let opt=document.getElementById("options");
+opt.innerHTML="";
+q.options.forEach(o=>{
+let div=document.createElement("div");
+div.className="option";
+if(answers[index]==o)div.classList.add("selected");
+div.innerText=o;
+div.onclick=()=>{
+answers[index]=o;
+showQuestion();
+};
+opt.appendChild(div);
+});
+}
+
+document.getElementById("next").onclick=()=>{
+if(index<quiz.questions.length-1){index++;showQuestion();}
+};
+
+document.getElementById("prev").onclick=()=>{
+if(index>0){index--;showQuestion();}
+};
+
+document.getElementById("submit").onclick=finish;
+
+function finish(){
+clearInterval(interval);
+let correct=0;
+quiz.questions.forEach((q,i)=>{
+if(answers[i]===q.correct_answer)correct++;
+});
+let wrong=quiz.questions.length-correct;
+let percent=(correct/quiz.questions.length*100).toFixed(1);
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("result").style.display="block";
+
+document.getElementById("score").innerText=`${correct} / ${quiz.questions.length}`;
+document.getElementById("correct").innerText="Correct Answers : "+correct;
+document.getElementById("wrong").innerText="Wrong Answers : "+wrong;
+document.getElementById("percentage").innerText="Percentage : "+percent+"%";
+}
+</script>
+</body>
+</html>

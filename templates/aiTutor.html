@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tutor &mdash; Cuántica</title>
+  <meta name="description" content="Your personal Quantum ML AI Tutor. Ask anything about Quantum Computing, Qiskit, and Machine Learning." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* =============================================================
+   CUÁNTICA — AI Tutor Page
+   aiTutor.css  |  Light Theme
+   Palette mirrors index.css exactly
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.35);
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+  --nav-h:            64px;
+  --sidebar-w:        280px;
+  --right-panel-w:    260px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: .6875rem;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   3. NAVBAR
+============================================================= */
+.at-navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  background: rgba(247,254,255,.92);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.at-navbar.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(247,254,255,.98);
+}
+
+.at-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  gap: 1rem;
+}
+
+/* Logo */
+.at-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.at-logo-mark {
+  width: 34px;
+  height: 34px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  transition: transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.at-logo:hover .at-logo-mark {
+  transform: rotate(12deg) scale(1.06);
+}
+
+.at-logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.125rem;
+  color: var(--text);
+  letter-spacing: -.025em;
+}
+
+/* Breadcrumb */
+.at-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8125rem;
+}
+
+.at-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.at-breadcrumb-link:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.at-breadcrumb-sep {
+  font-size: .5625rem;
+  color: var(--text-faint);
+}
+
+.at-breadcrumb-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--primary-deeper);
+  font-weight: 600;
+  font-size: .8125rem;
+  padding: 5px 10px;
+  background: rgba(108,229,191,.14);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(62,207,166,.2);
+}
+
+/* Navbar controls */
+.at-navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.at-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .875rem;
+  transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  border: none;
+  background: none;
+}
+
+.at-icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+  transform: scale(1.05);
+}
+
+.at-session-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(108,229,191,.14);
+  border: 1px solid rgba(62,207,166,.25);
+  border-radius: var(--radius-full);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--primary-deeper);
+  white-space: nowrap;
+}
+
+.at-session-dot {
+  font-size: .4rem;
+  color: var(--primary-dark);
+  animation: pulseGreen 2s ease-in-out infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .35; }
+}
+
+/* ============================================================
+   4. MAIN LAYOUT — 3 columns
+============================================================= */
+.at-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ============================================================
+   5. LEFT SIDEBAR
+============================================================= */
+.at-sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width var(--transition-slow), opacity var(--transition-slow);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.at-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.at-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.at-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+.at-sidebar.collapsed {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Tutor card at top */
+.at-tutor-card {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.at-tutor-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.at-tutor-online {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: var(--primary-dark);
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+}
+
+.at-tutor-info strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.at-tutor-info span {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+/* Sidebar sections */
+.at-sidebar-section {
+  padding: 1.125rem 1.125rem .875rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.at-sidebar-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .75rem;
+}
+
+.at-sidebar-label i {
+  font-size: .625rem;
+  color: var(--primary-dark);
+}
+
+/* Topics */
+.at-topics {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.at-topic-btn {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .625rem .75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: none;
+  text-align: left;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  width: 100%;
+  cursor: pointer;
+}
+
+.at-topic-btn:hover {
+  background: var(--surface-alt);
+  border-color: var(--primary-soft);
+  transform: translateX(2px);
+}
+
+.at-topic-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8125rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.at-topic-btn:hover .at-topic-icon {
+  transform: scale(1.12);
+}
+
+.at-topic-icon--teal   { background: #D1FAF0; color: #1FA880; }
+.at-topic-icon--indigo { background: #EEF2FF; color: #6366F1; }
+.at-topic-icon--amber  { background: #FFFBEB; color: #D97706; }
+.at-topic-icon--mint   { background: var(--surface-alt); color: #0F766E; }
+.at-topic-icon--rose   { background: #FFF1F3; color: #E11D7A; }
+.at-topic-icon--blue   { background: var(--secondary); color: #3B5BDB; }
+
+.at-topic-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.at-topic-text strong {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.at-topic-text small {
+  font-size: .6875rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.at-topic-arrow {
+  font-size: .5625rem;
+  color: var(--text-faint);
+  opacity: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.at-topic-btn:hover .at-topic-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Quick prompts */
+.at-quick-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+}
+
+.at-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: .6875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.at-quick-btn:hover {
+  color: var(--primary-deeper);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+/* Session stats */
+.at-session-stats {
+  padding: .875rem 1.125rem;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+
+.at-stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.at-stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.at-stat-item i {
+  font-size: .6875rem;
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   6. CHAT WRAPPER — center column
+============================================================= */
+.at-chat-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Chat header bar */
+.at-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .875rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.at-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  min-width: 0;
+}
+
+.at-chat-avatar {
+  width: 38px;
+  height: 38px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.at-chat-title {
+  font-family: var(--font-display);
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+
+.at-chat-subtitle {
+  font-size: .75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.at-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  flex-shrink: 0;
+}
+
+.at-header-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .8125rem;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  border: none;
+  background: none;
+}
+
+.at-header-btn:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+/* ============================================================
+   7. CHAT FEED
+============================================================= */
+.at-chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  scroll-behavior: smooth;
+}
+
+.at-chat-feed::-webkit-scrollbar {
+  width: 4px;
+}
+
+.at-chat-feed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.at-chat-feed::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================================
+   8. WELCOME BANNER
+============================================================= */
+.at-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  animation: fadeSlideUp .5s cubic-bezier(.4,0,.2,1) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.at-welcome-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--surface-alt), var(--primary-soft));
+  border: 2px solid var(--primary-soft);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.625rem;
+  color: var(--primary-deeper);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-primary);
+  animation: floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.at-welcome-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: .625rem;
+}
+
+.at-welcome-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+}
+
+.at-welcome-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  max-width: 520px;
+}
+
+.at-welcome-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-spring),
+    box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.at-welcome-chip i {
+  font-size: .75rem;
+  color: var(--primary-dark);
+  transition: transform var(--transition-spring);
+}
+
+.at-welcome-chip:hover {
+  color: var(--primary-deeper);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.at-welcome-chip:hover i {
+  transform: scale(1.2);
+}
+
+/* ============================================================
+   9. MESSAGE BUBBLES
+============================================================= */
+.at-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  animation: msgEnter .3s cubic-bezier(.4,0,.2,1) both;
+  max-width: 100%;
+}
+
+@keyframes msgEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* AI message */
+.at-msg--ai {
+  flex-direction: row;
+}
+
+.at-msg--ai .at-msg-body {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  max-width: min(680px, 85%);
+}
+
+/* User message */
+.at-msg--user {
+  flex-direction: row-reverse;
+}
+
+.at-msg--user .at-msg-body {
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: min(580px, 85%);
+}
+
+.at-msg--user .at-msg-text {
+  color: rgba(255,255,255,.92);
+}
+
+/* Avatar */
+.at-msg-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8125rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.at-msg--ai .at-msg-avatar {
+  background: var(--text);
+  color: var(--primary);
+}
+
+.at-msg--user .at-msg-avatar {
+  background: var(--primary);
+  color: var(--text);
+}
+
+/* Message body */
+.at-msg-body {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: .875rem 1.125rem;
+  min-width: 0;
+}
+
+/* Sender label */
+.at-msg-sender {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: .25rem;
+}
+
+.at-msg--ai  .at-msg-sender { color: var(--primary-deeper); }
+.at-msg--user .at-msg-sender { color: rgba(255,255,255,.55); }
+
+/* Message text */
+.at-msg-text {
+  font-size: .9125rem;
+  color: var(--text);
+  line-height: 1.72;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Inline code */
+.at-msg-text code {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--primary-deeper);
+  padding: .125rem .375rem;
+  border-radius: var(--radius-sm);
+  font-size: .8125rem;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.at-msg--user .at-msg-text code {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.2);
+  color: var(--primary-light);
+}
+
+/* Code blocks */
+.at-code-block {
+  background: #0F172A;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: .625rem 0 .25rem;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.at-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .875rem;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.at-code-lang {
+  font-size: .6875rem;
+  font-weight: 600;
+  color: var(--primary-light);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.at-code-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .6875rem;
+  color: rgba(255,255,255,.45);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.at-code-copy:hover {
+  color: var(--primary-light);
+  background: rgba(255,255,255,.07);
+}
+
+.at-code-body {
+  padding: .875rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.1) transparent;
+}
+
+.at-code-body pre {
+  font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+  font-size: .8125rem;
+  line-height: 1.7;
+  color: #E2E8F0;
+  white-space: pre;
+  margin: 0;
+}
+
+/* Message footer — timestamp */
+.at-msg-footer {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 1.125rem .625rem;
+}
+
+.at-msg-time {
+  font-size: .6875rem;
+  color: var(--text-faint);
+}
+
+.at-msg--user .at-msg-time {
+  color: rgba(255,255,255,.3);
+}
+
+/* Message actions (copy, etc.) */
+.at-msg-actions {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.at-msg:hover .at-msg-actions {
+  opacity: 1;
+}
+
+.at-msg-action-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-faint);
+  font-size: .6875rem;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.at-msg-action-btn:hover {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+.at-msg--user .at-msg-action-btn {
+  color: rgba(255,255,255,.35);
+}
+
+.at-msg--user .at-msg-action-btn:hover {
+  color: var(--primary-light);
+  background: rgba(255,255,255,.1);
+}
+
+/* ============================================================
+   10. TYPING INDICATOR
+============================================================= */
+.at-typing-tpl {
+  display: none;
+}
+
+.at-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: .5rem 0;
+}
+
+.at-typing-indicator span {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: typingBounce 1.1s ease-in-out infinite;
+  display: block;
+}
+
+.at-typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.at-typing-indicator span:nth-child(2) { animation-delay: .16s; }
+.at-typing-indicator span:nth-child(3) { animation-delay: .32s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+  30%           { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ============================================================
+   11. ERROR BANNER
+============================================================= */
+.at-error-banner {
+  display: none;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1.25rem;
+  background: #FFF1F3;
+  border-top: 1px solid #FECDD3;
+  border-bottom: 1px solid #FECDD3;
+  font-size: .8125rem;
+  color: #BE123C;
+  font-weight: 500;
+  flex-shrink: 0;
+  animation: slideDown .25s cubic-bezier(.4,0,.2,1) both;
+}
+
+.at-error-banner.visible {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.at-error-banner i {
+  font-size: .9375rem;
+  flex-shrink: 0;
+}
+
+.at-error-close {
+  margin-left: auto;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: #BE123C;
+  font-size: .8125rem;
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.at-error-close:hover {
+  background: #FECDD3;
+}
+
+/* ============================================================
+   12. INPUT AREA
+============================================================= */
+.at-input-area {
+  flex-shrink: 0;
+  padding: 1rem 1.5rem 1.25rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+/* Suggestion pills row */
+.at-suggestions {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  flex-wrap: wrap;
+  margin-bottom: .75rem;
+}
+
+.at-suggestion-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.at-suggestion-pill i {
+  font-size: .6875rem;
+  color: var(--primary-dark);
+}
+
+.at-suggestion-pill:hover {
+  color: var(--primary-deeper);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+/* Input box */
+.at-input-box {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  overflow: hidden;
+}
+
+.at-input-box:focus-within {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+.at-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  padding: .625rem .625rem .625rem 1rem;
+}
+
+.at-textarea-wrap {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.at-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: .9375rem;
+  color: var(--text);
+  line-height: 1.6;
+  resize: none;
+  min-height: 24px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: block;
+  padding: .25rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.at-textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.at-char-count {
+  display: block;
+  font-size: .6875rem;
+  color: var(--text-faint);
+  text-align: right;
+  padding-top: 2px;
+  transition: color var(--transition-fast);
+}
+
+.at-char-count.near-limit {
+  color: #D97706;
+}
+
+.at-char-count.at-limit {
+  color: #BE123C;
+}
+
+.at-send-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  flex-shrink: 0;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring),
+    opacity var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.at-send-btn:not(:disabled):hover {
+  background: var(--primary-deeper);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(30,41,59,.3);
+  transform: scale(1.07);
+}
+
+.at-send-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.at-send-btn.loading {
+  background: var(--primary-soft);
+  color: var(--primary-deeper);
+  cursor: not-allowed;
+}
+
+.at-send-btn.loading i {
+  animation: spinSend .7s linear infinite;
+}
+
+@keyframes spinSend {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Input hint line */
+.at-input-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .6875rem;
+  color: var(--text-faint);
+  padding: .375rem 1rem .5rem;
+  border-top: 1px solid var(--border);
+}
+
+.at-input-hint i {
+  font-size: .625rem;
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   13. RIGHT PANEL
+============================================================= */
+.at-right-panel {
+  width: var(--right-panel-w);
+  flex-shrink: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.at-right-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.at-right-panel::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+/* Panel cards */
+.at-panel-card {
+  padding: 1.125rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.at-panel-card-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .875rem;
+}
+
+.at-panel-card-header i {
+  width: 26px;
+  height: 26px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+
+.at-panel-card-header strong {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Learning path */
+.at-learning-path {
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  position: relative;
+}
+
+.at-learning-path::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.at-path-item {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.at-path-dot {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: .6875rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-faint);
+  transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+  z-index: 2;
+}
+
+.at-path-item span:last-child {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.at-path-item--done .at-path-dot {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+}
+
+.at-path-item--done span:last-child {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: .7;
+}
+
+.at-path-item--active .at-path-dot {
+  background: var(--surface-alt);
+  border-color: var(--primary);
+  color: var(--primary-deeper);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.2);
+}
+
+.at-path-item--active span:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* References */
+.at-references {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.at-ref-item {
+  list-style: none;
+}
+
+.at-ref-link {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .5rem;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+  text-decoration: none;
+}
+
+.at-ref-link:hover {
+  background: var(--surface-alt);
+}
+
+.at-ref-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6875rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.at-ref-link:hover .at-ref-icon {
+  transform: scale(1.1);
+}
+
+.at-ref-icon--teal   { background: #D1FAF0; color: #1FA880; }
+.at-ref-icon--indigo { background: #EEF2FF; color: #6366F1; }
+.at-ref-icon--amber  { background: #FFFBEB; color: #D97706; }
+.at-ref-icon--mint   { background: var(--surface-alt); color: #0F766E; }
+
+.at-ref-link span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.at-ref-link strong {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.at-ref-link small {
+  font-size: .6875rem;
+  color: var(--text-muted);
+}
+
+/* Tip card */
+.at-tip-card {
+  background: linear-gradient(135deg, rgba(108,229,191,.08) 0%, rgba(227,237,254,.12) 100%);
+}
+
+.at-tip-text {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   14. SCROLLBAR FADE-IN HELPER
+============================================================= */
+.at-msg-enter {
+  animation: msgEnter .3s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* ============================================================
+   15. RESPONSIVE — Tablet ( <= 1100px )
+============================================================= */
+@media (max-width: 1100px) {
+  :root {
+    --right-panel-w: 220px;
+  }
+}
+
+@media (max-width: 960px) {
+  .at-right-panel {
+    display: none;
+  }
+
+  .at-breadcrumb {
+    display: none;
+  }
+}
+
+/* ============================================================
+   16. RESPONSIVE — Mobile ( <= 700px )
+============================================================= */
+@media (max-width: 700px) {
+  :root {
+    --sidebar-w: 100%;
+    --nav-h: 58px;
+  }
+
+  .at-navbar-inner {
+    padding-inline: 1rem;
+  }
+
+  .at-session-badge span {
+    display: none;
+  }
+
+  .at-main {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .at-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height var(--transition-slow), opacity var(--transition-slow);
+  }
+
+  .at-sidebar.mobile-open {
+    max-height: 640px;
+    opacity: 1;
+    overflow-y: auto;
+  }
+
+  .at-chat-wrapper {
+    min-height: calc(100dvh - var(--nav-h));
+  }
+
+  .at-chat-feed {
+    padding: 1rem 1rem 0;
+  }
+
+  .at-input-area {
+    padding: .75rem 1rem 1rem;
+  }
+
+  .at-suggestions {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: .25rem;
+    scrollbar-width: none;
+  }
+
+  .at-suggestions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .at-suggestion-pill {
+    flex-shrink: 0;
+  }
+
+  .at-welcome {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .at-welcome-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.25rem;
+  }
+
+  .at-msg--ai .at-msg-body,
+  .at-msg--user .at-msg-body {
+    max-width: 92%;
+  }
+
+  .at-topics {
+    gap: .125rem;
+  }
+
+  .at-topic-btn {
+    padding: .5rem .625rem;
+  }
+}
+
+/* ============================================================
+   17. MICRO ANIMATIONS & UTILITIES
+============================================================= */
+
+/* Shimmer for loading state placeholder */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.at-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface-alt) 25%,
+    var(--bg)          50%,
+    var(--surface-alt) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* Focus-visible ring */
+:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Smooth opacity fade for panels */
+.at-fade-in {
+  animation: fadeIn .35s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Pulse ring for avatar */
+@keyframes ringPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(108,229,191,.45); }
+  70%  { box-shadow: 0 0 0 8px rgba(108,229,191,0); }
+  100% { box-shadow: 0 0 0 0 rgba(108,229,191,0); }
+}
+
+.at-chat-avatar {
+  animation: ringPulse 3s ease-in-out infinite;
+}
+
+/* Scroll-to-bottom button */
+.at-scroll-bottom {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1rem;
+  width: 34px;
+  height: 34px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: .8125rem;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-spring),
+    opacity var(--transition-base);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  border: none;
+}
+
+.at-scroll-bottom.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.at-scroll-bottom:hover {
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   18. DIVIDER WITH TIMESTAMP (date separators in chat)
+============================================================= */
+.at-date-divider {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .25rem 0;
+  flex-shrink: 0;
+}
+
+.at-date-divider::before,
+.at-date-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.at-date-divider span {
+  font-size: .6875rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  padding: 3px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVBAR
+  ============================================= -->
+  <header class="at-navbar" id="atNavbar">
+    <div class="at-navbar-inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="at-logo" aria-label="Cuántica home">
+        <div class="at-logo-mark" style="background: transparent;">
+          <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <span class="at-logo-text">Cuántica</span>
+      </a>
+
+      <!-- Center breadcrumb -->
+      <div class="at-breadcrumb">
+        <a href="index.html" class="at-breadcrumb-link">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <i class="fa-solid fa-chevron-right at-breadcrumb-sep"></i>
+        <span class="at-breadcrumb-current">
+          <i class="fa-solid fa-robot"></i>
+          AI Tutor
+        </span>
+      </div>
+
+      <!-- Right controls -->
+      <div class="at-navbar-controls">
+        <button class="at-icon-btn" id="atClearBtn" title="Clear conversation" aria-label="Clear conversation">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button class="at-icon-btn" id="atExportBtn" title="Export conversation" aria-label="Export conversation">
+          <i class="fa-solid fa-download"></i>
+        </button>
+        <div class="at-session-badge">
+          <i class="fa-solid fa-circle at-session-dot"></i>
+          <span>Session Active</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =============================================
+       MAIN LAYOUT
+  ============================================= -->
+  <main class="at-main">
+
+    <!-- LEFT SIDEBAR — Topics & Quick Actions -->
+    <aside class="at-sidebar" id="atSidebar" aria-label="Topics and quick actions">
+
+      <!-- Tutor info card -->
+      <div class="at-tutor-card">
+        <div class="at-tutor-avatar">
+          <i class="fa-solid fa-microchip"></i>
+          <span class="at-tutor-online"></span>
+        </div>
+        <div class="at-tutor-info">
+          <strong>Quantum AI Tutor</strong>
+          <span>Powered by Cuántica v2</span>
+        </div>
+      </div>
+
+      <!-- Topics section -->
+      <div class="at-sidebar-section">
+        <p class="at-sidebar-label">
+          <i class="fa-solid fa-layer-group"></i>
+          Topics
+        </p>
+        <nav class="at-topics" aria-label="Topic suggestions">
+          <button class="at-topic-btn" data-prompt="Explain the basics of quantum computing in simple terms.">
+            <span class="at-topic-icon at-topic-icon--teal">
+              <i class="fa-solid fa-atom"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Quantum Computing</strong>
+              <small>Qubits, superposition, entanglement</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+          <button class="at-topic-btn" data-prompt="What is Quantum Machine Learning and how does it differ from classical ML?">
+            <span class="at-topic-icon at-topic-icon--indigo">
+              <i class="fa-solid fa-brain"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Quantum ML</strong>
+              <small>QNN, variational algorithms</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+          <button class="at-topic-btn" data-prompt="How do I get started with Qiskit for quantum programming?">
+            <span class="at-topic-icon at-topic-icon--amber">
+              <i class="fa-brands fa-python"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Qiskit</strong>
+              <small>IBM's quantum SDK</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+          <button class="at-topic-btn" data-prompt="Explain variational quantum circuits and their use in optimization.">
+            <span class="at-topic-icon at-topic-icon--mint">
+              <i class="fa-solid fa-wave-square"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Quantum Circuits</strong>
+              <small>Gates, VQE, QAOA</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+          <button class="at-topic-btn" data-prompt="What are quantum neural networks and how do they work?">
+            <span class="at-topic-icon at-topic-icon--rose">
+              <i class="fa-solid fa-network-wired"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Quantum Neural Nets</strong>
+              <small>Architecture, training</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+          <button class="at-topic-btn" data-prompt="Explain quantum error correction and why it matters for quantum computing.">
+            <span class="at-topic-icon at-topic-icon--blue">
+              <i class="fa-solid fa-shield-halved"></i>
+            </span>
+            <span class="at-topic-text">
+              <strong>Error Correction</strong>
+              <small>Noise, decoherence, codes</small>
+            </span>
+            <i class="fa-solid fa-arrow-right at-topic-arrow"></i>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Quick prompts -->
+      <div class="at-sidebar-section">
+        <p class="at-sidebar-label">
+          <i class="fa-solid fa-bolt"></i>
+          Quick Prompts
+        </p>
+        <div class="at-quick-prompts">
+          <button class="at-quick-btn" data-prompt="What is a qubit?">What is a qubit?</button>
+          <button class="at-quick-btn" data-prompt="Explain quantum entanglement.">Quantum entanglement</button>
+          <button class="at-quick-btn" data-prompt="How does Grover's algorithm work?">Grover&apos;s algorithm</button>
+          <button class="at-quick-btn" data-prompt="What is quantum advantage?">Quantum advantage</button>
+          <button class="at-quick-btn" data-prompt="Explain the Bloch sphere representation.">Bloch sphere</button>
+          <button class="at-quick-btn" data-prompt="What is a variational quantum eigensolver (VQE)?">VQE explained</button>
+        </div>
+      </div>
+
+      <!-- Session stats -->
+      <div class="at-session-stats">
+        <div class="at-stat-row">
+          <span class="at-stat-item">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span id="msgCount">0</span> messages
+          </span>
+          <span class="at-stat-item">
+            <i class="fa-regular fa-clock"></i>
+            <span id="sessionTime">0:00</span>
+          </span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CENTER — Chat window -->
+    <section class="at-chat-wrapper" aria-label="Chat conversation">
+
+      <!-- Chat header bar -->
+      <div class="at-chat-header">
+        <div class="at-chat-header-info">
+          <div class="at-chat-avatar">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div>
+            <h1 class="at-chat-title">Quantum ML AI Tutor</h1>
+            <p class="at-chat-subtitle">Ask me anything about Quantum Computing, QML, Qiskit, and more</p>
+          </div>
+        </div>
+        <div class="at-chat-header-actions">
+          <button class="at-header-btn" id="atSidebarToggle" title="Toggle sidebar" aria-label="Toggle sidebar">
+            <i class="fa-solid fa-sidebar"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Message feed -->
+      <div class="at-chat-feed" id="atChatFeed" role="log" aria-live="polite" aria-label="Conversation messages">
+
+        <!-- Welcome banner (shown until first user message) -->
+        <div class="at-welcome" id="atWelcome">
+          <div class="at-welcome-icon">
+            <i class="fa-solid fa-atom"></i>
+          </div>
+          <h2 class="at-welcome-title">Your Quantum ML Tutor</h2>
+          <p class="at-welcome-sub">
+            I can explain quantum computing concepts, walk you through Qiskit code,
+            discuss quantum machine learning theory, and help you understand AI and ML fundamentals.
+          </p>
+          <div class="at-welcome-chips">
+            <button class="at-welcome-chip" data-prompt="What is quantum superposition?">
+              <i class="fa-solid fa-atom"></i> Quantum superposition
+            </button>
+            <button class="at-welcome-chip" data-prompt="How does quantum computing speed up machine learning?">
+              <i class="fa-solid fa-bolt"></i> Quantum speedup in ML
+            </button>
+            <button class="at-welcome-chip" data-prompt="Write a simple Qiskit circuit example.">
+              <i class="fa-brands fa-python"></i> Qiskit example
+            </button>
+            <button class="at-welcome-chip" data-prompt="What are the main quantum gates?">
+              <i class="fa-solid fa-wave-square"></i> Quantum gates
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Typing indicator (hidden, cloned into feed) -->
+      <div class="at-typing-tpl" id="atTypingTpl" aria-hidden="true">
+        <div class="at-msg at-msg--ai">
+          <div class="at-msg-avatar">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div class="at-msg-body">
+            <div class="at-typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error banner -->
+      <div class="at-error-banner" id="atErrorBanner" role="alert" aria-live="assertive">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="atErrorText">Something went wrong. Please try again.</span>
+        <button class="at-error-close" id="atErrorClose" aria-label="Dismiss error">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Input area -->
+      <div class="at-input-area">
+
+        <!-- Suggestion pills (above textarea) -->
+        <div class="at-suggestions" id="atSuggestions">
+          <button class="at-suggestion-pill" data-prompt="Can you explain that in simpler terms?">
+            <i class="fa-solid fa-circle-info"></i> Simplify
+          </button>
+          <button class="at-suggestion-pill" data-prompt="Give me a practical example of that.">
+            <i class="fa-solid fa-flask"></i> Example
+          </button>
+          <button class="at-suggestion-pill" data-prompt="What should I study next after this topic?">
+            <i class="fa-solid fa-road"></i> What&apos;s next
+          </button>
+          <button class="at-suggestion-pill" data-prompt="Can you give me a quiz question on this topic?">
+            <i class="fa-solid fa-list-check"></i> Quiz me
+          </button>
+        </div>
+
+        <div class="at-input-box">
+          <div class="at-input-row">
+            <div class="at-textarea-wrap">
+              <textarea
+                id="atQuestion"
+                class="at-textarea"
+                placeholder="Ask a question about quantum computing, Qiskit, QML..."
+                rows="1"
+                maxlength="2000"
+                aria-label="Your question"
+                autocomplete="off"
+                spellcheck="true"
+              ></textarea>
+              <span class="at-char-count" id="atCharCount">0 / 2000</span>
+            </div>
+            <button class="at-send-btn" id="atSendBtn" aria-label="Send message" disabled>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+          <p class="at-input-hint">
+            <i class="fa-solid fa-keyboard"></i>
+            Press <kbd>Enter</kbd> to send &middot; <kbd>Shift+Enter</kbd> for new line
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT PANEL — Context & Resources -->
+    <aside class="at-right-panel" id="atRightPanel" aria-label="Resources and context">
+
+      <!-- Learning path card -->
+      <div class="at-panel-card">
+        <div class="at-panel-card-header">
+          <i class="fa-solid fa-map"></i>
+          <strong>Learning Path</strong>
+        </div>
+        <ol class="at-learning-path">
+          <li class="at-path-item at-path-item--done">
+            <span class="at-path-dot"><i class="fa-solid fa-check"></i></span>
+            <span>Quantum basics</span>
+          </li>
+          <li class="at-path-item at-path-item--active">
+            <span class="at-path-dot"><i class="fa-solid fa-circle-dot"></i></span>
+            <span>Quantum circuits</span>
+          </li>
+          <li class="at-path-item">
+            <span class="at-path-dot"><i class="fa-regular fa-circle"></i></span>
+            <span>Variational algorithms</span>
+          </li>
+          <li class="at-path-item">
+            <span class="at-path-dot"><i class="fa-regular fa-circle"></i></span>
+            <span>QML models</span>
+          </li>
+          <li class="at-path-item">
+            <span class="at-path-dot"><i class="fa-regular fa-circle"></i></span>
+            <span>Quantum advantage</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- References card -->
+      <div class="at-panel-card">
+        <div class="at-panel-card-header">
+          <i class="fa-solid fa-book-open"></i>
+          <strong>References</strong>
+        </div>
+        <ul class="at-references">
+          <li class="at-ref-item">
+            <a href="https://qiskit.org/learn" target="_blank" rel="noopener noreferrer" class="at-ref-link">
+              <span class="at-ref-icon at-ref-icon--teal">
+                <i class="fa-solid fa-external-link"></i>
+              </span>
+              <span>
+                <strong>Qiskit Learn</strong>
+                <small>Official IBM learning hub</small>
+              </span>
+            </a>
+          </li>
+          <li class="at-ref-item">
+            <a href="https://pennylane.ai/learn/" target="_blank" rel="noopener noreferrer" class="at-ref-link">
+              <span class="at-ref-icon at-ref-icon--indigo">
+                <i class="fa-solid fa-external-link"></i>
+              </span>
+              <span>
+                <strong>PennyLane Docs</strong>
+                <small>Quantum ML framework</small>
+              </span>
+            </a>
+          </li>
+          <li class="at-ref-item">
+            <a href="https://arxiv.org/abs/2108.01725" target="_blank" rel="noopener noreferrer" class="at-ref-link">
+              <span class="at-ref-icon at-ref-icon--amber">
+                <i class="fa-solid fa-file-lines"></i>
+              </span>
+              <span>
+                <strong>QML Survey</strong>
+                <small>arXiv overview paper</small>
+              </span>
+            </a>
+          </li>
+          <li class="at-ref-item">
+            <a href="https://quantumcomputing.stackexchange.com/" target="_blank" rel="noopener noreferrer" class="at-ref-link">
+              <span class="at-ref-icon at-ref-icon--mint">
+                <i class="fa-brands fa-stack-exchange"></i>
+              </span>
+              <span>
+                <strong>Q. Computing SE</strong>
+                <small>Community Q&amp;A</small>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tip of the session -->
+      <div class="at-panel-card at-tip-card">
+        <div class="at-panel-card-header">
+          <i class="fa-solid fa-lightbulb"></i>
+          <strong>Tip</strong>
+        </div>
+        <p class="at-tip-text" id="atTipText">
+          Start with a specific concept rather than a broad question for the most detailed and useful answer.
+        </p>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <script>/* =============================================================
+   CUÁNTICA — AI Tutor  |  aiTutor.js
+   Logic preserved exactly from original.
+   UI enhancements: typing indicator, code blocks, timestamps,
+   char counter, auto-resize textarea, session stats, sidebar
+   toggle, scroll-to-bottom, export, clear, tip rotation.
+============================================================= */
+
+(function () {
+  'use strict';
+
+  /* ============================================================
+     AUTH GUARD — original logic untouched
+  ============================================================= */
+  var token = JSON.parse(localStorage.getItem('token'));
+  if (token == null) {
+    window.location = '/login';
+    return;
+  }
+
+  /* ============================================================
+     DOM REFERENCES
+  ============================================================= */
+  var chatFeed       = document.getElementById('atChatFeed');
+  var questionBox    = document.getElementById('atQuestion');
+  var sendBtn        = document.getElementById('atSendBtn');
+  var charCount      = document.getElementById('atCharCount');
+  var welcome        = document.getElementById('atWelcome');
+  var typingTpl      = document.getElementById('atTypingTpl');
+  var errorBanner    = document.getElementById('atErrorBanner');
+  var errorText      = document.getElementById('atErrorText');
+  var errorClose     = document.getElementById('atErrorClose');
+  var clearBtn       = document.getElementById('atClearBtn');
+  var exportBtn      = document.getElementById('atExportBtn');
+  var sidebarToggle  = document.getElementById('atSidebarToggle');
+  var sidebar        = document.getElementById('atSidebar');
+  var navbar         = document.getElementById('atNavbar');
+  var msgCountEl     = document.getElementById('msgCount');
+  var sessionTimeEl  = document.getElementById('sessionTime');
+  var tipText        = document.getElementById('atTipText');
+
+  /* ============================================================
+     STATE
+  ============================================================= */
+  var messageCount   = 0;
+  var isLoading      = false;
+  var sessionStart   = Date.now();
+  var typingNode     = null;
+  var scrollBtnNode  = null;
+
+  /* ============================================================
+     TIPS — rotate each session
+  ============================================================= */
+  var tips = [
+    'Start with a specific concept rather than a broad question for the most detailed and useful answer.',
+    'Ask for a code example after getting a theory explanation to reinforce learning.',
+    'Use "Explain like I\'m 5" phrasing if an answer feels too advanced.',
+    'Try asking "What are common mistakes when...?" for practical insight.',
+    'Chain questions — ask a follow-up immediately after to go deeper on a topic.',
+    'Request a comparison ("How does X differ from Y?") to understand trade-offs.',
+    'Ask for a real-world use-case to connect abstract theory to practice.',
+  ];
+
+  function rotateTip() {
+    if (!tipText) return;
+    var idx = Math.floor(Math.random() * tips.length);
+    tipText.textContent = tips[idx];
+  }
+
+  rotateTip();
+
+  /* ============================================================
+     SESSION TIMER
+  ============================================================= */
+  setInterval(function () {
+    if (!sessionTimeEl) return;
+    var elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+    var m = Math.floor(elapsed / 60);
+    var s = elapsed % 60;
+    sessionTimeEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  }, 1000);
+
+  /* ============================================================
+     NAVBAR SCROLL SHADOW
+  ============================================================= */
+  window.addEventListener('scroll', function () {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 4);
+  }, { passive: true });
+
+  /* ============================================================
+     SIDEBAR TOGGLE
+  ============================================================= */
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', function () {
+      sidebar.classList.toggle('collapsed');
+    });
+  }
+
+  /* ============================================================
+     SCROLL-TO-BOTTOM BUTTON
+  ============================================================= */
+  function createScrollBtn() {
+    var btn = document.createElement('button');
+    btn.className = 'at-scroll-bottom';
+    btn.setAttribute('aria-label', 'Scroll to bottom');
+    btn.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
+    btn.addEventListener('click', function () {
+      chatFeed.scrollTo({ top: chatFeed.scrollHeight, behavior: 'smooth' });
+    });
+    chatFeed.parentElement.style.position = 'relative';
+    chatFeed.parentElement.appendChild(btn);
+    return btn;
+  }
+
+  scrollBtnNode = createScrollBtn();
+
+  chatFeed.addEventListener('scroll', function () {
+    var threshold = 120;
+    var atBottom = chatFeed.scrollHeight - chatFeed.scrollTop - chatFeed.clientHeight < threshold;
+    if (scrollBtnNode) {
+      scrollBtnNode.classList.toggle('visible', !atBottom && chatFeed.scrollHeight > chatFeed.clientHeight);
+    }
+  }, { passive: true });
+
+  function scrollToBottom(force) {
+    var threshold = 140;
+    var atBottom  = chatFeed.scrollHeight - chatFeed.scrollTop - chatFeed.clientHeight < threshold;
+    if (force || atBottom) {
+      chatFeed.scrollTo({ top: chatFeed.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  /* ============================================================
+     CHARACTER COUNTER
+  ============================================================= */
+  questionBox.addEventListener('input', function () {
+    var len  = questionBox.value.length;
+    var max  = parseInt(questionBox.getAttribute('maxlength'), 10) || 2000;
+    charCount.textContent = len + ' / ' + max;
+    charCount.classList.toggle('near-limit', len > max * 0.8 && len <= max * 0.95);
+    charCount.classList.toggle('at-limit',   len > max * 0.95);
+    sendBtn.disabled = len === 0 || isLoading;
+    autoResizeTextarea();
+  });
+
+  /* ============================================================
+     AUTO-RESIZE TEXTAREA
+  ============================================================= */
+  function autoResizeTextarea() {
+    questionBox.style.height = 'auto';
+    questionBox.style.height = Math.min(questionBox.scrollHeight, 180) + 'px';
+  }
+
+  /* ============================================================
+     ERROR BANNER
+  ============================================================= */
+  function showError(msg) {
+    errorText.textContent = msg || 'Something went wrong. Please try again.';
+    errorBanner.classList.add('visible');
+    setTimeout(hideError, 6000);
+  }
+
+  function hideError() {
+    errorBanner.classList.remove('visible');
+  }
+
+  if (errorClose) {
+    errorClose.addEventListener('click', hideError);
+  }
+
+  /* ============================================================
+     FORMAT TIMESTAMP
+  ============================================================= */
+  function formatTime(date) {
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var ampm = h >= 12 ? 'pm' : 'am';
+    h = h % 12 || 12;
+    return h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+  }
+
+  /* ============================================================
+     DETECT AND RENDER CODE BLOCKS
+     Converts ```lang\n...\n``` into styled .at-code-block divs
+  ============================================================= */
+  function parseMessageContent(text) {
+    var fragment = document.createDocumentFragment();
+    var codeBlockReg = /```(\w*)\n?([\s\S]*?)```/g;
+    var lastIndex = 0;
+    var match;
+
+    while ((match = codeBlockReg.exec(text)) !== null) {
+      /* Text before code block */
+      if (match.index > lastIndex) {
+        var before = document.createElement('p');
+        before.className = 'at-msg-text';
+        before.textContent = text.slice(lastIndex, match.index).trim();
+        if (before.textContent) fragment.appendChild(before);
+      }
+
+      /* Code block */
+      var lang    = match[1] || 'code';
+      var code    = match[2];
+      var block   = document.createElement('div');
+      block.className = 'at-code-block';
+
+      var header  = document.createElement('div');
+      header.className = 'at-code-header';
+
+      var langBadge = document.createElement('span');
+      langBadge.className = 'at-code-lang';
+      langBadge.textContent = lang;
+
+      var copyBtn = document.createElement('button');
+      copyBtn.className = 'at-code-copy';
+      copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+      copyBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        copyToClipboard(code);
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+        setTimeout(function () {
+          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+        }, 2000);
+      });
+
+      header.appendChild(langBadge);
+      header.appendChild(copyBtn);
+
+      var body  = document.createElement('div');
+      body.className = 'at-code-body';
+      var pre   = document.createElement('pre');
+      pre.textContent = code.trim();
+      body.appendChild(pre);
+
+      block.appendChild(header);
+      block.appendChild(body);
+      fragment.appendChild(block);
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    /* Remaining text */
+    if (lastIndex < text.length) {
+      var rest = text.slice(lastIndex).trim();
+      if (rest) {
+        var p = document.createElement('p');
+        p.className = 'at-msg-text';
+        p.textContent = rest;
+        fragment.appendChild(p);
+      }
+    }
+
+    return fragment;
+  }
+
+  /* ============================================================
+     COPY TO CLIPBOARD UTILITY
+  ============================================================= */
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).catch(function () {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity  = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) { /* silent */ }
+    document.body.removeChild(ta);
+  }
+
+  /* ============================================================
+     ADD MESSAGE TO FEED
+     Preserves original addMessage(text, type) API contract.
+  ============================================================= */
+  function addMessage(text, type) {
+    /* Hide welcome banner on first real message */
+    if (welcome && welcome.parentNode) {
+      welcome.style.opacity = '0';
+      welcome.style.transition = 'opacity .25s ease';
+      setTimeout(function () {
+        if (welcome.parentNode) welcome.parentNode.removeChild(welcome);
+      }, 250);
+    }
+
+    var isAI   = type === 'ai' || type === 'ai typing';
+    var isUser = type === 'user';
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'at-msg ' + (isAI ? 'at-msg--ai' : 'at-msg--user');
+
+    /* Avatar */
+    var avatar = document.createElement('div');
+    avatar.className = 'at-msg-avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.innerHTML = isAI
+      ? '<i class="fa-solid fa-microchip"></i>'
+      : '<i class="fa-solid fa-user"></i>';
+
+    /* Body */
+    var body = document.createElement('div');
+    body.className = 'at-msg-body';
+
+    /* Sender label */
+    var sender = document.createElement('div');
+    sender.className = 'at-msg-sender';
+    sender.textContent = isAI ? 'AI Tutor' : 'You';
+    body.appendChild(sender);
+
+    /* Typing indicator variant */
+    if (type === 'ai typing') {
+      var typingDiv = document.createElement('div');
+      typingDiv.className = 'at-typing-indicator';
+      typingDiv.innerHTML = '<span></span><span></span><span></span>';
+      typingDiv.setAttribute('aria-label', 'AI is typing');
+      body.appendChild(typingDiv);
+    } else {
+      /* Content — parse code blocks */
+      var content = parseMessageContent(text);
+      body.appendChild(content);
+    }
+
+    /* Message footer (timestamp + actions) */
+    var footer = document.createElement('div');
+    footer.className = 'at-msg-footer';
+
+    var timeSpan = document.createElement('span');
+    timeSpan.className = 'at-msg-time';
+    timeSpan.textContent = formatTime(new Date());
+    footer.appendChild(timeSpan);
+
+    /* Copy action for AI messages */
+    if (isAI && type !== 'ai typing') {
+      var actions = document.createElement('div');
+      actions.className = 'at-msg-actions';
+
+      var copyAction = document.createElement('button');
+      copyAction.className = 'at-msg-action-btn';
+      copyAction.setAttribute('aria-label', 'Copy message');
+      copyAction.innerHTML = '<i class="fa-regular fa-copy"></i>';
+      copyAction.addEventListener('click', function () {
+        copyToClipboard(text);
+        copyAction.innerHTML = '<i class="fa-solid fa-check"></i>';
+        setTimeout(function () {
+          copyAction.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        }, 2000);
+      });
+      actions.appendChild(copyAction);
+      footer.appendChild(actions);
+    }
+
+    body.appendChild(footer);
+
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(body);
+    chatFeed.appendChild(wrapper);
+
+    /* Increment message counter */
+    if (type !== 'ai typing') {
+      messageCount++;
+      if (msgCountEl) msgCountEl.textContent = messageCount;
+    }
+
+    scrollToBottom(type === 'ai typing');
+    return wrapper;
+  }
+
+  /* ============================================================
+     SHOW / HIDE TYPING INDICATOR
+  ============================================================= */
+  function showTyping() {
+    if (typingNode) return typingNode;
+    typingNode = addMessage('', 'ai typing');
+    return typingNode;
+  }
+
+  function hideTyping() {
+    if (typingNode && typingNode.parentNode) {
+      typingNode.parentNode.removeChild(typingNode);
+    }
+    typingNode = null;
+  }
+
+  /* ============================================================
+     SET LOADING STATE
+  ============================================================= */
+  function setLoading(state) {
+    isLoading = state;
+    sendBtn.disabled = state || questionBox.value.trim() === '';
+    if (state) {
+      sendBtn.classList.add('loading');
+      sendBtn.innerHTML = '<i class="fa-solid fa-circle-notch"></i>';
+    } else {
+      sendBtn.classList.remove('loading');
+      sendBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+    }
+  }
+
+  /* ============================================================
+     ASK TUTOR — original API call logic untouched
+  ============================================================= */
+  function askTutor() {
+    var question = questionBox.value.trim();
+    if (question === '' || isLoading) return;
+
+    addMessage(question, 'user');
+    questionBox.value = '';
+    questionBox.style.height = 'auto';
+    charCount.textContent = '0 / 2000';
+    sendBtn.disabled = true;
+
+    setLoading(true);
+    showTyping();
+    hideError();
+
+    fetch('/api/tutor/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question: question
+      })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      hideTyping();
+      setLoading(false);
+      if (data.success) {
+        addMessage(data.answer, 'ai');
+      } else {
+        addMessage(data.message || 'An error occurred. Please try again.', 'ai');
+      }
+      rotateTip();
+    })
+    .catch(function () {
+      hideTyping();
+      setLoading(false);
+      showError('Unable to reach the server. Check your connection and try again.');
+    });
+  }
+
+  /* ============================================================
+     KEYBOARD HANDLER — original logic untouched (CJK-safe)
+  ============================================================= */
+  questionBox.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      if (e.nativeEvent && e.nativeEvent.isComposing) return;
+      if (e.keyCode === 229) return; /* Safari IME */
+      e.preventDefault();
+      askTutor();
+    }
+  });
+
+  /* ============================================================
+     SEND BUTTON CLICK
+  ============================================================= */
+  sendBtn.addEventListener('click', askTutor);
+
+  /* ============================================================
+     TOPIC BUTTONS IN SIDEBAR
+  ============================================================= */
+  document.querySelectorAll('[data-prompt]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var prompt = el.getAttribute('data-prompt');
+      if (!prompt || isLoading) return;
+      questionBox.value = prompt;
+      charCount.textContent = prompt.length + ' / 2000';
+      sendBtn.disabled = false;
+      autoResizeTextarea();
+      questionBox.focus();
+      /* Auto-send after a brief moment so user sees it populate */
+      setTimeout(askTutor, 80);
+    });
+  });
+
+  /* ============================================================
+     CLEAR CONVERSATION
+  ============================================================= */
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      /* Remove all messages */
+      while (chatFeed.firstChild) {
+        chatFeed.removeChild(chatFeed.firstChild);
+      }
+
+      /* Re-insert welcome banner */
+      var newWelcome = document.createElement('div');
+      newWelcome.id = 'atWelcome';
+      newWelcome.className = 'at-welcome';
+      newWelcome.innerHTML =
+        '<div class="at-welcome-icon"><i class="fa-solid fa-atom"></i></div>' +
+        '<h2 class="at-welcome-title">Your Quantum ML Tutor</h2>' +
+        '<p class="at-welcome-sub">I can explain quantum computing concepts, walk you through Qiskit code, discuss quantum machine learning theory, and help you understand AI and ML fundamentals.</p>' +
+        '<div class="at-welcome-chips">' +
+          '<button class="at-welcome-chip" data-prompt="What is quantum superposition?">' +
+            '<i class="fa-solid fa-atom"></i> Quantum superposition' +
+          '</button>' +
+          '<button class="at-welcome-chip" data-prompt="How does quantum computing speed up machine learning?">' +
+            '<i class="fa-solid fa-bolt"></i> Quantum speedup in ML' +
+          '</button>' +
+          '<button class="at-welcome-chip" data-prompt="Write a simple Qiskit circuit example.">' +
+            '<i class="fa-brands fa-python"></i> Qiskit example' +
+          '</button>' +
+          '<button class="at-welcome-chip" data-prompt="What are the main quantum gates?">' +
+            '<i class="fa-solid fa-wave-square"></i> Quantum gates' +
+          '</button>' +
+        '</div>';
+      chatFeed.appendChild(newWelcome);
+      welcome = newWelcome;
+
+      /* Re-attach chip listeners */
+      newWelcome.querySelectorAll('[data-prompt]').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var prompt = chip.getAttribute('data-prompt');
+          if (!prompt || isLoading) return;
+          questionBox.value = prompt;
+          charCount.textContent = prompt.length + ' / 2000';
+          sendBtn.disabled = false;
+          autoResizeTextarea();
+          questionBox.focus();
+          setTimeout(askTutor, 80);
+        });
+      });
+
+      messageCount = 0;
+      if (msgCountEl) msgCountEl.textContent = '0';
+      sessionStart  = Date.now();
+      rotateTip();
+      hideError();
+    });
+  }
+
+  /* ============================================================
+     EXPORT CONVERSATION
+  ============================================================= */
+  if (exportBtn) {
+    exportBtn.addEventListener('click', function () {
+      var messages = chatFeed.querySelectorAll('.at-msg');
+      if (messages.length === 0) {
+        showError('No messages to export yet.');
+        return;
+      }
+
+      var lines = ['Cuántica — AI Tutor Conversation', '='.repeat(40), ''];
+      messages.forEach(function (msg) {
+        var isAI   = msg.classList.contains('at-msg--ai');
+        var sender = isAI ? 'AI Tutor' : 'You';
+        var texts  = msg.querySelectorAll('.at-msg-text, .at-code-body pre');
+        var content = [];
+        texts.forEach(function (t) {
+          content.push(t.textContent.trim());
+        });
+        if (content.length) {
+          lines.push('[' + sender + ']');
+          lines.push(content.join('\n'));
+          lines.push('');
+        }
+      });
+
+      var blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'cuántica-ai-tutor-' + new Date().toISOString().slice(0, 10) + '.txt';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+    });
+  }
+
+  /* ============================================================
+     SIDEBAR MOBILE TOGGLE (via header breadcrumb area on small)
+  ============================================================= */
+  var mobileMenuBtn = document.querySelector('.at-breadcrumb-current');
+  if (mobileMenuBtn && window.innerWidth <= 700) {
+    mobileMenuBtn.style.cursor = 'pointer';
+    mobileMenuBtn.addEventListener('click', function () {
+      if (sidebar) sidebar.classList.toggle('mobile-open');
+    });
+  }
+
+  /* ============================================================
+     INITIAL FOCUS
+  ============================================================= */
+  questionBox.focus();
+
+})();
+</script>
+</body>
+</html>

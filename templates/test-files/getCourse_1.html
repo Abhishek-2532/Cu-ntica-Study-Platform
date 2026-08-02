@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Course Details</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+.header{
+width:100%;
+height:380px;
+position:relative;
+overflow:hidden;
+}
+
+.header img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.overlay{
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+bottom:0;
+
+background:rgba(0,0,0,.45);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.overlay h1{
+
+font-size:48px;
+
+color:white;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:40px 20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:35px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+}
+
+.description{
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#666;
+
+margin-bottom:25px;
+
+}
+
+.meta{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+margin-bottom:25px;
+
+}
+
+.meta div{
+
+background:#eef4ff;
+
+padding:15px 20px;
+
+border-radius:8px;
+
+}
+
+.tags{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-bottom:35px;
+
+}
+
+.tag{
+
+background:#2563eb;
+
+color:white;
+
+padding:8px 15px;
+
+border-radius:25px;
+
+font-size:14px;
+
+}
+
+.start{
+
+text-align:center;
+
+padding:30px;
+
+background:#f8fafc;
+
+border:2px dashed #2563eb;
+
+border-radius:12px;
+
+}
+
+.start h3{
+
+margin-bottom:15px;
+
+}
+
+.start p{
+
+margin-bottom:25px;
+
+color:#666;
+
+line-height:1.7;
+
+}
+
+.start button{
+
+padding:15px 40px;
+
+font-size:18px;
+
+background:#2563eb;
+
+border:none;
+
+border-radius:8px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.start button:hover{
+
+background:#1d4ed8;
+
+}
+
+.loader{
+
+padding:100px;
+
+text-align:center;
+
+font-size:24px;
+
+}
+
+.error{
+
+padding:100px;
+
+text-align:center;
+
+font-size:22px;
+
+color:red;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loader" class="loader">
+
+Loading Course...
+
+</div>
+
+<div id="page" style="display:none;">
+
+<div class="header">
+
+<img id="mainImage">
+
+<div class="overlay">
+
+<h1 id="title"></h1>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Course Description</h2>
+
+<p class="description" id="description"></p>
+
+<div class="meta">
+
+<div>
+
+<b>Difficulty</b>
+
+<p id="difficulty"></p>
+
+</div>
+
+<div>
+
+<b>Duration</b>
+
+<p id="time"></p>
+
+</div>
+
+</div>
+
+<div id="tags" class="tags"></div>
+
+<div class="start">
+
+<h3>🚀 Ready To Start?</h3>
+
+<p>
+
+Click below to open the complete course.
+
+</p>
+
+<button id="startCourse">
+
+Go To Your Course →
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const courseId = window.location.pathname.split("/").pop();
+
+let currentCourse = null;
+
+fetch("/api/course/"+courseId)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("loader").style.display="none";
+
+if(!data.success){
+
+document.body.innerHTML="<div class='error'>Course Not Found</div>";
+
+return;
+
+}
+
+currentCourse=data.course;
+
+document.getElementById("page").style.display="block";
+
+document.getElementById("title").innerHTML=currentCourse.title;
+
+document.getElementById("mainImage").src=currentCourse.main_image;
+
+document.getElementById("description").innerHTML=currentCourse.description;
+
+document.getElementById("difficulty").innerHTML=currentCourse.difficulty;
+
+document.getElementById("time").innerHTML=currentCourse.estimated_time;
+
+const tags=document.getElementById("tags");
+
+currentCourse.tags.forEach(tag=>{
+
+tags.innerHTML+=`<span class="tag">${tag}</span>`;
+
+});
+
+})
+
+.catch(()=>{
+
+document.body.innerHTML="<div class='error'>Server Error</div>";
+
+});
+
+document.getElementById("startCourse").onclick=function(){
+
+if(currentCourse==null){
+
+return;
+
+}
+
+localStorage.setItem(
+
+"currentCourse",
+
+JSON.stringify(currentCourse)
+
+);
+
+window.location="/course/content";
+
+};
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Content — Cuántica</title>
+  <meta name="description" content="Learn quantum machine learning on Cuántica." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Stylesheet -->
+  <style>
+    /* =============================================================
+   CUÁNTICA — Course Content Page
+   courseContent.css  |  Light Theme
+   Palette matches index.css tokens exactly.
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --surface-hover:    #EBF9F4;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --warn-bg:          #FFF8E6;
+  --warn-border:      #F6CC6A;
+  --warn-text:        #92681A;
+  --info-bg:          #EFF6FF;
+  --info-border:      #93C5FD;
+  --info-text:        #1D4ED8;
+  --danger-bg:        #FEF2F2;
+  --danger-border:    #FCA5A5;
+  --danger-text:      #DC2626;
+  --success-bg:       #F0FDF4;
+  --success-border:   #86EFAC;
+  --success-text:     #15803D;
+
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.35);
+
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+  --font-mono:        'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+
+  --nav-h:            60px;
+  --toc-w:            264px;
+  --content-max:      780px;
+  --article-font-size: 1.0625rem;
+}
+
+/* Font-size overrides */
+body.font-sm { --article-font-size: .9375rem; }
+body.font-md { --article-font-size: 1.0625rem; }
+body.font-lg { --article-font-size: 1.1875rem; }
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video, canvas, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul, ol { list-style: none; }
+
+/* ============================================================
+   3. READING PROGRESS BAR
+============================================================= */
+.reading-progress-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--border);
+  z-index: 9999;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+  transition: width .15s linear;
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+/* ============================================================
+   4. TOP NAVBAR
+============================================================= */
+.cc-navbar {
+  position: sticky;
+  top: 3px;                        /* sits just below the progress rail */
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: rgba(247,254,255,.92);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.cc-navbar.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(247,254,255,.98);
+}
+
+.cc-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  gap: 1rem;
+}
+
+/* Left */
+.cc-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  flex-shrink: 0;
+}
+
+.cc-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cc-back-btn:hover {
+  color: var(--primary-deeper);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateX(-2px);
+}
+
+.cc-back-btn i {
+  font-size: .75rem;
+  transition: transform var(--transition-fast);
+}
+
+.cc-back-btn:hover i {
+  transform: translateX(-2px);
+}
+
+.cc-navbar-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.cc-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.cc-logo-mark {
+  width: 32px;
+  height: 32px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.cc-logo:hover .cc-logo-mark {
+  transform: rotate(12deg) scale(1.06);
+}
+
+.cc-logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.075rem;
+  color: var(--text);
+  letter-spacing: -.025em;
+}
+
+/* Center */
+.cc-navbar-center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.cc-navbar-course-title {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+  transition: color var(--transition-fast);
+}
+
+/* Right */
+.cc-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+/* Progress ring pill */
+.cc-progress-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--primary-deeper);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.cc-progress-pill:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+}
+
+.cc-progress-ring-wrap {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.cc-progress-ring {
+  width: 26px;
+  height: 26px;
+  transform: rotate(-90deg);
+}
+
+.cc-progress-ring-bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 3.5;
+}
+
+.cc-progress-ring-fill {
+  fill: none;
+  stroke: var(--primary-dark);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset .4s ease;
+}
+
+.cc-progress-pct {
+  line-height: 1;
+}
+
+/* Icon buttons */
+.cc-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  position: relative;
+}
+
+.cc-icon-btn:hover {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+  transform: scale(1.06);
+}
+
+.cc-icon-btn.active {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+/* ============================================================
+   5. FONT SIZE POPOVER
+============================================================= */
+.cc-font-popover {
+  position: fixed;
+  top: calc(var(--nav-h) + 10px);
+  right: clamp(1rem, 3vw, 2rem);
+  z-index: 200;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(.97);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-base);
+  pointer-events: none;
+}
+
+.cc-font-popover.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.cc-font-popover-label {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+
+.cc-font-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.cc-font-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  background: var(--surface);
+}
+
+.cc-font-btn span {
+  font-size: .625rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: .04em;
+}
+
+.cc-font-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+.cc-font-btn--active {
+  border-color: var(--primary-dark);
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+/* ============================================================
+   6. PAGE LAYOUT
+============================================================= */
+.cc-layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  padding-top: 2.5rem;
+  padding-bottom: 5rem;
+  gap: 2.5rem;
+  position: relative;
+}
+
+/* ============================================================
+   7. TOC SIDEBAR
+============================================================= */
+.cc-toc-sidebar {
+  position: sticky;
+  top: calc(var(--nav-h) + 3px + 1.5rem);
+  width: var(--toc-w);
+  flex-shrink: 0;
+  max-height: calc(100vh - var(--nav-h) - 80px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.125rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: opacity var(--transition-base), transform var(--transition-slow);
+  align-self: flex-start;
+}
+
+.cc-toc-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cc-toc-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cc-toc-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.cc-toc-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-faint);
+  margin-bottom: .875rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cc-toc-header i {
+  color: var(--primary-dark);
+  font-size: .7rem;
+}
+
+.cc-toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cc-toc-link {
+  display: block;
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  line-height: 1.4;
+  transition: color var(--transition-fast), background var(--transition-fast), padding-left var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+}
+
+.cc-toc-link:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.cc-toc-link.active {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+  font-weight: 600;
+}
+
+.cc-toc-link.depth-h2 {
+  padding-left: 10px;
+}
+
+.cc-toc-link.depth-h3 {
+  padding-left: 22px;
+  font-size: .775rem;
+}
+
+.cc-toc-link.depth-h4 {
+  padding-left: 34px;
+  font-size: .75rem;
+  color: var(--text-faint);
+}
+
+/* TOC backdrop (mobile) */
+.cc-toc-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(30,41,59,.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+/* ============================================================
+   8. CONTENT COLUMN
+============================================================= */
+.cc-content-col {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+/* ============================================================
+   9. COURSE HERO (metadata)
+============================================================= */
+.cc-hero {
+  margin-bottom: 2.5rem;
+  animation: ccFadeUp .5s ease both;
+}
+
+@keyframes ccFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Tags */
+.cc-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 1.125rem;
+}
+
+.cc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-soft);
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cc-tag:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary-dark);
+}
+
+.cc-tag-diff {
+  background: var(--secondary);
+  border-color: #C7D2FE;
+  color: var(--secondary-dark);
+}
+
+.cc-tag-diff:hover {
+  background: #dde4fe;
+  border-color: var(--secondary-dark);
+}
+
+/* Hero title */
+.cc-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.8vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.14;
+  letter-spacing: -.03em;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+/* Hero description */
+.cc-hero-desc {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  line-height: 1.72;
+  max-width: 660px;
+  margin-bottom: 1.75rem;
+}
+
+/* Meta strip */
+.cc-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  margin-bottom: 1.875rem;
+}
+
+.cc-meta-sep {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.cc-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.cc-meta-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.cc-meta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cc-meta-label {
+  font-size: .675rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-faint);
+  line-height: 1;
+}
+
+.cc-meta-value {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* Divider */
+.cc-hero-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--primary-soft), var(--border), transparent);
+  margin-top: .25rem;
+}
+
+/* ============================================================
+   10. ARTICLE — GENERIC HTML CONTENT STYLING
+   (The heart of this file — makes any injected HTML_content
+    look premium regardless of its structure.)
+============================================================= */
+.cc-article {
+  font-size: var(--article-font-size);
+  font-family: var(--font-sans);
+  color: var(--text);
+  line-height: 1.78;
+  animation: ccFadeUp .55s .1s ease both;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* --- Headings --- */
+.cc-article h1,
+.cc-article h2,
+.cc-article h3,
+.cc-article h4,
+.cc-article h5,
+.cc-article h6 {
+  font-family: var(--font-display);
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  scroll-margin-top: calc(var(--nav-h) + 28px);
+}
+
+.cc-article h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  letter-spacing: -.03em;
+}
+
+.cc-article h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: .875rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--surface-alt);
+  position: relative;
+}
+
+.cc-article h2::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+  border-radius: var(--radius-full);
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+}
+
+.cc-article h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+  color: var(--text);
+}
+
+.cc-article h4 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: .5rem;
+  color: var(--text);
+}
+
+.cc-article h5 {
+  font-size: .9375rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: .4rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.cc-article h6 {
+  font-size: .875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: .375rem;
+  color: var(--text-faint);
+}
+
+/* First child heading top margin reset */
+.cc-article > h1:first-child,
+.cc-article > h2:first-child,
+.cc-article > h3:first-child {
+  margin-top: 0;
+}
+
+/* --- Paragraphs --- */
+.cc-article p {
+  margin-bottom: 1.375rem;
+  line-height: 1.8;
+}
+
+.cc-article p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Links --- */
+.cc-article a {
+  color: var(--primary-deeper);
+  text-decoration: underline;
+  text-decoration-color: rgba(62,207,166,.35);
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.cc-article a:hover {
+  color: var(--primary-dark);
+  text-decoration-color: var(--primary-dark);
+}
+
+/* --- Lists --- */
+.cc-article ul,
+.cc-article ol {
+  margin-bottom: 1.375rem;
+  padding-left: 1.5rem;
+}
+
+.cc-article ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.cc-article ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: .5rem;
+  line-height: 1.7;
+}
+
+.cc-article ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .58em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+}
+
+.cc-article ol {
+  list-style: none;
+  counter-reset: cc-ol;
+}
+
+.cc-article ol li {
+  counter-increment: cc-ol;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: .5rem;
+  line-height: 1.7;
+}
+
+.cc-article ol li::before {
+  content: counter(cc-ol);
+  position: absolute;
+  left: 0;
+  top: .1em;
+  width: 22px;
+  height: 22px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+  border: 1px solid var(--primary-soft);
+}
+
+/* Nested lists */
+.cc-article ul ul,
+.cc-article ol ol,
+.cc-article ul ol,
+.cc-article ol ul {
+  margin-top: .375rem;
+  margin-bottom: .5rem;
+}
+
+.cc-article ul ul li::before {
+  background: transparent;
+  border: 2px solid var(--primary-soft);
+}
+
+/* --- Blockquotes --- */
+.cc-article blockquote {
+  margin: 1.75rem 0;
+  padding: 1.125rem 1.375rem;
+  border-left: 4px solid var(--primary);
+  background: linear-gradient(135deg, var(--surface-alt) 0%, rgba(227,237,254,.35) 100%);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  position: relative;
+}
+
+.cc-article blockquote::before {
+  content: '\f10d';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 1rem;
+  right: 1.125rem;
+  font-size: 1.25rem;
+  color: var(--primary-soft);
+  opacity: .6;
+}
+
+.cc-article blockquote p {
+  font-size: 1.0625rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.72;
+  margin-bottom: 0;
+}
+
+.cc-article blockquote cite,
+.cc-article blockquote footer {
+  display: block;
+  margin-top: .625rem;
+  font-size: .8125rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.cc-article blockquote cite::before,
+.cc-article blockquote footer::before {
+  content: '— ';
+}
+
+/* --- Inline code --- */
+.cc-article code {
+  font-family: var(--font-mono);
+  font-size: .875em;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  padding: .15em .4em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  word-break: break-all;
+}
+.cc-article pre {
+       color: white;
+    margin: 1.75rem 0;
+    padding-top: 36px;
+    background: #0F1729;
+    border: 1px solid #2b3653;
+    border-radius: 12px;
+    overflow: auto;
+    position: relative;
+}
+
+.cc-article pre::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    right:0;
+    height:36px;
+    background:#1a2540;
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    background-image:
+      radial-gradient(circle at 20px 18px,#ff5f56 5px,transparent 6px),
+      radial-gradient(circle at 38px 18px,#ffbd2e 5px,transparent 6px),
+      radial-gradient(circle at 56px 18px,#27c93f 5px,transparent 6px);
+
+    background-repeat:no-repeat;
+}
+
+.cc-article pre code{
+    display:block;
+    padding:16px 20px;
+    color:#E2E8F0;
+
+    font-family:"JetBrains Mono", monospace;
+    font-size:14px;
+    line-height:1.7;
+
+    white-space:pre-wrap;
+    word-break:break-word;
+    overflow-wrap:anywhere;
+
+    background:none;
+}
+/* --- Tables --- */
+.cc-article .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.cc-article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9375rem;
+  min-width: 480px;
+}
+
+.cc-article thead {
+  background: var(--surface-alt);
+}
+
+.cc-article thead th {
+  font-family: var(--font-display);
+  font-size: .8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--primary-deeper);
+  padding: 12px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+
+.cc-article thead th:first-child {
+  border-radius: var(--radius-lg) 0 0 0;
+}
+
+.cc-article thead th:last-child {
+  border-radius: 0 var(--radius-lg) 0 0;
+}
+
+.cc-article tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition-fast);
+}
+
+.cc-article tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cc-article tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+.cc-article tbody td {
+  padding: 12px 16px;
+  color: var(--text);
+  line-height: 1.55;
+  vertical-align: top;
+}
+
+.cc-article tbody td strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cc-article tbody td code {
+  font-size: .8125em;
+}
+
+/* Striped rows */
+.cc-article tbody tr:nth-child(even) {
+  background: rgba(224,250,244,.35);
+}
+
+.cc-article tbody tr:nth-child(even):hover {
+  background: var(--surface-hover);
+}
+
+/* --- Images --- */
+.cc-article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  margin: 1.75rem auto;
+  box-shadow: var(--shadow-md);
+  display: block;
+  border: 1px solid var(--border);
+  transition: box-shadow var(--transition-base), transform var(--transition-slow);
+}
+
+.cc-article img:hover {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.008);
+}
+
+.cc-article figure {
+  margin: 1.75rem 0;
+}
+
+.cc-article figure img {
+  margin: 0 auto .625rem;
+}
+
+.cc-article figcaption {
+  text-align: center;
+  font-size: .825rem;
+  color: var(--text-faint);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* --- Videos / iframes --- */
+.cc-article .video-wrapper,
+.cc-article .embed-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin: 1.75rem 0;
+  box-shadow: var(--shadow-md);
+  background: #000;
+}
+
+.cc-article .video-wrapper iframe,
+.cc-article .video-wrapper video,
+.cc-article .embed-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+.cc-article video {
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin: 1.75rem 0;
+  box-shadow: var(--shadow-md);
+}
+
+.cc-article iframe {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin: 1.75rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Horizontal rule --- */
+.cc-article hr {
+  margin: 2.5rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+/* --- Emphasis / strong --- */
+.cc-article strong,
+.cc-article b {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cc-article em,
+.cc-article i {
+  font-style: italic;
+}
+
+.cc-article mark {
+  background: rgba(108,229,191,.35);
+  color: var(--text);
+  padding: 0 .25em;
+  border-radius: 3px;
+}
+
+.cc-article abbr[title] {
+  border-bottom: 1px dotted var(--text-muted);
+  cursor: help;
+  text-decoration: none;
+}
+
+.cc-article kbd {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-sm);
+  padding: .1em .45em;
+  font-family: var(--font-mono);
+  font-size: .8em;
+  color: var(--text);
+  box-shadow: 0 1px 0 var(--border-strong);
+}
+
+.cc-article sup {
+  font-size: .7em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.cc-article sub {
+  font-size: .7em;
+  line-height: 0;
+  vertical-align: sub;
+}
+
+/* --- Alert / Note / Warning boxes --- */
+/* These will catch common backend patterns like .note, .warning, .alert-*, .tip, .danger, .info */
+.cc-article .note,
+.cc-article .tip,
+.cc-article [class*="alert-info"],
+.cc-article [class*="info-box"] {
+  background: var(--info-bg);
+  border-left: 4px solid var(--info-border);
+  color: var(--info-text);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+.cc-article .warning,
+.cc-article [class*="alert-warning"],
+.cc-article [class*="warn-box"] {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--warn-border);
+  color: var(--warn-text);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+.cc-article .danger,
+.cc-article [class*="alert-danger"],
+.cc-article [class*="alert-error"],
+.cc-article [class*="error-box"] {
+  background: var(--danger-bg);
+  border-left: 4px solid var(--danger-border);
+  color: var(--danger-text);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+.cc-article .success,
+.cc-article [class*="alert-success"],
+.cc-article [class*="success-box"] {
+  background: var(--success-bg);
+  border-left: 4px solid var(--success-border);
+  color: var(--success-text);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+  font-size: .9375rem;
+  line-height: 1.65;
+}
+
+/* Alert icon support */
+.cc-article .note::before,
+.cc-article .tip::before {
+  content: '\f05a';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: .5em;
+  font-size: .85em;
+}
+
+.cc-article .warning::before {
+  content: '\f071';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: .5em;
+  font-size: .85em;
+}
+
+.cc-article .danger::before {
+  content: '\f057';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  margin-right: .5em;
+  font-size: .85em;
+}
+
+/* --- Section dividers from backend HTML --- */
+.cc-article .divider,
+.cc-article .separator {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  margin: 2rem 0;
+  border: none;
+}
+
+/* --- Definition lists --- */
+.cc-article dl {
+  margin: 1.5rem 0;
+}
+
+.cc-article dt {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+  font-size: .9375rem;
+}
+
+.cc-article dd {
+  color: var(--text-muted);
+  padding-left: 1.25rem;
+  margin-bottom: .875rem;
+  border-left: 2px solid var(--border);
+  line-height: 1.65;
+}
+
+/* --- Details / Summary --- */
+.cc-article details {
+  margin: 1.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cc-article summary {
+  font-weight: 600;
+  font-size: .9375rem;
+  color: var(--text);
+  padding: .875rem 1.125rem;
+  background: var(--surface-alt);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background var(--transition-fast);
+  list-style: none;
+}
+
+.cc-article summary::-webkit-details-marker {
+  display: none;
+}
+
+.cc-article summary::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: .75rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-base);
+}
+
+.cc-article details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.cc-article details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.cc-article details > *:not(summary) {
+  padding: 1rem 1.125rem;
+}
+
+/* --- Steps / numbered sections (common educational HTML) --- */
+.cc-article .step,
+.cc-article .lesson-step {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cc-article .step-number {
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  color: var(--text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.cc-article .step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Badges / chips inside content --- */
+.cc-article .badge,
+.cc-article .chip,
+.cc-article .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border: 1px solid var(--primary-soft);
+}
+
+/* --- Math formulas (MathJax / KaTeX fallback) --- */
+.cc-article .math,
+.cc-article .katex-display {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  padding: .75rem;
+  background: var(--secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid #C7D2FE;
+}
+
+/* ============================================================
+   11. COMPLETION BANNER
+============================================================= */
+.cc-completion {
+  margin-top: 3rem;
+  animation: ccFadeUp .5s ease both;
+}
+
+.cc-completion-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, var(--surface-alt) 0%, #EBF9F4 100%);
+  border: 1.5px solid var(--primary-soft);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-md);
+  flex-wrap: wrap;
+}
+
+.cc-completion-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  color: var(--text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-primary);
+  animation: popIn .5s var(--transition-spring) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0) rotate(-30deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0);     opacity: 1; }
+}
+
+.cc-completion-body {
+  flex: 1;
+  min-width: 200px;
+}
+
+.cc-completion-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+}
+
+.cc-completion-sub {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.cc-completion-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text);
+  color: var(--primary);
+  font-size: .875rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cc-completion-btn:hover {
+  background: #2d3f5c;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
+   12. SCROLL TO TOP BUTTON
+============================================================= */
+.cc-scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 150;
+  width: 44px;
+  height: 44px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(.9);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-spring), background var(--transition-fast);
+  cursor: pointer;
+}
+
+.cc-scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.cc-scroll-top:hover {
+  background: #2d3f5c;
+  transform: translateY(-3px) scale(1.06);
+}
+
+/* ============================================================
+   13. SKELETON LOADER (displayed while content loads)
+============================================================= */
+.cc-skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--surface-alt) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.cc-skeleton-h1 {
+  height: 42px;
+  width: 70%;
+  margin-bottom: .75rem;
+  border-radius: var(--radius-md);
+}
+
+.cc-skeleton-p {
+  height: 16px;
+  width: 100%;
+  margin-bottom: .5rem;
+  border-radius: var(--radius-sm);
+}
+
+.cc-skeleton-p--short {
+  width: 60%;
+}
+
+.cc-skeleton-block {
+  height: 120px;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================================
+   14. ANIMATIONS
+============================================================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Subtle entrance for TOC items */
+.cc-toc-link {
+  animation: fadeIn .3s ease both;
+}
+
+/* ============================================================
+   15. RESPONSIVE — TABLET & MOBILE
+============================================================= */
+
+/* Large screens: show TOC by default */
+@media (min-width: 1100px) {
+  .cc-toc-sidebar {
+    display: block;
+  }
+
+  .cc-content-col {
+    max-width: none;
+    flex: 1;
+  }
+
+  /* When TOC is present, content shifts */
+  .cc-layout {
+    grid-template-columns: var(--toc-w) 1fr;
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+/* Medium screens */
+@media (max-width: 1099px) {
+  .cc-toc-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(300px, 85vw);
+    z-index: 95;
+    border-radius: 0;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    transform: translateX(-110%);
+    max-height: 100vh;
+    padding-top: calc(var(--nav-h) + 1.5rem);
+    transition: transform var(--transition-slow), box-shadow var(--transition-base);
+    box-shadow: none;
+  }
+
+  .cc-toc-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .cc-toc-backdrop {
+    display: block;
+  }
+
+  .cc-toc-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
+  :root {
+    --nav-h: 56px;
+  }
+
+  .cc-navbar-center {
+    display: none;
+  }
+
+  .cc-navbar-course-title {
+    display: none;
+  }
+
+  .cc-back-btn span {
+    display: none;
+  }
+
+  .cc-logo-text {
+    display: none;
+  }
+
+  .cc-layout {
+    padding-top: 1.5rem;
+    padding-inline: 1rem;
+    gap: 0;
+  }
+
+  .cc-content-col {
+    width: 100%;
+  }
+
+  .cc-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .cc-meta-strip {
+    gap: .5rem .75rem;
+  }
+
+  .cc-meta-sep {
+    display: none;
+  }
+
+  .cc-completion-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .cc-completion-btn {
+    align-self: flex-start;
+  }
+
+  .cc-article h1 { font-size: 1.625rem; }
+  .cc-article h2 { font-size: 1.3125rem; }
+  .cc-article h3 { font-size: 1.125rem; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .cc-progress-pill .cc-progress-pct {
+    display: none;
+  }
+
+  .cc-hero-desc {
+    font-size: 1rem;
+  }
+
+  .cc-article {
+    font-size: 1rem;
+  }
+
+  .cc-article pre code {
+    font-size: .8125rem;
+  }
+
+  .cc-scroll-top {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ============================================================
+   16. PRINT STYLES
+============================================================= */
+@media print {
+  .cc-navbar,
+  .reading-progress-rail,
+  .cc-toc-sidebar,
+  .cc-scroll-top,
+  .cc-completion-btn,
+  .cc-font-popover {
+    display: none !important;
+  }
+
+  .cc-layout {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .cc-article {
+    font-size: 11pt;
+    color: #000;
+    line-height: 1.6;
+  }
+
+  .cc-article a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .cc-article pre {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+  }
+
+  .cc-article pre code {
+    color: #111;
+  }
+
+  .cc-article pre::before {
+    display: none;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== READING PROGRESS BAR ===== -->
+  <div class="reading-progress-rail" aria-hidden="true">
+    <div class="reading-progress-bar" id="readingProgressBar"></div>
+  </div>
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="cc-navbar" id="ccNavbar" role="banner">
+    <div class="cc-navbar-inner">
+
+      <!-- Left: back + logo -->
+      <div class="cc-navbar-left">
+        <button class="cc-back-btn" id="backBtn" aria-label="Go back to courses">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+        <div class="cc-navbar-divider" aria-hidden="true"></div>
+        <a href="/" class="cc-logo" aria-label="Cuántica home">
+          <div class="cc-logo-mark" style="background: transparent;">
+            <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+          </div>
+          <span class="cc-logo-text">Cuántica</span>
+        </a>
+      </div>
+
+      <!-- Center: course title (truncated) -->
+      <div class="cc-navbar-center">
+        <p class="cc-navbar-course-title" id="navbarCourseTitle"></p>
+      </div>
+
+      <!-- Right: progress pill + actions -->
+      <div class="cc-navbar-right">
+        <div class="cc-progress-pill" id="navProgressPill" aria-label="Reading progress">
+          <div class="cc-progress-ring-wrap">
+            <svg class="cc-progress-ring" viewBox="0 0 36 36" aria-hidden="true">
+              <circle class="cc-progress-ring-bg" cx="18" cy="18" r="15.9" />
+              <circle class="cc-progress-ring-fill" id="progressRingFill" cx="18" cy="18" r="15.9" />
+            </svg>
+          </div>
+          <span class="cc-progress-pct" id="progressPct">0%</span>
+        </div>
+
+        <button class="cc-icon-btn" id="fontSizeBtn" aria-label="Adjust font size" title="Font size">
+          <i class="fa-solid fa-text-height"></i>
+        </button>
+
+        <button class="cc-icon-btn" id="tocToggleBtn" aria-label="Table of contents" title="Table of contents">
+          <i class="fa-solid fa-list-ul"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===== FONT SIZE POPOVER ===== -->
+  <div class="cc-font-popover" id="fontPopover" role="dialog" aria-label="Font size controls" aria-hidden="true">
+    <p class="cc-font-popover-label">Reading size</p>
+    <div class="cc-font-btns">
+      <button class="cc-font-btn" data-size="sm" aria-label="Small text">A<span>sm</span></button>
+      <button class="cc-font-btn cc-font-btn--active" data-size="md" aria-label="Medium text">A<span>md</span></button>
+      <button class="cc-font-btn" data-size="lg" aria-label="Large text">A<span>lg</span></button>
+    </div>
+  </div>
+
+  <!-- ===== PAGE LAYOUT ===== -->
+  <main class="cc-layout" id="ccLayout">
+
+    <!-- ===== TABLE OF CONTENTS SIDEBAR ===== -->
+    <aside class="cc-toc-sidebar" id="tocSidebar" aria-label="Table of contents">
+      <div class="cc-toc-header">
+        <i class="fa-solid fa-list-ul"></i>
+        <span>Contents</span>
+      </div>
+      <nav class="cc-toc-nav" id="tocNav" aria-label="Lesson headings"></nav>
+    </aside>
+
+    <!-- ===== MAIN CONTENT COLUMN ===== -->
+    <div class="cc-content-col">
+
+      <!-- Course Meta Hero -->
+      <div class="cc-hero" id="ccHero">
+
+        <!-- Tags row -->
+        <div class="cc-hero-tags" id="heroTags"></div>
+
+        <!-- Title -->
+        <h1 class="cc-hero-title" id="heroTitle">Loading lesson...</h1>
+
+        <!-- Description -->
+        <p class="cc-hero-desc" id="heroDesc"></p>
+
+        <!-- Meta strip -->
+        <div class="cc-meta-strip" id="metaStrip">
+          <div class="cc-meta-item" id="metaAuthor">
+            <div class="cc-meta-icon"><i class="fa-solid fa-user-circle"></i></div>
+            <div class="cc-meta-text">
+              <span class="cc-meta-label">Author</span>
+              <span class="cc-meta-value" id="metaAuthorVal">—</span>
+            </div>
+          </div>
+          <div class="cc-meta-sep" aria-hidden="true"></div>
+          <div class="cc-meta-item">
+            <div class="cc-meta-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <div class="cc-meta-text">
+              <span class="cc-meta-label">Difficulty</span>
+              <span class="cc-meta-value" id="metaDiffVal">—</span>
+            </div>
+          </div>
+          <div class="cc-meta-sep" aria-hidden="true"></div>
+          <div class="cc-meta-item">
+            <div class="cc-meta-icon"><i class="fa-regular fa-clock"></i></div>
+            <div class="cc-meta-text">
+              <span class="cc-meta-label">Estimated time</span>
+              <span class="cc-meta-value" id="metaTimeVal">—</span>
+            </div>
+          </div>
+          <div class="cc-meta-sep" aria-hidden="true"></div>
+          <div class="cc-meta-item">
+            <div class="cc-meta-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div class="cc-meta-text">
+              <span class="cc-meta-label">Category</span>
+              <span class="cc-meta-value" id="metaCatVal">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="cc-hero-divider" aria-hidden="true"></div>
+      </div>
+
+      <!-- Lesson HTML Content -->
+      <article class="cc-article" id="content" role="main" aria-label="Lesson content">
+        <!-- Dynamic HTML from backend injected here -->
+      </article>
+
+      <!-- Completion Banner -->
+      <div class="cc-completion" id="completionBanner" aria-live="polite" hidden>
+        <div class="cc-completion-inner">
+          <div class="cc-completion-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="cc-completion-body">
+            <h3 class="cc-completion-title">Lesson complete</h3>
+            <p class="cc-completion-sub">Your progress has been saved. Keep going to the next lesson.</p>
+          </div>
+          <button class="cc-completion-btn" onclick="history.back()">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to course
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <!-- /cc-content-col -->
+
+  </main>
+
+  <!-- ===== TOC BACKDROP (mobile) ===== -->
+  <div class="cc-toc-backdrop" id="tocBackdrop" aria-hidden="true"></div>
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <button class="cc-scroll-top" id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+ <script>
+    /* =============================================================
+   CUÁNTICA — Course Content Page
+   courseContent.js
+   NOTE: All original API/logic is preserved exactly.
+         Only UI enhancements added on top.
+============================================================= */
+
+/* ============================================================
+   1. DATA — read from localStorage (original logic, untouched)
+============================================================= */
+const course = JSON.parse(localStorage.getItem("currentCourse"));
+const token  = JSON.parse(localStorage.getItem("token"));
+const c = document.getElementById("content");
+
+console.log(getComputedStyle(c).display);
+console.log(getComputedStyle(c).visibility);
+console.log(getComputedStyle(c).opacity);
+console.log(getComputedStyle(c).color);
+console.log(getComputedStyle(c).fontSize);
+console.log(c.offsetHeight);
+console.log(c.offsetWidth);
+if (course == null) {
+  window.location = "/courses";
+}
+
+if (token == null) {
+  window.location = "/login";
+}
+
+/* ============================================================
+   2. INJECT CONTENT (original logic, untouched)
+============================================================= */
+// Course title in original top bar → now mapped to new navbar + hero
+document.getElementById("courseTitle") && (
+  document.getElementById("courseTitle").innerHTML = course.title
+);
+
+// Main content injection
+document.getElementById("content").innerHTML = course.html_content;
+
+/* ============================================================
+   3. ORIGINAL PROGRESS TRACKING (completely unchanged)
+============================================================= */
+const courseId = course.id;
+let lastProgress = -1;
+
+function updateProgress(progress) {
+  fetch("/api/user-course/progress", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      user_id:     token.id,
+      course_id:   courseId,
+      progress:    progress,
+      last_lesson: Math.ceil(progress / 10)
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Progress Updated :", data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+function trackProgress() {
+  const scrollTop  = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+
+  if (docHeight <= 0) {
+    return;
+  }
+
+  let progress = Math.round((scrollTop / docHeight) * 100);
+
+  if (progress > 100) { progress = 100; }
+  if (progress < 0)   { progress = 0;   }
+
+  if (progress - lastProgress >= 5) {
+    lastProgress = progress;
+    updateProgress(progress);
+  }
+}
+
+window.addEventListener("scroll", trackProgress);
+
+window.addEventListener("beforeunload", function () {
+  updateProgress(lastProgress);
+});
+
+setTimeout(function () {
+  updateProgress(0);
+}, 1000);
+
+/* ============================================================
+   4. UI — POPULATE METADATA HERO
+============================================================= */
+function populateMeta() {
+  // Navbar course title
+  const navTitle = document.getElementById("navbarCourseTitle");
+  if (navTitle) navTitle.textContent = course.title || "";
+
+  // Hero title
+  const heroTitle = document.getElementById("heroTitle");
+  if (heroTitle) heroTitle.textContent = course.title || "Untitled Lesson";
+
+  // Hero description
+  const heroDesc = document.getElementById("heroDesc");
+  if (heroDesc) heroDesc.textContent = course.description || course.short_description || "";
+
+  // Tags
+  const tagsContainer = document.getElementById("heroTags");
+  if (tagsContainer && Array.isArray(course.tags) && course.tags.length) {
+    const frag = document.createDocumentFragment();
+
+    // Difficulty as a special badge
+    if (course.difficulty) {
+      const diff = document.createElement("span");
+      diff.className = "cc-tag cc-tag-diff";
+      diff.innerHTML = `<i class="fa-solid fa-gauge-high"></i> ${escHtml(course.difficulty)}`;
+      frag.appendChild(diff);
+    }
+
+    // Topic tags (max 5 for clean UI)
+    course.tags.slice(0, 5).forEach(t => {
+      const tag = document.createElement("span");
+      tag.className = "cc-tag";
+      tag.textContent = t;
+      frag.appendChild(tag);
+    });
+
+    tagsContainer.appendChild(frag);
+  }
+
+  // Meta strip values
+  const setMeta = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value || "—";
+  };
+
+  setMeta("metaAuthorVal",  course.author            || "—");
+  setMeta("metaDiffVal",    course.difficulty         || "—");
+  setMeta("metaTimeVal",    course.estimated_time     || "—");
+  setMeta("metaCatVal",     course.category           || "—");
+}
+
+// Tiny HTML escape helper (prevents XSS in text insertions)
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,  "&amp;")
+    .replace(/</g,  "&lt;")
+    .replace(/>/g,  "&gt;")
+    .replace(/"/g,  "&quot;");
+}
+
+populateMeta();
+
+/* ============================================================
+   5. UI — TABLE OF CONTENTS (auto-generated from headings)
+============================================================= */
+function buildTOC() {
+  const article  = document.getElementById("content");
+  const tocNav   = document.getElementById("tocNav");
+  if (!article || !tocNav) return;
+
+  const headings = article.querySelectorAll("h1, h2, h3, h4");
+  if (headings.length < 2) {
+    // Hide TOC toggle if no headings
+    const tocBtn = document.getElementById("tocToggleBtn");
+    if (tocBtn) tocBtn.style.display = "none";
+    return;
+  }
+
+  const frag = document.createDocumentFragment();
+  let   idx  = 0;
+
+  headings.forEach(h => {
+    // Ensure each heading has an id for anchor linking
+    if (!h.id) {
+      h.id = "heading-" + idx + "-" + h.textContent
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    const btn = document.createElement("button");
+    btn.className  = "cc-toc-link depth-" + h.tagName.toLowerCase();
+    btn.textContent = h.textContent;
+    btn.setAttribute("data-target", h.id);
+    btn.setAttribute("type", "button");
+
+    btn.addEventListener("click", function () {
+      const target = document.getElementById(this.getAttribute("data-target"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        // Close TOC on mobile after click
+        if (window.innerWidth < 1100) {
+          closeTOC();
+        }
+      }
+    });
+
+    frag.appendChild(btn);
+    idx++;
+  });
+
+  tocNav.appendChild(frag);
+}
+
+buildTOC();
+
+/* Active TOC link on scroll */
+function updateActiveTOC() {
+  const article  = document.getElementById("content");
+  if (!article) return;
+
+  const headings = article.querySelectorAll("h1, h2, h3, h4");
+  const links    = document.querySelectorAll(".cc-toc-link");
+  if (!headings.length || !links.length) return;
+
+  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 60;
+  let   active = null;
+
+  headings.forEach(h => {
+    const rect = h.getBoundingClientRect();
+    if (rect.top <= navH + 40) {
+      active = h.id;
+    }
+  });
+
+  links.forEach(link => {
+    link.classList.toggle("active", link.getAttribute("data-target") === active);
+  });
+}
+
+/* ============================================================
+   6. UI — PROGRESS BAR & RING
+============================================================= */
+const progressBar     = document.getElementById("readingProgressBar");
+const progressRing    = document.getElementById("progressRingFill");
+const progressPctText = document.getElementById("progressPct");
+
+const CIRCUMFERENCE = 2 * Math.PI * 15.9; // radius = 15.9 (matches SVG)
+
+function updateUI_Progress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (docHeight <= 0) return;
+
+  const pct = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
+
+  // Progress bar
+  if (progressBar) progressBar.style.width = pct + "%";
+
+  // Ring
+  if (progressRing) {
+    const offset = CIRCUMFERENCE - (pct / 100) * CIRCUMFERENCE;
+    progressRing.style.strokeDasharray  = CIRCUMFERENCE;
+    progressRing.style.strokeDashoffset = offset;
+  }
+
+  // Percentage text
+  if (progressPctText) progressPctText.textContent = Math.round(pct) + "%";
+
+  // Completion banner at 95%+
+  if (pct >= 95) {
+    const banner = document.getElementById("completionBanner");
+    if (banner) banner.hidden = false;
+  }
+}
+
+/* ============================================================
+   7. UI — NAVBAR SCROLL STATE
+============================================================= */
+const ccNavbar = document.getElementById("ccNavbar");
+
+function updateNavbar() {
+  if (!ccNavbar) return;
+  if (window.scrollY > 30) {
+    ccNavbar.classList.add("scrolled");
+  } else {
+    ccNavbar.classList.remove("scrolled");
+  }
+}
+
+/* ============================================================
+   8. UI — SCROLL TO TOP BUTTON
+============================================================= */
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+function updateScrollTopVisibility() {
+  if (!scrollTopBtn) return;
+  if (window.scrollY > 500) {
+    scrollTopBtn.classList.add("visible");
+  } else {
+    scrollTopBtn.classList.remove("visible");
+  }
+}
+
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+/* ============================================================
+   9. UI — MAIN SCROLL HANDLER
+============================================================= */
+let ticking = false;
+
+window.addEventListener("scroll", function () {
+  if (!ticking) {
+    window.requestAnimationFrame(function () {
+      updateUI_Progress();
+      updateNavbar();
+      updateScrollTopVisibility();
+      updateActiveTOC();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// Init on load
+updateUI_Progress();
+updateNavbar();
+
+/* ============================================================
+   10. UI — BACK BUTTON
+============================================================= */
+const backBtn = document.getElementById("backBtn");
+if (backBtn) {
+  backBtn.addEventListener("click", function () {
+    history.back();
+  });
+}
+
+/* ============================================================
+   11. UI — TABLE OF CONTENTS TOGGLE
+============================================================= */
+const tocToggleBtn  = document.getElementById("tocToggleBtn");
+const tocSidebar    = document.getElementById("tocSidebar");
+const tocBackdrop   = document.getElementById("tocBackdrop");
+
+function openTOC() {
+  if (tocSidebar)  tocSidebar.classList.add("mobile-open");
+  if (tocBackdrop) {
+    tocBackdrop.classList.add("visible");
+    tocBackdrop.style.display = "block";
+  }
+  if (tocToggleBtn) tocToggleBtn.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeTOC() {
+  if (tocSidebar)  tocSidebar.classList.remove("mobile-open");
+  if (tocBackdrop) {
+    tocBackdrop.classList.remove("visible");
+    setTimeout(() => {
+      if (tocBackdrop && !tocBackdrop.classList.contains("visible")) {
+        tocBackdrop.style.display = "";
+      }
+    }, 300);
+  }
+  if (tocToggleBtn) tocToggleBtn.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+if (tocToggleBtn) {
+  tocToggleBtn.addEventListener("click", function () {
+    if (window.innerWidth >= 1100) {
+      // On desktop: toggle visibility of the sidebar inline
+      if (tocSidebar) {
+        const isHidden = tocSidebar.style.display === "none";
+        tocSidebar.style.display = isHidden ? "" : "none";
+        this.classList.toggle("active", isHidden);
+      }
+    } else {
+      // On mobile/tablet: slide in from left
+      if (tocSidebar && tocSidebar.classList.contains("mobile-open")) {
+        closeTOC();
+      } else {
+        openTOC();
+      }
+    }
+  });
+}
+
+if (tocBackdrop) {
+  tocBackdrop.addEventListener("click", closeTOC);
+}
+
+// Close TOC on Escape key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeTOC();
+    closeFontPopover();
+  }
+});
+
+/* ============================================================
+   12. UI — FONT SIZE CONTROLS
+============================================================= */
+const fontSizeBtn   = document.getElementById("fontSizeBtn");
+const fontPopover   = document.getElementById("fontPopover");
+const fontBtns      = document.querySelectorAll(".cc-font-btn");
+const FONT_KEY      = "cuántica_article_font";
+
+function openFontPopover() {
+  if (!fontPopover) return;
+  fontPopover.classList.add("open");
+  fontPopover.setAttribute("aria-hidden", "false");
+  if (fontSizeBtn) fontSizeBtn.classList.add("active");
+}
+
+function closeFontPopover() {
+  if (!fontPopover) return;
+  fontPopover.classList.remove("open");
+  fontPopover.setAttribute("aria-hidden", "true");
+  if (fontSizeBtn) fontSizeBtn.classList.remove("active");
+}
+
+function setFontSize(size) {
+  document.body.classList.remove("font-sm", "font-md", "font-lg");
+  document.body.classList.add("font-" + size);
+  localStorage.setItem(FONT_KEY, size);
+
+  fontBtns.forEach(btn => {
+    btn.classList.toggle("cc-font-btn--active", btn.getAttribute("data-size") === size);
+  });
+}
+
+if (fontSizeBtn) {
+  fontSizeBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (fontPopover && fontPopover.classList.contains("open")) {
+      closeFontPopover();
+    } else {
+      openFontPopover();
+    }
+  });
+}
+
+fontBtns.forEach(btn => {
+  btn.addEventListener("click", function () {
+    setFontSize(this.getAttribute("data-size"));
+    closeFontPopover();
+  });
+});
+
+// Close popover when clicking outside
+document.addEventListener("click", function (e) {
+  if (fontPopover && fontPopover.classList.contains("open")) {
+    if (!fontPopover.contains(e.target) && e.target !== fontSizeBtn) {
+      closeFontPopover();
+    }
+  }
+});
+
+// Restore saved font preference
+const savedFont = localStorage.getItem(FONT_KEY);
+if (savedFont) setFontSize(savedFont);
+
+/* ============================================================
+   13. UI — ENHANCE INJECTED HTML CONTENT
+   Post-process course.html_content after injection:
+   - Wrap tables for horizontal scroll
+   - Add copy buttons to <pre> blocks
+   - Wrap iframes in responsive containers
+   - Ensure images have loading="lazy"
+   - Add IDs to headings for TOC
+============================================================= */
+function enhanceContent() {
+  const article = document.getElementById("content");
+  if (!article) return;
+
+  /* --- Wrap tables --- */
+  const tables = article.querySelectorAll("table");
+  tables.forEach(table => {
+    if (table.parentElement && table.parentElement.classList.contains("table-wrapper")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-wrapper";
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+
+  /* --- Add copy button to code blocks --- */
+  const preBlocks = article.querySelectorAll("pre");
+  preBlocks.forEach(pre => {
+    // Avoid double-insertion
+    if (pre.querySelector(".cc-copy-btn")) return;
+
+    const btn = document.createElement("button");
+    btn.className   = "cc-copy-btn";
+    btn.type        = "button";
+    btn.innerHTML   = '<i class="fa-regular fa-copy"></i> Copy';
+    btn.setAttribute("aria-label", "Copy code to clipboard");
+
+    btn.addEventListener("click", function () {
+      const code = pre.querySelector("code");
+      const text = code ? code.textContent : pre.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML  = '<i class="fa-solid fa-check"></i> Copied';
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.innerHTML  = '<i class="fa-regular fa-copy"></i> Copy';
+          btn.classList.remove("copied");
+        }, 2200);
+      }).catch(() => {
+        btn.textContent = "Error";
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+        }, 1500);
+      });
+    });
+
+    pre.style.position = "relative";
+    pre.appendChild(btn);
+  });
+
+  /* --- Lazy-load images --- */
+  const imgs = article.querySelectorAll("img");
+  imgs.forEach(img => {
+    img.loading = "lazy";
+    img.decoding = "async";
+    // Ensure images have alt text for accessibility
+    if (!img.alt) img.alt = "";
+  });
+
+  /* --- Wrap bare iframes in responsive wrapper --- */
+  const iframes = article.querySelectorAll("iframe");
+  iframes.forEach(iframe => {
+    if (iframe.parentElement && (
+      iframe.parentElement.classList.contains("video-wrapper") ||
+      iframe.parentElement.classList.contains("embed-wrapper")
+    )) return;
+
+    // Only wrap if it looks like a video embed
+    const src = iframe.src || "";
+    const isVideo = /youtube|youtu\.be|vimeo|dailymotion|wistia|loom/i.test(src);
+
+    if (isVideo) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "video-wrapper";
+      iframe.parentNode.insertBefore(wrapper, iframe);
+      wrapper.appendChild(iframe);
+    }
+  });
+
+  /* --- Ensure video elements are responsive --- */
+  const videos = article.querySelectorAll("video");
+  videos.forEach(v => {
+    v.style.maxWidth = "100%";
+    if (!v.getAttribute("controls")) v.setAttribute("controls", "");
+  });
+
+  /* --- Add target=_blank + rel to external links --- */
+  const links = article.querySelectorAll("a[href]");
+  links.forEach(link => {
+    try {
+      const url = new URL(link.href);
+      if (url.hostname !== window.location.hostname) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    } catch (e) {
+      // relative links — leave as-is
+    }
+  });
+}
+
+enhanceContent();
+
+/* ============================================================
+   14. UI — SMOOTH REVEAL ANIMATION ON SCROLL
+   Applies .cc-visible to article sections as they enter viewport
+============================================================= */
+function initRevealAnimations() {
+  const article = document.getElementById("content");
+  if (!article || !window.IntersectionObserver) return;
+
+  // Add fade-up styles dynamically for article direct children
+  const style = document.createElement("style");
+  style.textContent = `
+    .cc-article > * {
+      opacity: 1;
+      transform: translateY(14px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .cc-article > *.cc-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Headings animate slightly faster */
+    .cc-article > h1.cc-visible,
+    .cc-article > h2.cc-visible,
+    .cc-article > h3.cc-visible {
+      transition-duration: .35s;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("cc-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: "0px 0px -60px 0px",
+    threshold: 0.04
+  });
+
+  // Observe all direct children of the article
+  Array.from(article.children).forEach((child, i) => {
+    // Stagger delay for a cascading effect (capped at 5 items)
+    const delay = Math.min(i * 35, 175);
+    child.style.transitionDelay = delay + "ms";
+    observer.observe(child);
+  });
+}
+
+initRevealAnimations();
+
+/* ============================================================
+   15. UI — KEYBOARD NAVIGATION SUPPORT
+============================================================= */
+document.addEventListener("keydown", function (e) {
+  // Alt + ArrowUp / ArrowDown to jump between headings
+  if (e.altKey && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+    e.preventDefault();
+    const article  = document.getElementById("content");
+    if (!article) return;
+
+    const headings = Array.from(article.querySelectorAll("h1, h2, h3"));
+    if (!headings.length) return;
+
+    const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 60;
+    const scrollY  = window.scrollY + navH + 10;
+
+    let currentIdx = -1;
+    headings.forEach((h, i) => {
+      if (h.getBoundingClientRect().top + window.scrollY <= scrollY) {
+        currentIdx = i;
+      }
+    });
+
+    let targetIdx;
+    if (e.key === "ArrowDown") {
+      targetIdx = Math.min(headings.length - 1, currentIdx + 1);
+    } else {
+      targetIdx = Math.max(0, currentIdx - 1);
+    }
+
+    headings[targetIdx].scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
+
+/* ============================================================
+   16. UI — READING TIME ESTIMATE
+============================================================= */
+function injectReadingTime() {
+  const article = document.getElementById("content");
+  const desc    = document.getElementById("heroDesc");
+  if (!article) return;
+
+  const text  = article.textContent || "";
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  const mins  = Math.max(1, Math.ceil(words / 220)); // avg 220 WPM
+
+  const rTimeEl = document.createElement("span");
+  rTimeEl.className = "cc-tag";
+  rTimeEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${mins} min read`;
+
+  const tagsContainer = document.getElementById("heroTags");
+  if (tagsContainer) {
+    tagsContainer.appendChild(rTimeEl);
+  }
+}
+
+injectReadingTime();
+
+ </script>
+</body>
+</html>

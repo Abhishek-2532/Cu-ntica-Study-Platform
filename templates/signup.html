@@ -1,0 +1,3008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — Cuántica</title>
+  <meta name="description" content="Create your Cuántica account and start exploring quantum machine learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  
+
+  <style>
+
+    /* =============================================================
+   CUÁNTICA — Sign Up Page
+   signup.css  |  Light Theme
+   Shares design tokens with index.css
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES (mirrored from index.css)
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --surface-hover:    #C9F7ED;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --error:            #EF4444;
+  --error-bg:         #FEF2F2;
+  --error-border:     #FECACA;
+  --success:          #10B981;
+  --success-bg:       #ECFDF5;
+  --success-border:   #A7F3D0;
+  --warning:          #F59E0B;
+
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.38);
+  --shadow-input:     0 0 0 3px rgba(108,229,191,.22);
+
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, canvas { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+ul, ol { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. UTILITY
+============================================================= */
+.hidden       { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   4. ANIMATED BACKGROUND CANVAS
+============================================================= */
+.signup-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* ============================================================
+   5. PAGE LAYOUT (2-column split)
+============================================================= */
+.signup-page {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   6. LEFT PANEL — BRAND / INFO
+============================================================= */
+.signup-panel--left {
+  background: linear-gradient(
+    148deg,
+    #E5FCF4 0%,
+    #EAF8FF 45%,
+    #EFF9FF 100%
+  );
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle tinted corner blobs */
+.signup-panel--left::before {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(108,229,191,.22) 0%, transparent 68%);
+  top: -120px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.signup-panel--left::after {
+  content: '';
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(99,102,241,.09) 0%, transparent 65%);
+  bottom: -80px;
+  left: -60px;
+  pointer-events: none;
+}
+
+.panel-inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem);
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Logo */
+.panel-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.panel-logo:hover .logo-mark {
+  transform: rotate(14deg) scale(1.07);
+}
+
+.logo-mark--sm {
+  width: 32px;
+  height: 32px;
+  font-size: .875rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text);
+  letter-spacing: -.03em;
+}
+
+/* Panel hero copy */
+.panel-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(108,229,191,.2);
+  border: 1px solid rgba(62,207,166,.3);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.panel-badge-icon {
+  color: var(--primary-dark);
+  font-size: .65rem;
+}
+
+.panel-heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.panel-heading em {
+  font-style: italic;
+  color: var(--primary-deeper);
+}
+
+.panel-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.68;
+  max-width: 420px;
+}
+
+/* Feature list */
+.panel-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.panel-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: .875rem;
+  animation: fadeSlideUp .5s ease both;
+}
+
+.panel-feature:nth-child(1) { animation-delay: .1s; }
+.panel-feature:nth-child(2) { animation-delay: .2s; }
+.panel-feature:nth-child(3) { animation-delay: .3s; }
+
+.panel-feature-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6875rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--primary-soft);
+  margin-top: 1px;
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.panel-feature:hover .panel-feature-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.12);
+}
+
+.panel-feature > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.panel-feature strong {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.panel-feature span span {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Trust strip */
+.panel-trust {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-avatars {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.panel-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  object-fit: cover;
+  background: var(--surface-alt);
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+.panel-avatars .panel-avatar:last-child {
+  margin-left: 0;
+}
+
+.panel-trust-text {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.panel-trust-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ============================================================
+   7. RIGHT PANEL — FORM SHELL
+============================================================= */
+.signup-panel--right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  overflow-y: auto;
+  background: var(--surface);
+}
+
+.form-shell {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* ============================================================
+   8. FORM TOP BAR
+============================================================= */
+.form-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.form-topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.form-topbar-signin {
+  font-size: .875rem;
+  color: var(--text-muted);
+}
+
+.form-topbar-link {
+  color: var(--primary-deeper);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.form-topbar-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   9. STEP PROGRESS BAR
+============================================================= */
+.step-progress {
+  margin-bottom: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.step-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.step-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%);
+  border-radius: var(--radius-full);
+  width: 25%;
+  transition: width var(--transition-slow) ease;
+}
+
+.step-dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Connector line behind dots */
+.step-dots::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.step-dot {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--text-faint);
+  font-size: .8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring);
+}
+
+.step-dot.active {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(62,207,166,.22), var(--shadow-md);
+  transform: scale(1.1);
+}
+
+.step-dot.done {
+  background: var(--primary-soft);
+  border-color: var(--primary-dark);
+  color: var(--primary-deeper);
+}
+
+.step-dot.done::after {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6875rem;
+  color: var(--primary-deeper);
+}
+
+.step-dot.done > i {
+  opacity: 0;
+}
+
+.step-dot:not(.active):not(.done):hover {
+  border-color: var(--primary-light);
+  color: var(--text-muted);
+  background: var(--surface-alt);
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-label {
+  font-size: .6875rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  flex: 1;
+  text-align: center;
+  transition: color var(--transition-fast), font-weight var(--transition-fast);
+}
+
+.step-label.active {
+  color: var(--primary-deeper);
+  font-weight: 700;
+}
+
+.step-label.done {
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   10. FORM STEPS
+============================================================= */
+.form-step {
+  display: none;
+  animation: stepEnter var(--transition-slow) ease both;
+}
+
+.form-step.active {
+  display: block;
+}
+
+@keyframes stepEnter {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stepExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+.step-exiting {
+  animation: stepExit var(--transition-base) ease forwards;
+}
+
+/* Step header */
+.step-header {
+  margin-bottom: 1.75rem;
+}
+
+.step-eyebrow {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  margin-bottom: .5rem;
+}
+
+.step-title {
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.025em;
+  margin-bottom: .4rem;
+}
+
+.step-desc {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   11. FIELD GRID
+============================================================= */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-full  { grid-column: 1 / -1; }
+.field-half  { grid-column: span 1; }
+.field-third {
+  grid-column: span 1;
+}
+
+/* ============================================================
+   12. FIELD COMPONENTS
+============================================================= */
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .055em;
+  margin-bottom: .45rem;
+}
+
+.field-label i {
+  color: var(--primary-dark);
+  font-size: .7rem;
+}
+
+.field-label-optional {
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--text-faint);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+/* Input wrapper — positions the status icon */
+.field-input-wrap {
+  position: relative;
+}
+
+.field-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field-input::placeholder {
+  color: var(--text-faint);
+}
+
+.field-input:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.field-input:focus {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  box-shadow: var(--shadow-input);
+}
+
+/* Validation states */
+.field-input.valid {
+  border-color: var(--success);
+}
+
+.field-input.valid:focus {
+  box-shadow: 0 0 0 3px rgba(16,185,129,.18);
+}
+
+.field-input.invalid {
+  border-color: var(--error);
+}
+
+.field-input.invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239,68,68,.16);
+}
+
+/* Trailing status icon */
+.field-status {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .8125rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.field-status.visible { opacity: 1; }
+.field-status.ok   { color: var(--success); }
+.field-status.fail { color: var(--error); }
+
+/* Eye toggle for password fields */
+.field-input-wrap--icon .field-input {
+  padding-right: 44px;
+}
+
+.field-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-size: .875rem;
+  line-height: 1;
+  transition: color var(--transition-fast);
+  z-index: 1;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.field-eye:hover { color: var(--text); }
+
+/* Field hint text */
+.field-hint {
+  display: block;
+  font-size: .75rem;
+  color: var(--text-faint);
+  margin-top: .35rem;
+  min-height: 1rem;
+  transition: color var(--transition-fast);
+}
+
+.field-hint.error { color: var(--error); }
+.field-hint.ok    { color: var(--success); }
+
+/* Select */
+.field-select-wrap {
+  position: relative;
+}
+
+.field-select {
+  cursor: pointer;
+  padding-right: 36px;
+}
+
+.field-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .6875rem;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: transform var(--transition-base), color var(--transition-fast);
+}
+
+.field-select-wrap:focus-within .field-select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--primary-dark);
+}
+
+/* Date input */
+input[type="date"].field-input {
+  cursor: pointer;
+}
+
+input[type="date"].field-input::-webkit-calendar-picker-indicator {
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+input[type="date"].field-input:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+/* Textarea */
+.field-textarea-wrap {
+  position: relative;
+}
+
+.field-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  min-height: 112px;
+  line-height: 1.65;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.field-textarea::placeholder { color: var(--text-faint); }
+
+.field-textarea:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.field-textarea:focus {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  box-shadow: var(--shadow-input);
+}
+
+.textarea-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: .6875rem;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.textarea-counter.near-limit { color: var(--warning); }
+.textarea-counter.at-limit   { color: var(--error); }
+
+/* ============================================================
+   13. PASSWORD STRENGTH METER
+============================================================= */
+.pw-strength {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin-top: .5rem;
+}
+
+.pw-bars {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.pw-bar {
+  width: 28px;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+  display: block;
+}
+
+.pw-bar.weak     { background: #EF4444; }
+.pw-bar.fair     { background: #F59E0B; }
+.pw-bar.good     { background: #3B82F6; }
+.pw-bar.strong   { background: var(--success); }
+
+.pw-label {
+  font-size: .75rem;
+  color: var(--text-faint);
+  transition: color var(--transition-base);
+}
+
+.pw-label.weak   { color: #EF4444; }
+.pw-label.fair   { color: #F59E0B; }
+.pw-label.good   { color: #3B82F6; }
+.pw-label.strong { color: var(--success); }
+
+/* ============================================================
+   14. AVATAR UPLOAD
+============================================================= */
+.avatar-upload-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.avatar-upload {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 2px dashed var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base),
+    transform var(--transition-spring),
+    box-shadow var(--transition-base);
+}
+
+.avatar-upload:hover {
+  border-color: var(--primary-dark);
+  background: var(--surface-hover);
+  transform: scale(1.04);
+  box-shadow: 0 0 0 4px rgba(62,207,166,.18);
+}
+
+.avatar-upload:focus {
+  outline: none;
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(62,207,166,.22);
+}
+
+.avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-align: center;
+  line-height: 1.3;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.avatar-placeholder i {
+  font-size: 1.125rem;
+  color: var(--primary-dark);
+}
+
+.avatar-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,41,59,.45);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.avatar-upload:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.hidden-file {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-upload-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.avatar-upload-info strong {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.avatar-upload-info span {
+  font-size: .8rem;
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   15. CHECKBOX
+============================================================= */
+.checkbox-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  padding: .75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.checkbox-wrap:hover {
+  background: var(--surface-alt);
+  border-color: var(--primary-light);
+}
+
+.checkbox-wrap input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-strong);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-spring);
+}
+
+.checkbox-box i {
+  font-size: .6875rem;
+  color: var(--text);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity var(--transition-fast), transform var(--transition-spring);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked ~ .checkbox-box {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked ~ .checkbox-box i {
+  opacity: 1;
+  transform: scale(1);
+  color: #fff;
+}
+
+.checkbox-label {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.inline-link {
+  color: var(--primary-deeper);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+}
+
+.inline-link:hover {
+  text-decoration-color: currentColor;
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   16. LEARNING LEVEL CARDS
+============================================================= */
+.learning-levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+  margin-bottom: .25rem;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1.125rem .75rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring);
+  overflow: hidden;
+}
+
+.level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.level-card:hover {
+  border-color: var(--primary-light);
+  background: var(--surface-alt);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.level-card:hover::before { opacity: .6; }
+
+.level-card.selected {
+  border-color: var(--primary-dark);
+  background: var(--surface-alt);
+  box-shadow: var(--shadow-primary);
+}
+
+.level-card.selected::before { opacity: 1; }
+
+.level-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  border: 1.5px solid var(--primary-soft);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.level-card.selected .level-icon,
+.level-card:hover .level-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.level-title {
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.level-desc {
+  font-size: .7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.level-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .5625rem;
+  opacity: 0;
+  transform: scale(0) rotate(-30deg);
+  transition: opacity var(--transition-base), transform var(--transition-spring);
+}
+
+.level-card.selected .level-check {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* ============================================================
+   17. NAVIGATION BUTTONS
+============================================================= */
+.form-nav {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 11px 22px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    background var(--transition-base),
+    transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary-light);
+  color: var(--text);
+  background: var(--surface-alt);
+  transform: translateX(-2px);
+}
+
+.btn-ghost.invisible {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-primary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  border: none;
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--primary);
+  padding: 14px 36px;
+  border-radius: var(--radius-full);
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.btn-primary-lg:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+/* Loading spinner state on submit button */
+.submit-spinner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-primary.loading {
+  pointer-events: none;
+  background: var(--primary-dark);
+}
+
+/* ============================================================
+   18. ERROR BANNER
+============================================================= */
+.form-error-banner {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .875rem 1.125rem;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  animation: bannerIn .25s ease both;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-error-banner > i {
+  color: var(--error);
+  font-size: .9375rem;
+  flex-shrink: 0;
+}
+
+.form-error-banner > span {
+  font-size: .875rem;
+  color: var(--error);
+  flex: 1;
+  font-weight: 500;
+}
+
+.banner-close {
+  color: var(--error);
+  font-size: .875rem;
+  opacity: .7;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.banner-close:hover {
+  opacity: 1;
+  background: rgba(239,68,68,.1);
+}
+
+/* ============================================================
+   19. SUCCESS STATE
+============================================================= */
+.form-success {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.success-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.success-icon-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.success-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid var(--primary-soft);
+  animation: successRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes successRingPulse {
+  0%, 100% { transform: scale(1);    opacity: .7; }
+  50%       { transform: scale(1.15); opacity: .3; }
+}
+
+.success-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 1.75rem;
+  box-shadow: var(--shadow-primary);
+  animation: successIconPop var(--transition-spring) both;
+}
+
+@keyframes successIconPop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+}
+
+.success-desc {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  max-width: 340px;
+  line-height: 1.65;
+  margin-top: -.25rem;
+}
+
+.success-progress-wrap {
+  width: 200px;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.success-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  border-radius: var(--radius-full);
+  transition: width 2.5s linear;
+}
+
+.success-cta {
+  text-decoration: none;
+}
+
+/* ============================================================
+   20. ANIMATIONS (shared)
+============================================================= */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(.8); }
+  20%  { opacity: .55; }
+  80%  { opacity: .3; }
+  100% { opacity: 0; transform: translateY(-180px) scale(1.1); }
+}
+
+/* ============================================================
+   21. RESPONSIVE — TABLET
+============================================================= */
+@media (max-width: 1024px) {
+  .signup-page {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-panel--left {
+    display: none;
+  }
+
+  .signup-panel--right {
+    min-height: 100vh;
+    background: var(--bg);
+    padding: 2.5rem 1.5rem;
+  }
+
+  .form-shell {
+    max-width: 520px;
+    margin-inline: auto;
+  }
+
+  .learning-levels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .form-topbar {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  .form-topbar-signin {
+    font-size: .8rem;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-half,
+  .field-third {
+    grid-column: 1 / -1;
+  }
+
+  .step-label {
+    font-size: .6rem;
+  }
+
+  .step-dot {
+    width: 32px;
+    height: 32px;
+    font-size: .75rem;
+  }
+
+  .learning-levels {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-nav {
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .signup-panel--right {
+    padding: 1.5rem 1rem;
+  }
+
+  .learning-levels {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   22. FOCUS VISIBLE (accessibility)
+============================================================= */
+:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   23. SCROLLBAR (Webkit)
+============================================================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* ============================================================
+   24. SELECTION
+============================================================= */
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ─── BACKGROUND CANVAS ─── -->
+  <canvas id="bg-canvas" class="signup-bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- ─── PAGE WRAPPER ─── -->
+  <div class="signup-page">
+
+    <!-- ─── LEFT PANEL ─── -->
+    <aside class="signup-panel signup-panel--left" aria-hidden="true">
+      <div class="panel-inner">
+
+        <!-- Logo -->
+        <a href="index.html" class="panel-logo">
+          <span class="logo-mark" style="background: transparent;"><img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" /></span>
+          <span class="logo-text">Cuántica</span>
+        </a>
+
+        <!-- Hero copy -->
+        <div class="panel-hero">
+          <span class="panel-badge">
+            <i class="fa-solid fa-circle-nodes panel-badge-icon"></i>
+            Quantum ML Platform
+          </span>
+          <h1 class="panel-heading">
+            Start your quantum<br><em>journey today.</em>
+          </h1>
+          <p class="panel-sub">
+            Join thousands of researchers and developers building the next generation of intelligent systems at the intersection of quantum physics and machine learning.
+          </p>
+        </div>
+
+        <!-- Feature list -->
+        <ul class="panel-features" role="list">
+          <li class="panel-feature">
+            <span class="panel-feature-icon"><i class="fa-solid fa-check"></i></span>
+            <span>
+              <strong>Pre-built quantum circuits</strong>
+              <span>Ready-to-run variational models and QNN templates.</span>
+            </span>
+          </li>
+          <li class="panel-feature">
+            <span class="panel-feature-icon"><i class="fa-solid fa-check"></i></span>
+            <span>
+              <strong>Live hardware access</strong>
+              <span>Run experiments on real quantum processors.</span>
+            </span>
+          </li>
+          <li class="panel-feature">
+            <span class="panel-feature-icon"><i class="fa-solid fa-check"></i></span>
+            <span>
+              <strong>No booking fees</strong>
+              <span>What you see is what you get — no hidden charges.</span>
+            </span>
+          </li>
+        </ul>
+
+        <!-- Trust strip -->
+        <div class="panel-trust">
+          <div class="panel-avatars">
+            <img src="placeholder-user.jpg" alt="Researcher" class="panel-avatar" />
+            <img src="placeholder-user.jpg" alt="Researcher" class="panel-avatar" />
+            <img src="placeholder-user.jpg" alt="Researcher" class="panel-avatar" />
+            <img src="placeholder-user.jpg" alt="Researcher" class="panel-avatar" />
+          </div>
+          <p class="panel-trust-text">
+            <strong>12,400+</strong> researchers already on board
+          </p>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ─── RIGHT PANEL (FORM) ─── -->
+    <main class="signup-panel signup-panel--right">
+      <div class="form-shell">
+
+        <!-- Top bar -->
+        <header class="form-topbar">
+          <a href="index.html" class="form-topbar-logo">
+            <span class="logo-mark logo-mark--sm" style="background: transparent;"><img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" /></span>
+            <span class="logo-text">Cuántica</span>
+          </a>
+          <p class="form-topbar-signin">
+            Already have an account?
+            <a href="/login" class="form-topbar-link">Sign in</a>
+          </p>
+        </header>
+
+        <!-- Step progress -->
+        <div class="step-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" aria-label="Registration step 1 of 4" id="step-progress">
+          <div class="step-track">
+            <div class="step-fill" id="step-fill"></div>
+          </div>
+          <div class="step-dots">
+            <button class="step-dot active" data-step="1" aria-label="Step 1: Account">
+              <i class="fa-solid fa-user-lock"></i>
+            </button>
+            <button class="step-dot" data-step="2" aria-label="Step 2: Personal">
+              <i class="fa-solid fa-id-card"></i>
+            </button>
+            <button class="step-dot" data-step="3" aria-label="Step 3: Academic">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </button>
+            <button class="step-dot" data-step="4" aria-label="Step 4: Preferences">
+              <i class="fa-solid fa-sliders"></i>
+            </button>
+          </div>
+          <div class="step-labels">
+            <span class="step-label active">Account</span>
+            <span class="step-label">Personal</span>
+            <span class="step-label">Academic</span>
+            <span class="step-label">Preferences</span>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────────
+             STEP 1 — ACCOUNT CREDENTIALS
+        ───────────────────────────────── -->
+        <section class="form-step active" id="step-1" aria-label="Account credentials">
+          <div class="step-header">
+            <span class="step-eyebrow">Step 1 of 4</span>
+            <h2 class="step-title">Create your account</h2>
+            <p class="step-desc">Set up your login credentials to get started.</p>
+          </div>
+
+          <div class="field-grid">
+
+            
+            <!-- Email -->
+            <div class="field-half">
+              <label class="field-label" for="email">
+                <i class="fa-solid fa-envelope"></i> Email address
+              </label>
+              <div class="field-input-wrap">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="field-input"
+                  placeholder="you@university.edu"
+                  autocomplete="email"
+                  required
+                />
+                <span class="field-status" id="email-status"></span>
+              </div>
+              <span class="field-hint" id="email-hint"></span>
+            </div>
+
+            <!-- Phone -->
+            <div class="field-half">
+              <label class="field-label" for="phone">
+                <i class="fa-solid fa-mobile-screen-button"></i> Phone number
+              </label>
+              <div class="field-input-wrap">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="field-input"
+                  placeholder="+1 (555) 000-0000"
+                  autocomplete="tel"
+                />
+                <span class="field-status" id="phone-status"></span>
+              </div>
+              <span class="field-hint" id="phone-hint"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="field-half">
+              <label class="field-label" for="password">
+                <i class="fa-solid fa-lock"></i> Password
+              </label>
+              <div class="field-input-wrap field-input-wrap--icon">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="field-input"
+                  placeholder="Min. 8 characters"
+                  autocomplete="new-password"
+                  required
+                />
+                <button type="button" class="field-eye" id="toggle-pw" aria-label="Toggle password visibility">
+                  <i class="fa-solid fa-eye" id="eye-icon"></i>
+                </button>
+                <span class="field-status" id="pw-status"></span>
+              </div>
+              <div class="pw-strength" id="pw-strength" aria-live="polite">
+                <div class="pw-bars">
+                  <span class="pw-bar" id="bar1"></span>
+                  <span class="pw-bar" id="bar2"></span>
+                  <span class="pw-bar" id="bar3"></span>
+                  <span class="pw-bar" id="bar4"></span>
+                </div>
+                <span class="pw-label" id="pw-label">Enter a password</span>
+              </div>
+            </div>
+
+            <!-- Confirm password -->
+            <div class="field-half">
+              <label class="field-label" for="confirm_password">
+                <i class="fa-solid fa-shield-halved"></i> Confirm password
+              </label>
+              <div class="field-input-wrap field-input-wrap--icon">
+                <input
+                  type="password"
+                  id="confirm_password"
+                  name="confirm_password"
+                  class="field-input"
+                  placeholder="Repeat password"
+                  autocomplete="new-password"
+                  required
+                />
+                <button type="button" class="field-eye" id="toggle-cpw" aria-label="Toggle confirm password visibility">
+                  <i class="fa-solid fa-eye" id="ceye-icon"></i>
+                </button>
+                <span class="field-status" id="cpw-status"></span>
+              </div>
+              <span class="field-hint" id="cpw-hint"></span>
+            </div>
+
+          </div>
+
+          <!-- Terms -->
+          <label class="checkbox-wrap" for="terms">
+            <input type="checkbox" id="terms" name="terms" />
+            <span class="checkbox-box"><i class="fa-solid fa-check"></i></span>
+            <span class="checkbox-label">
+              I agree to the
+              <a href="#" class="inline-link">Terms of Service</a>
+              and
+              <a href="#" class="inline-link">Privacy Policy</a>
+            </span>
+          </label>
+
+        </section>
+
+        <!-- ─────────────────────────────
+             STEP 2 — PERSONAL INFORMATION
+        ───────────────────────────────── -->
+        <section class="form-step" id="step-2" aria-label="Personal information">
+          <div class="step-header">
+            <span class="step-eyebrow">Step 2 of 4</span>
+            <h2 class="step-title">Personal information</h2>
+            <p class="step-desc">Help us personalise your learning experience.</p>
+          </div>
+
+          <div class="field-grid">
+
+            <div class="field-half">
+              <label class="field-label" for="first_name">
+                <i class="fa-solid fa-user"></i> First name
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="first_name" name="first_name" class="field-input" placeholder="Ada" autocomplete="given-name" required />
+                <span class="field-status" id="fn-status"></span>
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="last_name">
+                <i class="fa-solid fa-user"></i> Last name
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="last_name" name="last_name" class="field-input" placeholder="Lovelace" autocomplete="family-name" required />
+                <span class="field-status" id="ln-status"></span>
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="gender">
+                <i class="fa-solid fa-venus-mars"></i> Gender
+              </label>
+              <div class="field-input-wrap field-select-wrap">
+                <select id="gender" name="gender" class="field-input field-select">
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="non-binary">Non-binary</option>
+                  <option value="prefer_not">Prefer not to say</option>
+                </select>
+                <i class="fa-solid fa-chevron-down field-select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="dob">
+                <i class="fa-solid fa-calendar-days"></i> Date of birth
+              </label>
+              <div class="field-input-wrap">
+                <input type="date" id="dob" name="dob" class="field-input" />
+              </div>
+            </div>
+
+            <div class="field-third">
+              <label class="field-label" for="country">
+                <i class="fa-solid fa-earth-americas"></i> Country
+              </label>
+              <div class="field-input-wrap field-select-wrap">
+                <select id="country" name="country" class="field-input field-select">
+                  <option value="" disabled selected>Select country</option>
+                  <option value="US">United States</option>
+                  <option value="IN">India</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="DE">Germany</option>
+                  <option value="CA">Canada</option>
+                  <option value="AU">Australia</option>
+                  <option value="FR">France</option>
+                  <option value="JP">Japan</option>
+                  <option value="CN">China</option>
+                  <option value="BR">Brazil</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fa-solid fa-chevron-down field-select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="field-third">
+              <label class="field-label" for="state">
+                <i class="fa-solid fa-map-pin"></i> State / Region
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="state" name="state" class="field-input" placeholder="California" />
+              </div>
+            </div>
+
+            <div class="field-third">
+              <label class="field-label" for="city">
+                <i class="fa-solid fa-city"></i> City
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="city" name="city" class="field-input" placeholder="San Francisco" />
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ─────────────────────────────
+             STEP 3 — ACADEMIC INFORMATION
+        ───────────────────────────────── -->
+        <section class="form-step" id="step-3" aria-label="Academic information">
+          <div class="step-header">
+            <span class="step-eyebrow">Step 3 of 4</span>
+            <h2 class="step-title">Academic information</h2>
+            <p class="step-desc">Tell us about your educational background.</p>
+          </div>
+
+          <div class="field-grid">
+
+            <div class="field-half">
+              <label class="field-label" for="college">
+                <i class="fa-solid fa-building-columns"></i> College / Institution
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="college" name="college" class="field-input" placeholder="MIT, IIT Delhi, etc." />
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="university">
+                <i class="fa-solid fa-university"></i> University
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="university" name="university" class="field-input" placeholder="University of California" />
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="course">
+                <i class="fa-solid fa-book-open"></i> Course / Programme
+              </label>
+              <div class="field-input-wrap field-select-wrap">
+                <select id="course" name="course" class="field-input field-select">
+                  <option value="" disabled selected>Select course</option>
+                  <option value="bsc">B.Sc. / B.Tech</option>
+                  <option value="msc">M.Sc. / M.Tech</option>
+                  <option value="phd">Ph.D.</option>
+                  <option value="mba">MBA</option>
+                  <option value="diploma">Diploma</option>
+                  <option value="professional">Professional</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fa-solid fa-chevron-down field-select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="branch">
+                <i class="fa-solid fa-code-branch"></i> Branch / Specialisation
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="branch" name="branch" class="field-input" placeholder="Computer Science, Physics…" />
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="semester">
+                <i class="fa-solid fa-layer-group"></i> Semester / Year
+              </label>
+              <div class="field-input-wrap field-select-wrap">
+                <select id="semester" name="semester" class="field-input field-select">
+                  <option value="" disabled selected>Select semester</option>
+                  <option value="1">1st Semester</option>
+                  <option value="2">2nd Semester</option>
+                  <option value="3">3rd Semester</option>
+                  <option value="4">4th Semester</option>
+                  <option value="5">5th Semester</option>
+                  <option value="6">6th Semester</option>
+                  <option value="7">7th Semester</option>
+                  <option value="8">8th Semester</option>
+                  <option value="graduated">Graduated</option>
+                </select>
+                <i class="fa-solid fa-chevron-down field-select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="field-half">
+              <label class="field-label" for="current_course">
+                <i class="fa-solid fa-atom"></i> Current QML course
+              </label>
+              <div class="field-input-wrap">
+                <input type="text" id="current_course" name="current_course" class="field-input" placeholder="e.g. Quantum Foundations 101" />
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ─────────────────────────────
+             STEP 4 — PREFERENCES & BIO
+        ───────────────────────────────── -->
+        <section class="form-step" id="step-4" aria-label="Preferences and bio">
+          <div class="step-header">
+            <span class="step-eyebrow">Step 4 of 4</span>
+            <h2 class="step-title">Preferences &amp; bio</h2>
+            <p class="step-desc">Almost done — tell us how you learn best.</p>
+          </div>
+
+          <div class="field-grid">
+
+            <div class="field-full">
+              <label class="field-label" for="learning_level">
+                <i class="fa-solid fa-signal"></i> Learning level
+              </label>
+              <div class="learning-levels" id="learning-levels" role="radiogroup" aria-label="Choose learning level">
+                <label class="level-card" data-value="beginner">
+                  <input type="radio" name="learning_level" value="beginner" class="sr-only" />
+                  <span class="level-icon"><i class="fa-solid fa-seedling"></i></span>
+                  <span class="level-title">Beginner</span>
+                  <span class="level-desc">New to quantum concepts</span>
+                  <span class="level-check"><i class="fa-solid fa-check"></i></span>
+                </label>
+                <label class="level-card" data-value="intermediate">
+                  <input type="radio" name="learning_level" value="intermediate" class="sr-only" />
+                  <span class="level-icon"><i class="fa-solid fa-flask"></i></span>
+                  <span class="level-title">Intermediate</span>
+                  <span class="level-desc">Familiar with QC basics</span>
+                  <span class="level-check"><i class="fa-solid fa-check"></i></span>
+                </label>
+                <label class="level-card" data-value="advanced">
+                  <input type="radio" name="learning_level" value="advanced" class="sr-only" />
+                  <span class="level-icon"><i class="fa-solid fa-atom"></i></span>
+                  <span class="level-title">Advanced</span>
+                  <span class="level-desc">Working with QNN/VQE</span>
+                  <span class="level-check"><i class="fa-solid fa-check"></i></span>
+                </label>
+                <label class="level-card" data-value="researcher">
+                  <input type="radio" name="learning_level" value="researcher" class="sr-only" />
+                  <span class="level-icon"><i class="fa-solid fa-microscope"></i></span>
+                  <span class="level-title">Researcher</span>
+                  <span class="level-desc">Publishing / lab work</span>
+                  <span class="level-check"><i class="fa-solid fa-check"></i></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field-full">
+              <label class="field-label" for="bio">
+                <i class="fa-solid fa-pen-nib"></i> Bio
+                <span class="field-label-optional">(optional)</span>
+              </label>
+              <div class="field-textarea-wrap">
+                <textarea
+                  id="bio"
+                  name="bio"
+                  class="field-textarea"
+                  rows="4"
+                  maxlength="400"
+                  placeholder="Tell us a bit about yourself — your research interests, goals, or favourite quantum algorithm…"
+                ></textarea>
+                <span class="textarea-counter" id="bio-counter">0 / 400</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ─────────────────────────────
+             SUCCESS STATE
+        ───────────────────────────────── -->
+        <section class="form-step form-success" id="step-success" aria-label="Registration complete">
+          <div class="success-inner">
+            <div class="success-icon-wrap">
+              <div class="success-ring"></div>
+              <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </div>
+            <h2 class="success-title">You&apos;re in!</h2>
+            <p class="success-desc">
+              Your Cuántica account has been created. We&apos;re redirecting you to your dashboard&hellip;
+            </p>
+            <div class="success-progress-wrap">
+              <div class="success-progress-bar" id="success-bar"></div>
+            </div>
+            <a href="/dashboard" class="btn-primary-lg success-cta" id="success-cta">
+              Go to Dashboard <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </section>
+
+        <!-- ─── Global error banner ─── -->
+        <div class="form-error-banner hidden" id="form-error-banner" role="alert" aria-live="assertive">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span id="form-error-text">Something went wrong. Please try again.</span>
+          <button type="button" class="banner-close" id="banner-close" aria-label="Dismiss error">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- ─── Navigation buttons ─── -->
+        <footer class="form-nav" id="form-nav">
+          <button type="button" class="form-nav-back btn-ghost" id="btn-back" aria-label="Previous step">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="form-nav-next btn-primary" id="btn-next" aria-label="Next step">
+            Continue <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <button type="button" class="form-nav-submit btn-primary hidden" id="btn-submit" aria-label="Create account">
+            <span id="submit-label">Create account</span>
+            <span class="submit-spinner hidden" id="submit-spinner" aria-hidden="true">
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </span>
+          </button>
+        </footer>
+
+      </div><!-- /.form-shell -->
+    </main>
+
+  </div><!-- /.signup-page -->
+
+  <script>
+    /* =============================================================
+   CUÁNTICA — Sign Up Page  |  signup.js
+   Logic: multi-step form, validation, avatar upload,
+          API call, background canvas animation.
+   API contract preserved exactly as in the existing project.
+============================================================= */
+
+(function () {
+  'use strict';
+
+  /* ══════════════════════════════════════════════════════════
+     1. BACKGROUND QUANTUM CANVAS
+  ═══════════════════════════════════════════════════════════ */
+  (function initBgCanvas() {
+    var canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+
+    var ctx    = canvas.getContext('2d');
+    var nodes  = [];
+    var raf;
+
+    var NODE_COUNT = 40;
+    var EDGE_DIST  = 160;
+    var COLORS = {
+      node: 'rgba(62,207,166,',
+      edge: 'rgba(62,207,166,',
+    };
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function buildNodes() {
+      nodes = [];
+      for (var i = 0; i < NODE_COUNT; i++) {
+        nodes.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          vx:    (Math.random() - 0.5) * 0.35,
+          vy:    (Math.random() - 0.5) * 0.35,
+          r:     1.5 + Math.random() * 2.5,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+
+    function drawFrame(time) {
+      time *= 0.001;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      /* Move nodes */
+      nodes.forEach(function (n) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      });
+
+      /* Edges */
+      for (var i = 0; i < nodes.length; i++) {
+        for (var j = i + 1; j < nodes.length; j++) {
+          var dx   = nodes[j].x - nodes[i].x;
+          var dy   = nodes[j].y - nodes[i].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < EDGE_DIST) {
+            var alpha = (1 - dist / EDGE_DIST) * 0.10;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = COLORS.edge + alpha + ')';
+            ctx.lineWidth   = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      /* Nodes */
+      nodes.forEach(function (n) {
+        var pulse  = 0.55 + 0.45 * Math.sin(time * 1.8 + n.phase);
+        var radius = n.r * pulse;
+        var alpha  = 0.12 + 0.22 * pulse;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = COLORS.node + alpha + ')';
+        ctx.fill();
+      });
+
+      raf = requestAnimationFrame(drawFrame);
+    }
+
+    resize();
+    buildNodes();
+    raf = requestAnimationFrame(drawFrame);
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        resize();
+        buildNodes();
+      }, 200);
+    });
+  })();
+
+  /* ══════════════════════════════════════════════════════════
+     2. STATE
+  ═══════════════════════════════════════════════════════════ */
+  var currentStep = 1;
+  var TOTAL_STEPS = 4;
+
+  /* Holds all collected form data across steps */
+  var formData = {  // base64 dataURL or URL
+    email:            '',
+    phone:            '',
+    password:         '',
+    first_name:       '',
+    last_name:        '',
+    gender:           '',
+    dob:              '',
+    country:          '',
+    state:            '',
+    city:             '',
+    college:          '',
+    university:       '',
+    course:           '',
+    branch:           '',
+    semester:         '',
+    current_course:   '',
+    learning_level:   '',
+    bio:              '',
+  };
+
+  /* ══════════════════════════════════════════════════════════
+     3. DOM REFS
+  ═══════════════════════════════════════════════════════════ */
+  var btnBack       = document.getElementById('btn-back');
+  var btnNext       = document.getElementById('btn-next');
+  var btnSubmit     = document.getElementById('btn-submit');
+  var submitLabel   = document.getElementById('submit-label');
+  var submitSpinner = document.getElementById('submit-spinner');
+  var formNav       = document.getElementById('form-nav');
+  var errorBanner   = document.getElementById('form-error-banner');
+  var errorText     = document.getElementById('form-error-text');
+  var bannerClose   = document.getElementById('banner-close');
+  var stepFill      = document.getElementById('step-fill');
+  var stepProgress  = document.getElementById('step-progress');
+
+  /* ══════════════════════════════════════════════════════════
+     4. STEP NAVIGATION
+  ═══════════════════════════════════════════════════════════ */
+  function goToStep(next, direction) {
+    if (next < 1 || next > TOTAL_STEPS + 1) return;
+
+    var leaving  = document.getElementById('step-' + currentStep);
+    var entering = document.getElementById('step-' + next);
+
+    if (!entering) return;
+
+    /* Animate the leaving step */
+    if (leaving) {
+      leaving.classList.add('step-exiting');
+      setTimeout(function () {
+        leaving.classList.remove('active', 'step-exiting');
+      }, 220);
+    }
+
+    /* Small delay so exit animation is visible */
+    setTimeout(function () {
+      if (entering) {
+        entering.classList.add('active');
+        /* Scroll form-shell back to top smoothly */
+        entering.closest('.form-shell').scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 100);
+
+    currentStep = next;
+    updateProgressUI();
+    updateNavButtons();
+    hideError();
+  }
+
+  function updateProgressUI() {
+    /* Fill bar width */
+    var pct = (currentStep / TOTAL_STEPS) * 100;
+    if (pct > 100) pct = 100;
+    if (stepFill) stepFill.style.width = pct + '%';
+
+    /* Step dots */
+    document.querySelectorAll('.step-dot').forEach(function (dot) {
+      var s = parseInt(dot.dataset.step, 10);
+      dot.classList.remove('active', 'done');
+      if (s === currentStep)      dot.classList.add('active');
+      else if (s < currentStep)   dot.classList.add('done');
+    });
+
+    /* Step labels */
+    document.querySelectorAll('.step-label').forEach(function (lbl, idx) {
+      var s = idx + 1;
+      lbl.classList.remove('active', 'done');
+      if (s === currentStep)     lbl.classList.add('active');
+      else if (s < currentStep)  lbl.classList.add('done');
+    });
+
+    /* ARIA */
+    if (stepProgress) {
+      stepProgress.setAttribute('aria-valuenow', currentStep);
+    }
+  }
+
+  function updateNavButtons() {
+    if (!btnBack || !btnNext || !btnSubmit) return;
+
+    /* Back */
+    if (currentStep === 1) {
+      btnBack.classList.add('invisible');
+    } else {
+      btnBack.classList.remove('invisible');
+    }
+
+    /* Next vs Submit */
+    if (currentStep === TOTAL_STEPS) {
+      btnNext.classList.add('hidden');
+      btnSubmit.classList.remove('hidden');
+    } else {
+      btnNext.classList.remove('hidden');
+      btnSubmit.classList.add('hidden');
+    }
+
+    /* Hide entire nav on success */
+    if (currentStep > TOTAL_STEPS) {
+      formNav.classList.add('hidden');
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     5. VALIDATION
+  ═══════════════════════════════════════════════════════════ */
+
+  /* Helpers */
+  function setFieldState(inputEl, statusEl, hintEl, state, msg) {
+    if (!inputEl) return;
+    inputEl.classList.remove('valid', 'invalid');
+    if (state === 'ok')   inputEl.classList.add('valid');
+    if (state === 'fail') inputEl.classList.add('invalid');
+
+    if (statusEl) {
+      statusEl.className = 'field-status';
+      if (state === 'ok') {
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        statusEl.classList.add('visible', 'ok');
+      } else if (state === 'fail') {
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        statusEl.classList.add('visible', 'fail');
+      } else {
+        statusEl.innerHTML = '';
+      }
+    }
+
+    if (hintEl) {
+      hintEl.className = 'field-hint';
+      hintEl.textContent = msg || '';
+      if (state === 'fail') hintEl.classList.add('error');
+      if (state === 'ok')   hintEl.classList.add('ok');
+    }
+  }
+
+  function isValidEmail(val) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
+  }
+
+  function isValidPhone(val) {
+    if (!val.trim()) return true; /* phone is optional */
+    return /^[\+]?[\d\s\-\(\)]{7,15}$/.test(val.trim());
+  }
+
+  /* Step 1 validation */
+  function validateStep1() {
+    var ok = true;
+
+    var emailEl = document.getElementById('email');
+    var emailSt = document.getElementById('email-status');
+    var emailHt = document.getElementById('email-hint');
+    if (!emailEl.value.trim()) {
+      setFieldState(emailEl, emailSt, emailHt, 'fail', 'Email is required.');
+      ok = false;
+    } else if (!isValidEmail(emailEl.value)) {
+      setFieldState(emailEl, emailSt, emailHt, 'fail', 'Enter a valid email address.');
+      ok = false;
+    } else {
+      setFieldState(emailEl, emailSt, emailHt, 'ok', '');
+    }
+
+    var phoneEl = document.getElementById('phone');
+    var phoneSt = document.getElementById('phone-status');
+    var phoneHt = document.getElementById('phone-hint');
+    if (phoneEl.value.trim() && !isValidPhone(phoneEl.value)) {
+      setFieldState(phoneEl, phoneSt, phoneHt, 'fail', 'Enter a valid phone number.');
+      ok = false;
+    } else {
+      setFieldState(phoneEl, phoneSt, phoneHt, phoneEl.value.trim() ? 'ok' : '', '');
+    }
+
+    var pwEl  = document.getElementById('password');
+    var pwSt  = document.getElementById('pw-status');
+    if (!pwEl.value) {
+      setFieldState(pwEl, pwSt, null, 'fail', '');
+      ok = false;
+    } else if (pwEl.value.length < 8) {
+      setFieldState(pwEl, pwSt, null, 'fail', '');
+      showError('Password must be at least 8 characters.');
+      ok = false;
+    } else {
+      setFieldState(pwEl, pwSt, null, 'ok', '');
+    }
+
+    var cpwEl = document.getElementById('confirm_password');
+    var cpwSt = document.getElementById('cpw-status');
+    var cpwHt = document.getElementById('cpw-hint');
+    if (!cpwEl.value) {
+      setFieldState(cpwEl, cpwSt, cpwHt, 'fail', 'Please confirm your password.');
+      ok = false;
+    } else if (cpwEl.value !== pwEl.value) {
+      setFieldState(cpwEl, cpwSt, cpwHt, 'fail', 'Passwords do not match.');
+      ok = false;
+    } else {
+      setFieldState(cpwEl, cpwSt, cpwHt, 'ok', '');
+    }
+
+    var termsEl = document.getElementById('terms');
+    if (!termsEl.checked) {
+      showError('You must agree to the Terms of Service and Privacy Policy.');
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  /* Step 2 validation */
+  function validateStep2() {
+    var ok = true;
+
+    var fnEl = document.getElementById('first_name');
+    var fnSt = document.getElementById('fn-status');
+    if (!fnEl.value.trim()) {
+      setFieldState(fnEl, fnSt, null, 'fail', '');
+      ok = false;
+    } else {
+      setFieldState(fnEl, fnSt, null, 'ok', '');
+    }
+
+    var lnEl = document.getElementById('last_name');
+    var lnSt = document.getElementById('ln-status');
+    if (!lnEl.value.trim()) {
+      setFieldState(lnEl, lnSt, null, 'fail', '');
+      ok = false;
+    } else {
+      setFieldState(lnEl, lnSt, null, 'ok', '');
+    }
+
+    if (!ok) showError('Please fill in your first and last name.');
+
+    return ok;
+  }
+
+  /* Step 3 — academic (all optional, no hard block) */
+  function validateStep3() {
+    return true;
+  }
+
+  /* Step 4 validation — learning level must be picked */
+  function validateStep4() {
+    var selected = document.querySelector('.level-card.selected');
+    if (!selected) {
+      showError('Please select your learning level to continue.');
+      return false;
+    }
+    return true;
+  }
+
+  function validateCurrentStep() {
+    hideError();
+    switch (currentStep) {
+      case 1: return validateStep1();
+      case 2: return validateStep2();
+      case 3: return validateStep3();
+      case 4: return validateStep4();
+      default: return true;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     6. COLLECT FORM DATA
+  ═══════════════════════════════════════════════════════════ */
+  function collectStep(step) {
+    switch (step) {
+      case 1:
+        formData.email    = (document.getElementById('email').value || '').trim();
+        formData.phone    = (document.getElementById('phone').value || '').trim();
+        formData.password = document.getElementById('password').value || '';
+        break;
+      case 2:
+        formData.first_name = (document.getElementById('first_name').value || '').trim();
+        formData.last_name  = (document.getElementById('last_name').value  || '').trim();
+        formData.gender     = document.getElementById('gender').value  || '';
+        formData.dob        = document.getElementById('dob').value     || '';
+        formData.country    = document.getElementById('country').value || '';
+        formData.state      = (document.getElementById('state').value  || '').trim();
+        formData.city       = (document.getElementById('city').value   || '').trim();
+        break;
+      case 3:
+        formData.college        = (document.getElementById('college').value        || '').trim();
+        formData.university     = (document.getElementById('university').value     || '').trim();
+        formData.course         = document.getElementById('course').value          || '';
+        formData.branch         = (document.getElementById('branch').value         || '').trim();
+        formData.semester       = document.getElementById('semester').value        || '';
+        formData.current_course = (document.getElementById('current_course').value || '').trim();
+        break;
+      case 4:
+        var selected = document.querySelector('.level-card.selected');
+        formData.learning_level = selected ? selected.dataset.value : '';
+        formData.bio = (document.getElementById('bio').value || '').trim();
+        break;
+    }
+  }
+
+  /* Build full_name convenience field */
+  function buildFullName() {
+    formData.full_name = (formData.first_name + ' ' + formData.last_name).trim();
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     7. ERROR / SUCCESS BANNER
+  ═══════════════════════════════════════════════════════════ */
+  function showError(msg) {
+    if (!errorBanner || !errorText) return;
+    errorText.textContent = msg || 'Something went wrong. Please try again.';
+    errorBanner.classList.remove('hidden');
+    errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function hideError() {
+    if (!errorBanner) return;
+    errorBanner.classList.add('hidden');
+  }
+
+  if (bannerClose) {
+    bannerClose.addEventListener('click', hideError);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     8. BUTTON HANDLERS
+  ═══════════════════════════════════════════════════════════ */
+  if (btnNext) {
+    btnNext.addEventListener('click', function () {
+      if (!validateCurrentStep()) return;
+      collectStep(currentStep);
+      goToStep(currentStep + 1, 'forward');
+    });
+  }
+
+  if (btnBack) {
+    btnBack.addEventListener('click', function () {
+      hideError();
+      goToStep(currentStep - 1, 'back');
+    });
+  }
+
+  /* Step dot navigation (jump only to already-completed steps) */
+  document.querySelectorAll('.step-dot').forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      var target = parseInt(dot.dataset.step, 10);
+      if (target < currentStep) {
+        collectStep(currentStep);
+        goToStep(target, 'back');
+      }
+    });
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     9. SUBMIT — API CALL
+     Contract: POST /api/auth/signup  (same as existing project)
+  ═══════════════════════════════════════════════════════════ */
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', function () {
+      if (!validateCurrentStep()) return;
+      collectStep(currentStep);
+      buildFullName();
+      submitForm();
+    });
+  }
+
+  function setSubmitLoading(loading) {
+    if (!btnSubmit) return;
+    if (loading) {
+      btnSubmit.classList.add('loading');
+      btnSubmit.disabled = true;
+      if (submitLabel)   submitLabel.classList.add('hidden');
+      if (submitSpinner) submitSpinner.classList.remove('hidden');
+    } else {
+      btnSubmit.classList.remove('loading');
+      btnSubmit.disabled = false;
+      if (submitLabel)   submitLabel.classList.remove('hidden');
+      if (submitSpinner) submitSpinner.classList.add('hidden');
+    }
+  }
+
+  function submitForm() {
+    setSubmitLoading(true);
+    hideError();
+
+    var payload = {
+      email:          formData.email,
+      phone:          formData.phone,
+      password:       formData.password,
+      first_name:     formData.first_name,
+      last_name:      formData.last_name,
+      full_name:      formData.full_name,
+      gender:         formData.gender,
+      dob:            formData.dob,
+      country:        formData.country,
+      state:          formData.state,
+      city:           formData.city,
+      college:        formData.college,
+      university:     formData.university,
+      course:         formData.course,
+      branch:         formData.branch,
+      semester:       formData.semester,
+      current_course: formData.current_course,
+      learning_level: formData.learning_level,
+      bio:            formData.bio,
+      xp:             0,
+      coins:          0,
+      badges:         [],
+      certificates:   [],
+    };
+
+    fetch('/api/users/register', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        setSubmitLoading(false);
+
+        if (!data.success) {
+          showError(data.message || 'Signup failed. Please try again.');
+          return;
+        }
+
+        /* Save token to localStorage — same pattern as existing project */
+        if (data.token) {
+          localStorage.setItem('token', JSON.stringify(data.token));
+        }
+
+        /* Show success step */
+        showSuccessStep();
+      })
+      .catch(function (err) {
+        setSubmitLoading(false);
+        showError('Network error — please check your connection and try again.');
+      });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     10. SUCCESS STEP
+  ═══════════════════════════════════════════════════════════ */
+  function showSuccessStep() {
+    /* Hide current step */
+    var leaving = document.getElementById('step-' + currentStep);
+    if (leaving) {
+      leaving.classList.add('step-exiting');
+      setTimeout(function () { leaving.classList.remove('active', 'step-exiting'); }, 220);
+    }
+
+    setTimeout(function () {
+      var successEl = document.getElementById('step-success');
+      if (successEl) successEl.classList.add('active');
+    }, 120);
+
+    /* Hide nav */
+    currentStep = TOTAL_STEPS + 1;
+    updateProgressUI();
+    if (formNav) formNav.classList.add('hidden');
+
+    /* Animate redirect progress bar */
+    setTimeout(function () {
+      var bar = document.getElementById('success-bar');
+      if (bar) bar.style.width = '100%';
+    }, 300);
+
+    /* Auto redirect after 3s */
+    setTimeout(function () {
+      window.location.href = '/login';
+    }, 3200);
+  }
+
+
+
+  /* ══════════════════════════════════════════════════════════
+     12. PASSWORD STRENGTH METER
+  ═══════════════════════════════════════════════════════════ */
+  var pwInput  = document.getElementById('password');
+  var pwLabel  = document.getElementById('pw-label');
+  var bars     = [
+    document.getElementById('bar1'),
+    document.getElementById('bar2'),
+    document.getElementById('bar3'),
+    document.getElementById('bar4'),
+  ];
+
+  function measureStrength(pw) {
+    var score = 0;
+    if (!pw) return 0;
+    if (pw.length >= 8)  score++;
+    if (pw.length >= 12) score++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    /* Clamp 0-4 */
+    return Math.min(4, Math.floor(score * 0.8 + 0.5));
+  }
+
+  function renderStrength(score) {
+    var levels  = ['', 'weak', 'fair', 'good', 'strong'];
+    var labels  = ['Enter a password', 'Too weak', 'Fair', 'Good', 'Strong'];
+
+    bars.forEach(function (bar, idx) {
+      if (!bar) return;
+      bar.className = 'pw-bar';
+      if (score > 0 && idx < score) {
+        bar.classList.add(levels[score]);
+      }
+    });
+
+    if (pwLabel) {
+      pwLabel.className = 'pw-label' + (score > 0 ? ' ' + levels[score] : '');
+      pwLabel.textContent = labels[score] || '';
+    }
+  }
+
+  if (pwInput) {
+    pwInput.addEventListener('input', function () {
+      renderStrength(measureStrength(pwInput.value));
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     13. PASSWORD VISIBILITY TOGGLE
+  ═══════════════════════════════════════════════════════════ */
+  function bindEyeToggle(btnId, inputId, iconId) {
+    var btn  = document.getElementById(btnId);
+    var inp  = document.getElementById(inputId);
+    var icon = document.getElementById(iconId);
+    if (!btn || !inp) return;
+
+    btn.addEventListener('click', function () {
+      var showing = inp.type === 'text';
+      inp.type = showing ? 'password' : 'text';
+      if (icon) {
+        icon.className = showing ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+      }
+      btn.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+    });
+  }
+
+  bindEyeToggle('toggle-pw',  'password',         'eye-icon');
+  bindEyeToggle('toggle-cpw', 'confirm_password', 'ceye-icon');
+
+  /* ══════════════════════════════════════════════════════════
+     14. INLINE REAL-TIME VALIDATION (email & confirm pw)
+  ═══════════════════════════════════════════════════════════ */
+  var emailInput = document.getElementById('email');
+  if (emailInput) {
+    emailInput.addEventListener('blur', function () {
+      var st = document.getElementById('email-status');
+      var ht = document.getElementById('email-hint');
+      if (!emailInput.value.trim()) {
+        setFieldState(emailInput, st, ht, 'fail', 'Email is required.');
+      } else if (!isValidEmail(emailInput.value)) {
+        setFieldState(emailInput, st, ht, 'fail', 'Enter a valid email address.');
+      } else {
+        setFieldState(emailInput, st, ht, 'ok', '');
+      }
+    });
+  }
+
+  var cpwInput = document.getElementById('confirm_password');
+  if (cpwInput) {
+    cpwInput.addEventListener('input', function () {
+      var pw  = document.getElementById('password');
+      var st  = document.getElementById('cpw-status');
+      var ht  = document.getElementById('cpw-hint');
+      if (cpwInput.value && pw && cpwInput.value === pw.value) {
+        setFieldState(cpwInput, st, ht, 'ok', '');
+      } else if (cpwInput.value && pw && cpwInput.value !== pw.value) {
+        setFieldState(cpwInput, st, ht, 'fail', 'Passwords do not match.');
+      } else {
+        setFieldState(cpwInput, st, null, '', '');
+        if (ht) ht.textContent = '';
+      }
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     15. LEARNING LEVEL CARD SELECTION
+  ═══════════════════════════════════════════════════════════ */
+  document.querySelectorAll('.level-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      document.querySelectorAll('.level-card').forEach(function (c) {
+        c.classList.remove('selected');
+        var radio = c.querySelector('input[type="radio"]');
+        if (radio) radio.checked = false;
+      });
+
+      card.classList.add('selected');
+      var radio = card.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+
+      /* Animate in */
+      card.style.transform = 'translateY(-4px) scale(1.03)';
+      setTimeout(function () {
+        card.style.transform = '';
+      }, 280);
+    });
+
+    /* Keyboard support */
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     16. BIO CHARACTER COUNTER
+  ═══════════════════════════════════════════════════════════ */
+  var bioEl      = document.getElementById('bio');
+  var bioCounter = document.getElementById('bio-counter');
+
+  if (bioEl && bioCounter) {
+    bioEl.addEventListener('input', function () {
+      var len = bioEl.value.length;
+      var max = parseInt(bioEl.getAttribute('maxlength'), 10) || 400;
+      bioCounter.textContent = len + ' / ' + max;
+      bioCounter.className   = 'textarea-counter';
+      if (len >= max)           bioCounter.classList.add('at-limit');
+      else if (len >= max * .8) bioCounter.classList.add('near-limit');
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     17. ENTER KEY — advance form (not inside textarea)
+  ═══════════════════════════════════════════════════════════ */
+  document.addEventListener('keydown', function (e) {
+    /* Ignore if composing (CJK IME) */
+    if (e.nativeEvent && e.nativeEvent.isComposing) return;
+    if (e.isComposing) return;
+    if (e.keyCode === 229) return;  /* Safari IME fallback */
+
+    if (e.key !== 'Enter') return;
+
+    /* Don't trigger inside textarea */
+    if (document.activeElement && document.activeElement.tagName === 'TEXTAREA') return;
+
+    e.preventDefault();
+
+    if (currentStep < TOTAL_STEPS && !btnNext.classList.contains('hidden')) {
+      btnNext.click();
+    } else if (currentStep === TOTAL_STEPS && !btnSubmit.classList.contains('hidden')) {
+      btnSubmit.click();
+    }
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     18. INITIALISE
+  ═══════════════════════════════════════════════════════════ */
+  updateProgressUI();
+  updateNavButtons();
+
+  /* Fade in the right panel smoothly */
+  var rightPanel = document.querySelector('.signup-panel--right');
+  if (rightPanel) {
+    rightPanel.style.opacity = '0';
+    requestAnimationFrame(function () {
+      rightPanel.style.transition = 'opacity 0.5s ease';
+      rightPanel.style.opacity    = '1';
+    });
+  }
+
+})();
+
+  </script>
+</body>
+</html>

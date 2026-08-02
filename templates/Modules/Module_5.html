@@ -1,0 +1,1314 @@
+<main>
+<h1>
+ Module 5 – Quantum Computing Foundations
+</h1>
+<h2>
+ Chapter 1: Linear Algebra Basics
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ Linear Algebra is the mathematical language of quantum computing. Every quantum state, quantum gate, and quantum algorithm is represented using vectors and matrices.
+</p>
+<p>
+ Unlike classical computing, where data is represented as bits (0 or 1), quantum computing represents information as vectors in a complex vector space called a
+ <strong>
+  Hilbert Space
+ </strong>
+ .
+</p>
+<p>
+ Without Linear Algebra, quantum computing cannot be understood.
+</p>
+<ol>
+ <li>
+  <h3>
+   Scalars
+  </h3>
+  <p>
+   A scalar is simply a single number.
+  </p>
+  <p>
+   Examples
+  </p>
+  <ul>
+   <li>
+    5
+   </li>
+   <li>
+    -2
+   </li>
+   <li>
+    7.5
+   </li>
+   <li>
+    3+4i
+   </li>
+  </ul>
+  <p>
+   In quantum computing, scalars are usually
+   <strong>
+    complex numbers
+   </strong>
+   .
+  </p>
+ </li>
+ <li>
+  <h3>
+   Vectors
+  </h3>
+  <p>
+   A vector is an ordered list of numbers.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+[1]
+[0]</pre>
+  <p>
+   Another example
+  </p>
+  <pre>
+[0.707]
+[0.707]</pre>
+  <p>
+   Quantum states are represented by vectors.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+|ψ⟩ = α|0⟩ + β|1⟩</pre>
+ </li>
+ <li>
+  <h3>
+   Vector Length (Norm)
+  </h3>
+  <p>
+   Length tells us how long a vector is.
+  </p>
+  <p>
+   Formula
+  </p>
+  <pre>
+||v|| = sqrt(v₁² + v₂² + ... + vₙ²)</pre>
+  <p>
+   Example
+  </p>
+  <p>
+   Vector
+  </p>
+  <pre>
+v = [3, 4]</pre>
+  <p>
+   Length
+  </p>
+  <pre>
+||v|| = sqrt(3² + 4²) = sqrt(9 + 16) = sqrt(25) = 5</pre>
+  <p>
+   Quantum states always have length
+   <strong>
+    1
+   </strong>
+   .
+  </p>
+  <p>
+   This is called
+   <strong>
+    Normalization
+   </strong>
+   .
+  </p>
+ </li>
+ <li>
+  <h3>
+   Unit Vector
+  </h3>
+  <p>
+   A vector having length 1 is called a Unit Vector.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+[1/sqrt(2)]
+[1/sqrt(2)]</pre>
+  <p>
+   Length = 1
+  </p>
+ </li>
+ <li>
+  <h3>
+   Matrix
+  </h3>
+  <p>
+   A matrix is a rectangular array of numbers.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+[1 0]
+[0 1]</pre>
+  <p>
+   Quantum gates are represented using matrices.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Matrix Addition
+  </h3>
+  <p>
+   Only matrices of the same size can be added.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+[1 2] + [3 4] = [4 6]
+[3 4]   [5 6]   [8 10]</pre>
+ </li>
+ <li>
+  <h3>
+   Matrix Multiplication
+  </h3>
+  <p>
+   Rows × Columns
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+[1 2] x [5 6] = [1*5+2*7 1*6+2*8]
+[3 4]   [7 8]   [3*5+4*7 3*6+4*8]</pre>
+  <p>
+   Result
+  </p>
+  <pre>
+[19 22]
+[43 50]</pre>
+  <p>
+   Quantum gates work by matrix multiplication.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Identity Matrix
+  </h3>
+  <p>
+   Acts like number 1.
+  </p>
+  <pre>
+I = [1 0]
+    [0 1]</pre>
+ </li>
+ <li>
+  <h3>
+   Transpose
+  </h3>
+  <p>
+   Rows become columns.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+A = [1 2 3]
+    [4 5 6]</pre>
+  <p>
+   Transpose
+  </p>
+  <pre>
+Aᵀ = [1 4]
+     [2 5]
+     [3 6]</pre>
+ </li>
+ <li>
+  <h3>
+   Conjugate Transpose (Hermitian)
+  </h3>
+  <p>
+   Take complex conjugate then transpose.
+  </p>
+  <p>
+   Denoted
+  </p>
+  <pre>
+A†</pre>
+  <p>
+   Used extensively in quantum computing.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Eigenvalues and Eigenvectors
+  </h3>
+  <p>
+   Very important concept.
+  </p>
+  <p>
+   If
+  </p>
+  <pre>
+A|v⟩ = λ|v⟩</pre>
+  <p>
+   Then
+  </p>
+  <dl>
+   <dt>
+    λ
+   </dt>
+   <dd>
+    Eigenvalue
+   </dd>
+   <dt>
+    |v⟩
+   </dt>
+   <dd>
+    Eigenvector
+   </dd>
+  </dl>
+  <p>
+   Measurement operators use eigenvalues.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Tensor Product
+  </h3>
+  <p>
+   Combines multiple qubits.
+  </p>
+  <p>
+   Example
+  </p>
+  <pre>
+|0⟩ ⊗ |1⟩ = |01⟩</pre>
+  <p>
+   This operation builds multi-qubit systems.
+  </p>
+ </li>
+</ol>
+<h3>
+ Summary
+</h3>
+<p>
+ Linear Algebra provides:
+</p>
+<ul>
+ <li>
+  Vectors
+ </li>
+ <li>
+  Matrices
+ </li>
+ <li>
+  Matrix Multiplication
+ </li>
+ <li>
+  Tensor Product
+ </li>
+ <li>
+  Eigenvalues
+ </li>
+ <li>
+  Hilbert Space
+ </li>
+</ul>
+<p>
+ Everything in quantum computing depends on these.
+</p>
+<h2>
+ Chapter 2: Complex Numbers
+</h2>
+<h3>
+ Why Complex Numbers?
+</h3>
+<p>
+ Classical computers only use real numbers.
+</p>
+<p>
+ Quantum mechanics uses
+ <strong>
+  complex numbers
+ </strong>
+ because wave functions have both magnitude and phase.
+</p>
+<ol>
+ <li>
+  <h3>
+   Definition
+  </h3>
+  <p>
+   A complex number is
+  </p>
+  <pre>
+z = a + bi</pre>
+  <p>
+   where
+  </p>
+  <dl>
+   <dt>
+    a
+   </dt>
+   <dd>
+    Real part
+   </dd>
+   <dt>
+    b
+   </dt>
+   <dd>
+    Imaginary part
+   </dd>
+  </dl>
+ </li>
+</ol>
+<p>
+ Example
+</p>
+<pre>
+z = 3 + 4i</pre>
+<p>
+ Real = 3
+</p>
+<p>
+ Imaginary = 4
+</p>
+<ol start="2">
+ <li>
+  <h3>
+   Complex Plane
+  </h3>
+  <p>
+   Horizontal axis → Real
+  </p>
+  <p>
+   Vertical axis → Imaginary
+  </p>
+  <p>
+   Every complex number is a point.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Addition
+  </h3>
+  <pre>
+(a + bi) + (c + di) = (a+c) + (b+d)i</pre>
+ </li>
+ <li>
+  <h3>
+   Multiplication
+  </h3>
+  <p>
+   Remember
+  </p>
+  <pre>
+i² = -1</pre>
+  <p>
+   Example
+  </p>
+  <pre>
+(3 + 2i)(1 + 4i)</pre>
+  <p>
+   Expand normally.
+  </p>
+  <pre>
+3*1 + 3*4i + 2i*1 + 2i*4i
+3 + 12i + 2i + 8i²
+3 + 14i - 8
+-5 + 14i</pre>
+ </li>
+ <li>
+  <h3>
+   Complex Conjugate
+  </h3>
+  <p>
+   Replace
+  </p>
+  <pre>
++i</pre>
+  <p>
+   by
+  </p>
+  <pre>
+-i</pre>
+  <p>
+   Example
+  </p>
+  <pre>
+z = 3 + 4i</pre>
+  <p>
+   Conjugate
+  </p>
+  <pre>
+z* = 3 - 4i</pre>
+  <p>
+   Notation
+  </p>
+  <pre>
+z* or z̄</pre>
+ </li>
+ <li>
+  <h3>
+   Magnitude
+  </h3>
+  <pre>
+|z| = sqrt(a² + b²)</pre>
+  <p>
+   Example
+  </p>
+  <pre>
+z = 3 + 4i</pre>
+  <p>
+   Magnitude
+  </p>
+  <pre>
+|z| = sqrt(3² + 4²) = 5</pre>
+ </li>
+ <li>
+  <h3>
+   Polar Form
+  </h3>
+  <p>
+   A complex number can be written as
+  </p>
+  <pre>
+z = r(cosθ + isinθ)</pre>
+  <p>
+   where
+  </p>
+  <dl>
+   <dt>
+    r
+   </dt>
+   <dd>
+    magnitude
+   </dd>
+   <dt>
+    θ
+   </dt>
+   <dd>
+    phase angle
+   </dd>
+  </dl>
+ </li>
+ <li>
+  <h3>
+   Euler Formula
+  </h3>
+  <p>
+   The most famous formula in quantum computing
+  </p>
+  <pre>
+e^(iθ) = cosθ + isinθ</pre>
+ </li>
+ <li>
+  <h3>
+   Why Important?
+  </h3>
+  <p>
+   Quantum amplitudes are complex numbers.
+  </p>
+  <p>
+   Probability
+  </p>
+  <pre>
+P = |amplitude|²</pre>
+  <p>
+   Only the magnitude squared gives measurable probabilities.
+  </p>
+ </li>
+</ol>
+<h3>
+ Summary
+</h3>
+<p>
+ Complex numbers introduce:
+</p>
+<ul>
+ <li>
+  Phase
+ </li>
+ <li>
+  Interference
+ </li>
+ <li>
+  Rotation
+ </li>
+ <li>
+  Quantum amplitudes
+ </li>
+</ul>
+<p>
+ Without them, quantum mechanics would not exist.
+</p>
+<h2>
+ Chapter 3: Dirac Notation (Bra-Ket Notation)
+</h2>
+<p>
+ Developed by
+ <strong>
+  Paul Dirac
+ </strong>
+ to represent quantum states compactly.
+</p>
+<ol>
+ <li>
+  <h3>
+   Ket
+  </h3>
+  <p>
+   A quantum state is written as
+  </p>
+  <pre>
+|ψ⟩</pre>
+  <p>
+   Example
+  </p>
+  <pre>
+|0⟩, |1⟩, |+⟩, |-⟩</pre>
+ </li>
+ <li>
+  <h3>
+   Bra
+  </h3>
+  <p>
+   The conjugate transpose of a ket.
+  </p>
+  <pre>
+⟨ψ| = (|ψ⟩)†</pre>
+ </li>
+ <li>
+  <h3>
+   Bra-Ket (Inner Product)
+  </h3>
+  <p>
+   Measures overlap between two quantum states.
+  </p>
+  <pre>
+⟨φ|ψ⟩</pre>
+  <ul>
+   <li>
+    1 → Same state
+   </li>
+   <li>
+    0 → Orthogonal states
+   </li>
+  </ul>
+ </li>
+ <li>
+  <h3>
+   Outer Product
+  </h3>
+  <p>
+   Produces a matrix.
+  </p>
+  <pre>
+|ψ⟩⟨φ|</pre>
+  <p>
+   Used in quantum operators.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Basis States
+  </h3>
+  <p>
+   One-qubit basis:
+  </p>
+  <pre>
+|0⟩ = [1] , |1⟩ = [0]
+      [0]         [1]</pre>
+ </li>
+ <li>
+  <h3>
+   Superposition
+  </h3>
+  <p>
+   General qubit
+  </p>
+  <pre>
+|ψ⟩ = α|0⟩ + β|1⟩</pre>
+  <p>
+   Condition
+  </p>
+  <pre>
+|α|² + |β|² = 1</pre>
+ </li>
+</ol>
+<h3>
+ Summary
+</h3>
+<p>
+ Dirac notation simplifies:
+</p>
+<ul>
+ <li>
+  Quantum states
+ </li>
+ <li>
+  Measurements
+ </li>
+ <li>
+  Operators
+ </li>
+ <li>
+  Inner products
+ </li>
+ <li>
+  Tensor products
+ </li>
+</ul>
+<h2>
+ Chapter 4: Quantum Gates
+</h2>
+<p>
+ Quantum gates manipulate qubits. They are the quantum equivalent of classical logic gates and are represented by
+ <strong>
+  unitary matrices
+ </strong>
+ , meaning they preserve the total probability of the quantum state.
+</p>
+<ol>
+ <li>
+  <h3>
+   Pauli-X Gate (Quantum NOT)
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+X = [0 1]
+    [1 0]</pre>
+  <p>
+   Effect:
+  </p>
+  <pre>
+X|0⟩ = |1⟩
+X|1⟩ = |0⟩</pre>
+  <p>
+   It flips the qubit, similar to a classical NOT gate.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Pauli-Y Gate
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+Y = [0  -i]
+    [i   0]</pre>
+  <p>
+   It performs both a bit flip and a phase change.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Pauli-Z Gate
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+Z = [1  0]
+    [0 -1]</pre>
+  <p>
+   Effect:
+  </p>
+  <pre>
+Z|0⟩ = |0⟩
+Z|1⟩ = -|1⟩</pre>
+  <p>
+   It changes only the phase of the state.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Hadamard Gate (H)
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+H = 1/sqrt(2) [1  1]
+              [1 -1]</pre>
+  <p>
+   Effects:
+  </p>
+  <pre>
+H|0⟩ = |+⟩ = 1/sqrt(2) (|0⟩ + |1⟩)
+H|1⟩ = |-⟩ = 1/sqrt(2) (|0⟩ - |1⟩)</pre>
+  <p>
+   The Hadamard gate creates superposition.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Phase Gate (S)
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+S = [1 0]
+    [0 i]</pre>
+  <p>
+   It adds a phase shift to the state.
+  </p>
+ </li>
+ <li>
+  <h3>
+   T Gate
+  </h3>
+  <p>
+   Matrix:
+  </p>
+  <pre>
+T = [1    0   ]
+    [0 e^(iπ/4)]</pre>
+  <p>
+   It applies a phase rotation and is important in fault-tolerant quantum computing.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Controlled-NOT (CNOT)
+  </h3>
+  <p>
+   Truth table:
+  </p>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Control
+     </th>
+     <th>
+      Target Before
+     </th>
+     <th>
+      Target After
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      0
+     </td>
+     <td>
+      0
+     </td>
+     <td>
+      0
+     </td>
+    </tr>
+    <tr>
+     <td>
+      0
+     </td>
+     <td>
+      1
+     </td>
+     <td>
+      1
+     </td>
+    </tr>
+    <tr>
+     <td>
+      1
+     </td>
+     <td>
+      0
+     </td>
+     <td>
+      1
+     </td>
+    </tr>
+    <tr>
+     <td>
+      1
+     </td>
+     <td>
+      1
+     </td>
+     <td>
+      0
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <p>
+   The target qubit flips only if the control qubit is 1.
+  </p>
+  <p>
+   CNOT is essential for generating entanglement.
+  </p>
+ </li>
+ <li>
+  <h3>
+   SWAP Gate
+  </h3>
+  <p>
+   Exchanges the states of two qubits.
+  </p>
+  <pre>
+SWAP|AB⟩ = |BA⟩</pre>
+  <p>
+   Useful for moving quantum information across hardware.
+  </p>
+ </li>
+ <li>
+  <h3>
+   Rotation Gates
+  </h3>
+  <ul>
+   <li>
+    Rₓ(θ): Rotation about the X-axis
+   </li>
+   <li>
+    Rᵧ(θ): Rotation about the Y-axis
+   </li>
+   <li>
+    R₂Rz(θ): Rotation about the Z-axis
+   </li>
+  </ul>
+  <p>
+   These allow arbitrary manipulation of qubit states.
+  </p>
+ </li>
+</ol>
+<h3>
+ Properties of Quantum Gates
+</h3>
+<ul>
+ <li>
+  Unitary
+ </li>
+ <li>
+  Reversible
+ </li>
+ <li>
+  Preserve normalization
+ </li>
+ <li>
+  Can be combined to implement quantum algorithms
+ </li>
+</ul>
+<h2>
+ Chapter 5: Quantum Circuits
+</h2>
+<p>
+ A quantum circuit is a sequence of quantum gates applied to one or more qubits. It is the standard model used to perform quantum computations.
+</p>
+<h3>
+ Components
+</h3>
+<ul>
+ <li>
+  <strong>
+   Qubits
+  </strong>
+  : Horizontal wires
+ </li>
+ <li>
+  <strong>
+   Quantum Gates
+  </strong>
+  : Operations on qubits
+ </li>
+ <li>
+  <strong>
+   Measurement
+  </strong>
+  : Converts qubits into classical bits
+ </li>
+ <li>
+  <strong>
+   Classical Bits
+  </strong>
+  : Store measurement results
+ </li>
+</ul>
+<h3>
+ Example Circuit
+</h3>
+<pre>
+|0⟩ ── H ──●── M
+            │
+|0⟩ ─────── X── M</pre>
+<p>
+ Steps:
+</p>
+<ol>
+ <li>
+  Initialize both qubits in |0⟩.
+ </li>
+ <li>
+  Apply a Hadamard gate to the first qubit.
+ </li>
+ <li>
+  Apply a CNOT gate.
+ </li>
+ <li>
+  Measure both qubits.
+ </li>
+</ol>
+<p>
+ Final state:
+</p>
+<pre>
+1/sqrt(2) (|00⟩ + |11⟩)</pre>
+<p>
+ This is a Bell state (maximally entangled state).
+</p>
+<h3>
+ Circuit Depth
+</h3>
+<p>
+ Circuit depth is the number of sequential layers of gates.
+</p>
+<ul>
+ <li>
+  Lower depth → Faster execution
+ </li>
+ <li>
+  Less noise
+ </li>
+ <li>
+  Better performance on current quantum hardware
+ </li>
+</ul>
+<h3>
+ Types of Quantum Circuits
+</h3>
+<ul>
+ <li>
+  Single-qubit circuits
+ </li>
+ <li>
+  Multi-qubit circuits
+ </li>
+ <li>
+  Variational circuits
+ </li>
+ <li>
+  Error-correction circuits
+ </li>
+ <li>
+  Algorithm-specific circuits (Grover, QFT, Shor)
+ </li>
+</ul>
+<h3>
+ Quantum Circuit Model
+</h3>
+<p>
+ General workflow:
+</p>
+<ol>
+ <li>
+  Initialize qubits
+ </li>
+ <li>
+  Apply quantum gates
+ </li>
+ <li>
+  Perform entangling operations
+ </li>
+ <li>
+  Measure qubits
+ </li>
+ <li>
+  Obtain classical output
+ </li>
+</ol>
+<h2>
+ Chapter 6: Bloch Sphere
+</h2>
+<p>
+ The Bloch Sphere is a geometric representation of the state of a single qubit.
+</p>
+<p>
+ A classical bit has only two possible states:
+</p>
+<ul>
+ <li>
+  0
+ </li>
+ <li>
+  1
+ </li>
+</ul>
+<p>
+ A qubit can exist anywhere on the surface of the Bloch sphere.
+</p>
+<h3>
+ General Qubit State
+</h3>
+<pre>
+|ψ⟩ = cos(θ/2)|0⟩ + e^(iφ)sin(θ/2)|1⟩</pre>
+<p>
+ where:
+</p>
+<ul>
+ <li>
+  θ: Polar angle
+ </li>
+ <li>
+  φ: Azimuthal angle
+ </li>
+</ul>
+<h3>
+ Important Points
+</h3>
+<ul>
+ <li>
+  North Pole → |0⟩
+ </li>
+ <li>
+  South Pole → |1⟩
+ </li>
+ <li>
+  Equator → Equal superposition states
+ </li>
+</ul>
+<h3>
+ Axes
+</h3>
+<ul>
+ <li>
+  X-axis: Superposition basis
+ </li>
+ <li>
+  Y-axis: Phase basis
+ </li>
+ <li>
+  Z-axis: Computational basis
+ </li>
+</ul>
+<h3>
+ Gate Actions on the Bloch Sphere
+</h3>
+<ul>
+ <li>
+  X Gate → Rotation about X-axis
+ </li>
+ <li>
+  Y Gate → Rotation about Y-axis
+ </li>
+ <li>
+  Z Gate → Rotation about Z-axis
+ </li>
+ <li>
+  H Gate → Rotates between Z and X bases
+ </li>
+</ul>
+<h3>
+ Why the Bloch Sphere Matters
+</h3>
+<p>
+ It helps visualize:
+</p>
+<ul>
+ <li>
+  Superposition
+ </li>
+ <li>
+  Phase
+ </li>
+ <li>
+  Rotations
+ </li>
+ <li>
+  Quantum gate operations
+ </li>
+</ul>
+<p>
+ Note that it represents only
+ <strong>
+  single-qubit
+ </strong>
+ pure states. Multi-qubit states require higher-dimensional representations.
+</p>
+<h2>
+ Chapter 7: Quantum Measurement
+</h2>
+<p>
+ Quantum measurement extracts classical information from a quantum state. Unlike classical systems, measurement changes the quantum state.
+</p>
+<h3>
+ Measurement Postulate
+</h3>
+<p>
+ For a qubit
+</p>
+<pre>
+|ψ⟩ = α|0⟩ + β|1⟩</pre>
+<p>
+ the probabilities are:
+</p>
+<pre>
+P(0) = |α|²
+P(1) = |β|²</pre>
+<p>
+ with
+</p>
+<pre>
+|α|² + |β|² = 1</pre>
+<h3>
+ State Collapse
+</h3>
+<p>
+ Suppose
+</p>
+<pre>
+|ψ⟩ = 1/sqrt(2)|0⟩ + 1/sqrt(2)|1⟩</pre>
+<p>
+ Before measurement:
+</p>
+<ul>
+ <li>
+  50% probability of 0
+ </li>
+ <li>
+  50% probability of 1
+ </li>
+</ul>
+<p>
+ After measuring:
+</p>
+<ul>
+ <li>
+  If the outcome is 0, the state becomes |0⟩.
+ </li>
+ <li>
+  If the outcome is 1, the state becomes |1⟩.
+ </li>
+</ul>
+<p>
+ The original superposition no longer exists.
+</p>
+<h3>
+ Measuring Multiple Qubits
+</h3>
+<p>
+ For the Bell state
+</p>
+<pre>
+|Φ⁺⟩ = 1/sqrt(2) (|00⟩ + |11⟩)</pre>
+<p>
+ Possible outcomes:
+</p>
+<ul>
+ <li>
+  00 (50%)
+ </li>
+ <li>
+  11 (50%)
+ </li>
+</ul>
+<p>
+ The outcomes 01 and 10 never occur.
+</p>
+<p>
+ This demonstrates quantum entanglement.
+</p>
+<h3>
+ Types of Measurement
+</h3>
+<ul>
+ <li>
+  Computational (Z) basis
+ </li>
+ <li>
+  X-basis measurement
+ </li>
+ <li>
+  Y-basis measurement
+ </li>
+ <li>
+  Projective measurement
+ </li>
+ <li>
+  Generalized measurements (POVMs)
+ </li>
+</ul>
+<h3>
+ Importance of Measurement
+</h3>
+<p>
+ Quantum measurement is fundamental because it:
+</p>
+<ul>
+ <li>
+  Converts quantum information into classical information.
+ </li>
+ <li>
+  Determines the final output of quantum algorithms.
+ </li>
+ <li>
+  Is probabilistic rather than deterministic.
+ </li>
+ <li>
+  Causes wavefunction collapse according to quantum mechanics.
+ </li>
+</ul>
+<h3>
+ Module 5 Summary
+</h3>
+<p>
+ After completing this module, you should understand:
+</p>
+<ul>
+ <li>
+  <strong>
+   Linear Algebra Basics:
+  </strong>
+  Vectors, matrices, norms, tensor products, eigenvalues, and unitary operations.
+ </li>
+ <li>
+  <strong>
+   Complex Numbers:
+  </strong>
+  Complex amplitudes, magnitude, phase, conjugates, and Euler's formula.
+ </li>
+ <li>
+  <strong>
+   Dirac Notation:
+  </strong>
+  Bra-ket notation, basis states, inner and outer products, and superposition.
+ </li>
+ <li>
+  <strong>
+   Quantum Gates:
+  </strong>
+  Pauli gates, Hadamard, phase gates, CNOT, SWAP, and rotation gates.
+ </li>
+ <li>
+  <strong>
+   Quantum Circuits:
+  </strong>
+  Circuit construction, gate sequencing, Bell-state preparation, and circuit depth.
+ </li>
+ <li>
+  <strong>
+   Bloch Sphere:
+  </strong>
+  Geometric visualization of single-qubit states and gate-induced rotations.
+ </li>
+ <li>
+  <strong>
+   Quantum Measurement:
+  </strong>
+  Probability amplitudes, Born rule, wavefunction collapse, and measurement in different bases.
+ </li>
+</ul>
+<p>
+ These concepts form the mathematical and physical foundation of all advanced quantum computing topics, including quantum algorithms, quantum machine learning (QML), quantum error correction, and quantum hardware.
+</p>
+</main>

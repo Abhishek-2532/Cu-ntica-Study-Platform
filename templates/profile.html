@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — Cuántica</title>
+  <meta name="description" content="Your Cuántica learner profile — XP, coins, achievements, and academic information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* =============================================================
+   CUÁNTICA — Profile Page
+   profile.css  |  Light Theme
+   Extends the index.css design system — same tokens, typography,
+   and interaction patterns. No emojis. FontAwesome icons only.
+============================================================= */
+
+/* ============================================================
+   1. DESIGN TOKENS  (mirrors index.css :root)
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --surface-raised:   #F0FDFB;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --accent-amber:     #F59E0B;
+  --accent-violet:    #8B5CF6;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.32);
+  --shadow-coins:     0 8px 28px rgba(245,158,11,.22);
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-2xl:       32px;
+  --radius-full:      9999px;
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+  --max-w:            1280px;
+  --nav-h:            66px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* room for mobile tab bar */
+  padding-bottom: 72px;
+}
+
+@media (min-width: 768px) {
+  body { padding-bottom: 0; }
+}
+
+img, video, canvas, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, textarea, select { font-family: inherit; }
+ul, ol { list-style: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. UTILITY
+============================================================= */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+.hidden { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-soft);
+  margin-bottom: .875rem;
+}
+
+.section-badge i { font-size: .68rem; }
+
+.btn-ghost-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--transition-base),
+              background var(--transition-base),
+              transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-ghost-sm:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+.btn-primary-md {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .9375rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-fast);
+}
+
+.btn-primary-md:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   4. NAVBAR
+============================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: rgba(247,254,255,.9);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(247,254,255,.97);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  gap: 1.5rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform var(--transition-spring);
+  flex-shrink: 0;
+}
+.learning-section{
+
+    margin-top:40px;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,590px);
+
+    justify-content:center;
+
+    gap:25px;
+
+}
+
+.learning-card{
+
+    width:100%;
+
+    max-width:650px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.learning-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    border-bottom:1px solid #ececec;
+
+    padding-bottom:15px;
+
+}
+
+.learning-header h3{
+
+    font-size:20px;
+
+    color:#222;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.learning-header h3 i{
+
+    color:var(--primary-deeper);
+
+}
+
+.learning-header span{
+
+    background:var(--primary-deeper);
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.learning-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.learning-item{
+
+    background:#f8f9fc;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    transition:.3s;
+
+}
+
+.learning-item:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.learning-item strong{
+
+    display:block;
+
+    color:#222;
+
+    margin-bottom:10px;
+
+    font-size:16px;
+
+}
+
+.learning-item small{
+
+    color:#666;
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:8px;
+
+    background:#dbeafe;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    margin-top:8px;
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    background:linear-gradient(90deg,var(--primary-deeper),var(--primary-dark));
+
+    border-radius:50px;
+
+}
+
+.course-badge{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    background:#22c55e;
+
+    color:white;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+.navbar-logo:hover .logo-mark {
+  transform: rotate(12deg) scale(1.05);
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1875rem;
+  color: var(--text);
+  letter-spacing: -.025em;
+}
+
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.nav-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  position: relative;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.notif-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: 6px; right: 6px;
+  border: 1.5px solid var(--bg);
+}
+
+/* ============================================================
+   5. SKELETON LOADER
+============================================================= */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.pulse {
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    var(--surface-alt) 50%,
+    var(--border) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: var(--radius-md);
+}
+
+.profile-skeleton {
+  padding: 2.5rem 0;
+}
+
+.skeleton-hero {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  flex: 1;
+}
+
+.skeleton-line {
+  height: 16px;
+  border-radius: var(--radius-full);
+}
+
+.skeleton-line.w-48  { width: 48%; }
+.skeleton-line.w-64  { width: 64%; }
+.skeleton-line.w-36  { width: 36%; }
+
+.skeleton-cards {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.skeleton-card {
+  height: 100px;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 480px) {
+  .skeleton-cards { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   6. PROFILE HERO SECTION
+============================================================= */
+.profile-hero {
+  position: relative;
+  background: linear-gradient(148deg, #E5FCF4 0%, #EFF9FF 40%, var(--bg) 65%, #E8F5FF 100%);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2.5rem;
+}
+
+/* Canvas background */
+.profile-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.profile-hero-bg canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Content wrapper over canvas */
+.profile-hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 2.75rem;
+  flex-wrap: wrap;
+}
+
+/* Left: avatar + name */
+.profile-hero-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+/* Avatar */
+.avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-lg);
+  display: block;
+  background: var(--surface-alt);
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+}
+
+.avatar-wrapper:hover .profile-avatar {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-primary);
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px dashed var(--primary-soft);
+  animation: spinRing 18s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.avatar-status {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 14px;
+  height: 14px;
+  background: var(--primary-dark);
+  border: 2.5px solid var(--surface);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(62,207,166,.2);
+  animation: statusPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(62,207,166,.2); }
+  50%       { box-shadow: 0 0 0 6px rgba(62,207,166,.0); }
+}
+
+/* Identity block */
+.profile-identity {
+  padding-bottom: .25rem;
+}
+
+.profile-level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(108,229,191,.18);
+  border: 1px solid rgba(62,207,166,.3);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: .625rem;
+}
+
+.profile-level-badge i {
+  font-size: .65rem;
+  color: var(--primary-dark);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 4vw, 2.375rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin-bottom: .625rem;
+}
+
+.profile-meta {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  flex-wrap: wrap;
+}
+
+.profile-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.profile-meta-item i {
+  font-size: .75rem;
+  color: var(--primary-dark);
+}
+
+.profile-meta-divider {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  flex-shrink: 0;
+}
+
+/* Right: stat cards */
+.profile-hero-right {
+  flex-shrink: 0;
+}
+
+.stat-card-group {
+  display: flex;
+  gap: .875rem;
+  flex-wrap: wrap;
+}
+
+/* Shared stat card */
+.stat-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.125rem 1.375rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 160px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* XP card accent */
+.stat-card--xp {
+  border-top: 2px solid var(--primary);
+}
+
+.stat-card--xp .stat-card-icon {
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+}
+
+/* Coins card accent */
+.stat-card--coins {
+  border-top: 2px solid var(--accent-amber);
+}
+
+.stat-card--coins .stat-card-icon {
+  background: rgba(245,158,11,.1);
+  color: var(--accent-amber);
+}
+
+.stat-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0625rem;
+  flex-shrink: 0;
+}
+
+.stat-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.stat-card-label {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* XP progress bar inside card */
+.stat-card-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--border);
+}
+
+.stat-card-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius: 0 2px 0 0;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1) .4s;
+}
+
+/* Coins shimmer */
+.stat-card-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(245,158,11,.06) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: cardShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cardShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+   7. PROFILE BODY LAYOUT
+============================================================= */
+.profile-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  padding-top: 2.25rem;
+  padding-bottom: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .profile-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   8. SIDEBAR
+============================================================= */
+.profile-sidebar {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .profile-sidebar { display: none; }
+}
+
+/* Sidebar navigation */
+.sidebar-nav {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: .5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    padding-left var(--transition-base);
+}
+
+.sidebar-nav-item i {
+  font-size: .875rem;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: color var(--transition-fast);
+}
+
+.sidebar-nav-item:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+  padding-left: 18px;
+}
+
+.sidebar-nav-item.active {
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  font-weight: 600;
+}
+
+.sidebar-nav-item.active i {
+  color: var(--primary-darker, var(--primary-deeper));
+}
+
+/* Quick stats widget */
+.sidebar-quick-stats {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.125rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+}
+
+.quick-stat {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+}
+
+.quick-stat > i {
+  width: 34px;
+  height: 34px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.quick-stat div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.quick-stat strong {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.quick-stat span {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   9. PANEL LAYOUT
+============================================================= */
+.profile-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.profile-panel {
+  animation: panelFadeIn var(--transition-slow) ease both;
+}
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Panel header */
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.panel-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: .375rem;
+}
+
+.panel-sub {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   10. INFO GRID
+============================================================= */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+/* Reveal animation (JS adds .visible) */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--transition-slow) ease,
+    transform var(--transition-slow) ease;
+}
+
+.reveal-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Info card */
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .875rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.125rem;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.info-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-soft);
+}
+
+.info-item--full {
+  grid-column: 1 / -1;
+}
+
+.info-item-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.info-item:hover .info-item-icon {
+  background: var(--primary-soft);
+  color: var(--primary-deeper);
+}
+
+.info-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.info-item-label {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: block;
+}
+
+.info-item-value {
+  font-size: .9375rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-word;
+  display: block;
+}
+
+.info-item-value--highlight {
+  color: var(--primary-deeper);
+  font-weight: 700;
+}
+
+/* ============================================================
+   11. BIO CARD
+============================================================= */
+.bio-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2rem 2rem 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--primary);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.bio-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.bio-quote-mark {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  color: var(--primary-soft);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.bio-text {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  font-weight: 400;
+  max-width: 72ch;
+  font-style: italic;
+}
+
+/* ============================================================
+   12. ACHIEVEMENTS
+============================================================= */
+.achievement-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.625rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.25rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.achievement-block:last-child { margin-bottom: 0; }
+
+.achievement-block:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.achievement-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.achievement-block-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.achievement-block-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  flex-shrink: 0;
+}
+
+.achievement-block-icon--cert {
+  background: rgba(245,158,11,.1);
+  color: var(--accent-amber);
+}
+
+.achievement-block-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.achievement-count {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+}
+
+/* List of achievement chips */
+.achievement-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+}
+
+/* Individual chip */
+.achievement-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  font-size: .8125rem;
+  font-weight: 600;
+  border: 1px solid var(--primary-soft);
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  cursor: default;
+  transition:
+    transform var(--transition-spring),
+    box-shadow var(--transition-base),
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+  animation: chipPop var(--transition-spring) both;
+}
+
+.achievement-chip:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 12px rgba(62,207,166,.22);
+  background: var(--primary-soft);
+  border-color: var(--primary-dark);
+}
+
+.achievement-chip i {
+  font-size: .75rem;
+}
+
+/* Certificate chips get a warm amber tint */
+.achievement-chip--cert {
+  background: rgba(245,158,11,.08);
+  border-color: rgba(245,158,11,.3);
+  color: #92400E;
+}
+
+.achievement-chip--cert:hover {
+  background: rgba(245,158,11,.16);
+  box-shadow: 0 4px 12px rgba(245,158,11,.18);
+}
+
+@keyframes chipPop {
+  from { opacity: 0; transform: scale(.7) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Empty state chip */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1.5rem;
+  width: 100%;
+  color: var(--text-faint);
+  font-size: .875rem;
+  text-align: center;
+}
+
+.empty-state i {
+  font-size: 1.75rem;
+  color: var(--border-strong);
+  margin-bottom: .25rem;
+}
+
+/* ============================================================
+   13. ERROR STATE
+============================================================= */
+.profile-error {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.profile-error-inner {
+  text-align: center;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-error-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(239,68,68,.08);
+  color: #EF4444;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: .5rem;
+}
+
+.profile-error-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.profile-error-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: .5rem;
+}
+
+/* ============================================================
+   14. MOBILE TAB BAR
+============================================================= */
+.mobile-tab-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-top: 1px solid var(--border);
+  padding: .5rem .25rem;
+  box-shadow: 0 -4px 24px rgba(30,41,59,.08);
+}
+
+@media (max-width: 900px) {
+  .mobile-tab-bar { display: flex; }
+}
+
+.mobile-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 4px;
+  border-radius: var(--radius-md);
+  font-size: .6875rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.mobile-tab i {
+  font-size: 1.0625rem;
+  transition: transform var(--transition-spring);
+}
+
+.mobile-tab.active {
+  color: var(--primary-deeper);
+}
+
+.mobile-tab.active i {
+  transform: translateY(-2px) scale(1.12);
+  color: var(--primary-dark);
+}
+
+.mobile-tab:hover:not(.active) {
+  color: var(--text-muted);
+  background: var(--surface-alt);
+}
+
+/* ============================================================
+   15. REVEAL / SCROLL ANIMATION
+============================================================= */
+.reveal-item:nth-child(1)  { transition-delay: .04s; }
+.reveal-item:nth-child(2)  { transition-delay: .08s; }
+.reveal-item:nth-child(3)  { transition-delay: .12s; }
+.reveal-item:nth-child(4)  { transition-delay: .16s; }
+.reveal-item:nth-child(5)  { transition-delay: .20s; }
+.reveal-item:nth-child(6)  { transition-delay: .24s; }
+.reveal-item:nth-child(7)  { transition-delay: .28s; }
+.reveal-item:nth-child(8)  { transition-delay: .32s; }
+
+/* ============================================================
+   16. RESPONSIVE ADJUSTMENTS
+============================================================= */
+@media (max-width: 768px) {
+  .profile-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  .profile-hero-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .stat-card-group {
+    width: 100%;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 560px) {
+  .stat-card-group {
+    flex-direction: column;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+
+  .bio-card {
+    padding: 1.5rem 1.25rem 1.5rem 1.5rem;
+  }
+}
+
+/* ============================================================
+   17. FOCUS & ACCESSIBILITY
+============================================================= */
+:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.sidebar-nav-item:focus-visible,
+.mobile-tab:focus-visible {
+  outline-offset: 0;
+}
+
+/* ============================================================
+   18. PROFILE WRAPPER
+============================================================= */
+.profile-wrapper {
+  min-height: calc(100vh - var(--nav-h));
+}
+
+/* ============================================================
+   19. PRINT
+============================================================= */
+@media print {
+  .navbar,
+  .profile-hero-bg,
+  .profile-sidebar,
+  .mobile-tab-bar,
+  .avatar-ring,
+  .avatar-status {
+    display: none !important;
+  }
+
+  body { background: #fff; padding-bottom: 0; }
+
+  .profile-hero {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .profile-body {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-panel.hidden {
+    display: block !important;
+    margin-top: 2rem;
+  }
+
+  .info-item,
+  .bio-card,
+  .achievement-block {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+
+/* ============================================================
+   20. SCROLLBAR (Webkit)
+============================================================= */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+/* ============================================================
+   21. SELECTION
+============================================================= */
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="Cuántica home">
+        <div class="logo-mark" aria-hidden="true" style="background: transparent;">
+          <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <span class="logo-text">Cuántica</span>
+      </a>
+
+      <div class="navbar-controls">
+        <a href="/" class="nav-icon-btn" title="Home" aria-label="Go to home">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <button class="nav-icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notif-dot" aria-hidden="true"></span>
+        </button>
+        <a href="#" class="btn-ghost-sm" id="logoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Sign out
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- /NAVBAR -->
+
+  <!-- ===================== PROFILE WRAPPER ===================== -->
+  <main class="profile-wrapper" id="main-content">
+
+    <!-- Loading skeleton -->
+    <div class="profile-skeleton" id="profileSkeleton" aria-live="polite" aria-busy="true">
+      <div class="skeleton-hero">
+        <div class="skeleton-avatar pulse"></div>
+        <div class="skeleton-lines">
+          <div class="skeleton-line w-48 pulse"></div>
+          <div class="skeleton-line w-64 pulse"></div>
+          <div class="skeleton-line w-36 pulse"></div>
+        </div>
+      </div>
+      <div class="skeleton-cards">
+        <div class="skeleton-card pulse"></div>
+        <div class="skeleton-card pulse"></div>
+      </div>
+    </div>
+
+    <!-- Actual profile content (hidden until loaded) -->
+    <div class="profile-content hidden" id="profileContent">
+
+      <!-- ---- HERO PROFILE CARD ---- -->
+      <section class="profile-hero" aria-label="Profile overview">
+        <div class="profile-hero-bg" aria-hidden="true">
+          <canvas id="profileCanvas"></canvas>
+        </div>
+        <div class="profile-hero-inner container">
+
+          <div class="profile-hero-left">
+            <div class="avatar-wrapper">
+              <img id="profile_image" class="profile-avatar" src="" alt="Profile photo" />
+              <span class="avatar-ring" aria-hidden="true"></span>
+              <span class="avatar-status" title="Active learner" aria-label="Active learner"></span>
+            </div>
+
+            <div class="profile-identity">
+              <div class="profile-level-badge" id="levelBadge">
+                <i class="fa-solid fa-circle-bolt"></i>
+                <span id="learning_level">Learner</span>
+              </div>
+              <h1 class="profile-name" id="full_name">Loading...</h1>
+              <div class="profile-meta">
+                <span class="profile-meta-item" id="emailMeta">
+                  <i class="fa-regular fa-envelope"></i>
+                  <span id="email"></span>
+                </span>
+                <span class="profile-meta-divider" aria-hidden="true"></span>
+                <span class="profile-meta-item" id="phoneMeta">
+                  <i class="fa-solid fa-phone-volume"></i>
+                  <span id="phone"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-hero-right">
+            <div class="stat-card-group">
+              <div class="stat-card stat-card--xp">
+                <div class="stat-card-icon" aria-hidden="true">
+                  <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <div class="stat-card-body">
+                  <span class="stat-card-value" id="xp">0</span>
+                  <span class="stat-card-label">Experience Points</span>
+                </div>
+                <div class="stat-card-bar" aria-hidden="true">
+                  <div class="stat-card-bar-fill" id="xpBar"></div>
+                </div>
+              </div>
+              <div class="stat-card stat-card--coins">
+                <div class="stat-card-icon" aria-hidden="true">
+                  <i class="fa-solid fa-coins"></i>
+                </div>
+                <div class="stat-card-body">
+                  <span class="stat-card-value" id="coins">0</span>
+                  <span class="stat-card-label">Quantum Coins</span>
+                </div>
+                <div class="stat-card-shimmer" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="learning-section">
+
+    <div class="learning-card">
+
+        <div class="learning-header">
+
+            <h3>
+                <i class="fa-solid fa-book-open-reader"></i>
+                Lesson Progress
+            </h3>
+
+            <span id="lessonProgressCount">
+                0 Lessons
+            </span>
+
+        </div>
+
+        <div id="lessonProgressList" class="learning-list">
+
+            Loading...
+
+        </div>
+
+    </div>
+
+    <div class="learning-card">
+
+        <div class="learning-header">
+
+            <h3>
+                <i class="fa-solid fa-circle-check"></i>
+                Completed Courses
+            </h3>
+
+        </div>
+
+        <div id="completedCourseList" class="learning-list">
+
+            Loading Completed Courses...
+
+        </div>
+
+    </div>
+
+</div>
+      </section>
+      <!-- /HERO PROFILE CARD -->
+
+      <!-- ---- PAGE BODY ---- -->
+      <div class="profile-body container">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="profile-sidebar" aria-label="Profile navigation">
+          <nav class="sidebar-nav" aria-label="Profile sections">
+            <button class="sidebar-nav-item active" data-target="personal">
+              <i class="fa-regular fa-user"></i>
+              <span>Personal</span>
+            </button>
+            <button class="sidebar-nav-item" data-target="academic">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Academic</span>
+            </button>
+            <button class="sidebar-nav-item" data-target="bio">
+              <i class="fa-regular fa-id-card"></i>
+              <span>Bio</span>
+            </button>
+            <button class="sidebar-nav-item" data-target="achievements">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Achievements</span>
+            </button>
+          </nav>
+
+          <div class="sidebar-quick-stats">
+            <div class="quick-stat">
+              <i class="fa-solid fa-award"></i>
+              <div>
+                <strong id="badgeCount">0</strong>
+                <span>Badges earned</span>
+              </div>
+            </div>
+            <div class="quick-stat">
+              <i class="fa-solid fa-certificate"></i>
+              <div>
+                <strong id="certCount">0</strong>
+                <span>Certificates</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <!-- /LEFT SIDEBAR -->
+
+        <!-- MAIN CONTENT PANELS -->
+        <div class="profile-panels">
+
+          <!-- ---- PERSONAL INFORMATION ---- -->
+          <section class="profile-panel active" id="panel-personal" aria-labelledby="personal-heading">
+            <div class="panel-header">
+              <div class="panel-header-left">
+                <span class="section-badge">
+                  <i class="fa-regular fa-user"></i>
+                  Personal
+                </span>
+                <h2 class="panel-title" id="personal-heading">Personal Information</h2>
+                <p class="panel-sub">Your identity and contact details on Cuántica.</p>
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-user-tag"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">First Name</strong>
+                  <span class="info-item-value" id="first_name">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-user-tag"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Last Name</strong>
+                  <span class="info-item-value" id="last_name">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-venus-mars"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Gender</strong>
+                  <span class="info-item-value" id="gender">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-regular fa-calendar"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Date of Birth</strong>
+                  <span class="info-item-value" id="dob">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-earth-asia"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Country</strong>
+                  <span class="info-item-value" id="country">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">State</strong>
+                  <span class="info-item-value" id="state">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-city"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">City</strong>
+                  <span class="info-item-value" id="city">—</span>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- /PERSONAL -->
+
+          <!-- ---- ACADEMIC INFORMATION ---- -->
+          <section class="profile-panel hidden" id="panel-academic" aria-labelledby="academic-heading">
+            <div class="panel-header">
+              <div class="panel-header-left">
+                <span class="section-badge">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                  Academic
+                </span>
+                <h2 class="panel-title" id="academic-heading">Academic Information</h2>
+                <p class="panel-sub">Your educational background and current curriculum.</p>
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">College</strong>
+                  <span class="info-item-value" id="college">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-school-flag"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">University</strong>
+                  <span class="info-item-value" id="university">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Course</strong>
+                  <span class="info-item-value" id="course">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-code-branch"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Branch</strong>
+                  <span class="info-item-value" id="branch">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Semester</strong>
+                  <span class="info-item-value" id="semester">—</span>
+                </div>
+              </div>
+
+              <div class="info-item reveal-item info-item--full">
+                <div class="info-item-icon" aria-hidden="true">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <div class="info-item-body">
+                  <strong class="info-item-label">Current Course on Cuántica</strong>
+                  <span class="info-item-value info-item-value--highlight" id="current_course">—</span>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- /ACADEMIC -->
+
+          <!-- ---- BIO ---- -->
+          <section class="profile-panel hidden" id="panel-bio" aria-labelledby="bio-heading">
+            <div class="panel-header">
+              <div class="panel-header-left">
+                <span class="section-badge">
+                  <i class="fa-regular fa-id-card"></i>
+                  About
+                </span>
+                <h2 class="panel-title" id="bio-heading">Bio</h2>
+                <p class="panel-sub">A little about who you are and what drives you.</p>
+              </div>
+            </div>
+
+            <div class="bio-card reveal-item">
+              <div class="bio-quote-mark" aria-hidden="true">
+                <i class="fa-solid fa-quote-left"></i>
+              </div>
+              <p class="bio-text" id="bio">No bio added yet.</p>
+            </div>
+          </section>
+          <!-- /BIO -->
+
+          <!-- ---- ACHIEVEMENTS ---- -->
+          <section class="profile-panel hidden" id="panel-achievements" aria-labelledby="achievements-heading">
+            <div class="panel-header">
+              <div class="panel-header-left">
+                <span class="section-badge">
+                  <i class="fa-solid fa-trophy"></i>
+                  Achievements
+                </span>
+                <h2 class="panel-title" id="achievements-heading">Achievements</h2>
+                <p class="panel-sub">Badges and certificates you have earned through your learning journey.</p>
+              </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="achievement-block reveal-item">
+              <div class="achievement-block-header">
+                <div class="achievement-block-title-wrap">
+                  <span class="achievement-block-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                  </span>
+                  <h3 class="achievement-block-title">Badges</h3>
+                </div>
+                <span class="achievement-count" id="badgeCountDisplay">0 earned</span>
+              </div>
+              <div class="achievement-list" id="badges" role="list" aria-label="Earned badges"></div>
+            </div>
+
+            <!-- Certificates -->
+            <div class="achievement-block reveal-item">
+              <div class="achievement-block-header">
+                <div class="achievement-block-title-wrap">
+                  <span class="achievement-block-icon achievement-block-icon--cert">
+                    <i class="fa-solid fa-certificate"></i>
+                  </span>
+                  <h3 class="achievement-block-title">Certificates</h3>
+                </div>
+                <span class="achievement-count" id="certCountDisplay">0 earned</span>
+              </div>
+              <div class="achievement-list" id="certificates" role="list" aria-label="Earned certificates"></div>
+            </div>
+
+            
+          </section>
+          <!-- /ACHIEVEMENTS -->
+
+        </div>
+        <!-- /MAIN CONTENT PANELS -->
+
+      </div>
+      <!-- /PROFILE BODY -->
+
+    </div>
+    <!-- /profile-content -->
+
+    <!-- Error state -->
+    <div class="profile-error hidden" id="profileError" role="alert">
+      <div class="profile-error-inner">
+        <div class="profile-error-icon" aria-hidden="true">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2 class="profile-error-title">Unable to load profile</h2>
+        <p class="profile-error-sub">There was a problem fetching your profile data. Please try again.</p>
+        <button class="btn-primary-md" id="retryBtn">
+          <i class="fa-solid fa-rotate-right"></i>
+          Retry
+        </button>
+      </div>
+    </div>
+
+  </main>
+  <!-- /PROFILE WRAPPER -->
+
+  <!-- Mobile tab bar for small screens -->
+  <nav class="mobile-tab-bar" aria-label="Profile sections" id="mobileTabBar">
+    <button class="mobile-tab active" data-target="personal" aria-pressed="true">
+      <i class="fa-regular fa-user"></i>
+      <span>Personal</span>
+    </button>
+    <button class="mobile-tab" data-target="academic" aria-pressed="false">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>Academic</span>
+    </button>
+    <button class="mobile-tab" data-target="bio" aria-pressed="false">
+      <i class="fa-regular fa-id-card"></i>
+      <span>Bio</span>
+    </button>
+    <button class="mobile-tab" data-target="achievements" aria-pressed="false">
+      <i class="fa-solid fa-trophy"></i>
+      <span>Awards</span>
+    </button>
+  </nav>
+
+
+  <script>
+/**
+ * CUÁNTICA — Profile Page JavaScript
+ * profile.js
+ *
+ * Rules:
+ *  - API call logic (fetch, token, redirect) is UNCHANGED from original.
+ *  - This file adds:
+ *      1. Hero quantum-network canvas (light-theme palette).
+ *      2. Sidebar / mobile-tab navigation with panel switching.
+ *      3. Navbar scroll shadow.
+ *      4. Animated XP progress bar.
+ *      5. Animated counter for XP + coins.
+ *      6. IntersectionObserver reveal for .reveal-item cards.
+ *      7. Achievement chip rendering with icons.
+ *      8. Retry button handler.
+ *      9. Logout handler.
+ *      10. Error / skeleton state management.
+ */
+
+(function () {
+  "use strict";
+
+  /* ============================================================
+     A. NAVBAR SCROLL SHADOW
+  ============================================================= */
+  var navbar = document.getElementById("navbar");
+
+  function handleNavbarScroll() {
+    if (window.scrollY > 10) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  }
+
+  window.addEventListener("scroll", handleNavbarScroll, { passive: true });
+  handleNavbarScroll();
+
+  /* ============================================================
+     B. HERO QUANTUM CANVAS
+  ============================================================= */
+  (function initHeroCanvas() {
+    var canvas = document.getElementById("profileCanvas");
+    if (!canvas) return;
+
+    var ctx = canvas.getContext("2d");
+    var nodes = [];
+    var packets = [];
+    var animFrame;
+
+    /* Light-theme node colours */
+    var NODE_COLOR   = "rgba(62,207,166,";
+    var EDGE_COLOR   = "rgba(62,207,166,";
+    var PACKET_COLOR = "rgba(108,229,191,";
+
+    var NODE_COUNT = 36;
+    var EDGE_DIST  = 160;
+
+    function resize() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width  = rect.width;
+      canvas.height = rect.height;
+    }
+
+    function createNode() {
+      return {
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        vx:    (Math.random() - .5) * .38,
+        vy:    (Math.random() - .5) * .38,
+        r:     1.4 + Math.random() * 2.2,
+        phase: Math.random() * Math.PI * 2
+      };
+    }
+
+    function spawnPacket() {
+      var src = Math.floor(Math.random() * nodes.length);
+      var dst = Math.floor(Math.random() * nodes.length);
+      if (src === dst) return;
+      packets.push({ src: src, dst: dst, t: 0, speed: .004 + Math.random() * .006 });
+    }
+
+    function init() {
+      nodes = [];
+      packets = [];
+      for (var i = 0; i < NODE_COUNT; i++) nodes.push(createNode());
+      for (var k = 0; k < 4; k++) spawnPacket();
+    }
+
+    function draw(timestamp) {
+      var time = timestamp / 1000;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      /* Move nodes */
+      nodes.forEach(function (n) {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      });
+
+      /* Draw edges */
+      for (var i = 0; i < nodes.length; i++) {
+        for (var j = i + 1; j < nodes.length; j++) {
+          var dx   = nodes[i].x - nodes[j].x;
+          var dy   = nodes[i].y - nodes[j].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < EDGE_DIST) {
+            var alpha = (1 - dist / EDGE_DIST) * .12;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = EDGE_COLOR + alpha + ")";
+            ctx.lineWidth   = .7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      /* Draw nodes */
+      nodes.forEach(function (n) {
+        var pulse  = .55 + .45 * Math.sin(time * 1.8 + n.phase);
+        var radius = n.r * pulse;
+        var alpha  = .16 + .24 * pulse;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = NODE_COLOR + alpha + ")";
+        ctx.fill();
+
+        /* Glow ring */
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, radius * 2.8, 0, Math.PI * 2);
+        ctx.strokeStyle = NODE_COLOR + (alpha * .16) + ")";
+        ctx.lineWidth   = .5;
+        ctx.stroke();
+      });
+
+      /* Draw packets */
+      packets.forEach(function (pk, idx) {
+        pk.t += pk.speed;
+        if (pk.t >= 1) {
+          packets[idx] = { src: pk.dst, dst: Math.floor(Math.random() * nodes.length), t: 0, speed: pk.speed };
+          return;
+        }
+
+        var s  = nodes[pk.src];
+        var d  = nodes[pk.dst];
+        var px = s.x + (d.x - s.x) * pk.t;
+        var py = s.y + (d.y - s.y) * pk.t;
+        var tx = s.x + (d.x - s.x) * Math.max(0, pk.t - .18);
+        var ty = s.y + (d.y - s.y) * Math.max(0, pk.t - .18);
+
+        var grad = ctx.createLinearGradient(tx, ty, px, py);
+        grad.addColorStop(0, PACKET_COLOR + "0)");
+        grad.addColorStop(1, PACKET_COLOR + ".5)");
+
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth   = 1.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = PACKET_COLOR + ".65)";
+        ctx.fill();
+      });
+
+      animFrame = requestAnimationFrame(draw);
+    }
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        resize();
+        init();
+      }, 180);
+    });
+
+    resize();
+    init();
+    animFrame = requestAnimationFrame(draw);
+  })();
+
+  /* ============================================================
+     C. PANEL NAVIGATION (sidebar + mobile tabs)
+  ============================================================= */
+  var allPanels  = document.querySelectorAll(".profile-panel");
+  var sidebarBtns = document.querySelectorAll(".sidebar-nav-item");
+  var mobileTabs = document.querySelectorAll(".mobile-tab");
+
+  function switchPanel(target) {
+    /* Panels */
+    allPanels.forEach(function (p) {
+      if (p.id === "panel-" + target) {
+        p.classList.remove("hidden");
+        /* Trigger reveal animations for items inside */
+        requestAnimationFrame(function () {
+          triggerReveal(p);
+        });
+      } else {
+        p.classList.add("hidden");
+      }
+    });
+
+    /* Sidebar buttons */
+    sidebarBtns.forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.target === target);
+    });
+
+    /* Mobile tabs */
+    mobileTabs.forEach(function (tab) {
+      var isActive = tab.dataset.target === target;
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  sidebarBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      switchPanel(btn.dataset.target);
+    });
+  });
+
+  mobileTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      switchPanel(tab.dataset.target);
+      /* Scroll to top of content on mobile */
+      window.scrollTo({ top: document.querySelector(".profile-hero").offsetHeight, behavior: "smooth" });
+    });
+  });
+
+  /* ============================================================
+     D. REVEAL ON SCROLL (IntersectionObserver)
+  ============================================================= */
+  function triggerReveal(root) {
+    var items = (root || document).querySelectorAll(".reveal-item:not(.visible)");
+    if (!items.length) return;
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      items.forEach(function (item) { observer.observe(item); });
+    } else {
+      /* Fallback for older browsers */
+      items.forEach(function (item) { item.classList.add("visible"); });
+    }
+  }
+
+  /* ============================================================
+     E. ANIMATED COUNTER
+  ============================================================= */
+  function animateCounter(el, target, duration) {
+    var start     = 0;
+    var startTime = null;
+    var numTarget = parseInt(target, 10) || 0;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed  = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      /* Ease out cubic */
+      var eased    = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * numTarget).toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  /* ============================================================
+     F. SHOW / HIDE STATES
+  ============================================================= */
+  var skeleton = document.getElementById("profileSkeleton");
+  var content  = document.getElementById("profileContent");
+  var errorEl  = document.getElementById("profileError");
+
+  function showContent() {
+    if (skeleton) skeleton.style.display = "none";
+    if (content)  content.classList.remove("hidden");
+    if (errorEl)  errorEl.classList.add("hidden");
+  }
+
+  function showError() {
+    if (skeleton) skeleton.style.display = "none";
+    if (content)  content.classList.add("hidden");
+    if (errorEl)  errorEl.classList.remove("hidden");
+  }
+
+  /* Retry button */
+  var retryBtn = document.getElementById("retryBtn");
+  if (retryBtn) {
+    retryBtn.addEventListener("click", function () {
+      if (skeleton) skeleton.style.display = "";
+      if (errorEl)  errorEl.classList.add("hidden");
+      loadProfile();
+    });
+  }
+
+  /* Logout button */
+  var logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("token");
+      window.location = "/login";
+    });
+  }
+
+  /* ============================================================
+     G. ACHIEVEMENT CHIP FACTORY
+  ============================================================= */
+  function createChip(text, isCert) {
+    var chip = document.createElement("span");
+    chip.className = "achievement-chip" + (isCert ? " achievement-chip--cert" : "");
+    chip.setAttribute("role", "listitem");
+
+    var icon = document.createElement("i");
+    icon.className = isCert ? "fa-solid fa-certificate" : "fa-solid fa-shield-halved";
+    icon.setAttribute("aria-hidden", "true");
+
+    chip.appendChild(icon);
+    chip.appendChild(document.createTextNode(" " + text));
+    return chip;
+  }
+
+  function emptyState(message) {
+    var wrap = document.createElement("div");
+    wrap.className = "empty-state";
+
+    var icon = document.createElement("i");
+    icon.className = "fa-regular fa-face-meh-blank";
+    icon.setAttribute("aria-hidden", "true");
+
+    var txt = document.createElement("span");
+    txt.textContent = message;
+
+    wrap.appendChild(icon);
+    wrap.appendChild(txt);
+    return wrap;
+  }
+
+  /* ============================================================
+     H. PROFILE DATA POPULATION
+     All IDs and the fetch logic are IDENTICAL to the original.
+  ============================================================= */
+  function populateProfile(p) {
+    /* Avatar */
+    var avatarEl = document.getElementById("profile_image");
+    if (avatarEl) {
+      avatarEl.src = p.profile_image || "";
+      avatarEl.alt = (p.full_name || "User") + " profile photo";
+      avatarEl.onerror = function () {
+        this.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(p.full_name || "U") + "&background=E0FAF4&color=1FA880&size=128&bold=true&font-size=0.4";
+      };
+    }
+
+    /* Name + meta */
+    setText("full_name", p.full_name);
+    setText("email",     p.email);
+    setText("phone",     p.phone);
+    setText("learning_level", p.learning_level);
+
+    /* Stat values — animated */
+    var xpEl    = document.getElementById("xp");
+    var coinsEl = document.getElementById("coins");
+    if (xpEl)    animateCounter(xpEl,    p.xp,    1400);
+    if (coinsEl) animateCounter(coinsEl, p.coins, 1600);
+
+    /* XP bar (0–5000 XP = 0–100%) */
+    var xpBar = document.getElementById("xpBar");
+    if (xpBar) {
+      var pct = Math.min((parseInt(p.xp, 10) || 0) / 5000 * 100, 100);
+      setTimeout(function () {
+        xpBar.style.width = pct.toFixed(1) + "%";
+      }, 300);
+    }
+
+    /* Personal */
+    setText("first_name", p.first_name);
+    setText("last_name",  p.last_name);
+    setText("gender",     p.gender);
+    setText("dob",        p.dob);
+    setText("country",    p.country);
+    setText("state",      p.state);
+    setText("city",       p.city);
+
+    /* Academic */
+    setText("college",        p.college);
+    setText("university",     p.university);
+    setText("course",         p.course);
+    setText("branch",         p.branch);
+    setText("semester",       p.semester);
+    setText("current_course", p.current_course);
+
+    /* Bio */
+    var bioEl = document.getElementById("bio");
+    if (bioEl) bioEl.textContent = p.bio || "No bio added yet.";
+
+    /* Badges */
+    var badgeContainer = document.getElementById("badges");
+    var badgeCount     = (p.badges && p.badges.length) ? p.badges.length : 0;
+
+    if (badgeContainer) {
+      badgeContainer.innerHTML = "";
+      if (badgeCount === 0) {
+        badgeContainer.appendChild(emptyState("No badges earned yet. Keep learning!"));
+      } else {
+        p.badges.forEach(function (b) {
+          badgeContainer.appendChild(createChip(b, false));
+        });
+      }
+    }
+
+    /* Certificates */
+    var certContainer = document.getElementById("certificates");
+    var certCount     = (p.certificates && p.certificates.length) ? p.certificates.length : 0;
+
+    if (certContainer) {
+      certContainer.innerHTML = "";
+      if (certCount === 0) {
+        certContainer.appendChild(emptyState("No certificates yet. Complete a course to earn one!"));
+      } else {
+        p.certificates.forEach(function (c) {
+          certContainer.appendChild(createChip(c, true));
+        });
+      }
+    }
+
+    /* Update count displays */
+    setText("badgeCount",        badgeCount);
+    setText("certCount",         certCount);
+    setText("badgeCountDisplay", badgeCount + " earned");
+    setText("certCountDisplay",  certCount  + " earned");
+  }
+
+  /* Helper: safely set text of an element by id */
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value || "—";
+  }
+
+  /* ============================================================
+     I. FETCH PROFILE  (original API logic — unchanged)
+  ============================================================= */
+  function loadProfile() {
+    var token = JSON.parse(localStorage.getItem("token"));
+
+    if (!token) {
+      window.location = "/login";
+      return;
+    }
+
+    fetch("/api/profile/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id:    token.id,
+        email: token.email
+      })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data.success) {
+          showError();
+          return;
+        }
+
+        populateProfile(data.profile);
+        showContent();
+
+        /* Trigger reveal on the default visible panel */
+        requestAnimationFrame(function () {
+          triggerReveal(document.getElementById("panel-personal"));
+        });
+      })
+      .catch(function (err) {
+        console.error("[Cuántica] Profile fetch error:", err);
+        showError();
+      });
+  }
+
+  /* ============================================================
+     J. BOOT
+  ============================================================= */
+  loadProfile();
+
+})();
+
+
+  </script>
+<script>
+
+const token = JSON.parse(
+
+    localStorage.getItem("token")
+
+);
+
+async function loadCompletedCourses(){
+
+    if(!token){
+
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(
+
+            "/api/profile/get-completed-course",
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify({
+
+                    id:token.id,
+
+                    email:token.email
+
+                })
+
+            }
+
+        );
+
+        const data = await response.json();
+console.log(data);
+        // ==========================
+        // Completed Courses
+        // ==========================
+
+        const courseContainer = document.getElementById(
+
+            "completedCourseList"
+
+        );
+
+        courseContainer.innerHTML="";
+
+        if(
+
+            !data.success ||
+
+            !data.completed_courses ||
+
+            data.completed_courses.length===0
+
+        ){
+
+            courseContainer.innerHTML=`
+
+            <div class="db-next-item">
+
+                <div class="db-next-info">
+
+                    <strong>No Completed Course</strong>
+
+                    <small>
+
+                        Complete your first course.
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+
+        else{
+
+            data.completed_courses.forEach(course=>{
+
+                const shortDescription =
+
+                    course.description.split(" ").length>15
+
+                    ?
+
+                    course.description
+
+                    .split(" ")
+
+                    .slice(0,15)
+
+                    .join(" ")
+
+                    +"..."
+
+                    :
+
+                    course.description;
+
+                courseContainer.innerHTML+=`
+
+                <div class="db-next-item">
+
+                    <div class="db-next-thumb">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div class="db-next-info">
+
+                        <strong>
+
+                            ${course.title}
+
+                        </strong>
+
+                        <small>
+
+                            ${shortDescription}
+
+                        </small>
+
+                    </div>
+
+                    <span class="db-next-badge">
+
+                        Completed
+
+                    </span>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+        // ==========================
+        // Lesson Progress
+        // ==========================
+
+        const lessonContainer = document.getElementById(
+
+            "lessonProgressList"
+
+        );
+
+        const lessonCount = document.getElementById(
+
+            "lessonProgressCount"
+
+        );
+
+        lessonContainer.innerHTML="";
+
+        const lessons = data.completed_lessons || [];
+
+        lessonCount.innerHTML =
+
+            lessons.length+" Lessons";
+
+        if(lessons.length===0){
+
+            lessonContainer.innerHTML=`
+
+            <div class="achievement-item">
+
+                <div>
+
+                    <strong>
+
+                        No Lesson Started
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+
+        else{
+
+            lessons.forEach(lesson=>{
+
+                lessonContainer.innerHTML+=`
+
+                <div class="achievement-item">
+
+                    <div style="width:100%;">
+
+                        <strong>
+
+                            ${lesson.title}
+
+                        </strong>
+
+                        <div
+
+                            style="
+
+                                margin-top:10px;
+
+                                width:100%;
+
+                                height:10px;
+
+                                background:#e5e7eb;
+
+                                border-radius:10px;
+
+                                overflow:hidden;
+
+                            "
+
+                        >
+
+                            <div
+
+                                style="
+
+                                    width:${lesson.progress}%;
+
+                                    height:100%;
+
+                                    background:#2563eb;
+
+                                "
+
+                            ></div>
+
+                        </div>
+
+                        <small>
+
+                            ${lesson.progress}% Completed
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+loadCompletedCourses();
+
+</script>
+</body>
+</html>

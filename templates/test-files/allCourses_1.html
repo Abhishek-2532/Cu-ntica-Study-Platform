@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All Courses | Quantum ML Academy</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#f4f7fb;
+
+}
+
+header{
+
+background:#2563eb;
+color:white;
+padding:20px;
+text-align:center;
+
+}
+
+.container{
+
+max-width:1400px;
+margin:40px auto;
+padding:20px;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card img{
+
+width:100%;
+height:220px;
+object-fit:cover;
+
+}
+
+.content{
+
+padding:20px;
+
+}
+
+.title{
+
+font-size:24px;
+font-weight:bold;
+margin-bottom:12px;
+
+}
+
+.description{
+
+color:#666;
+line-height:1.6;
+margin-bottom:15px;
+
+}
+
+.row{
+
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+font-size:15px;
+
+}
+
+.tags{
+
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:20px;
+
+}
+
+.tag{
+
+background:#2563eb;
+color:white;
+padding:6px 12px;
+border-radius:30px;
+font-size:13px;
+
+}
+
+button{
+
+width:100%;
+padding:14px;
+background:#16a34a;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#15803d;
+
+}
+
+.loader{
+
+text-align:center;
+font-size:22px;
+margin-top:80px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Quantum Machine Learning Courses</h1>
+
+<p>Start Learning Today 🚀</p>
+
+</header>
+
+<div class="container">
+
+<div id="loader" class="loader">
+
+Loading Courses...
+
+</div>
+
+<div id="courses" class="grid"></div>
+
+</div>
+
+<script>
+
+fetch("/api/course/all")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("loader").style.display="none";
+
+const container=document.getElementById("courses");
+
+if(!data.success){
+
+container.innerHTML="<h2>Unable to load courses.</h2>";
+
+return;
+
+}
+
+data.courses.forEach(course=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<img src="${course.main_image}" alt="${course.title}">
+
+<div class="content">
+
+<div class="title">
+
+${course.title}
+
+</div>
+
+<div class="description">
+
+${course.description}
+
+</div>
+
+<div class="row">
+
+<div>
+
+<b>Difficulty</b><br>
+
+${course.difficulty}
+
+</div>
+
+<div>
+
+<b>Duration</b><br>
+
+${course.estimated_time}
+
+</div>
+
+</div>
+
+<div class="tags">
+
+${course.tags.map(tag=>`
+
+<span class="tag">
+
+${tag}
+
+</span>
+
+`).join("")}
+
+</div>
+
+<button onclick="openCourse('${course.id}')">
+
+View Course
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+})
+
+.catch(err=>{
+
+console.log(err);
+
+document.getElementById("loader").innerHTML="Server Error.";
+
+});
+
+function openCourse(id){
+
+window.location="/course/"+id;
+
+}
+
+</script>
+
+</body>
+</html>

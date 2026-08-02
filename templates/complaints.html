@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>complaint — Cuántica</title>
+  <meta name="description" content="Create your Cuántica account and start exploring quantum machine learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  
+
+  <style>
+
+    /* =============================================================
+   CUÁNTICA — Sign Up Page
+   signup.css  |  Light Theme
+   Shares design tokens with index.css
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES (mirrored from index.css)
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --surface-hover:    #C9F7ED;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --error:            #EF4444;
+  --error-bg:         #FEF2F2;
+  --error-border:     #FECACA;
+  --success:          #10B981;
+  --success-bg:       #ECFDF5;
+  --success-border:   #A7F3D0;
+  --warning:          #F59E0B;
+
+  --shadow-sm:        0 1px 3px rgba(30,41,59,.06), 0 1px 2px rgba(30,41,59,.04);
+  --shadow-md:        0 4px 16px rgba(30,41,59,.08), 0 2px 6px rgba(30,41,59,.06);
+  --shadow-lg:        0 12px 40px rgba(30,41,59,.12), 0 4px 16px rgba(30,41,59,.08);
+  --shadow-xl:        0 24px 64px rgba(30,41,59,.14), 0 8px 24px rgba(30,41,59,.10);
+  --shadow-primary:   0 8px 32px rgba(108,229,191,.38);
+  --shadow-input:     0 0 0 3px rgba(108,229,191,.22);
+
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, canvas { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+ul, ol { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. UTILITY
+============================================================= */
+.hidden       { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   4. ANIMATED BACKGROUND CANVAS
+============================================================= */
+.signup-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* ============================================================
+   5. PAGE LAYOUT (2-column split)
+============================================================= */
+.signup-page {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   6. LEFT PANEL — BRAND / INFO
+============================================================= */
+.signup-panel--left {
+  background: linear-gradient(
+    148deg,
+    #E5FCF4 0%,
+    #EAF8FF 45%,
+    #EFF9FF 100%
+  );
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle tinted corner blobs */
+.signup-panel--left::before {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(108,229,191,.22) 0%, transparent 68%);
+  top: -120px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.signup-panel--left::after {
+  content: '';
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(99,102,241,.09) 0%, transparent 65%);
+  bottom: -80px;
+  left: -60px;
+  pointer-events: none;
+}
+
+.panel-inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem);
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Logo */
+.panel-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.panel-logo:hover .logo-mark {
+  transform: rotate(14deg) scale(1.07);
+}
+
+.logo-mark--sm {
+  width: 32px;
+  height: 32px;
+  font-size: .875rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text);
+  letter-spacing: -.03em;
+}
+
+/* Panel hero copy */
+.panel-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(108,229,191,.2);
+  border: 1px solid rgba(62,207,166,.3);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.panel-badge-icon {
+  color: var(--primary-dark);
+  font-size: .65rem;
+}
+
+.panel-heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.panel-heading em {
+  font-style: italic;
+  color: var(--primary-deeper);
+}
+
+.panel-sub {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.68;
+  max-width: 420px;
+}
+
+/* Feature list */
+.panel-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.panel-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: .875rem;
+  animation: fadeSlideUp .5s ease both;
+}
+
+.panel-feature:nth-child(1) { animation-delay: .1s; }
+.panel-feature:nth-child(2) { animation-delay: .2s; }
+.panel-feature:nth-child(3) { animation-delay: .3s; }
+
+.panel-feature-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6875rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--primary-soft);
+  margin-top: 1px;
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.panel-feature:hover .panel-feature-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.12);
+}
+
+.panel-feature > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.panel-feature strong {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.panel-feature span span {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Trust strip */
+.panel-trust {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-avatars {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.panel-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  object-fit: cover;
+  background: var(--surface-alt);
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+.panel-avatars .panel-avatar:last-child {
+  margin-left: 0;
+}
+
+.panel-trust-text {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.panel-trust-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ============================================================
+   7. RIGHT PANEL — FORM SHELL
+============================================================= */
+.signup-panel--right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  overflow-y: auto;
+  background: var(--surface);
+}
+
+.form-shell {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* ============================================================
+   8. FORM TOP BAR
+============================================================= */
+.form-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.form-topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.form-topbar-signin {
+  font-size: .875rem;
+  color: var(--text-muted);
+}
+
+.form-topbar-link {
+  color: var(--primary-deeper);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.form-topbar-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   9. STEP PROGRESS BAR
+============================================================= */
+.step-progress {
+  margin-bottom: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.step-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.step-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%);
+  border-radius: var(--radius-full);
+  width: 25%;
+  transition: width var(--transition-slow) ease;
+}
+
+.step-dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Connector line behind dots */
+.step-dots::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.step-dot {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--text-faint);
+  font-size: .8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring);
+}
+
+.step-dot.active {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(62,207,166,.22), var(--shadow-md);
+  transform: scale(1.1);
+}
+
+.step-dot.done {
+  background: var(--primary-soft);
+  border-color: var(--primary-dark);
+  color: var(--primary-deeper);
+}
+
+.step-dot.done::after {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .6875rem;
+  color: var(--primary-deeper);
+}
+
+.step-dot.done > i {
+  opacity: 0;
+}
+
+.step-dot:not(.active):not(.done):hover {
+  border-color: var(--primary-light);
+  color: var(--text-muted);
+  background: var(--surface-alt);
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-label {
+  font-size: .6875rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  flex: 1;
+  text-align: center;
+  transition: color var(--transition-fast), font-weight var(--transition-fast);
+}
+
+.step-label.active {
+  color: var(--primary-deeper);
+  font-weight: 700;
+}
+
+.step-label.done {
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   10. FORM STEPS
+============================================================= */
+.form-step {
+  display: none;
+  animation: stepEnter var(--transition-slow) ease both;
+}
+
+.form-step.active {
+  display: block;
+}
+
+@keyframes stepEnter {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stepExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+.step-exiting {
+  animation: stepExit var(--transition-base) ease forwards;
+}
+
+/* Step header */
+.step-header {
+  margin-bottom: 1.75rem;
+}
+
+.step-eyebrow {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  margin-bottom: .5rem;
+}
+
+.step-title {
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.025em;
+  margin-bottom: .4rem;
+}
+
+.step-desc {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   11. FIELD GRID
+============================================================= */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.field-full  { grid-column: 1 / -1; }
+.field-half  { grid-column: span 1; }
+.field-third {
+  grid-column: span 1;
+}
+
+/* ============================================================
+   12. FIELD COMPONENTS
+============================================================= */
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .055em;
+  margin-bottom: .45rem;
+}
+
+.field-label i {
+  color: var(--primary-dark);
+  font-size: .7rem;
+}
+
+.field-label-optional {
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--text-faint);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+/* Input wrapper — positions the status icon */
+.field-input-wrap {
+  position: relative;
+}
+
+.field-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field-input::placeholder {
+  color: var(--text-faint);
+}
+
+.field-input:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.field-input:focus {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  box-shadow: var(--shadow-input);
+}
+
+/* Validation states */
+.field-input.valid {
+  border-color: var(--success);
+}
+
+.field-input.valid:focus {
+  box-shadow: 0 0 0 3px rgba(16,185,129,.18);
+}
+
+.field-input.invalid {
+  border-color: var(--error);
+}
+
+.field-input.invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239,68,68,.16);
+}
+
+/* Trailing status icon */
+.field-status {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .8125rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.field-status.visible { opacity: 1; }
+.field-status.ok   { color: var(--success); }
+.field-status.fail { color: var(--error); }
+
+/* Eye toggle for password fields */
+.field-input-wrap--icon .field-input {
+  padding-right: 44px;
+}
+
+.field-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-size: .875rem;
+  line-height: 1;
+  transition: color var(--transition-fast);
+  z-index: 1;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.field-eye:hover { color: var(--text); }
+
+/* Field hint text */
+.field-hint {
+  display: block;
+  font-size: .75rem;
+  color: var(--text-faint);
+  margin-top: .35rem;
+  min-height: 1rem;
+  transition: color var(--transition-fast);
+}
+
+.field-hint.error { color: var(--error); }
+.field-hint.ok    { color: var(--success); }
+
+/* Select */
+.field-select-wrap {
+  position: relative;
+}
+
+.field-select {
+  cursor: pointer;
+  padding-right: 36px;
+}
+
+.field-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .6875rem;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: transform var(--transition-base), color var(--transition-fast);
+}
+
+.field-select-wrap:focus-within .field-select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--primary-dark);
+}
+
+/* Date input */
+input[type="date"].field-input {
+  cursor: pointer;
+}
+
+input[type="date"].field-input::-webkit-calendar-picker-indicator {
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+input[type="date"].field-input:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+/* Textarea */
+.field-textarea-wrap {
+  position: relative;
+}
+
+.field-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: .9rem;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  min-height: 112px;
+  line-height: 1.65;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.field-textarea::placeholder { color: var(--text-faint); }
+
+.field-textarea:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.field-textarea:focus {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  box-shadow: var(--shadow-input);
+}
+
+.textarea-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: .6875rem;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.textarea-counter.near-limit { color: var(--warning); }
+.textarea-counter.at-limit   { color: var(--error); }
+
+/* ============================================================
+   13. PASSWORD STRENGTH METER
+============================================================= */
+.pw-strength {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin-top: .5rem;
+}
+
+.pw-bars {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.pw-bar {
+  width: 28px;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+  display: block;
+}
+
+.pw-bar.weak     { background: #EF4444; }
+.pw-bar.fair     { background: #F59E0B; }
+.pw-bar.good     { background: #3B82F6; }
+.pw-bar.strong   { background: var(--success); }
+
+.pw-label {
+  font-size: .75rem;
+  color: var(--text-faint);
+  transition: color var(--transition-base);
+}
+
+.pw-label.weak   { color: #EF4444; }
+.pw-label.fair   { color: #F59E0B; }
+.pw-label.good   { color: #3B82F6; }
+.pw-label.strong { color: var(--success); }
+
+/* ============================================================
+   14. AVATAR UPLOAD
+============================================================= */
+.avatar-upload-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.avatar-upload {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 2px dashed var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base),
+    transform var(--transition-spring),
+    box-shadow var(--transition-base);
+}
+
+.avatar-upload:hover {
+  border-color: var(--primary-dark);
+  background: var(--surface-hover);
+  transform: scale(1.04);
+  box-shadow: 0 0 0 4px rgba(62,207,166,.18);
+}
+
+.avatar-upload:focus {
+  outline: none;
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(62,207,166,.22);
+}
+
+.avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-align: center;
+  line-height: 1.3;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.avatar-placeholder i {
+  font-size: 1.125rem;
+  color: var(--primary-dark);
+}
+
+.avatar-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,41,59,.45);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.avatar-upload:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.hidden-file {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-upload-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.avatar-upload-info strong {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.avatar-upload-info span {
+  font-size: .8rem;
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   15. CHECKBOX
+============================================================= */
+.checkbox-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  padding: .75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.checkbox-wrap:hover {
+  background: var(--surface-alt);
+  border-color: var(--primary-light);
+}
+
+.checkbox-wrap input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-strong);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-spring);
+}
+
+.checkbox-box i {
+  font-size: .6875rem;
+  color: var(--text);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity var(--transition-fast), transform var(--transition-spring);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked ~ .checkbox-box {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked ~ .checkbox-box i {
+  opacity: 1;
+  transform: scale(1);
+  color: #fff;
+}
+
+.checkbox-label {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.inline-link {
+  color: var(--primary-deeper);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+}
+
+.inline-link:hover {
+  text-decoration-color: currentColor;
+  color: var(--primary-dark);
+}
+
+/* ============================================================
+   16. LEARNING LEVEL CARDS
+============================================================= */
+.learning-levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+  margin-bottom: .25rem;
+}
+
+.level-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 1.125rem .75rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition:
+    border-color var(--transition-base),
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring);
+  overflow: hidden;
+}
+
+.level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.level-card:hover {
+  border-color: var(--primary-light);
+  background: var(--surface-alt);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.level-card:hover::before { opacity: .6; }
+
+.level-card.selected {
+  border-color: var(--primary-dark);
+  background: var(--surface-alt);
+  box-shadow: var(--shadow-primary);
+}
+
+.level-card.selected::before { opacity: 1; }
+
+.level-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  border: 1.5px solid var(--primary-soft);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.level-card.selected .level-icon,
+.level-card:hover .level-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.level-title {
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.level-desc {
+  font-size: .7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.level-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .5625rem;
+  opacity: 0;
+  transform: scale(0) rotate(-30deg);
+  transition: opacity var(--transition-base), transform var(--transition-spring);
+}
+
+.level-card.selected .level-check {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* ============================================================
+   17. NAVIGATION BUTTONS
+============================================================= */
+.form-nav {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 11px 22px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    background var(--transition-base),
+    transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary-light);
+  color: var(--text);
+  background: var(--surface-alt);
+  transform: translateX(-2px);
+}
+
+.btn-ghost.invisible {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-primary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--primary);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  border: none;
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--primary);
+  padding: 14px 36px;
+  border-radius: var(--radius-full);
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.btn-primary-lg:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+/* Loading spinner state on submit button */
+.submit-spinner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-primary.loading {
+  pointer-events: none;
+  background: var(--primary-dark);
+}
+
+/* ============================================================
+   18. ERROR BANNER
+============================================================= */
+.form-error-banner {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .875rem 1.125rem;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  animation: bannerIn .25s ease both;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-error-banner > i {
+  color: var(--error);
+  font-size: .9375rem;
+  flex-shrink: 0;
+}
+
+.form-error-banner > span {
+  font-size: .875rem;
+  color: var(--error);
+  flex: 1;
+  font-weight: 500;
+}
+
+.banner-close {
+  color: var(--error);
+  font-size: .875rem;
+  opacity: .7;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.banner-close:hover {
+  opacity: 1;
+  background: rgba(239,68,68,.1);
+}
+
+/* ============================================================
+   19. SUCCESS STATE
+============================================================= */
+.form-success {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.success-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.success-icon-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.success-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid var(--primary-soft);
+  animation: successRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes successRingPulse {
+  0%, 100% { transform: scale(1);    opacity: .7; }
+  50%       { transform: scale(1.15); opacity: .3; }
+}
+
+.success-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 1.75rem;
+  box-shadow: var(--shadow-primary);
+  animation: successIconPop var(--transition-spring) both;
+}
+
+@keyframes successIconPop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+}
+
+.success-desc {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  max-width: 340px;
+  line-height: 1.65;
+  margin-top: -.25rem;
+}
+
+.success-progress-wrap {
+  width: 200px;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.success-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  border-radius: var(--radius-full);
+  transition: width 2.5s linear;
+}
+
+.success-cta {
+  text-decoration: none;
+}
+
+/* ============================================================
+   20. ANIMATIONS (shared)
+============================================================= */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(.8); }
+  20%  { opacity: .55; }
+  80%  { opacity: .3; }
+  100% { opacity: 0; transform: translateY(-180px) scale(1.1); }
+}
+
+/* ============================================================
+   21. RESPONSIVE — TABLET
+============================================================= */
+@media (max-width: 1024px) {
+  .signup-page {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-panel--left {
+    display: none;
+  }
+
+  .signup-panel--right {
+    min-height: 100vh;
+    background: var(--bg);
+    padding: 2.5rem 1.5rem;
+  }
+
+  .form-shell {
+    max-width: 520px;
+    margin-inline: auto;
+  }
+
+  .learning-levels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .form-topbar {
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+
+  .form-topbar-signin {
+    font-size: .8rem;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-half,
+  .field-third {
+    grid-column: 1 / -1;
+  }
+
+  .step-label {
+    font-size: .6rem;
+  }
+
+  .step-dot {
+    width: 32px;
+    height: 32px;
+    font-size: .75rem;
+  }
+
+  .learning-levels {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-nav {
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .signup-panel--right {
+    padding: 1.5rem 1rem;
+  }
+
+  .learning-levels {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   22. FOCUS VISIBLE (accessibility)
+============================================================= */
+:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   23. SCROLLBAR (Webkit)
+============================================================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* ============================================================
+   24. SELECTION
+============================================================= */
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+  </style>
+</head>
+
+<body>
+
+<canvas class="signup-bg-canvas"></canvas>
+
+<div class="signup-page">
+
+    <!-- Left Information Panel -->
+    <aside class="signup-panel--left">
+        <div class="panel-inner">
+
+            <a href="/dashboard" class="panel-logo">
+                <div class="logo-mark" style="background: transparent;">
+                    <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+                </div>
+                <span class="logo-text">Quantum ML</span>
+            </a>
+
+            <div class="panel-hero">
+                <span class="panel-badge">
+                    Complaint Portal
+                </span>
+
+                <h1 class="panel-heading">
+                    We're here to <em>help you.</em>
+                </h1>
+
+                <p class="panel-sub">
+                    Facing any issue related to your learning experience?
+                    Submit your complaint and our support team will review it
+                    as quickly as possible.
+                </p>
+            </div>
+
+            <div class="panel-features">
+
+                <div class="panel-feature">
+                    <span class="panel-feature-icon">✓</span>
+                    <span>
+                        <strong>Quick Resolution</strong>
+                        <span>Complaints are reviewed by our support team.</span>
+                    </span>
+                </div>
+
+                <div class="panel-feature">
+                    <span class="panel-feature-icon">⚡</span>
+                    <span>
+                        <strong>Priority Support</strong>
+                        <span>Critical issues receive faster attention.</span>
+                    </span>
+                </div>
+
+                <div class="panel-feature">
+                    <span class="panel-feature-icon">🔒</span>
+                    <span>
+                        <strong>Secure</strong>
+                        <span>Your complaint details remain confidential.</span>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- Right Form Panel -->
+    <main class="signup-panel--right">
+
+        <div class="form-shell">
+
+            <div class="step-header">
+                <span class="step-eyebrow">
+                    Support Center
+                </span>
+
+                <h2 class="step-title">
+                    Submit a Complaint
+                </h2>
+
+                <p class="step-desc">
+                    Fill in the details below so we can investigate your issue.
+                </p>
+            </div>
+
+            <form id="complaintForm">
+
+                <div class="field-grid">
+
+                    <!-- Name -->
+                    <div class="field-half">
+                        <label class="field-label">
+                            Full Name
+                        </label>
+
+                        <div class="field-input-wrap">
+                            <input
+                                type="text"
+                                id="name"
+                                class="field-input"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field-half">
+                        <label class="field-label">
+                            Email
+                        </label>
+
+                        <div class="field-input-wrap">
+                            <input
+                                type="email"
+                                id="email"
+                                class="field-input"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="field-half">
+
+                        <label class="field-label">
+                            Complaint Category
+                        </label>
+
+                        <div class="field-select-wrap">
+
+                            <select
+                                id="category"
+                                class="field-input field-select">
+
+                                <option value="">Select Category</option>
+                                <option>Course Content</option>
+                                <option>Video Issue</option>
+                                <option>Quiz Problem</option>
+                                <option>Payment Issue</option>
+                                <option>Certificate</option>
+                                <option>Technical Issue</option>
+                                <option>Bug Report</option>
+                                <option>Other</option>
+
+                            </select>
+
+                            <span class="field-select-arrow">▼</span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="field-half">
+
+                        <label class="field-label">
+                            Priority
+                        </label>
+
+                        <div class="field-select-wrap">
+
+                            <select
+                                id="priority"
+                                class="field-input field-select">
+
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                                <option>Critical</option>
+
+                            </select>
+
+                            <span class="field-select-arrow">▼</span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Title -->
+                    <div class="field-full">
+
+                        <label class="field-label">
+                            Complaint Title
+                        </label>
+
+                        <div class="field-input-wrap">
+
+                            <input
+                                type="text"
+                                id="title"
+                                class="field-input"
+                                placeholder="Enter complaint title">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Description -->
+                    <div class="field-full">
+
+                        <label class="field-label">
+                            Description
+                        </label>
+
+                        <div class="field-textarea-wrap">
+
+                            <textarea
+                                id="description"
+                                class="field-textarea"
+                                placeholder="Explain your issue in detail..."></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-nav">
+
+                    <button
+                        type="submit"
+                        class="btn-primary">
+
+                        Submit Complaint
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div id="message"></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+<script>
+
+const token=JSON.parse(localStorage.getItem("token"));
+
+if(!token){
+
+window.location="/login";
+
+}
+
+document.getElementById("name").value=token.full_name;
+
+document.getElementById("email").value=token.email;
+
+document.getElementById("complaintForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const complaint={
+
+user_id:token.id,
+
+name:token.full_name,
+
+email:token.email,
+
+category:document.getElementById("category").value,
+
+priority:document.getElementById("priority").value,
+
+title:document.getElementById("title").value,
+
+description:document.getElementById("description").value,
+
+status:"Pending",
+
+created_at:new Date().toISOString()
+
+};
+
+fetch("/api/complaints/create",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(complaint)
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+const msg=document.getElementById("message");
+
+msg.style.display="block";
+
+msg.className="success";
+
+msg.innerHTML=data.message || "Complaint submitted successfully.";
+
+document.getElementById("complaintForm").reset();
+
+document.getElementById("name").value=token.full_name;
+
+document.getElementById("email").value=token.email;
+
+})
+
+.catch(()=>{
+
+const msg=document.getElementById("message");
+
+msg.style.display="block";
+
+msg.className="error";
+
+msg.innerHTML="Backend not available. Fake request sent successfully for testing.";
+
+console.log(complaint);
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>

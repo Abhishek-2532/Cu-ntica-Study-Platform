@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask Jupyter Notebook{% endblock %}</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- RequireJS & Marked JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<header class="app-header">
+    <div class="brand-section">
+        <div class="brand-logo">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>Jupyter Lab</span>
+        </div>
+        <input type="text" id="notebookTitleInput" class="notebook-title-input" value="Untitled_Notebook" placeholder="Notebook Title">
+    </div>
+
+    <div id="kernelStatusBadge" class="kernel-status-badge idle">
+        <span class="status-dot"></span>
+        <span class="status-text">Idle</span>
+    </div>
+
+    <div class="toolbar-section">
+        <div class="btn-group">
+            <button id="addCodeCellBtn" class="btn btn-primary" title="Add Code Cell"><i class="fa-solid fa-plus"></i> Code</button>
+            <button id="addMarkdownCellBtn" class="btn" title="Add Markdown Cell"><i class="fa-solid fa-paragraph"></i> Markdown</button>
+        </div>
+
+        <div class="btn-group">
+            <button id="runAllBtn" class="btn btn-run" title="Run All Cells"><i class="fa-solid fa-forward-step"></i> Run All</button>
+            <button id="clearOutputsBtn" class="btn" title="Clear All Outputs"><i class="fa-solid fa-eraser"></i> Clear</button>
+        </div>
+
+        <div class="btn-group">
+            <button id="restartKernelBtn" class="btn" title="Restart Kernel"><i class="fa-solid fa-rotate-right"></i></button>
+            <button id="interruptKernelBtn" class="btn btn-danger" title="Interrupt Kernel Execution"><i class="fa-solid fa-hand"></i></button>
+        </div>
+
+        <div class="btn-group">
+            <button id="openPkgModalBtn" class="btn" title="Install External Libraries (pip)"><i class="fa-solid fa-box-open"></i> Packages</button>
+        </div>
+
+        <div class="btn-group">
+            <button id="saveNotebookBtn" class="btn" title="Save Notebook"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+            <button id="exportNotebookBtn" class="btn" title="Export .ipynb"><i class="fa-solid fa-download"></i></button>
+            <label class="btn" title="Import .ipynb file" style="cursor: pointer;">
+                <i class="fa-solid fa-upload"></i>
+                <input type="file" id="importNotebookInput" accept=".ipynb,.json" style="display: none;">
+            </label>
+        </div>
+    </div>
+</header>
+
+<main class="notebook-container">
+    <div id="cells"></div>
+</main>
+
+<!-- Package Manager Modal -->
+<div id="packageModal" class="modal-overlay hidden">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-cubes"></i> External Package Manager (pip)</h3>
+            <button class="btn-icon btn-text-small" id="closePkgModalBtn"><i class="fa-solid fa-xmark fa-lg"></i></button>
+        </div>
+        <div class="modal-body">
+            <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9rem;">
+                Install Python libraries directly into the project environment. Once installed, packages can be imported immediately in notebook cells (e.g. <code>import numpy</code>, <code>import matplotlib</code>).
+            </p>
+            <form id="installPkgForm" class="pkg-install-form">
+                <input type="text" id="packageNameInput" class="input-field" placeholder="Enter package name (e.g. numpy, pandas, matplotlib, requests)" required>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-download"></i> Install Package</button>
+            </form>
+
+            <div id="packageInstallLog" class="log-terminal hidden"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+                <h4 style="font-size: 0.95rem; color: var(--text-primary);">Installed Libraries</h4>
+                <button id="refreshPkgListBtn" class="btn-text-small"><i class="fa-solid fa-rotate"></i> Refresh</button>
+            </div>
+            <div id="installedPackagesList" class="installed-pkgs-grid"></div>
+        </div>
+    </div>
+</div>
+
+<script>/**
+ * Flask Jupyter Notebook - Frontend Logic
+ */
+
+let cellsContainer;
+let cellCounter = 0;
+let cellList = []; // Stores { id, type, editor, element, executionCount }
+let isKernelBusy = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+    cellsContainer = document.getElementById("cells");
+
+    // Initialize RequireJS for Monaco Editor
+    if (window.require) {
+        require.config({
+            paths: {
+                vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs"
+            }
+        });
+
+        require(["vs/editor/editor.main"], function () {
+            // Initial default cell
+            addCell("code", "# Welcome to Flask Jupyter Notebook\n# Write Python code here and press Shift+Enter to run\nimport sys\nprint(f'Python version: {sys.version}')\n");
+        });
+    }
+
+    // Attach Event Listeners for Toolbar Buttons
+    document.getElementById("addCodeCellBtn")?.addEventListener("click", () => addCell("code"));
+    document.getElementById("addMarkdownCellBtn")?.addEventListener("click", () => addCell("markdown"));
+    document.getElementById("runAllBtn")?.addEventListener("click", runAllCells);
+    document.getElementById("restartKernelBtn")?.addEventListener("click", restartKernel);
+    document.getElementById("interruptKernelBtn")?.addEventListener("click", interruptKernel);
+    document.getElementById("clearOutputsBtn")?.addEventListener("click", clearAllOutputs);
+    document.getElementById("openPkgModalBtn")?.addEventListener("click", openPackageModal);
+    document.getElementById("saveNotebookBtn")?.addEventListener("click", saveNotebook);
+    document.getElementById("exportNotebookBtn")?.addEventListener("click", exportNotebook);
+    document.getElementById("importNotebookInput")?.addEventListener("change", importNotebook);
+
+    // Package Modal Listeners
+    document.getElementById("closePkgModalBtn")?.addEventListener("click", closePackageModal);
+    document.getElementById("installPkgForm")?.addEventListener("submit", handleInstallPackage);
+    document.getElementById("refreshPkgListBtn")?.addEventListener("click", loadInstalledPackages);
+
+    // Initial package list load
+    loadInstalledPackages();
+});
+
+// Update Kernel Status UI Badge
+function setKernelStatus(status, text) {
+    const badge = document.getElementById("kernelStatusBadge");
+    if (!badge) return;
+    badge.className = `kernel-status-badge ${status}`;
+    badge.innerHTML = `<span class="status-dot"></span> <span class="status-text">${text}</span>`;
+    isKernelBusy = status === "busy";
+}
+
+/**
+ * Add a new cell (Code or Markdown)
+ */
+function addCell(type = "code", initialContent = "", targetCellId = null) {
+    cellCounter++;
+    const cellId = `cell_${cellCounter}`;
+
+    const cellDiv = document.createElement("div");
+    cellDiv.className = `notebook-cell cell-${type}`;
+    cellDiv.dataset.cellId = cellId;
+    cellDiv.dataset.cellType = type;
+
+    cellDiv.innerHTML = `
+        <div class="cell-header">
+            <div class="cell-info">
+                <span class="cell-type-badge">${type.toUpperCase()}</span>
+                <span class="prompt-label" id="prompt_${cellId}">${type === 'code' ? 'In [ ]:' : 'Markdown'}</span>
+            </div>
+            <div class="cell-actions">
+                <select class="cell-type-select" onchange="changeCellType('${cellId}', this.value)">
+                    <option value="code" ${type === 'code' ? 'selected' : ''}>Code</option>
+                    <option value="markdown" ${type === 'markdown' ? 'selected' : ''}>Markdown</option>
+                </select>
+                ${type === 'code' ? `<button class="btn btn-icon btn-run" onclick="runCell('${cellId}')" title="Run Cell (Shift+Enter)"><i class="fa-solid fa-play"></i> Run</button>` : `<button class="btn btn-icon btn-run" onclick="renderMarkdownCell('${cellId}')" title="Render Markdown"><i class="fa-solid fa-eye"></i> Render</button>`}
+                <button class="btn btn-icon" onclick="moveCellUp('${cellId}')" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+                <button class="btn btn-icon" onclick="moveCellDown('${cellId}')" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+                <button class="btn btn-icon btn-danger" onclick="deleteCell('${cellId}')" title="Delete Cell"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+        <div class="cell-body">
+            <div class="editor-container" id="editor_${cellId}"></div>
+            <div class="markdown-preview hidden" id="preview_${cellId}"></div>
+        </div>
+        <div class="cell-output-container hidden" id="output_container_${cellId}">
+            <div class="output-header">
+                <span class="output-title">Output</span>
+                <button class="btn-text-small" onclick="clearCellOutput('${cellId}')">Clear</button>
+            </div>
+            <div class="cell-output" id="output_${cellId}"></div>
+        </div>
+    `;
+
+    if (targetCellId) {
+        const targetEl = document.querySelector(`[data-cell-id="${targetCellId}"]`);
+        if (targetEl && targetEl.nextSibling) {
+            cellsContainer.insertBefore(cellDiv, targetEl.nextSibling);
+        } else {
+            cellsContainer.appendChild(cellDiv);
+        }
+    } else {
+        cellsContainer.appendChild(cellDiv);
+    }
+
+    let editorInstance = null;
+
+    // Create Monaco Editor
+    if (window.monaco) {
+        editorInstance = monaco.editor.create(document.getElementById(`editor_${cellId}`), {
+            value: initialContent,
+            language: type === "code" ? "python" : "markdown",
+            theme: "vs-dark",
+            automaticLayout: true,
+            minimap: { enabled: false },
+            fontSize: 14,
+            lineNumbers: "on",
+            scrollBeyondLastLine: false,
+            padding: { top: 8, bottom: 8 },
+            renderLineHighlight: "all",
+            smoothScrolling: true
+        });
+
+        // Add Keybinding: Shift+Enter to run cell
+        editorInstance.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+            if (type === "code") {
+                runCell(cellId);
+            } else {
+                renderMarkdownCell(cellId);
+            }
+        });
+    }
+
+    const cellData = {
+        id: cellId,
+        type: type,
+        editor: editorInstance,
+        element: cellDiv,
+        executionCount: null
+    };
+
+    cellList.push(cellData);
+    return cellData;
+}
+
+/**
+ * Execute a specific Code Cell
+ */
+async function runCell(cellId) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj || cellObj.type !== "code") return;
+
+    const code = cellObj.editor ? cellObj.editor.getValue() : "";
+    const promptEl = document.getElementById(`prompt_${cellId}`);
+    const outputContainer = document.getElementById(`output_container_${cellId}`);
+    const outputEl = document.getElementById(`output_${cellId}`);
+
+    if (promptEl) promptEl.innerText = "In [*]:";
+    outputContainer.classList.remove("hidden");
+    outputEl.innerHTML = `<div class="running-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Executing...</div>`;
+
+    setKernelStatus("busy", "Busy");
+
+    try {
+        const response = await fetch("/execute", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code: code })
+        });
+
+        const result = await response.json();
+        setKernelStatus("idle", "Idle");
+
+        if (promptEl) {
+            promptEl.innerText = `In [${result.execution_count || '-'}] :`;
+        }
+        cellObj.executionCount = result.execution_count;
+
+        outputEl.innerHTML = ""; // Clear loader
+
+        if (!result.outputs || result.outputs.length === 0) {
+            if (result.error) {
+                outputEl.innerHTML = `<div class="output-error-box">${result.error}</div>`;
+            } else {
+                outputContainer.classList.add("hidden"); // Hide output if clean no-op
+            }
+            return;
+        }
+
+        renderOutputs(outputEl, result.outputs);
+
+    } catch (err) {
+        setKernelStatus("error", "Kernel Error");
+        if (promptEl) promptEl.innerText = "In [!]:";
+        outputEl.innerHTML = `<div class="output-error-box">Failed to connect to execution server: ${err.message}</div>`;
+    }
+}
+
+/**
+ * Render execution outputs (stdout, images, html, error tracebacks)
+ */
+function renderOutputs(container, outputs) {
+    outputs.forEach(out => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = `output-item output-${out.type}`;
+
+        if (out.type === "stream") {
+            const pre = document.createElement("pre");
+            pre.className = out.name === "stderr" ? "stream-stderr" : "stream-stdout";
+            pre.innerText = out.text;
+            itemDiv.appendChild(pre);
+        } else if (out.type === "text") {
+            const pre = document.createElement("pre");
+            pre.innerText = out.data;
+            itemDiv.appendChild(pre);
+        } else if (out.type === "html") {
+            itemDiv.innerHTML = out.data;
+        } else if (out.type === "image") {
+            const img = document.createElement("img");
+            img.src = out.data;
+            img.className = "output-image";
+            itemDiv.appendChild(img);
+        } else if (out.type === "svg") {
+            itemDiv.innerHTML = out.data;
+        } else if (out.type === "error") {
+            const errDiv = document.createElement("div");
+            errDiv.className = "output-error-traceback";
+            errDiv.innerHTML = out.html || `<pre>${out.raw}</pre>`;
+            itemDiv.appendChild(errDiv);
+        }
+
+        container.appendChild(itemDiv);
+    });
+}
+
+/**
+ * Render Markdown Cell Preview
+ */
+function renderMarkdownCell(cellId) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj || cellObj.type !== "markdown") return;
+
+    const editorEl = document.getElementById(`editor_${cellId}`);
+    const previewEl = document.getElementById(`preview_${cellId}`);
+    const content = cellObj.editor ? cellObj.editor.getValue() : "";
+
+    if (previewEl.classList.contains("hidden")) {
+        // Switch to preview mode
+        const html = window.marked ? marked.parse(content) : `<pre>${content}</pre>`;
+        previewEl.innerHTML = html;
+        editorEl.classList.add("hidden");
+        previewEl.classList.remove("hidden");
+    } else {
+        // Switch back to edit mode
+        previewEl.classList.add("hidden");
+        editorEl.classList.remove("hidden");
+    }
+}
+
+/**
+ * Run All Cells in Sequence
+ */
+async function runAllCells() {
+    for (const cell of cellList) {
+        if (cell.type === "code") {
+            await runCell(cell.id);
+        } else if (cell.type === "markdown") {
+            renderMarkdownCell(cell.id);
+        }
+    }
+}
+
+/**
+ * Change Cell Type (Code <-> Markdown)
+ */
+function changeCellType(cellId, newType) {
+    const cellObj = cellList.find(c => c.id === cellId);
+    if (!cellObj) return;
+
+    cellObj.type = newType;
+    cellObj.element.dataset.cellType = newType;
+    cellObj.element.className = `notebook-cell cell-${newType}`;
+
+    const typeBadge = cellObj.element.querySelector(".cell-type-badge");
+    if (typeBadge) typeBadge.innerText = newType.toUpperCase();
+
+    const promptLabel = document.getElementById(`prompt_${cellId}`);
+    if (promptLabel) promptLabel.innerText = newType === 'code' ? 'In [ ]:' : 'Markdown';
+
+    if (cellObj.editor) {
+        monaco.editor.setModelLanguage(cellObj.editor.getModel(), newType === "code" ? "python" : "markdown");
+    }
+}
+
+/**
+ * Delete Cell
+ */
+function deleteCell(cellId) {
+    const idx = cellList.findIndex(c => c.id === cellId);
+    if (idx !== -1) {
+        const cellObj = cellList[idx];
+        if (cellObj.editor) cellObj.editor.dispose();
+        cellObj.element.remove();
+        cellList.splice(idx, 1);
+    }
+}
+
+/**
+ * Move Cell Up / Down
+ */
+function moveCellUp(cellId) {
+    const el = document.querySelector(`[data-cell-id="${cellId}"]`);
+    if (el && el.previousElementSibling) {
+        cellsContainer.insertBefore(el, el.previousElementSibling);
+    }
+}
+
+function moveCellDown(cellId) {
+    const el = document.querySelector(`[data-cell-id="${cellId}"]`);
+    if (el && el.nextElementSibling) {
+        cellsContainer.insertBefore(el.nextElementSibling, el);
+    }
+}
+
+/**
+ * Clear Output
+ */
+function clearCellOutput(cellId) {
+    const outputEl = document.getElementById(`output_${cellId}`);
+    const outputContainer = document.getElementById(`output_container_${cellId}`);
+    if (outputEl) outputEl.innerHTML = "";
+    if (outputContainer) outputContainer.classList.add("hidden");
+}
+
+function clearAllOutputs() {
+    cellList.forEach(c => clearCellOutput(c.id));
+}
+
+/**
+ * Kernel Controls: Restart & Interrupt
+ */
+async function restartKernel() {
+    if (!confirm("Are you sure you want to restart the Python Kernel? All variables will be lost.")) return;
+    setKernelStatus("busy", "Restarting...");
+    try {
+        const res = await fetch("/restart-kernel", { method: "POST" });
+        const data = await res.json();
+        setKernelStatus("idle", "Idle");
+        alert(data.message);
+    } catch (e) {
+        setKernelStatus("error", "Error");
+        alert("Failed to restart kernel.");
+    }
+}
+
+async function interruptKernel() {
+    try {
+        const res = await fetch("/interrupt-kernel", { method: "POST" });
+        const data = await res.json();
+        alert(data.message);
+    } catch (e) {
+        alert("Failed to interrupt kernel.");
+    }
+}
+
+/**
+ * External Package Manager Modal
+ */
+function openPackageModal() {
+    document.getElementById("packageModal")?.classList.remove("hidden");
+    loadInstalledPackages();
+}
+
+function closePackageModal() {
+    document.getElementById("packageModal")?.classList.add("hidden");
+}
+
+async function handleInstallPackage(e) {
+    e.preventDefault();
+    const pkgInput = document.getElementById("packageNameInput");
+    const pkgName = pkgInput ? pkgInput.value.trim() : "";
+    const logEl = document.getElementById("packageInstallLog");
+
+    if (!pkgName) return;
+
+    logEl.classList.remove("hidden");
+    logEl.innerText = `Installing '${pkgName}' via pip... Please wait.\n`;
+
+    try {
+        const res = await fetch("/install-package", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ package: pkgName })
+        });
+        const data = await res.json();
+
+        logEl.innerText += `\n${data.output || data.message}`;
+        if (data.success) {
+            pkgInput.value = "";
+            loadInstalledPackages();
+        }
+    } catch (err) {
+        logEl.innerText += `\nError installing package: ${err.message}`;
+    }
+}
+
+async function loadInstalledPackages() {
+    const pkgListEl = document.getElementById("installedPackagesList");
+    if (!pkgListEl) return;
+
+    pkgListEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Loading installed packages...`;
+
+    try {
+        const res = await fetch("/packages");
+        const data = await res.json();
+
+        if (data.packages && data.packages.length > 0) {
+            pkgListEl.innerHTML = data.packages.map(p =>
+                `<div class="pkg-tag"><strong>${p.name}</strong> <span class="pkg-version">v${p.version}</span></div>`
+            ).join("");
+        } else {
+            pkgListEl.innerHTML = `No packages found.`;
+        }
+    } catch (e) {
+        pkgListEl.innerHTML = `Failed to load packages list.`;
+    }
+}
+
+/**
+ * Notebook Save, Export, and Import
+ */
+function getNotebookCellsData() {
+    return cellList.map(c => ({
+        cell_type: c.type,
+        source: c.editor ? c.editor.getValue() : "",
+        execution_count: c.executionCount
+    }));
+}
+
+async function saveNotebook() {
+    const titleInput = document.getElementById("notebookTitleInput");
+    const filename = (titleInput ? titleInput.value.trim() : "untitled") + ".ipynb";
+    const cellsData = getNotebookCellsData();
+
+    try {
+        const res = await fetch("/save-notebook", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, cells: cellsData })
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert(`Notebook saved successfully as '${data.filename}'!`);
+        }
+    } catch (e) {
+        alert("Failed to save notebook.");
+    }
+}
+
+async function exportNotebook() {
+    const titleInput = document.getElementById("notebookTitleInput");
+    const filename = (titleInput ? titleInput.value.trim() : "notebook") + ".ipynb";
+    const cellsData = getNotebookCellsData();
+
+    try {
+        const res = await fetch("/export-notebook", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ filename, cells: cellsData })
+        });
+        const data = await res.json();
+
+        // Download JSON as .ipynb file
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    } catch (e) {
+        alert("Failed to export notebook.");
+    }
+}
+
+async function importNotebook(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const res = await fetch("/import-notebook", {
+            method: "POST",
+            body: formData
+        });
+        const data = await res.json();
+
+        if (data.success && data.cells) {
+            // Clear existing cells
+            cellsContainer.innerHTML = "";
+            cellList.forEach(c => { if (c.editor) c.editor.dispose(); });
+            cellList = [];
+
+            // Load imported cells
+            data.cells.forEach(c => {
+                const cellObj = addCell(c.cell_type, c.source);
+                if (c.outputs && c.outputs.length > 0) {
+                    const outputContainer = document.getElementById(`output_container_${cellObj.id}`);
+                    const outputEl = document.getElementById(`output_${cellObj.id}`);
+                    outputContainer.classList.remove("hidden");
+                    renderOutputs(outputEl, c.outputs);
+                }
+            });
+
+            const titleInput = document.getElementById("notebookTitleInput");
+            if (titleInput) titleInput.value = file.name.replace(".ipynb", "");
+        } else {
+            alert(data.message || "Failed to import notebook.");
+        }
+    } catch (err) {
+        alert("Error importing notebook file.");
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,5455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cuántica — The quantum machine learning platform. Train, benchmark, and deploy quantum-classical hybrid models at scale." />
+  <meta name="theme-color" content="#6CE5BF" />
+  <title>Cuántica &mdash; Quantum Machine Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    /* =============================================================
+   CUÁNTICA — Quantum Machine Learning Platform
+   index.css  |  Light Theme
+   Palette:
+     --bg:            #F7FEFF  (Arctic White)
+     --surface:       #FFFFFF  (Cards)
+     --surface-alt:   #E0FAF4  (Section backgrounds)
+     --primary:       #6CE5BF  (Main brand teal)
+     --primary-light: #83E9CA
+     --primary-soft:  #ADF1DD
+     --secondary:     #E3EDFE  (Soft blue)
+     --text:          #1E293B
+     --text-muted:    #64748B
+     --border:        #DCEEF2
+============================================================= */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES
+============================================================= */
+:root {
+  --bg:               #F7FEFF;
+  --surface:          #FFFFFF;
+  --surface-alt:      #E0FAF4;
+  --primary:          #6CE5BF;
+  --primary-light:    #83E9CA;
+  --primary-soft:     #ADF1DD;
+  --primary-dark:     #3ECFA6;
+  --primary-deeper:   #1FA880;
+  --secondary:        #E3EDFE;
+  --secondary-dark:   #6366F1;
+  --text:             #1E293B;
+  --text-muted:       #64748B;
+  --text-faint:       #94A3B8;
+  --border:           #DCEEF2;
+  --border-strong:    #B8D9E4;
+  --shadow-sm:        0 1px 3px rgba(30, 41, 59, .06), 0 1px 2px rgba(30, 41, 59, .04);
+  --shadow-md:        0 4px 16px rgba(30, 41, 59, .08), 0 2px 6px rgba(30, 41, 59, .06);
+  --shadow-lg:        0 12px 40px rgba(30, 41, 59, .12), 0 4px 16px rgba(30, 41, 59, .08);
+  --shadow-xl:        0 24px 64px rgba(30, 41, 59, .14), 0 8px 24px rgba(30, 41, 59, .10);
+  --shadow-primary:   0 8px 32px rgba(108, 229, 191, .35);
+  --radius-sm:        6px;
+  --radius-md:        12px;
+  --radius-lg:        18px;
+  --radius-xl:        24px;
+  --radius-full:      9999px;
+  --font-sans:        'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:     'Sora', 'Inter', system-ui, sans-serif;
+  --transition-fast:  150ms cubic-bezier(.4,0,.2,1);
+  --transition-base:  250ms cubic-bezier(.4,0,.2,1);
+  --transition-slow:  400ms cubic-bezier(.4,0,.2,1);
+  --transition-spring:450ms cubic-bezier(.34,1.56,.64,1);
+  --max-w:            1280px;
+  --nav-h:            68px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+============================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================================
+   3. UTILITY CLASSES
+============================================================= */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Shared section badge */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-soft);
+  margin-bottom: 1rem;
+}
+
+.section-badge i {
+  font-size: .7rem;
+}
+
+/* Section headers */
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin-inline: auto;
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin-bottom: .75rem;
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+/* Shared button styles */
+.btn-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .875rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary-sm:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-ghost-sm:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+.btn-primary-md {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .9375rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-primary-md:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-primary-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 15px 32px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-primary-lg:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.btn-outline-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-strong);
+  transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-outline-lg:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  transform: translateY(-2px);
+}
+
+.btn-outline-lg--dark {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-outline-lg--dark:hover {
+  border-color: var(--primary-dark);
+  background: var(--surface);
+  color: var(--primary-deeper);
+}
+
+/* ============================================================
+   4. ANNOUNCEMENT BAR
+============================================================= */
+.announcement-bar {
+  background: var(--text);
+  color: #fff;
+  padding: 10px 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  font-size: .8125rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 200;
+}
+
+.announcement-bar.hidden {
+  display: none;
+}
+
+.announcement-inner {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.announcement-icon {
+  color: var(--primary);
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+
+.announcement-link {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.announcement-link:hover {
+  color: var(--primary-soft);
+  text-decoration-color: currentColor;
+}
+
+.announcement-link i {
+  font-size: .7rem;
+  margin-left: 2px;
+}
+
+.announcement-close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  opacity: .6;
+  font-size: .875rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.announcement-close:hover {
+  opacity: 1;
+  background: rgba(255,255,255,.12);
+}
+
+/* ============================================================
+   5. NAVBAR
+============================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(247, 254, 255, .88);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow-md);
+  background: rgba(247, 254, 255, .97);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+  gap: 1.5rem;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.navbar-logo:hover .logo-mark {
+  transform: rotate(12deg) scale(1.05);
+}
+
+.logo-mark--sm {
+  width: 30px;
+  height: 30px;
+  font-size: .875rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1875rem;
+  color: var(--text);
+  letter-spacing: -.025em;
+}
+
+/* Nav links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: .875rem;
+  font-weight: 500;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.nav-chevron {
+  font-size: .625rem;
+  opacity: .7;
+  transition: transform var(--transition-base);
+}
+
+/* Dropdown */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-dropdown-wrapper:hover .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  min-width: 260px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  pointer-events: none;
+  z-index: 300;
+}
+
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.nav-dropdown-item:hover {
+  background: var(--surface-alt);
+}
+
+.nav-dropdown-item > i {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-dropdown-item:hover > i {
+  background: var(--primary);
+  color: var(--text);
+}
+
+.nav-dropdown-item span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-dropdown-item strong {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+}
+
+.nav-dropdown-item small {
+  font-size: .75rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* Nav right controls */
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.nav-icon-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  position: relative;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.notif-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: 1.5px solid var(--bg);
+}
+
+.nav-locale {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-locale:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.nav-locale i {
+  font-size: .75rem;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.hamburger:hover {
+  background: var(--surface-alt);
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   6. MOBILE NAV
+============================================================= */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: var(--surface);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--nav-h) + 1rem) 1.5rem 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100%);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-slow);
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.mobile-nav-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition-fast), padding-left var(--transition-base);
+}
+
+.mobile-nav-link:hover {
+  color: var(--primary-deeper);
+  padding-left: 6px;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+/* ============================================================
+   7. GLOBAL SEARCH OVERLAY
+============================================================= */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.search-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 41, 59, .45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.search-modal {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  width: 90%;
+  max-width: 640px;
+  overflow: hidden;
+  transform: translateY(-20px) scale(.97);
+  transition: transform var(--transition-spring);
+}
+
+.search-overlay.open .search-modal {
+  transform: translateY(0) scale(1);
+}
+
+.search-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-modal-icon {
+  color: var(--text-muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.search-modal-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: var(--text);
+  background: transparent;
+}
+
+.search-modal-input::placeholder {
+  color: var(--text-faint);
+}
+
+.search-modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: .9375rem;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.search-modal-close:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.search-modal-results {
+  padding: 16px 20px 20px;
+  min-height: 100px;
+}
+
+.search-hint {
+  color: var(--text-faint);
+  font-size: .875rem;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.search-result-item:hover {
+  background: var(--surface-alt);
+}
+
+.search-result-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.search-result-text strong {
+  display: block;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.search-result-text small {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   8. HERO SECTION
+============================================================= */
+.hero {
+  position: relative;
+  min-height: clamp(560px, 80vh, 840px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    148deg,
+    #E5FCF4 0%,
+    #EFF9FF 38%,
+    var(--bg) 62%,
+    #E8F5FF 100%
+  );
+}
+
+/* Quantum animated canvas behind everything */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+/* Light overlay gradient – keeps edges soft */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(108,229,191,.28) 0%, transparent 68%),
+    radial-gradient(ellipse 45% 35% at 90% 85%, rgba(99,102,241,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 5%  70%, rgba(108,229,191,.09) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* Floating particles layer */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(.8); }
+  20%  { opacity: .6; }
+  80%  { opacity: .4; }
+  100% { opacity: 0; transform: translateY(-160px) scale(1.1); }
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) 1.5rem clamp(2.5rem, 5vw, 4rem);
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
+  gap: 0;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(108, 229, 191, .22);
+  border: 1px solid rgba(62, 207, 166, .35);
+  color: var(--primary-deeper);
+  font-size: .8125rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.5rem;
+}
+
+.hero-badge-icon {
+  color: var(--primary-dark);
+  font-size: .7rem;
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 5.5vw, 4rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  margin-bottom: 1.125rem;
+  max-width: 860px;
+  text-wrap: balance;
+}
+
+.hero-heading em {
+  font-style: italic;
+  color: var(--primary-deeper);
+}
+
+.hero-subheading {
+  font-size: clamp(.9375rem, 1.8vw, 1.125rem);
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.65;
+  margin-bottom: 2.25rem;
+}
+
+/* ============================================================
+   9. EXPLORE BAR
+============================================================= */
+.explore-bar {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  width: 100%;
+  max-width: 860px;
+}
+
+/* Tabs */
+.explore-tabs {
+  display: flex;
+  align-items: center;
+  padding: 12px 12px 0;
+  gap: 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.explore-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 8px 14px 12px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  position: relative;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.explore-tab i {
+  font-size: .8125rem;
+}
+
+.explore-tab:hover {
+  color: var(--text);
+  background: var(--surface-alt);
+}
+
+.explore-tab.active {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom-color: var(--primary);
+  background: transparent;
+}
+
+/* Tab panels */
+.explore-panel {
+  display: none;
+  padding: 16px;
+}
+
+.explore-panel.active {
+  display: block;
+}
+
+/* Fields */
+.explore-fields {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.explore-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  min-width: 0;
+  transition: background var(--transition-fast);
+}
+
+.explore-field:hover {
+  background: var(--surface-alt);
+}
+
+.explore-field--main {
+  flex: 1.4;
+}
+
+.explore-field label {
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.explore-field input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: .875rem;
+  color: var(--text);
+  width: 100%;
+}
+
+.explore-field input::placeholder {
+  color: var(--text-faint);
+}
+
+.explore-divider {
+  width: 1px;
+  height: 42px;
+  background: var(--border);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.explore-search-btn {
+  width: 52px;
+  height: 52px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0625rem;
+  margin: 6px;
+  flex-shrink: 0;
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-spring);
+}
+
+.explore-search-btn:hover {
+  background: var(--primary-deeper);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(30,41,59,.25);
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   10. FEATURE STRIP
+============================================================= */
+.feature-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 0;
+}
+
+.feature-strip-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.feature-strip-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.feature-strip-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.feature-strip-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.0625rem;
+  flex-shrink: 0;
+  border: 1.5px solid var(--primary-soft);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.feature-strip-item:hover .feature-strip-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.feature-strip-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature-strip-text strong {
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+}
+
+.feature-strip-text span {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  display: block;
+}
+
+/* ============================================================
+   11. LOGOS SECTION
+============================================================= */
+.logos-section {
+  padding: 3rem 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.logos-label {
+  text-align: center;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 1.5rem;
+}
+
+.logos-track-wrapper {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.logos-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: logosScroll 28s linear infinite;
+}
+
+.logos-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes logosScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.logo-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  cursor: default;
+}
+
+.logo-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+/* ============================================================
+   12. STATS SECTION
+============================================================= */
+.stats-section {
+  padding: 5rem 0;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--primary-soft);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  margin: 0 auto 1rem;
+  border: 1.5px solid var(--primary-soft);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.03em;
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+
+.stat-label {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .25rem;
+}
+
+.stat-desc {
+  font-size: .75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   13. MODELS SECTION
+============================================================= */
+.models-section {
+  padding: 6rem 0;
+  background: var(--bg);
+}
+
+/* Filter bar */
+.models-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 18px;
+  border-radius: var(--radius-full);
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--text);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: var(--text);
+  color: var(--primary);
+  border-color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Models grid */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Model card */
+.model-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.model-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: linear-gradient(to top, var(--surface-alt), transparent);
+  transition: height var(--transition-slow);
+  pointer-events: none;
+}
+
+.model-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+  border-color: var(--primary-soft);
+}
+
+.model-card:hover::after {
+  height: 60px;
+}
+
+.model-card.hidden {
+  display: none;
+}
+
+.model-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.model-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-spring);
+}
+
+.model-card:hover .model-icon-wrap {
+  transform: scale(1.1) rotate(-4deg);
+}
+
+.model-icon--teal    { background: #D1FAF0; color: #1FA880; }
+.model-icon--blue    { background: var(--secondary); color: #3B5BDB; }
+.model-icon--mint    { background: var(--surface-alt); color: #0F766E; }
+.model-icon--indigo  { background: #EEF2FF; color: #6366F1; }
+.model-icon--rose    { background: #FFF1F3; color: #E11D7A; }
+.model-icon--amber   { background: #FFFBEB; color: #D97706; }
+
+.model-meta {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.model-badge {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.model-badge--new    { background: var(--surface-alt); color: var(--primary-deeper); }
+.model-badge--hot    { background: #FFF1F3; color: #BE123C; }
+.model-badge--stable { background: #F0FDF4; color: #16A34A; }
+.model-badge--beta   { background: #EEF2FF; color: #6366F1; }
+
+.model-bookmark {
+  color: var(--text-faint);
+  font-size: .875rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.model-bookmark:hover,
+.model-bookmark.bookmarked {
+  color: var(--primary-deeper);
+  background: var(--surface-alt);
+}
+
+.model-name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+
+.model-desc {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.model-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+}
+
+.model-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+.model-tag i {
+  font-size: .6rem;
+}
+
+.model-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: .75rem;
+  border-top: 1px solid var(--border);
+}
+
+.model-stats {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+
+.model-stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.model-stats i {
+  font-size: .65rem;
+  color: var(--primary-deeper);
+}
+
+.model-run-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--primary);
+  color: var(--text);
+  font-size: .75rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.model-run-btn i {
+  font-size: .625rem;
+}
+
+.model-run-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-1px);
+}
+
+.models-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* ============================================================
+   14. HOW IT WORKS SECTION
+============================================================= */
+.how-section {
+  padding: 6rem 0;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: calc(12.5% + 24px);
+  right: calc(12.5% + 24px);
+  height: 1px;
+  background: linear-gradient(to right, var(--primary-soft), var(--primary), var(--primary-soft));
+  z-index: 0;
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.how-step-number {
+  font-family: var(--font-display);
+  font-size: .75rem;
+  font-weight: 800;
+  color: var(--primary-deeper);
+  letter-spacing: .05em;
+  margin-bottom: .75rem;
+}
+
+.how-step-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.25rem;
+  width: 100%;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+.how-step:hover .how-step-content {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--primary-soft);
+}
+
+.how-step-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  margin: 0 auto 1rem;
+  border: 1.5px solid var(--primary-soft);
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-spring);
+}
+
+.how-step:hover .how-step-icon {
+  background: var(--primary);
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+.how-step-content h3 {
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+
+.how-step-content p {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.how-step-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--primary-deeper);
+  transition: gap var(--transition-base);
+}
+
+.how-step-link:hover {
+  gap: 8px;
+}
+
+.how-step-link i {
+  font-size: .65rem;
+}
+
+/* ============================================================
+   15. BENCHMARKS SECTION
+============================================================= */
+.benchmarks-section {
+  padding: 6rem 0;
+  background: var(--bg);
+}
+
+.benchmarks-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.section-title-left {
+  font-size: clamp(1.625rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin-bottom: .75rem;
+}
+
+.section-sub-left {
+  font-size: .9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.benchmark-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.benchmark-item {
+  width: 100%;
+}
+
+.benchmark-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.benchmark-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .8125rem;
+}
+
+.benchmark-label-row span {
+  color: var(--text-muted);
+}
+
+.benchmark-label-row strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.benchmark-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.benchmark-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  border-radius: var(--radius-full);
+  width: 0;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+
+.benchmarks-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bench-visual {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  transition: box-shadow var(--transition-base);
+}
+
+.bench-visual:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* ============================================================
+   16. TESTIMONIALS SECTION
+============================================================= */
+.testimonials-section {
+  padding: 6rem 0;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--primary-soft);
+}
+
+.testimonial-card--featured {
+  border-color: var(--primary-soft);
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(173, 241, 221, .15) 100%);
+}
+
+.testimonial-rating {
+  display: flex;
+  gap: 3px;
+  color: #F59E0B;
+  font-size: .875rem;
+}
+
+.testimonial-text {
+  font-size: .9375rem;
+  color: var(--text);
+  line-height: 1.65;
+  flex: 1;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .5rem;
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.9);
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+
+.testimonial-author strong {
+  display: block;
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.testimonial-author span {
+  font-size: .75rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+/* ============================================================
+   17. PRICING SECTION
+============================================================= */
+.pricing-section {
+  padding: 6rem 0;
+  background: var(--bg);
+}
+
+/* Toggle */
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .875rem;
+  margin-bottom: 3rem;
+}
+
+.toggle-label {
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.toggle-save {
+  background: var(--primary);
+  color: var(--text);
+  font-size: .6875rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+}
+
+.toggle-btn {
+  width: 48px;
+  height: 26px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: background var(--transition-base);
+}
+
+.toggle-btn[aria-pressed="true"] {
+  background: var(--primary);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-spring);
+}
+
+.toggle-btn[aria-pressed="true"] .toggle-thumb {
+  transform: translateX(22px);
+}
+
+/* Pricing grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  position: relative;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+.pricing-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.pricing-card--featured {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.15), var(--shadow-md);
+  transform: scale(1.025);
+}
+
+.pricing-card--featured:hover {
+  transform: scale(1.025) translateY(-4px);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.25), var(--shadow-lg);
+}
+
+.pricing-popular-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--text);
+  font-size: .6875rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  box-shadow: var(--shadow-primary);
+}
+
+.pricing-card-top {
+  margin-bottom: 1.75rem;
+}
+
+.pricing-plan-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--surface-alt);
+  color: var(--primary-deeper);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0625rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--primary-soft);
+}
+
+.pricing-plan-name {
+  font-size: 1.1875rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: .375rem;
+}
+
+.pricing-plan-desc {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  line-height: 1;
+}
+
+.pricing-currency {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text);
+  padding-bottom: 4px;
+}
+
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -.04em;
+}
+
+.pricing-amount--custom {
+  font-size: 1.5rem;
+  letter-spacing: -.02em;
+}
+
+.pricing-period {
+  font-size: .875rem;
+  color: var(--text-muted);
+  padding-bottom: 5px;
+}
+
+.pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-bottom: 1.75rem;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  font-size: .875rem;
+  color: var(--text);
+}
+
+.pricing-features li i.fa-check {
+  color: var(--primary-deeper);
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+
+.pricing-feature--unavail {
+  color: var(--text-faint) !important;
+  text-decoration: line-through;
+}
+
+.pricing-feature--unavail i.fa-xmark {
+  color: var(--text-faint);
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+
+.pricing-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: .9375rem;
+  font-weight: 700;
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast), border-color var(--transition-base);
+}
+
+.pricing-cta--primary {
+  background: var(--primary);
+  color: var(--text);
+}
+
+.pricing-cta--primary:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+.pricing-cta--ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+
+.pricing-cta--ghost:hover {
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   18. CTA SECTION
+============================================================= */
+.cta-section {
+  padding: 5rem 0;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-card {
+  background: var(--text);
+  border-radius: var(--radius-xl);
+  padding: clamp(2.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(108,229,191,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-badge {
+  background: rgba(108, 229, 191, .15);
+  color: var(--primary-soft);
+  border-color: rgba(108, 229, 191, .3);
+}
+
+.cta-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  margin-bottom: .75rem;
+}
+
+.cta-desc {
+  font-size: .9375rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 460px;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.cta-note {
+  font-size: .75rem;
+  color: rgba(255,255,255,.45);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cta-note i {
+  color: var(--primary-soft);
+  font-size: .65rem;
+}
+
+#ctaCanvas {
+  border-radius: var(--radius-lg);
+  opacity: .9;
+}
+
+/* ============================================================
+   19. FOOTER
+============================================================= */
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 4rem 0 2rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-tagline {
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.footer-social-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  font-size: .875rem;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-spring);
+}
+
+.footer-social-btn:hover {
+  color: var(--primary-deeper);
+  border-color: var(--primary);
+  background: var(--surface-alt);
+  transform: translateY(-2px);
+}
+
+.footer-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+}
+
+.footer-nav-title {
+  font-size: .8125rem;
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: .25rem;
+}
+
+.footer-nav-link {
+  font-size: .875rem;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), padding-left var(--transition-base);
+  display: block;
+}
+
+.footer-nav-link:hover {
+  color: var(--primary-deeper);
+  padding-left: 4px;
+}
+
+.footer-newsletter p {
+  font-size: .8125rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: .875rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.newsletter-input-wrap {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.newsletter-input-wrap:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108,229,191,.18);
+}
+
+.newsletter-input-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  font-size: .875rem;
+  color: var(--text);
+  background: transparent;
+  min-width: 0;
+}
+
+.newsletter-input-wrap input::placeholder {
+  color: var(--text-faint);
+}
+
+.newsletter-input-wrap button {
+  background: var(--primary);
+  color: var(--text);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+  transition: background var(--transition-base);
+}
+
+.newsletter-input-wrap button:hover {
+  background: var(--primary-dark);
+}
+
+.newsletter-error {
+  font-size: .75rem;
+  color: #DC2626;
+  display: none;
+}
+
+.newsletter-error.visible {
+  display: block;
+}
+
+.newsletter-success {
+  font-size: .75rem;
+  color: #16A34A;
+  font-weight: 600;
+  display: none;
+}
+
+.newsletter-success.visible {
+  display: block;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-copy {
+  font-size: .8125rem;
+  color: var(--text-faint);
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-bottom-links a {
+  font-size: .8125rem;
+  color: var(--text-faint);
+  transition: color var(--transition-fast);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--primary-deeper);
+}
+
+/* ============================================================
+   20. BACK TO TOP
+============================================================= */
+.back-to-top {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 150;
+  width: 44px;
+  height: 44px;
+  background: var(--text);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9375rem;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--transition-base), visibility var(--transition-base), transform var(--transition-spring), background var(--transition-base);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--primary-deeper);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   21. SCROLL ANIMATIONS
+============================================================= */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1);
+}
+
+[data-animate="fade-right"] {
+  transform: translateX(-28px);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(28px);
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ============================================================
+   22. FOCUS STYLES (ACCESSIBILITY)
+============================================================= */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   23. SELECTION
+============================================================= */
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+/* ============================================================
+   24. SCROLLBAR STYLING
+============================================================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================================
+   25. SHIMMER LOADING SKELETON (reusable)
+============================================================= */
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--surface-alt) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+   26. TOOLTIP
+============================================================= */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(.92);
+  background: var(--text);
+  color: #fff;
+  font-size: .6875rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: 200;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ============================================================
+   27. NOISE TEXTURE OVERLAY
+============================================================= */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ============================================================
+   28. RESPONSIVE — TABLET  (max-width: 1024px)
+============================================================= */
+@media (max-width: 1024px) {
+
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-locale {
+    display: none;
+  }
+
+  .btn-ghost-sm,
+  .btn-primary-sm {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: clamp(480px, 70vh, 720px);
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Models */
+  .models-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* How */
+  .how-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .how-steps::before {
+    display: none;
+  }
+
+  /* Benchmarks */
+  .benchmarks-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .benchmarks-right {
+    order: -1;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .pricing-card--featured {
+    transform: none;
+  }
+
+  .pricing-card--featured:hover {
+    transform: translateY(-4px);
+  }
+
+  /* CTA */
+  .cta-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  #ctaCanvas {
+    display: none;
+  }
+
+  /* Footer */
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  /* Feature strip */
+  .feature-strip-grid {
+    flex-direction: column;
+  }
+
+  .feature-strip-divider {
+    width: 100%;
+    height: 1px;
+  }
+}
+
+/* ============================================================
+   29. RESPONSIVE — MOBILE  (max-width: 640px)
+============================================================= */
+@media (max-width: 640px) {
+
+  :root {
+    --nav-h: 60px;
+  }
+
+  .announcement-bar {
+    font-size: .75rem;
+    padding: 8px 2.5rem 8px 1rem;
+    text-align: center;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: clamp(420px, 75vh, 640px);
+  }
+
+  .hero-content {
+    padding-inline: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Explore bar */
+  .explore-bar {
+    border-radius: var(--radius-lg);
+  }
+
+  .explore-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+    padding-bottom: 0;
+  }
+
+  .explore-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .explore-tab span {
+    white-space: nowrap;
+  }
+
+  .explore-fields {
+    flex-direction: column;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+  }
+
+  .explore-field {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .explore-field:last-of-type {
+    border-bottom: none;
+  }
+
+  .explore-divider {
+    display: none;
+  }
+
+  .explore-search-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: var(--radius-md);
+    margin: 8px;
+    width: calc(100% - 16px);
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Models */
+  .models-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* How */
+  .how-steps {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+  }
+
+  /* Bench visual */
+  #benchmarkChart {
+    width: 100%;
+    height: auto;
+  }
+
+  /* CTA */
+  .cta-actions {
+    flex-direction: column;
+  }
+
+  .cta-actions a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   30. RESPONSIVE — SMALL MOBILE  (max-width: 400px)
+============================================================= */
+@media (max-width: 400px) {
+
+  .hero-heading {
+    font-size: 1.875rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .models-filter-bar {
+    gap: .375rem;
+  }
+
+  .filter-btn {
+    font-size: .75rem;
+    padding: 6px 12px;
+  }
+}
+
+/* ============================================================
+   31. PRINT STYLES
+============================================================= */
+@media print {
+  .navbar,
+  .announcement-bar,
+  .mobile-nav,
+  .search-overlay,
+  .back-to-top,
+  .hero-canvas,
+  .hero-particles,
+  #ctaCanvas,
+  #benchmarkChart {
+    display: none !important;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+}
+
+/* ============================================================
+   32. REDUCED MOTION
+============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   33. HIGH CONTRAST MEDIA QUERY
+============================================================= */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #94A3B8;
+    --border-strong: #64748B;
+    --text-muted: #334155;
+    --text-faint: #475569;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       ANNOUNCEMENT BANNER
+  ============================================================ -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-inner">
+      <i class="fa-solid fa-bolt announcement-icon"></i>
+      <span>Cuántica v2.4 is live &mdash; introducing Variational Quantum Eigensolvers and hybrid QAOA support.</span>
+      <a href="#" class="announcement-link">Explore what&apos;s new <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <button class="announcement-close" id="announcementClose" aria-label="Close announcement">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+
+      <!-- Logo -->
+      <a href="#" class="navbar-logo" aria-label="Cuántica home">
+        <div class="logo-mark" style="background: transparent;">
+          <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
+        <span class="logo-text">Cuántica</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="navbar-links" aria-label="Primary navigation">
+        <a href="#explore" class="nav-link">Explore</a>
+        <a href="#models" class="nav-link">Models</a>
+        <a href="#benchmarks" class="nav-link">Benchmarks</a>
+        <div class="nav-dropdown-wrapper">
+          <a href="#" class="nav-link nav-dropdown-trigger">
+            Platform <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown">
+            <a href="/visualizer" class="nav-dropdown-item">
+              <i class="fa-solid fa-microchip"></i>
+              <span>
+                <strong>Quantum Circuits</strong>
+                <small>Visual circuit builder</small>
+              </span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>
+                <strong>Training Hub</strong>
+                <small>Hybrid model training</small>
+              </span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <i class="fa-solid fa-database"></i>
+              <span>
+                <strong>Dataset Library</strong>
+                <small>Quantum-ready datasets</small>
+              </span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <i class="fa-solid fa-rocket"></i>
+              <span>
+                <strong>Deployment</strong>
+                <small>One-click cloud deploy</small>
+              </span>
+            </a>
+          </div>
+        </div>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#docs" class="nav-link">Docs</a>
+      </nav>
+
+      <!-- Right Controls -->
+      <div class="navbar-controls">
+        <button class="nav-icon-btn" aria-label="Notifications" id="notifBtn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+        <button class="nav-icon-btn" aria-label="Search" id="globalSearchBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <div class="nav-locale">
+          <i class="fa-solid fa-globe"></i>
+          <span>EN</span>
+        </div>
+        <a href="login" class="btn-ghost-sm">Sign in</a>
+        <a href="signup" class="btn-primary-sm">Get started</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-inner">
+      <nav class="mobile-nav-links">
+        <a href="#explore" class="mobile-nav-link">Explore</a>
+        <a href="#models" class="mobile-nav-link">Models</a>
+        <a href="#benchmarks" class="mobile-nav-link">Benchmarks</a>
+        <a href="#" class="mobile-nav-link">Platform</a>
+        <a href="#pricing" class="mobile-nav-link">Pricing</a>
+        <a href="#docs" class="mobile-nav-link">Docs</a>
+      </nav>
+      <div class="mobile-nav-actions">
+        <a href="#" class="btn-ghost-sm w-full">Sign in</a>
+        <a href="#" class="btn-primary-sm w-full">Get started free</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Search Overlay -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <div class="search-overlay-backdrop" id="searchBackdrop"></div>
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <i class="fa-solid fa-magnifying-glass search-modal-icon"></i>
+        <input type="text" class="search-modal-input" id="searchModalInput" placeholder="Search models, algorithms, datasets..." autocomplete="off" />
+        <button class="search-modal-close" id="searchModalClose" aria-label="Close search">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="search-modal-results" id="searchModalResults">
+        <p class="search-hint">Start typing to search across Cuántica&apos;s model library...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section class="hero" id="hero">
+    <!-- Animated quantum background canvas -->
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+    <!-- Background gradient overlays -->
+    <div class="hero-gradient" aria-hidden="true"></div>
+
+    <!-- Floating particles -->
+    <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <!-- Badge -->
+      <div class="hero-badge" data-animate="fade-up" data-delay="0">
+        <i class="fa-solid fa-circle-check hero-badge-icon"></i>
+        <span>Trusted by 12,000+ researchers &amp; engineers</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="hero-heading" data-animate="fade-up" data-delay="100">
+        Explore <em>all</em> of quantum<br />machine learning at once.
+      </h1>
+
+      <!-- Subheading -->
+      <p class="hero-subheading" data-animate="fade-up" data-delay="200">
+        Train, benchmark, and deploy quantum-classical hybrid models across 40+ quantum backends, 200+ algorithms, and every major dataset.
+      </p>
+
+      <!-- Tabbed Explore Bar -->
+      <div class="explore-bar" data-animate="fade-up" data-delay="300">
+
+        <!-- Tabs -->
+        <div class="explore-tabs" role="tablist" aria-label="Explore category">
+          <button class="explore-tab active" role="tab" aria-selected="true" data-tab="models" id="tab-models" aria-controls="panel-models">
+            <i class="fa-solid fa-brain"></i>
+            <span>Models</span>
+          </button>
+          <button class="explore-tab" role="tab" aria-selected="false" data-tab="circuits" id="tab-circuits" aria-controls="panel-circuits">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Circuits</span>
+          </button>
+          <button class="explore-tab" role="tab" aria-selected="false" data-tab="datasets" id="tab-datasets" aria-controls="panel-datasets">
+            <i class="fa-solid fa-database"></i>
+            <span>Datasets</span>
+          </button>
+          <button class="explore-tab" role="tab" aria-selected="false" data-tab="benchmarks" id="tab-benchmarks" aria-controls="panel-benchmarks">
+            <i class="fa-solid fa-chart-bar"></i>
+            <span>Benchmarks</span>
+          </button>
+        </div>
+
+        <!-- Search Panels -->
+        <div class="explore-panel active" role="tabpanel" id="panel-models" aria-labelledby="tab-models">
+          <div class="explore-fields">
+            <div class="explore-field explore-field--main">
+              <label for="field-model-type">Model type</label>
+              <input type="text" id="field-model-type" placeholder="e.g. VQC, QAOA, QNN..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-qubits">Qubits</label>
+              <input type="text" id="field-qubits" placeholder="Min qubits" autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-backend">Backend</label>
+              <input type="text" id="field-backend" placeholder="IBM, IonQ, Rigetti..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-framework">Framework</label>
+              <input type="text" id="field-framework" placeholder="Qiskit, Pennylane..." autocomplete="off" />
+            </div>
+            <button class="explore-search-btn" id="exploreSearchBtn" aria-label="Search models">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="explore-panel" role="tabpanel" id="panel-circuits" aria-labelledby="tab-circuits">
+          <div class="explore-fields">
+            <div class="explore-field explore-field--main">
+              <label for="field-circuit-name">Circuit name</label>
+              <input type="text" id="field-circuit-name" placeholder="e.g. Bell state, Grover, QFT..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-gate-depth">Gate depth</label>
+              <input type="text" id="field-gate-depth" placeholder="Max depth" autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-topology">Topology</label>
+              <input type="text" id="field-topology" placeholder="Linear, Ring, Full..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-noise">Noise model</label>
+              <input type="text" id="field-noise" placeholder="Ideal, Depolar..." autocomplete="off" />
+            </div>
+            <button class="explore-search-btn" aria-label="Search circuits">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="explore-panel" role="tabpanel" id="panel-datasets" aria-labelledby="tab-datasets">
+          <div class="explore-fields">
+            <div class="explore-field explore-field--main">
+              <label for="field-dataset">Dataset name</label>
+              <input type="text" id="field-dataset" placeholder="e.g. MNIST, molecular, spin..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-domain">Domain</label>
+              <input type="text" id="field-domain" placeholder="Chemistry, Finance..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-size">Size</label>
+              <input type="text" id="field-size" placeholder="&lt; 1GB, 1-10GB..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-license">License</label>
+              <input type="text" id="field-license" placeholder="Open, MIT, CC-BY..." autocomplete="off" />
+            </div>
+            <button class="explore-search-btn" aria-label="Search datasets">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="explore-panel" role="tabpanel" id="panel-benchmarks" aria-labelledby="tab-benchmarks">
+          <div class="explore-fields">
+            <div class="explore-field explore-field--main">
+              <label for="field-benchmark-name">Benchmark suite</label>
+              <input type="text" id="field-benchmark-name" placeholder="e.g. QASMbench, QED-C..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-metric">Metric</label>
+              <input type="text" id="field-metric" placeholder="Fidelity, CNOT count..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-hardware">Hardware</label>
+              <input type="text" id="field-hardware" placeholder="Supercond., Trapped ion..." autocomplete="off" />
+            </div>
+            <div class="explore-divider" aria-hidden="true"></div>
+            <div class="explore-field">
+              <label for="field-year">Year</label>
+              <input type="text" id="field-year" placeholder="2023, 2024..." autocomplete="off" />
+            </div>
+            <button class="explore-search-btn" aria-label="Search benchmarks">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /explore-bar -->
+    </div><!-- /hero-content -->
+  </section>
+
+  <!-- ============================================================
+       FEATURE STRIP (below hero, mirrors the 3-col strip in the image)
+  ============================================================ -->
+  <section class="feature-strip" aria-label="Key platform benefits">
+    <div class="container">
+      <div class="feature-strip-grid">
+
+        <div class="feature-strip-item">
+          <div class="feature-strip-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div class="feature-strip-text">
+            <strong>Everything in one place</strong>
+            <span>Access every quantum framework, backend, and dataset from a single unified workspace.</span>
+          </div>
+        </div>
+
+        <div class="feature-strip-divider" aria-hidden="true"></div>
+
+        <div class="feature-strip-item">
+          <div class="feature-strip-icon">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div class="feature-strip-text">
+            <strong>Filter for what you need</strong>
+            <span>Running VQE on a trapped-ion device? Instantly narrow results by qubit count, topology, and noise model.</span>
+          </div>
+        </div>
+
+        <div class="feature-strip-divider" aria-hidden="true"></div>
+
+        <div class="feature-strip-item">
+          <div class="feature-strip-icon">
+            <i class="fa-solid fa-lock-open"></i>
+          </div>
+          <div class="feature-strip-text">
+            <strong>No vendor lock-in</strong>
+            <span>Export to Qiskit, Pennylane, Cirq, or raw OpenQASM. Your models, your rules.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRUSTED BY / LOGOS
+  ============================================================ -->
+  <section class="logos-section" aria-label="Trusted by leading organizations">
+    <div class="container">
+      <p class="logos-label">Trusted by research teams at</p>
+      <div class="logos-track-wrapper">
+        <div class="logos-track" id="logosTrack" aria-hidden="true">
+          <span class="logo-pill">MIT</span>
+          <span class="logo-pill">Stanford</span>
+          <span class="logo-pill">Google DeepMind</span>
+          <span class="logo-pill">IBM Research</span>
+          <span class="logo-pill">Caltech</span>
+          <span class="logo-pill">CERN</span>
+          <span class="logo-pill">IonQ</span>
+          <span class="logo-pill">Rigetti Computing</span>
+          <span class="logo-pill">Oxford QC</span>
+          <span class="logo-pill">NASA</span>
+          <!-- Duplicate for infinite scroll -->
+          <span class="logo-pill" aria-hidden="true">MIT</span>
+          <span class="logo-pill" aria-hidden="true">Stanford</span>
+          <span class="logo-pill" aria-hidden="true">Google DeepMind</span>
+          <span class="logo-pill" aria-hidden="true">IBM Research</span>
+          <span class="logo-pill" aria-hidden="true">Caltech</span>
+          <span class="logo-pill" aria-hidden="true">CERN</span>
+          <span class="logo-pill" aria-hidden="true">IonQ</span>
+          <span class="logo-pill" aria-hidden="true">Rigetti Computing</span>
+          <span class="logo-pill" aria-hidden="true">Oxford QC</span>
+          <span class="logo-pill" aria-hidden="true">NASA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS SECTION
+  ============================================================ -->
+  <section class="stats-section" id="explore" aria-label="Platform statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" data-animate="fade-up" data-delay="0">
+          <div class="stat-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="stat-number" data-count="240" data-suffix="+">0</div>
+          <div class="stat-label">Quantum Models</div>
+          <div class="stat-desc">VQC, QAOA, QNN, VQE and more</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="100">
+          <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="stat-number" data-count="42" data-suffix="+">0</div>
+          <div class="stat-label">Hardware Backends</div>
+          <div class="stat-desc">Superconducting, trapped-ion, photonic</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="200">
+          <div class="stat-icon"><i class="fa-solid fa-database"></i></div>
+          <div class="stat-number" data-count="1800" data-suffix="+">0</div>
+          <div class="stat-label">Datasets</div>
+          <div class="stat-desc">Chemistry, finance, optimization, NLP</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="300">
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-number" data-count="12" data-suffix="K+">0</div>
+          <div class="stat-label">Active Researchers</div>
+          <div class="stat-desc">Across 94 countries worldwide</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED MODELS SECTION
+  ============================================================ -->
+  <section class="models-section" id="models" aria-label="Featured quantum models">
+    <div class="container">
+
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-badge">
+          <i class="fa-solid fa-star"></i>
+          Featured Models
+        </div>
+        <h2 class="section-title">State-of-the-art quantum<br />models, ready to deploy.</h2>
+        <p class="section-sub">Browse the most-cited hybrid models from the Cuántica community. Filter by domain, qubit count, or hardware backend.</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="models-filter-bar" data-animate="fade-up" data-delay="100">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="classification">Classification</button>
+        <button class="filter-btn" data-filter="optimization">Optimization</button>
+        <button class="filter-btn" data-filter="simulation">Simulation</button>
+        <button class="filter-btn" data-filter="generative">Generative</button>
+        <button class="filter-btn" data-filter="nlp">NLP</button>
+      </div>
+
+      <!-- Models Grid -->
+      <div class="models-grid" id="modelsGrid">
+
+        <article class="model-card" data-category="classification" data-animate="fade-up" data-delay="0">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--teal">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--new">New</span>
+              <button class="model-bookmark" aria-label="Bookmark VQC-128">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">VQC-128</h3>
+          <p class="model-desc">Variational Quantum Classifier with 128-qubit ansatz. Achieves 94.2% accuracy on standard binary classification benchmarks.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 128 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Qiskit</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> IBM Eagle</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 8.4K</span>
+              <span><i class="fa-regular fa-star"></i> 4.9</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+        <article class="model-card" data-category="optimization" data-animate="fade-up" data-delay="80">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--blue">
+              <i class="fa-solid fa-diagram-project"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--hot">Hot</span>
+              <button class="model-bookmark" aria-label="Bookmark QAOA-Max">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">QAOA-Max</h3>
+          <p class="model-desc">Quantum Approximate Optimization Algorithm tuned for MaxCut and TSP. Supports 16-layer parametrization with noise-aware training.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 64 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Pennylane</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> IonQ</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 12.1K</span>
+              <span><i class="fa-regular fa-star"></i> 4.8</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+        <article class="model-card" data-category="simulation" data-animate="fade-up" data-delay="160">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--mint">
+              <i class="fa-solid fa-atom"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--stable">Stable</span>
+              <button class="model-bookmark" aria-label="Bookmark VQE-Chem">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">VQE-Chem</h3>
+          <p class="model-desc">Variational Quantum Eigensolver specialized for molecular ground-state energy estimation. Used in drug discovery pipelines.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 32 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Cirq</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> Google Sycamore</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 6.7K</span>
+              <span><i class="fa-regular fa-star"></i> 4.9</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+        <article class="model-card" data-category="classification" data-animate="fade-up" data-delay="240">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--indigo">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--new">New</span>
+              <button class="model-bookmark" aria-label="Bookmark QNN-ResNet">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">QNN-ResNet</h3>
+          <p class="model-desc">Hybrid quantum-classical residual network. Classical feature extraction fused with a 16-qubit variational block for image tasks.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 16 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Pennylane</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> Simulator</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 9.2K</span>
+              <span><i class="fa-regular fa-star"></i> 4.7</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+        <article class="model-card" data-category="generative" data-animate="fade-up" data-delay="320">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--rose">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--beta">Beta</span>
+              <button class="model-bookmark" aria-label="Bookmark Q-GAN">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">Q-GAN</h3>
+          <p class="model-desc">Quantum Generative Adversarial Network for molecule generation. Trained on PubChem subset with 99.3% chemical validity rate.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 24 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Qiskit</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> IBM Falcon</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 4.3K</span>
+              <span><i class="fa-regular fa-star"></i> 4.6</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+        <article class="model-card" data-category="nlp" data-animate="fade-up" data-delay="400">
+          <div class="model-card-header">
+            <div class="model-icon-wrap model-icon--amber">
+              <i class="fa-solid fa-language"></i>
+            </div>
+            <div class="model-meta">
+              <span class="model-badge model-badge--hot">Hot</span>
+              <button class="model-bookmark" aria-label="Bookmark QBERT">
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+          <h3 class="model-name">QBERT</h3>
+          <p class="model-desc">Quantum-enhanced BERT encoder. Sentence embeddings generated through quantum amplitude encoding achieve 3.1x speedup on retrieval tasks.</p>
+          <div class="model-tags">
+            <span class="model-tag"><i class="fa-solid fa-microchip"></i> 20 qubits</span>
+            <span class="model-tag"><i class="fa-solid fa-code"></i> Pennylane</span>
+            <span class="model-tag"><i class="fa-solid fa-flask"></i> Rigetti</span>
+          </div>
+          <div class="model-card-footer">
+            <div class="model-stats">
+              <span><i class="fa-solid fa-download"></i> 7.8K</span>
+              <span><i class="fa-regular fa-star"></i> 4.8</span>
+            </div>
+            <a href="#" class="model-run-btn">Run model <i class="fa-solid fa-play"></i></a>
+          </div>
+        </article>
+
+      </div><!-- /models-grid -->
+
+      <div class="models-cta" data-animate="fade-up">
+        <a href="#" class="btn-outline-lg">
+          Browse all 240+ models <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS
+  ============================================================ -->
+  <section class="how-section" id="benchmarks" aria-label="How Cuántica works">
+    <div class="container">
+
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-badge">
+          <i class="fa-solid fa-circle-nodes"></i>
+          How it works
+        </div>
+        <h2 class="section-title">From quantum circuit to<br />production in four steps.</h2>
+        <p class="section-sub">Cuántica abstracts away the complexity of quantum hardware so you can focus on building breakthroughs.</p>
+      </div>
+
+      <div class="how-steps">
+
+        <div class="how-step" data-animate="fade-right" data-delay="0">
+          <div class="how-step-number">01</div>
+          <div class="how-step-content">
+            <div class="how-step-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Discover</h3>
+            <p>Search 240+ quantum models, 1800+ datasets, and 42 hardware backends from one unified catalog with intelligent semantic search.</p>
+            <a href="#" class="how-step-link">Browse catalog <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="how-step" data-animate="fade-right" data-delay="100">
+          <div class="how-step-number">02</div>
+          <div class="how-step-content">
+            <div class="how-step-icon">
+              <i class="fa-solid fa-pen-ruler"></i>
+            </div>
+            <h3>Design</h3>
+            <p>Build parametric quantum circuits in our visual drag-and-drop editor. Export to OpenQASM, Qiskit, or Pennylane in one click.</p>
+            <a href="#" class="how-step-link">Try the editor <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="how-step" data-animate="fade-right" data-delay="200">
+          <div class="how-step-number">03</div>
+          <div class="how-step-content">
+            <div class="how-step-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Train</h3>
+            <p>Launch hybrid training jobs across simulators and real quantum hardware. Automatic hyperparameter tuning and noise mitigation included.</p>
+            <a href="#" class="how-step-link">Start training <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="how-step" data-animate="fade-right" data-delay="300">
+          <div class="how-step-number">04</div>
+          <div class="how-step-content">
+            <div class="how-step-icon">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3>Deploy</h3>
+            <p>Serve predictions via REST API or WebSocket endpoint. Scale from research prototype to enterprise workload without rewriting a line of code.</p>
+            <a href="#" class="how-step-link">Deploy now <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BENCHMARKS / PERFORMANCE
+  ============================================================ -->
+  <section class="benchmarks-section" aria-label="Performance benchmarks">
+    <div class="container">
+
+      <div class="benchmarks-layout">
+        <div class="benchmarks-left" data-animate="fade-right">
+          <div class="section-badge">
+            <i class="fa-solid fa-chart-bar"></i>
+            Benchmarks
+          </div>
+          <h2 class="section-title-left">Measurable quantum<br />advantage, proven.</h2>
+          <p class="section-sub-left">Cuántica models are benchmarked on standardized suites including QASMbench, QED-C, and our in-house QuantumScore metric. Every result is reproducible and openly published.</p>
+
+          <div class="benchmark-highlights">
+            <div class="benchmark-item">
+              <div class="benchmark-bar-wrap">
+                <div class="benchmark-label-row">
+                  <span>VQC Classification Accuracy</span>
+                  <strong>94.2%</strong>
+                </div>
+                <div class="benchmark-track">
+                  <div class="benchmark-fill" data-width="94"></div>
+                </div>
+              </div>
+            </div>
+            <div class="benchmark-item">
+              <div class="benchmark-bar-wrap">
+                <div class="benchmark-label-row">
+                  <span>QAOA Approximation Ratio</span>
+                  <strong>0.978</strong>
+                </div>
+                <div class="benchmark-track">
+                  <div class="benchmark-fill" data-width="97.8"></div>
+                </div>
+              </div>
+            </div>
+            <div class="benchmark-item">
+              <div class="benchmark-bar-wrap">
+                <div class="benchmark-label-row">
+                  <span>VQE Chemical Accuracy</span>
+                  <strong>99.1%</strong>
+                </div>
+                <div class="benchmark-track">
+                  <div class="benchmark-fill" data-width="99.1"></div>
+                </div>
+              </div>
+            </div>
+            <div class="benchmark-item">
+              <div class="benchmark-bar-wrap">
+                <div class="benchmark-label-row">
+                  <span>Quantum Volume (avg)</span>
+                  <strong>512 QV</strong>
+                </div>
+                <div class="benchmark-track">
+                  <div class="benchmark-fill" data-width="82"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="btn-primary-md">View full benchmark report <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="benchmarks-right" data-animate="fade-left" data-delay="100">
+          <div class="bench-visual">
+            <canvas id="benchmarkChart" width="460" height="320" aria-label="Benchmark comparison chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section class="testimonials-section" aria-label="User testimonials">
+    <div class="container">
+
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-badge">
+          <i class="fa-solid fa-quote-left"></i>
+          Testimonials
+        </div>
+        <h2 class="section-title">Loved by researchers<br />and engineers worldwide.</h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" data-animate="fade-up" data-delay="0">
+          <div class="testimonial-rating" aria-label="5 out of 5 stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">&ldquo;Cuántica cut our molecular simulation time from 3 days to 4 hours. The VQE-Chem model is genuinely state-of-the-art, and the noise mitigation tooling is unmatched.&rdquo;</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: var(--primary);">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <strong>Dr. Sarah Chen</strong>
+              <span>Computational Chemist, Caltech</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card testimonial-card--featured" data-animate="fade-up" data-delay="120">
+          <div class="testimonial-rating" aria-label="5 out of 5 stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">&ldquo;The unified search across backends is a game-changer. We used to maintain five separate environments for Qiskit, Pennylane, and Cirq. Now everything lives in one place and deploys seamlessly.&rdquo;</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: #6366F1;">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <strong>Marcus Freiberg</strong>
+              <span>ML Engineer, IBM Research</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate="fade-up" data-delay="240">
+          <div class="testimonial-rating" aria-label="5 out of 5 stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">&ldquo;As a PhD student, the free tier alone gives me access to more quantum compute than my entire department&apos;s hardware grant. The benchmark transparency builds real scientific credibility.&rdquo;</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: #F59E0B;">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <strong>Aiko Tanaka</strong>
+              <span>PhD Candidate, University of Tokyo</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING SECTION
+  ============================================================ -->
+  <section class="pricing-section" id="pricing" aria-label="Pricing plans">
+    <div class="container">
+
+      <div class="section-header" data-animate="fade-up">
+        <div class="section-badge">
+          <i class="fa-solid fa-tag"></i>
+          Pricing
+        </div>
+        <h2 class="section-title">Simple, transparent pricing.<br />No surprise charges.</h2>
+        <p class="section-sub">Start free. Scale when you need to. Cancel anytime.</p>
+      </div>
+
+      <!-- Toggle -->
+      <div class="pricing-toggle" data-animate="fade-up" data-delay="50">
+        <span class="toggle-label" id="toggleMonthly">Monthly</span>
+        <button class="toggle-btn" id="pricingToggle" aria-label="Toggle billing period" aria-pressed="false">
+          <span class="toggle-thumb"></span>
+        </button>
+        <span class="toggle-label" id="toggleAnnual">Annual <span class="toggle-save">Save 20%</span></span>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card" data-animate="fade-up" data-delay="0">
+          <div class="pricing-card-top">
+            <div class="pricing-plan-icon">
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+            <h3 class="pricing-plan-name">Starter</h3>
+            <p class="pricing-plan-desc">Perfect for students and individual researchers exploring quantum ML.</p>
+            <div class="pricing-price">
+              <span class="pricing-currency">$</span>
+              <span class="pricing-amount" data-monthly="0" data-annual="0">0</span>
+              <span class="pricing-period">/month</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> 10 model runs per day</li>
+            <li><i class="fa-solid fa-check"></i> 5-qubit simulator access</li>
+            <li><i class="fa-solid fa-check"></i> Community models library</li>
+            <li><i class="fa-solid fa-check"></i> Basic benchmarking tools</li>
+            <li><i class="fa-solid fa-check"></i> Community support</li>
+            <li class="pricing-feature--unavail"><i class="fa-solid fa-xmark"></i> Real hardware access</li>
+            <li class="pricing-feature--unavail"><i class="fa-solid fa-xmark"></i> Private model repos</li>
+          </ul>
+          <a href="#" class="pricing-cta pricing-cta--ghost">Start for free</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured" data-animate="fade-up" data-delay="100">
+          <div class="pricing-popular-badge">Most Popular</div>
+          <div class="pricing-card-top">
+            <div class="pricing-plan-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3 class="pricing-plan-name">Pro</h3>
+            <p class="pricing-plan-desc">For professional researchers and small teams running production workloads.</p>
+            <div class="pricing-price">
+              <span class="pricing-currency">$</span>
+              <span class="pricing-amount" data-monthly="49" data-annual="39">49</span>
+              <span class="pricing-period">/month</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> Unlimited model runs</li>
+            <li><i class="fa-solid fa-check"></i> 127-qubit simulator access</li>
+            <li><i class="fa-solid fa-check"></i> 5 real hardware QPU hours</li>
+            <li><i class="fa-solid fa-check"></i> Advanced benchmarking suite</li>
+            <li><i class="fa-solid fa-check"></i> Private model repositories</li>
+            <li><i class="fa-solid fa-check"></i> API access + webhooks</li>
+            <li><i class="fa-solid fa-check"></i> Priority email support</li>
+          </ul>
+          <a href="#" class="pricing-cta pricing-cta--primary">Get started</a>
+        </div>
+
+        <div class="pricing-card" data-animate="fade-up" data-delay="200">
+          <div class="pricing-card-top">
+            <div class="pricing-plan-icon">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <h3 class="pricing-plan-name">Enterprise</h3>
+            <p class="pricing-plan-desc">Custom compute, dedicated support, and compliance tooling for large organisations.</p>
+            <div class="pricing-price">
+              <span class="pricing-amount pricing-amount--custom">Custom</span>
+            </div>
+          </div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> Unlimited QPU hours</li>
+            <li><i class="fa-solid fa-check"></i> All hardware backends</li>
+            <li><i class="fa-solid fa-check"></i> On-premise deployment option</li>
+            <li><i class="fa-solid fa-check"></i> SSO &amp; SAML 2.0</li>
+            <li><i class="fa-solid fa-check"></i> Audit logs &amp; compliance</li>
+            <li><i class="fa-solid fa-check"></i> Dedicated success manager</li>
+            <li><i class="fa-solid fa-check"></i> SLA-backed uptime</li>
+          </ul>
+          <a href="#" class="pricing-cta pricing-cta--ghost">Contact sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA SECTION
+  ============================================================ -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="container">
+      <div class="cta-card" data-animate="fade-up">
+        <div class="cta-content">
+          <div class="section-badge cta-badge">
+            <i class="fa-solid fa-rocket"></i>
+            Start building today
+          </div>
+          <h2 class="cta-title">The quantum future<br />starts here.</h2>
+          <p class="cta-desc">Join 12,000+ researchers already using Cuántica to accelerate their quantum ML research. Free plan, no credit card required.</p>
+          <div class="cta-actions">
+            <a href="#" class="btn-primary-lg">
+              <i class="fa-solid fa-rocket"></i>
+              Start for free
+            </a>
+            <a href="#" class="btn-outline-lg btn-outline-lg--dark">
+              <i class="fa-brands fa-github"></i>
+              View on GitHub
+            </a>
+          </div>
+          <p class="cta-note"><i class="fa-solid fa-shield-halved"></i> SOC 2 Type II certified &mdash; enterprise-grade security.</p>
+        </div>
+        <div class="cta-visual" aria-hidden="true">
+          <canvas id="ctaCanvas" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" id="docs" aria-label="Site footer">
+    <div class="container">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="#" class="footer-logo" aria-label="Cuántica home">
+            <div class="logo-mark logo-mark--sm" style="background: transparent;">
+              <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+            </div>
+            <span class="logo-text">Cuántica</span>
+          </a>
+          <p class="footer-tagline">The quantum machine learning platform for researchers, engineers, and enterprises pushing the boundaries of computation.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social-btn" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Twitter / X">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="Discord">
+              <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="#" class="footer-social-btn" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <nav class="footer-nav-group" aria-label="Platform links">
+          <h4 class="footer-nav-title">Platform</h4>
+          <a href="#" class="footer-nav-link">Model Library</a>
+          <a href="#" class="footer-nav-link">Circuit Builder</a>
+          <a href="#" class="footer-nav-link">Training Hub</a>
+          <a href="#" class="footer-nav-link">Benchmarks</a>
+          <a href="#" class="footer-nav-link">Dataset Catalog</a>
+          <a href="#" class="footer-nav-link">API Reference</a>
+        </nav>
+
+        <nav class="footer-nav-group" aria-label="Resources links">
+          <h4 class="footer-nav-title">Resources</h4>
+          <a href="#" class="footer-nav-link">Documentation</a>
+          <a href="#" class="footer-nav-link">Tutorials</a>
+          <a href="#" class="footer-nav-link">Research Papers</a>
+          <a href="#" class="footer-nav-link">Community Forum</a>
+          <a href="#" class="footer-nav-link">Blog</a>
+          <a href="#" class="footer-nav-link">Changelog</a>
+        </nav>
+
+        <nav class="footer-nav-group" aria-label="Company links">
+          <h4 class="footer-nav-title">Company</h4>
+          <a href="#" class="footer-nav-link">About</a>
+          <a href="#" class="footer-nav-link">Careers</a>
+          <a href="#" class="footer-nav-link">Press</a>
+          <a href="#" class="footer-nav-link">Contact</a>
+          <a href="#" class="footer-nav-link">Privacy Policy</a>
+          <a href="#" class="footer-nav-link">Terms of Service</a>
+        </nav>
+
+        <div class="footer-newsletter">
+          <h4 class="footer-nav-title">Stay updated</h4>
+          <p>Get the latest quantum ML research and platform updates.</p>
+          <form class="newsletter-form" id="newsletterForm" novalidate>
+            <div class="newsletter-input-wrap">
+              <input type="email" id="newsletterEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email address" required />
+              <button type="submit" aria-label="Subscribe">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+            <p class="newsletter-error" id="newsletterError" role="alert" aria-live="polite"></p>
+            <p class="newsletter-success" id="newsletterSuccess" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Cuántica, Inc. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+          <a href="#">Status</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script >/**
+ * Cuántica — Quantum Machine Learning Platform
+ * index.js  |  All interactive behaviour
+ *
+ * Sections:
+ *  1.  Utility helpers
+ *  2.  Announcement bar
+ *  3.  Navbar: scroll state + hamburger + mobile nav
+ *  4.  Global search overlay
+ *  5.  Hero canvas (animated quantum network)
+ *  6.  Hero particles
+ *  7.  Explore bar tabs
+ *  8.  Scroll-driven entry animations (IntersectionObserver)
+ *  9.  Animated counters
+ * 10.  Model cards filter
+ * 11.  Model bookmark toggle
+ * 12.  Benchmark progress bars animation
+ * 13.  Benchmark chart (canvas)
+ * 14.  CTA canvas (spinning qubit rings)
+ * 15.  Pricing toggle (monthly / annual)
+ * 16.  Newsletter form validation
+ * 17.  Back-to-top button
+ * 18.  Smooth-scroll for anchor links
+ * 19.  Keyboard accessibility helpers
+ * 20.  Init — wire everything up
+ */
+
+'use strict';
+
+/* ============================================================
+   1. UTILITY HELPERS
+============================================================= */
+
+/**
+ * querySelector shorthand that throws a descriptive error when
+ * an element is not found, so bugs surface immediately.
+ */
+function qs(selector, root) {
+  root = root || document;
+  const el = root.querySelector(selector);
+  if (!el) {
+    console.warn('[Cuántica] Element not found: ' + selector);
+  }
+  return el;
+}
+
+/**
+ * querySelectorAll shorthand — returns a real Array.
+ */
+function qsa(selector, root) {
+  root = root || document;
+  return Array.from(root.querySelectorAll(selector));
+}
+
+/**
+ * Debounce — prevents a function from firing more than once
+ * every `wait` milliseconds.
+ */
+function debounce(fn, wait) {
+  var timer;
+  return function () {
+    var args = arguments;
+    var ctx = this;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(ctx, args);
+    }, wait);
+  };
+}
+
+/**
+ * Clamp a number between min and max.
+ */
+function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+}
+
+/**
+ * Linear interpolation.
+ */
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+/**
+ * Random float between min and max.
+ */
+function randBetween(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+/**
+ * Easing function — ease-out cubic.
+ */
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+/**
+ * Easing function — ease-in-out quad.
+ */
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
+
+/* ============================================================
+   2. ANNOUNCEMENT BAR
+============================================================= */
+
+function initAnnouncementBar() {
+  var bar   = qs('#announcementBar');
+  var close = qs('#announcementClose');
+  if (!bar || !close) return;
+
+  close.addEventListener('click', function () {
+    bar.style.maxHeight = bar.offsetHeight + 'px';
+    bar.style.overflow  = 'hidden';
+    bar.style.transition = 'max-height 0.35s ease, opacity 0.35s ease';
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        bar.style.maxHeight = '0';
+        bar.style.opacity   = '0';
+      });
+    });
+
+    setTimeout(function () {
+      bar.classList.add('hidden');
+      bar.style.removeProperty('max-height');
+      bar.style.removeProperty('overflow');
+      bar.style.removeProperty('opacity');
+      bar.style.removeProperty('transition');
+    }, 380);
+  });
+}
+
+/* ============================================================
+   3. NAVBAR: SCROLL STATE + HAMBURGER + MOBILE NAV
+============================================================= */
+
+function initNavbar() {
+  var navbar    = qs('#navbar');
+  var hamburger = qs('#hamburger');
+  var mobileNav = qs('#mobileNav');
+  if (!navbar) return;
+
+  /* Scrolled class */
+  function onScroll() {
+    if (window.scrollY > 16) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Hamburger toggle */
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', function () {
+      var isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      mobileNav.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    /* Close mobile nav when a link is clicked */
+    qsa('.mobile-nav-link', mobileNav).forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* Close on backdrop click (outside nav-inner) */
+    mobileNav.addEventListener('click', function (e) {
+      if (e.target === mobileNav) {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+}
+
+/* ============================================================
+   4. GLOBAL SEARCH OVERLAY
+============================================================= */
+
+/* Mock search data — in production this would be a real API call */
+var SEARCH_DATA = [
+  { type: 'model',     icon: 'fa-brain',           name: 'VQC-128',             desc: 'Variational Quantum Classifier, 128 qubits' },
+  { type: 'model',     icon: 'fa-diagram-project',  name: 'QAOA-Max',            desc: 'Quantum Approximate Optimization' },
+  { type: 'model',     icon: 'fa-atom',             name: 'VQE-Chem',            desc: 'Variational Quantum Eigensolver for chemistry' },
+  { type: 'model',     icon: 'fa-network-wired',    name: 'QNN-ResNet',          desc: 'Hybrid quantum-classical residual network' },
+  { type: 'model',     icon: 'fa-wand-magic-sparkles', name: 'Q-GAN',            desc: 'Quantum Generative Adversarial Network' },
+  { type: 'model',     icon: 'fa-language',         name: 'QBERT',               desc: 'Quantum-enhanced BERT encoder' },
+  { type: 'dataset',   icon: 'fa-database',         name: 'Quantum MNIST',       desc: 'Quantum-encoded handwritten digits' },
+  { type: 'dataset',   icon: 'fa-flask',            name: 'QChem Benchmark',     desc: 'Molecular ground-state dataset' },
+  { type: 'backend',   icon: 'fa-microchip',        name: 'IBM Eagle',           desc: '127-qubit superconducting QPU' },
+  { type: 'backend',   icon: 'fa-microchip',        name: 'IonQ Harmony',        desc: '11-qubit trapped-ion QPU' },
+  { type: 'backend',   icon: 'fa-microchip',        name: 'Rigetti Aspen',       desc: '80-qubit superconducting QPU' },
+  { type: 'doc',       icon: 'fa-book',             name: 'Getting Started',     desc: 'Installation and first circuit' },
+  { type: 'doc',       icon: 'fa-book',             name: 'API Reference',       desc: 'Full REST API documentation' },
+  { type: 'benchmark', icon: 'fa-chart-bar',        name: 'QASMbench v2',        desc: 'Gate-level quantum benchmark suite' },
+];
+
+function initGlobalSearch() {
+  var openBtn   = qs('#globalSearchBtn');
+  var overlay   = qs('#searchOverlay');
+  var backdrop  = qs('#searchBackdrop');
+  var input     = qs('#searchModalInput');
+  var closeBtn  = qs('#searchModalClose');
+  var results   = qs('#searchModalResults');
+  if (!openBtn || !overlay) return;
+
+  function openSearch() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (input) {
+      setTimeout(function () { input.focus(); }, 60);
+    }
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+    if (results) results.innerHTML = '<p class="search-hint">Start typing to search across Cuántica\'s model library...</p>';
+  }
+
+  openBtn.addEventListener('click', openSearch);
+
+  /* Keyboard shortcut: Cmd/Ctrl + K */
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (overlay.classList.contains('open')) {
+        closeSearch();
+      } else {
+        openSearch();
+      }
+    }
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeSearch();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+  if (backdrop) backdrop.addEventListener('click', closeSearch);
+
+  /* Live search */
+  if (input && results) {
+    input.addEventListener('input', debounce(function () {
+      var query = input.value.trim().toLowerCase();
+      if (!query) {
+        results.innerHTML = '<p class="search-hint">Start typing to search across Cuántica\'s model library...</p>';
+        return;
+      }
+
+      var matches = SEARCH_DATA.filter(function (item) {
+        return item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query) || item.type.toLowerCase().includes(query);
+      });
+
+      if (matches.length === 0) {
+        results.innerHTML = '<p class="search-hint">No results for &ldquo;' + escapeHtml(input.value) + '&rdquo;. Try a different term.</p>';
+        return;
+      }
+
+      var html = matches.map(function (item) {
+        return (
+          '<div class="search-result-item" role="option" tabindex="0">' +
+            '<div class="search-result-icon"><i class="fa-solid ' + item.icon + '"></i></div>' +
+            '<div class="search-result-text">' +
+              '<strong>' + escapeHtml(item.name) + '</strong>' +
+              '<small>' + capitalise(item.type) + ' &mdash; ' + escapeHtml(item.desc) + '</small>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      results.innerHTML = html;
+
+      /* Allow keyboard navigation inside results */
+      qsa('.search-result-item', results).forEach(function (item) {
+        item.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') item.click();
+        });
+        item.addEventListener('click', function () {
+          closeSearch();
+        });
+      });
+
+    }, 140));
+  }
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+function capitalise(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/* ============================================================
+   5. HERO CANVAS — ANIMATED QUANTUM NETWORK
+============================================================= */
+
+function initHeroCanvas() {
+  var canvas = qs('#heroCanvas');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  var nodes   = [];
+  var edges   = [];
+  var packets = [];
+  var raf;
+  var time = 0;
+
+  var NODE_COUNT = 52;
+  var EDGE_DIST  = 180;
+  /* Light-theme palette — teal strokes on arctic white */
+  var COLORS = {
+    node:   'rgba(62,207,166,',
+    edge:   'rgba(62,207,166,',
+    packet: 'rgba(108,229,191,'
+  };
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    build();
+  }
+
+  function build() {
+    nodes = [];
+    edges = [];
+    packets = [];
+
+    for (var i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x:  randBetween(0, W),
+        y:  randBetween(0, H),
+        vx: randBetween(-0.25, 0.25),
+        vy: randBetween(-0.25, 0.25),
+        r:  randBetween(1.5, 3.5),
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    spawnPackets();
+  }
+
+  function spawnPackets() {
+    for (var i = 0; i < 8; i++) {
+      var a = Math.floor(Math.random() * nodes.length);
+      var b = Math.floor(Math.random() * nodes.length);
+      if (a !== b) {
+        packets.push({
+          a: a, b: b,
+          t: Math.random(),
+          speed: randBetween(0.002, 0.006)
+        });
+      }
+    }
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
+    time += 0.008;
+
+    /* Move nodes */
+    nodes.forEach(function (n) {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0)  { n.x = W; }
+      if (n.x > W)  { n.x = 0; }
+      if (n.y < 0)  { n.y = H; }
+      if (n.y > H)  { n.y = 0; }
+    });
+
+    /* Draw edges */
+    for (var i = 0; i < nodes.length; i++) {
+      for (var j = i + 1; j < nodes.length; j++) {
+        var dx   = nodes[j].x - nodes[i].x;
+        var dy   = nodes[j].y - nodes[i].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < EDGE_DIST) {
+          var alpha = (1 - dist / EDGE_DIST) * 0.14;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = COLORS.edge + alpha + ')';
+          ctx.lineWidth = 0.75;
+          ctx.stroke();
+        }
+      }
+    }
+
+    /* Draw nodes */
+    nodes.forEach(function (n) {
+      var pulse  = 0.55 + 0.45 * Math.sin(time * 1.8 + n.phase);
+      var radius = n.r * pulse;
+      var alpha  = 0.18 + 0.28 * pulse;
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = COLORS.node + alpha + ')';
+      ctx.fill();
+
+      /* Outer glow ring */
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, radius * 2.8, 0, Math.PI * 2);
+      ctx.strokeStyle = COLORS.node + (alpha * 0.18) + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    });
+
+    /* Draw packets (data travelling along edges) */
+    packets.forEach(function (p, idx) {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        /* Reassign to a new random edge */
+        var a = Math.floor(Math.random() * nodes.length);
+        var b = Math.floor(Math.random() * nodes.length);
+        packets[idx].a = a;
+        packets[idx].b = b;
+        packets[idx].t = 0;
+        return;
+      }
+
+      var na = nodes[p.a];
+      var nb = nodes[p.b];
+      var px = lerp(na.x, nb.x, p.t);
+      var py = lerp(na.y, nb.y, p.t);
+
+      /* Trail */
+      var trailLen = 0.06;
+      var t0 = Math.max(0, p.t - trailLen);
+      var tx = lerp(na.x, nb.x, t0);
+      var ty = lerp(na.y, nb.y, t0);
+
+      var grad = ctx.createLinearGradient(tx, ty, px, py);
+      grad.addColorStop(0, COLORS.packet + '0)');
+      grad.addColorStop(1, COLORS.packet + '0.55)');
+
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      /* Head dot */
+      ctx.beginPath();
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = COLORS.packet + '1)';
+      ctx.fill();
+    });
+
+    raf = requestAnimationFrame(drawFrame);
+  }
+
+  var ro = new ResizeObserver(debounce(resize, 80));
+  ro.observe(canvas.parentElement || canvas);
+
+  resize();
+  drawFrame();
+
+  /* Clean up when page is hidden */
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      cancelAnimationFrame(raf);
+    } else {
+      drawFrame();
+    }
+  });
+}
+
+/* ============================================================
+   6. HERO PARTICLES
+============================================================= */
+
+function initHeroParticles() {
+  var container = qs('#heroParticles');
+  if (!container) return;
+
+  var PARTICLE_COUNT = 18;
+
+  function createParticle() {
+    var el   = document.createElement('span');
+    var size = randBetween(3, 8);
+
+    el.classList.add('particle');
+    el.style.cssText = [
+      'width:'    + size + 'px',
+      'height:'   + size + 'px',
+      'left:'     + randBetween(5, 95) + '%',
+      'bottom:'   + randBetween(-8, 20) + '%',
+      'animation-duration:' + randBetween(5, 12) + 's',
+      'animation-delay:'    + randBetween(0, 8)  + 's',
+      'opacity:0'
+    ].join(';');
+
+    container.appendChild(el);
+
+    /* Remove and recreate so loop feels organic */
+    el.addEventListener('animationend', function () {
+      el.remove();
+      createParticle();
+    });
+  }
+
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    createParticle();
+  }
+}
+
+/* ============================================================
+   7. EXPLORE BAR TABS
+============================================================= */
+
+function initExploreTabs() {
+  var tabs   = qsa('.explore-tab');
+  var panels = qsa('.explore-panel');
+  if (!tabs.length) return;
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var target = tab.dataset.tab;
+
+      /* Update tabs */
+      tabs.forEach(function (t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      /* Update panels */
+      panels.forEach(function (panel) {
+        panel.classList.remove('active');
+      });
+
+      var activePanel = qs('#panel-' + target);
+      if (activePanel) {
+        activePanel.classList.add('active');
+        /* Focus first input in panel for accessibility */
+        var firstInput = qs('input', activePanel);
+        if (firstInput) firstInput.focus();
+      }
+    });
+
+    /* Arrow key navigation within tab list */
+    tab.addEventListener('keydown', function (e) {
+      var idx  = tabs.indexOf(tab);
+      var next = null;
+      if (e.key === 'ArrowRight') { next = tabs[(idx + 1) % tabs.length]; }
+      if (e.key === 'ArrowLeft')  { next = tabs[(idx - 1 + tabs.length) % tabs.length]; }
+      if (next) {
+        e.preventDefault();
+        next.focus();
+        next.click();
+      }
+    });
+  });
+
+  /* Search button interaction */
+  var searchBtns = qsa('.explore-search-btn');
+  searchBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel  = btn.closest('.explore-panel');
+      var inputs = qsa('input', panel);
+      var query  = inputs.map(function (i) { return i.value.trim(); }).filter(Boolean).join(', ');
+
+      if (!query) {
+        /* Shake animation if nothing entered */
+        var bar = qs('.explore-bar');
+        bar.classList.add('shake');
+        setTimeout(function () { bar.classList.remove('shake'); }, 500);
+
+        var firstInput = inputs[0];
+        if (firstInput) {
+          firstInput.focus();
+          firstInput.style.outline = '2px solid #EF4444';
+          setTimeout(function () { firstInput.style.outline = ''; }, 1500);
+        }
+        return;
+      }
+
+      /* Simulate search by animating the button */
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+      btn.disabled = true;
+
+      setTimeout(function () {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        btn.style.background = '#16A34A';
+
+        setTimeout(function () {
+          btn.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 1800);
+      }, 900);
+    });
+  });
+}
+
+/* Add a shake keyframe class via JS */
+(function () {
+  var style = document.createElement('style');
+  style.textContent = [
+    '@keyframes shake{',
+      '0%,100%{transform:translateX(0)}',
+      '15%{transform:translateX(-6px)}',
+      '30%{transform:translateX(6px)}',
+      '45%{transform:translateX(-4px)}',
+      '60%{transform:translateX(4px)}',
+      '75%{transform:translateX(-2px)}',
+    '}',
+    '.shake{animation:shake .5s ease}'
+  ].join('');
+  document.head.appendChild(style);
+}());
+
+/* ============================================================
+   8. SCROLL-DRIVEN ENTRY ANIMATIONS (IntersectionObserver)
+============================================================= */
+
+function initScrollAnimations() {
+  var elements = qsa('[data-animate]');
+  if (!elements.length) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el    = entry.target;
+      var delay = parseInt(el.dataset.delay || 0, 10);
+      setTimeout(function () {
+        el.classList.add('is-visible');
+      }, delay);
+      io.unobserve(el);
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  elements.forEach(function (el) {
+    io.observe(el);
+  });
+}
+
+/* ============================================================
+   9. ANIMATED COUNTERS
+============================================================= */
+
+function initCounters() {
+  var counters = qsa('[data-count]');
+  if (!counters.length) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      animateCounter(entry.target);
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function (el) { io.observe(el); });
+}
+
+function animateCounter(el) {
+  var target   = parseInt(el.dataset.count, 10);
+  var suffix   = el.dataset.suffix || '';
+  var duration = 1600;
+  var start    = null;
+
+  function tick(ts) {
+    if (!start) start = ts;
+    var progress = Math.min((ts - start) / duration, 1);
+    var eased    = easeOutCubic(progress);
+    var current  = Math.floor(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      el.textContent = target + suffix;
+    }
+  }
+
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   10. MODEL CARDS FILTER
+============================================================= */
+
+function initModelFilter() {
+  var filterBtns = qsa('.filter-btn');
+  var cards      = qsa('.model-card');
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.dataset.filter;
+
+      /* Active state */
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      /* Show/hide cards */
+      cards.forEach(function (card, idx) {
+        var match = filter === 'all' || card.dataset.category === filter;
+
+        if (match) {
+          card.classList.remove('hidden');
+          card.style.opacity   = '0';
+          card.style.transform = 'translateY(20px)';
+          /* Stagger the reveal */
+          setTimeout(function () {
+            card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+            card.style.opacity   = '1';
+            card.style.transform = 'translateY(0)';
+          }, idx * 55);
+        } else {
+          card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+          card.style.opacity   = '0';
+          card.style.transform = 'translateY(12px)';
+          setTimeout(function () {
+            card.classList.add('hidden');
+            card.style.removeProperty('opacity');
+            card.style.removeProperty('transform');
+            card.style.removeProperty('transition');
+          }, 220);
+        }
+      });
+    });
+  });
+}
+
+/* ============================================================
+   11. MODEL BOOKMARK TOGGLE
+============================================================= */
+
+function initBookmarks() {
+  var btns = qsa('.model-bookmark');
+  if (!btns.length) return;
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var icon = btn.querySelector('i');
+      if (!icon) return;
+
+      if (icon.classList.contains('fa-regular')) {
+        icon.classList.replace('fa-regular', 'fa-solid');
+        btn.classList.add('bookmarked');
+        btn.setAttribute('aria-label', btn.getAttribute('aria-label').replace('Bookmark', 'Unbookmark'));
+        /* Bounce animation */
+        btn.style.transform = 'scale(1.35)';
+        setTimeout(function () { btn.style.transform = ''; }, 250);
+      } else {
+        icon.classList.replace('fa-solid', 'fa-regular');
+        btn.classList.remove('bookmarked');
+        btn.setAttribute('aria-label', btn.getAttribute('aria-label').replace('Unbookmark', 'Bookmark'));
+      }
+    });
+  });
+}
+
+/* ============================================================
+   12. BENCHMARK PROGRESS BARS
+============================================================= */
+
+function initBenchmarkBars() {
+  var fills = qsa('.benchmark-fill');
+  if (!fills.length) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el  = entry.target;
+      var pct = parseFloat(el.dataset.width) || 0;
+      /* Slight delay so the user can see the animation start */
+      setTimeout(function () {
+        el.style.width = pct + '%';
+      }, 200);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  fills.forEach(function (el) { io.observe(el); });
+}
+
+/* ============================================================
+   13. BENCHMARK CHART (CANVAS)
+============================================================= */
+
+function initBenchmarkChart() {
+  var canvas = qs('#benchmarkChart');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  var W   = canvas.width;
+  var H   = canvas.height;
+
+  var palette = {
+    primary:    '#6CE5BF',
+    secondary:  '#6366F1',
+    tertiary:   '#F59E0B',
+    text:       '#1E293B',
+    muted:      '#94A3B8',
+    border:     '#DCEEF2',
+    bg:         '#F7FEFF',
+    surfaceAlt: '#E0FAF4'
+  };
+
+  var LABELS   = ['VQC', 'QAOA', 'VQE', 'QNN', 'Q-GAN', 'QBERT'];
+  var CUÁNTICA = [94.2, 97.8, 99.1, 88.4, 91.6, 87.3];
+  var CLASSIC  = [88.1, 91.3, 93.0, 86.2, 84.7, 83.9];
+
+  var barW     = 28;
+  var groupW   = 80;
+  var paddingL = 52;
+  var paddingR = 20;
+  var paddingT = 20;
+  var paddingB = 44;
+  var chartW   = W - paddingL - paddingR;
+  var chartH   = H - paddingT - paddingB;
+  var gridLines = 5;
+  var minVal   = 75;
+  var maxVal   = 100;
+
+  /* Animation progress for each bar */
+  var progress = CUÁNTICA.map(function () { return 0; });
+  var startTs  = null;
+  var animating = false;
+  var DURATION  = 1100;
+
+  function toY(val) {
+    var norm = (val - minVal) / (maxVal - minVal);
+    return paddingT + chartH - norm * chartH;
+  }
+
+  function draw(ts) {
+    if (!startTs) startTs = ts;
+    var t = Math.min((ts - startTs) / DURATION, 1);
+    var eased = easeInOutQuad(t);
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* Background */
+    ctx.fillStyle = palette.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Grid lines */
+    for (var g = 0; g <= gridLines; g++) {
+      var val  = minVal + (maxVal - minVal) * (g / gridLines);
+      var y    = toY(val);
+      ctx.beginPath();
+      ctx.moveTo(paddingL, y);
+      ctx.lineTo(W - paddingR, y);
+      ctx.strokeStyle = palette.border;
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+
+      ctx.fillStyle  = palette.muted;
+      ctx.font       = '11px Inter, sans-serif';
+      ctx.textAlign  = 'right';
+      ctx.fillText(val.toFixed(0) + '%', paddingL - 8, y + 4);
+    }
+
+    /* Group bars */
+    LABELS.forEach(function (label, i) {
+      var groupX = paddingL + i * groupW + (groupW - barW * 2 - 6) / 2;
+
+      /* Cuántica bar */
+      var cH  = toY(minVal) - toY(minVal + (CUÁNTICA[i] - minVal) * eased);
+      var cY  = toY(minVal) - cH;
+      var rx  = 4;
+
+      ctx.fillStyle = palette.primary;
+      ctx.beginPath();
+      ctx.roundRect
+        ? ctx.roundRect(groupX, cY, barW, cH, [rx, rx, 0, 0])
+        : roundRectFallback(ctx, groupX, cY, barW, cH, rx);
+      ctx.fill();
+
+      /* Classic bar */
+      var classH = toY(minVal) - toY(minVal + (CLASSIC[i] - minVal) * eased);
+      var classY = toY(minVal) - classH;
+      ctx.fillStyle = palette.secondary;
+      ctx.globalAlpha = 0.55;
+      ctx.beginPath();
+      ctx.roundRect
+        ? ctx.roundRect(groupX + barW + 6, classY, barW, classH, [rx, rx, 0, 0])
+        : roundRectFallback(ctx, groupX + barW + 6, classY, barW, classH, rx);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      /* Label */
+      ctx.fillStyle = palette.muted;
+      ctx.font      = '11px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, groupX + barW + 3, H - paddingB + 16);
+
+      /* Value label above Cuántica bar */
+      if (t >= 0.85) {
+        ctx.fillStyle = palette.text;
+        ctx.font      = 'bold 10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(CUÁNTICA[i].toFixed(1) + '%', groupX + barW / 2, cY - 6);
+      }
+    });
+
+    /* Legend */
+    var legX = paddingL;
+    var legY = H - 8;
+
+    ctx.fillStyle = palette.primary;
+    ctx.fillRect(legX, legY - 9, 12, 9);
+    ctx.fillStyle = palette.text;
+    ctx.font      = '11px Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Cuántica', legX + 16, legY);
+
+    ctx.fillStyle  = palette.secondary;
+    ctx.globalAlpha = 0.55;
+    ctx.fillRect(legX + 90, legY - 9, 12, 9);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = palette.text;
+    ctx.fillText('Classical', legX + 108, legY);
+
+    if (t < 1) {
+      requestAnimationFrame(draw);
+    }
+  }
+
+  function roundRectFallback(ctx, x, y, w, h, r) {
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h);
+    ctx.lineTo(x, y + h);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  /* Trigger on visibility */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !animating) {
+        animating = true;
+        startTs   = null;
+        requestAnimationFrame(draw);
+        io.unobserve(canvas);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  io.observe(canvas);
+}
+
+/* ============================================================
+   14. CTA CANVAS — SPINNING QUBIT RINGS
+============================================================= */
+
+function initCtaCanvas() {
+  var canvas = qs('#ctaCanvas');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  var W   = canvas.width;
+  var H   = canvas.height;
+  var raf;
+  var time = 0;
+
+  var rings = [
+    { rx: 120, ry: 60,  angle: 0.0, speed: 0.008, tilt: 0.3, color: 'rgba(108,229,191,' },
+    { rx: 90,  ry: 45,  angle: 1.0, speed: -0.012, tilt: -0.5, color: 'rgba(99,102,241,' },
+    { rx: 60,  ry: 30,  angle: 2.1, speed: 0.018, tilt: 0.8, color: 'rgba(173,241,221,' }
+  ];
+
+  var cx = W / 2;
+  var cy = H / 2;
+
+  function drawRing(ring) {
+    ring.angle += ring.speed;
+    var steps  = 120;
+    ctx.beginPath();
+    for (var i = 0; i <= steps; i++) {
+      var theta = (i / steps) * Math.PI * 2;
+      var ox    = ring.rx * Math.cos(theta + ring.angle);
+      var oy    = ring.ry * Math.sin(theta + ring.angle) * Math.cos(ring.tilt);
+      if (i === 0) {
+        ctx.moveTo(cx + ox, cy + oy);
+      } else {
+        ctx.lineTo(cx + ox, cy + oy);
+      }
+    }
+    ctx.strokeStyle = ring.color + '0.55)';
+    ctx.lineWidth   = 1.5;
+    ctx.stroke();
+
+    /* Dot at ring start */
+    var dotX = cx + ring.rx * Math.cos(ring.angle);
+    var dotY = cy + ring.ry * Math.sin(ring.angle) * Math.cos(ring.tilt);
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = ring.color + '1)';
+    ctx.fill();
+  }
+
+  function drawGrid() {
+    /* Hex dot grid in the background */
+    var spacing = 32;
+    ctx.fillStyle = 'rgba(108,229,191,0.06)';
+    for (var gx = 0; gx < W; gx += spacing) {
+      for (var gy = 0; gy < H; gy += spacing) {
+        var row = Math.floor(gy / spacing);
+        var offX = row % 2 === 0 ? 0 : spacing / 2;
+        ctx.beginPath();
+        ctx.arc(gx + offX, gy, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    time += 0.01;
+
+    drawGrid();
+
+    /* Centre glow */
+    var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80);
+    grad.addColorStop(0, 'rgba(108,229,191,0.18)');
+    grad.addColorStop(1, 'rgba(108,229,191,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    rings.forEach(drawRing);
+
+    /* Centre node */
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6 + 2 * Math.sin(time * 2), 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(108,229,191,0.9)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 14 + 4 * Math.sin(time * 2), 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(108,229,191,0.3)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  frame();
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      cancelAnimationFrame(raf);
+    } else {
+      raf = requestAnimationFrame(frame);
+    }
+  });
+}
+
+/* ============================================================
+   15. PRICING TOGGLE
+============================================================= */
+
+function initPricingToggle() {
+  var toggle = qs('#pricingToggle');
+  if (!toggle) return;
+
+  var amounts = qsa('.pricing-amount[data-monthly]');
+
+  toggle.addEventListener('click', function () {
+    var isAnnual = toggle.getAttribute('aria-pressed') === 'true';
+    var next     = !isAnnual;
+
+    toggle.setAttribute('aria-pressed', String(next));
+
+    amounts.forEach(function (el) {
+      var monthly = el.dataset.monthly;
+      var annual  = el.dataset.annual;
+      var from    = next ? parseInt(monthly, 10) : parseInt(annual, 10);
+      var to      = next ? parseInt(annual,  10) : parseInt(monthly, 10);
+
+      animatePriceChange(el, from, to);
+    });
+
+    /* Highlight active label */
+    var monthLabel  = qs('#toggleMonthly');
+    var annualLabel = qs('#toggleAnnual');
+    if (monthLabel && annualLabel) {
+      monthLabel.style.fontWeight = next ? '400' : '700';
+      monthLabel.style.color      = next ? '' : 'var(--text)';
+      annualLabel.style.fontWeight = next ? '700' : '400';
+      annualLabel.style.color      = next ? 'var(--text)' : '';
+    }
+  });
+}
+
+function animatePriceChange(el, from, to) {
+  var duration = 450;
+  var start    = null;
+
+  function tick(ts) {
+    if (!start) start = ts;
+    var progress = Math.min((ts - start) / duration, 1);
+    var eased    = easeInOutQuad(progress);
+    var current  = Math.round(lerp(from, to, eased));
+    el.textContent = String(current);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
+   16. NEWSLETTER FORM VALIDATION
+============================================================= */
+
+function initNewsletterForm() {
+  var form    = qs('#newsletterForm');
+  var input   = qs('#newsletterEmail');
+  var errorEl = qs('#newsletterError');
+  var successEl = qs('#newsletterSuccess');
+  if (!form || !input) return;
+
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearMessages();
+
+    var val = input.value.trim();
+
+    if (!val) {
+      showError('Please enter your email address.');
+      input.focus();
+      return;
+    }
+
+    if (!EMAIL_RE.test(val)) {
+      showError('That doesn\'t look like a valid email address.');
+      input.focus();
+      return;
+    }
+
+    /* Simulate async submit */
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+      btn.disabled  = true;
+    }
+
+    setTimeout(function () {
+      input.value  = '';
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+        btn.disabled  = false;
+      }
+      showSuccess('You\'re on the list. We\'ll be in touch soon.');
+    }, 1200);
+  });
+
+  function showError(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.classList.add('visible');
+  }
+
+  function showSuccess(msg) {
+    if (!successEl) return;
+    successEl.textContent = msg;
+    successEl.classList.add('visible');
+  }
+
+  function clearMessages() {
+    if (errorEl)   { errorEl.classList.remove('visible');   errorEl.textContent   = ''; }
+    if (successEl) { successEl.classList.remove('visible'); successEl.textContent = ''; }
+  }
+
+  input.addEventListener('input', clearMessages);
+}
+
+/* ============================================================
+   17. BACK TO TOP BUTTON
+============================================================= */
+
+function initBackToTop() {
+  var btn = qs('#backToTop');
+  if (!btn) return;
+
+  function onScroll() {
+    if (window.scrollY > 500) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ============================================================
+   18. SMOOTH-SCROLL FOR ANCHOR LINKS
+============================================================= */
+
+function initSmoothScroll() {
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (href === '#') return;
+
+    var target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+
+    var navH   = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 68;
+    var offset = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
+}
+
+/* ============================================================
+   19. KEYBOARD ACCESSIBILITY — TRAP FOCUS IN MODAL OVERLAYS
+============================================================= */
+
+function initFocusTrap() {
+  var overlay    = qs('#searchOverlay');
+  var mobileNav  = qs('#mobileNav');
+
+  function trapFocus(container, e) {
+    var focusable = qsa(
+      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      container
+    ).filter(function (el) {
+      return !el.closest('[aria-hidden="true"]') && el.offsetParent !== null;
+    });
+
+    if (!focusable.length) return;
+
+    var first = focusable[0];
+    var last  = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    if (overlay && overlay.classList.contains('open')) {
+      trapFocus(overlay, e);
+    } else if (mobileNav && mobileNav.classList.contains('open')) {
+      trapFocus(mobileNav, e);
+    }
+  });
+}
+
+/* ============================================================
+   20. ACTIVE NAV LINK — HIGHLIGHT CURRENT SECTION
+============================================================= */
+
+function initActiveNavHighlight() {
+  var sections = qsa('section[id], header[id], footer[id]');
+  var navLinks = qsa('.nav-link');
+  if (!sections.length || !navLinks.length) return;
+
+  var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 68;
+
+  function update() {
+    var scrollY = window.scrollY + navH + 40;
+    var current = '';
+
+    sections.forEach(function (sec) {
+      if (sec.offsetTop <= scrollY) {
+        current = '#' + sec.id;
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('href') === current);
+    });
+  }
+
+  window.addEventListener('scroll', debounce(update, 80), { passive: true });
+  update();
+}
+
+/* ============================================================
+   21. NOTIFICATION BUTTON — PLACEHOLDER INTERACTION
+============================================================= */
+
+function initNotifButton() {
+  var btn  = qs('#notifBtn');
+  var dot  = btn && btn.querySelector('.notif-dot');
+  if (!btn) return;
+
+  btn.addEventListener('click', function () {
+    if (dot) {
+      dot.style.opacity = '0';
+      dot.style.transform = 'scale(0)';
+      dot.style.transition = 'opacity 0.2s, transform 0.2s';
+    }
+  });
+}
+
+/* ============================================================
+   22. HERO — PARALLAX SUBTLE TILT ON MOUSE MOVE
+============================================================= */
+
+function initHeroParallax() {
+  var hero    = qs('#hero');
+  var content = hero && hero.querySelector('.hero-content');
+  if (!hero || !content) return;
+
+  /* Only run on pointer devices — skip touch */
+  var HAS_POINTER = window.matchMedia('(hover: hover)').matches;
+  if (!HAS_POINTER) return;
+
+  hero.addEventListener('mousemove', function (e) {
+    var rect   = hero.getBoundingClientRect();
+    var cx     = rect.left + rect.width  / 2;
+    var cy     = rect.top  + rect.height / 2;
+    var dx     = (e.clientX - cx) / (rect.width  / 2);
+    var dy     = (e.clientY - cy) / (rect.height / 2);
+    var maxRot = 3;
+
+    content.style.transform = [
+      'perspective(1000px)',
+      'rotateY(' + (dx * maxRot) + 'deg)',
+      'rotateX(' + (-dy * maxRot) + 'deg)'
+    ].join(' ');
+    content.style.transition = 'transform 0.1s ease';
+  });
+
+  hero.addEventListener('mouseleave', function () {
+    content.style.transform  = '';
+    content.style.transition = 'transform 0.5s ease';
+  });
+}
+
+/* ============================================================
+   23. LOGO TRACK — PAUSE ON HOVER (already in CSS, JS fallback)
+============================================================= */
+
+function initLogoTrack() {
+  var track = qs('#logosTrack');
+  if (!track) return;
+
+  track.addEventListener('mouseenter', function () {
+    track.style.animationPlayState = 'paused';
+  });
+
+  track.addEventListener('mouseleave', function () {
+    track.style.animationPlayState = 'running';
+  });
+}
+
+/* ============================================================
+   24. STAT CARDS — TILT ON HOVER (pointer devices)
+============================================================= */
+
+function initCardTilt() {
+  var cards = qsa('.stat-card, .model-card, .testimonial-card');
+  var HAS_POINTER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!HAS_POINTER) return;
+
+  cards.forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var rect  = card.getBoundingClientRect();
+      var x     = (e.clientX - rect.left) / rect.width  - 0.5;
+      var y     = (e.clientY - rect.top)  / rect.height - 0.5;
+      var tiltX = y * -8;
+      var tiltY = x *  8;
+
+      card.style.transform = [
+        'translateY(-4px)',
+        'perspective(600px)',
+        'rotateX(' + tiltX + 'deg)',
+        'rotateY(' + tiltY + 'deg)'
+      ].join(' ');
+    });
+
+    card.addEventListener('mouseleave', function () {
+      card.style.transform  = '';
+      card.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
+    });
+  });
+}
+
+/* ============================================================
+   20. INIT — WIRE EVERYTHING UP
+============================================================= */
+
+function init() {
+  initAnnouncementBar();
+  initNavbar();
+  initGlobalSearch();
+  initHeroCanvas();
+  initHeroParticles();
+  initExploreTabs();
+  initScrollAnimations();
+  initCounters();
+  initModelFilter();
+  initBookmarks();
+  initBenchmarkBars();
+  initBenchmarkChart();
+  initCtaCanvas();
+  initPricingToggle();
+  initNewsletterForm();
+  initBackToTop();
+  initSmoothScroll();
+  initFocusTrap();
+  initActiveNavHighlight();
+  initNotifButton();
+  initHeroParallax();
+  initLogoTrack();
+  initCardTilt();
+}
+
+/* Run after DOM is ready */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>

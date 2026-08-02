@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Module 4 – Why Quantum Computing?
+  </title>
+ </head>
+ <body>
+  <main>
+  <h2>
+   Module 4 – Why Quantum Computing?
+  </h2>
+  <h3>
+   Chapter 1: Limitations of Classical Computing
+  </h3>
+  <h4>
+   1.1 Introduction
+  </h4>
+  <p>
+   Classical computers have transformed human civilization. From smartphones to supercomputers, almost every digital device works using
+   <strong>
+    classical bits
+   </strong>
+   .
+  </p>
+  <p>
+   A classical bit can only exist in one of two states:
+  </p>
+  <ul>
+   <li>
+    0
+   </li>
+   <li>
+    1
+   </li>
+  </ul>
+  <p>
+   Even though modern processors contain billions of transistors, there are certain problems that become impossible or impractical to solve using classical computers.
+  </p>
+  <p>
+   These limitations led scientists to develop an entirely new computing paradigm called
+   <strong>
+    Quantum Computing
+   </strong>
+   .
+  </p>
+  <h4>
+   1.2 How Classical Computers Work
+  </h4>
+  <p>
+   A classical computer processes information using:
+  </p>
+  <ul>
+   <li>
+    Binary bits
+   </li>
+   <li>
+    Logic gates
+   </li>
+   <li>
+    Electrical signals
+   </li>
+   <li>
+    Transistors
+   </li>
+  </ul>
+  <h5>
+   Example
+  </h5>
+  <p>
+   Bit = 0
+   <br/>
+   Bit = 1
+   <br/>
+   8 Bits = 1 Byte
+  </p>
+  <p>
+   Everything inside a computer—images, videos, games, AI models—is ultimately represented using combinations of 0s and 1s.
+  </p>
+  <h4>
+   1.3 Moore's Law
+  </h4>
+  <p>
+   In 1965, Gordon Moore observed that:
+  </p>
+  <ul>
+   <li>
+    The number of transistors on a chip doubles approximately every two years.
+   </li>
+  </ul>
+  <p>
+   This resulted in:
+  </p>
+  <ul>
+   <li>
+    Faster processors
+   </li>
+   <li>
+    Smaller devices
+   </li>
+   <li>
+    Lower cost
+   </li>
+   <li>
+    More memory
+   </li>
+  </ul>
+  <p>
+   However, Moore's Law is slowing down.
+  </p>
+  <h5>
+   Reason:
+  </h5>
+  <ul>
+   <li>
+    Transistors are becoming extremely tiny (only a few nanometers).
+   </li>
+  </ul>
+  <p>
+   At this scale:
+  </p>
+  <ul>
+   <li>
+    Quantum effects begin appearing
+   </li>
+   <li>
+    Heat increases
+   </li>
+   <li>
+    Leakage current increases
+   </li>
+   <li>
+    Manufacturing becomes difficult
+   </li>
+  </ul>
+  <h4>
+   1.4 Major Limitations of Classical Computing
+  </h4>
+  <h5>
+   A. Processing Power
+  </h5>
+  <p>
+   Some problems require enormous computational resources.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <p>
+   Finding the best route among millions of possibilities.
+  </p>
+  <p>
+   Classical computers must check many possibilities one by one.
+  </p>
+  <h5>
+   B. Exponential Growth
+  </h5>
+  <p>
+   Many scientific problems grow exponentially.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <p>
+   Traveling Salesman Problem
+  </p>
+  <p>
+   If cities increase:
+  </p>
+  <ul>
+   <li>
+    5 cities → 120 routes
+   </li>
+   <li>
+    10 cities → 3.6 million routes
+   </li>
+   <li>
+    20 cities → 2.4 × 10
+    <sup>
+     18
+    </sup>
+    routes
+   </li>
+  </ul>
+  <p>
+   Impossible to check every route.
+  </p>
+  <h5>
+   C. Simulation of Nature
+  </h5>
+  <p>
+   Richard Feynman said:
+  </p>
+  <p>
+   Nature is quantum mechanical.
+  </p>
+  <p>
+   Atoms and molecules follow quantum physics.
+  </p>
+  <p>
+   Classical computers struggle to simulate:
+  </p>
+  <ul>
+   <li>
+    Molecules
+   </li>
+   <li>
+    Chemical reactions
+   </li>
+   <li>
+    Protein folding
+   </li>
+   <li>
+    Quantum materials
+   </li>
+  </ul>
+  <h5>
+   D. Cryptography
+  </h5>
+  <p>
+   Modern encryption:
+  </p>
+  <ul>
+   <li>
+    RSA
+   </li>
+  </ul>
+  <p>
+   Security depends upon factoring huge prime numbers.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <p>
+   <code>
+    N = P × Q
+   </code>
+  </p>
+  <p>
+   Finding P and Q for large numbers is extremely difficult.
+  </p>
+  <p>
+   Classical computers require millions of years for extremely large numbers.
+  </p>
+  <h5>
+   E. Artificial Intelligence
+  </h5>
+  <p>
+   Modern AI requires:
+  </p>
+  <ul>
+   <li>
+    Massive datasets
+   </li>
+   <li>
+    Huge GPUs
+   </li>
+   <li>
+    High electricity
+   </li>
+   <li>
+    Long training time
+   </li>
+  </ul>
+  <h6>
+   Example
+  </h6>
+  <p>
+   Training GPT models requires:
+  </p>
+  <ul>
+   <li>
+    Thousands of GPUs
+   </li>
+   <li>
+    Millions of watts
+   </li>
+   <li>
+    Weeks of computation
+   </li>
+  </ul>
+  <h5>
+   F. Optimization Problems
+  </h5>
+  <h6>
+   Examples
+  </h6>
+  <ul>
+   <li>
+    Airline scheduling
+   </li>
+   <li>
+    Delivery routing
+   </li>
+   <li>
+    Traffic control
+   </li>
+   <li>
+    Stock optimization
+   </li>
+   <li>
+    Supply chains
+   </li>
+  </ul>
+  <p>
+   These require searching billions of combinations.
+  </p>
+  <h4>
+   1.5 Energy Consumption
+  </h4>
+  <p>
+   Modern data centers consume enormous electricity.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <p>
+   AI models require:
+  </p>
+  <ul>
+   <li>
+    Thousands of GPUs
+   </li>
+   <li>
+    Cooling systems
+   </li>
+   <li>
+    Huge energy bills
+   </li>
+  </ul>
+  <p>
+   Future computing needs more efficient approaches.
+  </p>
+  <h4>
+   1.6 Memory Limitation
+  </h4>
+  <p>
+   Large simulations require:
+  </p>
+  <ul>
+   <li>
+    TBs
+   </li>
+   <li>
+    PBs
+   </li>
+   <li>
+    Even Exabytes
+   </li>
+  </ul>
+  <p>
+   Memory quickly becomes insufficient.
+  </p>
+  <h4>
+   1.7 Parallel Computing is Not Enough
+  </h4>
+  <p>
+   Supercomputers use:
+  </p>
+  <ul>
+   <li>
+    Thousands of CPUs
+   </li>
+   <li>
+    Millions of cores
+   </li>
+  </ul>
+  <p>
+   Even then,
+  </p>
+  <p>
+   Certain problems remain computationally infeasible.
+  </p>
+  <h4>
+   1.8 Summary
+  </h4>
+  <p>
+   Classical computing struggles with:
+  </p>
+  <ul>
+   <li>
+    Optimization
+   </li>
+   <li>
+    Quantum simulations
+   </li>
+   <li>
+    Cryptography
+   </li>
+   <li>
+    Large-scale AI
+   </li>
+   <li>
+    Exponential search problems
+   </li>
+  </ul>
+  <p>
+   Quantum computing aims to address many of these challenges.
+  </p>
+  <h3>
+   Chapter 2: Quantum Computing Fundamentals
+  </h3>
+  <h4>
+   2.1 What is Quantum Computing?
+  </h4>
+  <p>
+   Quantum computing is a new computing paradigm based on the principles of
+   <strong>
+    quantum mechanics
+   </strong>
+   .
+  </p>
+  <p>
+   Instead of classical bits, it uses
+   <strong>
+    qubits
+   </strong>
+   .
+  </p>
+  <h4>
+   2.2 Quantum Mechanics
+  </h4>
+  <p>
+   Quantum mechanics describes the behavior of:
+  </p>
+  <ul>
+   <li>
+    Electrons
+   </li>
+   <li>
+    Photons
+   </li>
+   <li>
+    Atoms
+   </li>
+   <li>
+    Molecules
+   </li>
+  </ul>
+  <p>
+   At microscopic scales, particles exhibit behaviors unlike classical objects.
+  </p>
+  <h4>
+   2.3 Basic Principles
+  </h4>
+  <p>
+   Quantum computing relies on:
+  </p>
+  <ul>
+   <li>
+    Superposition
+   </li>
+   <li>
+    Entanglement
+   </li>
+   <li>
+    Interference
+   </li>
+   <li>
+    Measurement
+   </li>
+  </ul>
+  <p>
+   These principles enable new ways of processing information.
+  </p>
+  <h4>
+   2.4 Quantum vs Classical Computing
+  </h4>
+  <!-- Table content will be inserted at the end -->
+  <h4>
+   2.5 Quantum Gates
+  </h4>
+  <p>
+   Quantum gates manipulate qubits.
+  </p>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    X Gate
+   </li>
+   <li>
+    Y Gate
+   </li>
+   <li>
+    Z Gate
+   </li>
+   <li>
+    Hadamard Gate
+   </li>
+   <li>
+    CNOT Gate
+   </li>
+   <li>
+    Phase Gate
+   </li>
+  </ul>
+  <p>
+   Unlike classical gates, quantum gates are reversible and represented by unitary matrices.
+  </p>
+  <h4>
+   2.6 Quantum Circuit
+  </h4>
+  <p>
+   A quantum algorithm is represented as a quantum circuit.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <pre>
+|0&gt; ----H------●------
+               |
+|0&gt; -----------X------
+    </pre>
+  <p>
+   This creates an entangled Bell state.
+  </p>
+  <h4>
+   2.7 Measurement
+  </h4>
+  <pre>
+Quantum State
+↓
+Collapses
+↓
+0 or 1
+    </pre>
+  <p>
+   Measurement converts quantum information into classical information.
+  </p>
+  <h3>
+   Chapter 3: Qubits
+  </h3>
+  <h4>
+   3.1 What is a Qubit?
+  </h4>
+  <p>
+   A
+   <strong>
+    qubit (quantum bit)
+   </strong>
+   is the basic unit of quantum information.
+  </p>
+  <p>
+   Unlike a classical bit:
+  </p>
+  <p>
+   Bit
+   <br/>
+   0
+   <br/>
+   or
+   <br/>
+   1
+  </p>
+  <p>
+   A qubit can exist in a superposition of both states.
+  </p>
+  <h4>
+   3.2 Mathematical Representation
+  </h4>
+  <p>
+   A qubit is written as:
+   <code>
+    α|0&gt; + β|1&gt;
+   </code>
+  </p>
+  <p>
+   where:
+  </p>
+  <ul>
+   <li>
+    <code>
+     α
+    </code>
+    and
+    <code>
+     β
+    </code>
+    are complex probability amplitudes.
+   </li>
+   <li>
+    <code>
+     |α|^2 + |β|^2 = 1
+    </code>
+    .
+   </li>
+  </ul>
+  <h4>
+   3.3 Physical Implementations
+  </h4>
+  <p>
+   Qubits can be built using:
+  </p>
+  <ul>
+   <li>
+    Superconducting circuits
+   </li>
+   <li>
+    Trapped ions
+   </li>
+   <li>
+    Photons
+   </li>
+   <li>
+    Neutral atoms
+   </li>
+   <li>
+    Quantum dots
+   </li>
+   <li>
+    Spin qubits
+   </li>
+  </ul>
+  <p>
+   Each platform has different strengths and challenges.
+  </p>
+  <h4>
+   3.4 Bloch Sphere
+  </h4>
+  <p>
+   A single qubit state can be visualized on the Bloch sphere.
+  </p>
+  <ul>
+   <li>
+    North Pole →
+    <code>
+     |0&gt;
+    </code>
+   </li>
+   <li>
+    South Pole →
+    <code>
+     |1&gt;
+    </code>
+   </li>
+   <li>
+    Any point on the sphere → valid quantum state
+   </li>
+  </ul>
+  <p>
+   This provides an intuitive picture of qubit rotations.
+  </p>
+  <h3>
+   Chapter 4: Superposition
+  </h3>
+  <h4>
+   4.1 Definition
+  </h4>
+  <p>
+   Superposition means a qubit can exist in a combination of basis states until measured.
+  </p>
+  <h6>
+   Example
+  </h6>
+  <p>
+   <code>
+    1/√2 (|0&gt; + |1&gt;)
+   </code>
+  </p>
+  <p>
+   This state has equal probability of yielding 0 or 1 upon measurement.
+  </p>
+  <h4>
+   4.2 Hadamard Gate
+  </h4>
+  <p>
+   Applying a Hadamard gate to
+   <code>
+    |0&gt;
+   </code>
+   :
+  </p>
+  <p>
+   <code>
+    1/√2 (|0&gt; + |1&gt;)
+   </code>
+  </p>
+  <p>
+   This creates a superposition.
+  </p>
+  <h4>
+   4.3 Why Superposition Matters
+  </h4>
+  <p>
+   With
+   <code>
+    n
+   </code>
+   qubits, the state space has
+   <code>
+    2
+    <sup>
+     n
+    </sup>
+   </code>
+   amplitudes.
+  </p>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    <code>
+     n=1
+    </code>
+    → 2 states
+   </li>
+   <li>
+    <code>
+     n=2
+    </code>
+    → 4 states
+   </li>
+   <li>
+    <code>
+     n=3
+    </code>
+    → 8 states
+   </li>
+  </ul>
+  <p>
+   Quantum algorithms exploit this large state space through carefully designed interference; it does
+   <strong>
+    not
+   </strong>
+   mean all problems automatically receive an exponential speedup.
+  </p>
+  <h3>
+   Chapter 5: Entanglement
+  </h3>
+  <h4>
+   5.1 Definition
+  </h4>
+  <p>
+   Entanglement is a uniquely quantum correlation between qubits.
+  </p>
+  <p>
+   The state of one qubit becomes correlated with the state of another, even when they are separated.
+  </p>
+  <h4>
+   5.2 Bell State
+  </h4>
+  <p>
+   One of the simplest entangled states:
+  </p>
+  <p>
+   <code>
+    1/√2 (|00&gt; + |11&gt;)
+   </code>
+  </p>
+  <p>
+   Measuring one qubit immediately determines the correlated outcome of the other, regardless of the distance between them. This does
+   <strong>
+    not
+   </strong>
+   allow faster-than-light communication.
+  </p>
+  <h4>
+   5.3 Creating Entanglement
+  </h4>
+  <pre>
+|0&gt; ----H------●------
+               |
+|0&gt; -----------X------
+    </pre>
+  <p>
+   Steps:
+  </p>
+  <ol>
+   <li>
+    Apply Hadamard to the first qubit.
+   </li>
+   <li>
+    Apply CNOT using the first qubit as control.
+   </li>
+   <li>
+    The result is an entangled Bell state.
+   </li>
+  </ol>
+  <h4>
+   5.4 Applications
+  </h4>
+  <ul>
+   <li>
+    Quantum teleportation
+   </li>
+   <li>
+    Superdense coding
+   </li>
+   <li>
+    Quantum cryptography
+   </li>
+   <li>
+    Quantum communication
+   </li>
+   <li>
+    Quantum algorithms
+   </li>
+   <li>
+    Quantum error correction
+   </li>
+  </ul>
+  <h3>
+   Chapter 6: Quantum Advantage
+  </h3>
+  <h4>
+   6.1 Definition
+  </h4>
+  <p>
+   Quantum advantage refers to demonstrating a computational task where a quantum computer outperforms the best known classical methods under comparable conditions.
+  </p>
+  <p>
+   It does
+   <strong>
+    not
+   </strong>
+   mean quantum computers are faster for every task.
+  </p>
+  <h4>
+   6.2 Why It Happens
+  </h4>
+  <p>
+   Quantum algorithms can exploit:
+  </p>
+  <ul>
+   <li>
+    Superposition
+   </li>
+   <li>
+    Entanglement
+   </li>
+   <li>
+    Interference
+   </li>
+  </ul>
+  <p>
+   to reduce the number of computational steps for specific problems.
+  </p>
+  <h4>
+   6.3 Famous Algorithms
+  </h4>
+  <h5>
+   Shor's Algorithm
+  </h5>
+  <ul>
+   <li>
+    Integer factorization
+   </li>
+   <li>
+    Threatens RSA encryption if implemented on large fault-tolerant quantum computers.
+   </li>
+  </ul>
+  <h5>
+   Grover's Algorithm
+  </h5>
+  <ul>
+   <li>
+    Database search
+   </li>
+   <li>
+    Quadratic speedup over classical exhaustive search.
+   </li>
+  </ul>
+  <h5>
+   Quantum Simulation
+  </h5>
+  <p>
+   Efficiently simulating quantum systems such as molecules and materials is one of the most promising applications of quantum computing.
+  </p>
+  <h5>
+   Quantum Machine Learning
+  </h5>
+  <p>
+   Potential applications include:
+  </p>
+  <ul>
+   <li>
+    Quantum kernels
+   </li>
+   <li>
+    Variational Quantum Classifiers (VQC)
+   </li>
+   <li>
+    Quantum Neural Networks (QNN)
+   </li>
+   <li>
+    Quantum PCA
+   </li>
+  </ul>
+  <p>
+   Many proposed advantages are still being actively researched.
+  </p>
+  <h4>
+   6.4 Applications
+  </h4>
+  <p>
+   Potential areas include:
+  </p>
+  <ul>
+   <li>
+    Drug discovery
+   </li>
+   <li>
+    Material science
+   </li>
+   <li>
+    Financial modeling
+   </li>
+   <li>
+    Logistics optimization
+   </li>
+   <li>
+    Climate modeling
+   </li>
+   <li>
+    Machine learning
+   </li>
+   <li>
+    Quantum chemistry
+   </li>
+  </ul>
+  <h4>
+   6.5 Current Limitations
+  </h4>
+  <p>
+   Today's quantum computers face challenges such as:
+  </p>
+  <ul>
+   <li>
+    Noise
+   </li>
+   <li>
+    Decoherence
+   </li>
+   <li>
+    Limited qubit counts
+   </li>
+   <li>
+    Gate errors
+   </li>
+   <li>
+    Readout errors
+   </li>
+  </ul>
+  <p>
+   These limitations define the current
+   <strong>
+    Noisy Intermediate-Scale Quantum (NISQ)
+   </strong>
+   era.
+  </p>
+  <h3>
+   Chapter 7: Real Quantum Hardware
+  </h3>
+  <h4>
+   7.1 What is Quantum Hardware?
+  </h4>
+  <p>
+   Quantum hardware refers to physical systems that implement qubits and quantum gates.
+  </p>
+  <p>
+   Different technologies use different physical phenomena to encode quantum information.
+  </p>
+  <h4>
+   7.2 Major Quantum Hardware Platforms
+  </h4>
+  <h5>
+   1. Superconducting Qubits
+  </h5>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    IBM Quantum
+   </li>
+   <li>
+    Google Quantum
+   </li>
+   <li>
+    Rigetti
+   </li>
+  </ul>
+  <h6>
+   Advantages
+  </h6>
+  <ul>
+   <li>
+    Fast gate operations
+   </li>
+   <li>
+    Mature fabrication techniques
+   </li>
+  </ul>
+  <h6>
+   Challenges
+  </h6>
+  <ul>
+   <li>
+    Require dilution refrigerators (~10–20 mK)
+   </li>
+   <li>
+    Sensitive to noise
+   </li>
+  </ul>
+  <h5>
+   2. Trapped Ion Qubits
+  </h5>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    IonQ
+   </li>
+   <li>
+    Quantinuum
+   </li>
+  </ul>
+  <h6>
+   Advantages
+  </h6>
+  <ul>
+   <li>
+    Very high gate fidelity
+   </li>
+   <li>
+    Long coherence times
+   </li>
+  </ul>
+  <h6>
+   Challenges
+  </h6>
+  <ul>
+   <li>
+    Slower gate operations
+   </li>
+   <li>
+    More difficult to scale
+   </li>
+  </ul>
+  <h5>
+   3. Photonic Quantum Computers
+  </h5>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    Xanadu
+   </li>
+   <li>
+    PsiQuantum
+   </li>
+  </ul>
+  <h6>
+   Advantages
+  </h6>
+  <ul>
+   <li>
+    Operate at or near room temperature
+   </li>
+   <li>
+    Well suited for quantum communication
+   </li>
+  </ul>
+  <h6>
+   Challenges
+  </h6>
+  <ul>
+   <li>
+    Photon generation and detection remain technically demanding.
+   </li>
+  </ul>
+  <h5>
+   4. Neutral Atom Qubits
+  </h5>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    QuEra
+   </li>
+   <li>
+    Pasqal
+   </li>
+  </ul>
+  <h6>
+   Advantages
+  </h6>
+  <ul>
+   <li>
+    Naturally scalable arrays
+   </li>
+   <li>
+    Strong interactions via Rydberg states
+   </li>
+  </ul>
+  <h5>
+   5. Silicon Spin Qubits
+  </h5>
+  <h6>
+   Examples:
+  </h6>
+  <ul>
+   <li>
+    Intel
+   </li>
+   <li>
+    Research laboratories worldwide
+   </li>
+  </ul>
+  <p>
+   Potentially compatible with existing semiconductor manufacturing processes.
+  </p>
+  <h4>
+   7.3 Important Hardware Metrics
+  </h4>
+  <p>
+   Researchers evaluate quantum processors using:
+  </p>
+  <ul>
+   <li>
+    Number of physical qubits
+   </li>
+   <li>
+    Coherence time
+   </li>
+   <li>
+    Gate fidelity
+   </li>
+   <li>
+    Readout fidelity
+   </li>
+   <li>
+    Connectivity
+   </li>
+   <li>
+    Error rates
+   </li>
+   <li>
+    Quantum Volume
+   </li>
+   <li>
+    CLOPS (Circuit Layer Operations Per Second)
+   </li>
+  </ul>
+  <h4>
+   7.4 Quantum Software Ecosystem
+  </h4>
+  <p>
+   Common tools include:
+  </p>
+  <ul>
+   <li>
+    <strong>
+     Qiskit
+    </strong>
+    (IBM)
+   </li>
+   <li>
+    <strong>
+     PennyLane
+    </strong>
+    (Xanadu)
+   </li>
+   <li>
+    <strong>
+     Cirq
+    </strong>
+    (Google)
+   </li>
+   <li>
+    <strong>
+     Amazon Braket
+    </strong>
+   </li>
+   <li>
+    <strong>
+     Q#
+    </strong>
+    (Microsoft)
+   </li>
+  </ul>
+  <p>
+   These frameworks allow users to design, simulate, and execute quantum circuits on simulators or real quantum hardware.
+  </p>
+  <h2>
+   Module 4 Summary
+  </h2>
+  <p>
+   After completing this module, you should understand:
+  </p>
+  <ol>
+   <li>
+    Why classical computing faces fundamental limitations for certain problems.
+   </li>
+   <li>
+    The principles of quantum mechanics that underpin quantum computing.
+   </li>
+   <li>
+    The concept and mathematical representation of qubits.
+   </li>
+   <li>
+    How superposition and entanglement enable uniquely quantum information processing.
+   </li>
+   <li>
+    What quantum advantage means, and why it applies only to certain computational tasks.
+   </li>
+   <li>
+    The major quantum hardware platforms, their strengths, challenges, and the current state of quantum technology.
+   </li>
+  </ol>
+  <p>
+   These concepts form the foundation for studying quantum algorithms, quantum communication, quantum error correction, and quantum machine learning in later modules.
+  </p>
+  <h3>
+   Tables
+  </h3>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Classical Computer
+     </th>
+     <th>
+      Quantum Computer
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      Bit
+     </td>
+     <td>
+      Qubit
+     </td>
+    </tr>
+    <tr>
+     <td>
+      0 or 1
+     </td>
+     <td>
+      0 and 1 simultaneously (before measurement)
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Boolean logic
+     </td>
+     <td>
+      Quantum gates
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Sequential processing
+     </td>
+     <td>
+      Quantum parallelism (algorithm-dependent)
+     </td>
+    </tr>
+    <tr>
+     <td>
+      Electrical circuits
+     </td>
+     <td>
+      Quantum circuits
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <table>
+   <thead>
+    <tr>
+     <th>
+      Number of Qubits
+     </th>
+     <th>
+      Basis States
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      1
+     </td>
+     <td>
+      2
+     </td>
+    </tr>
+    <tr>
+     <td>
+      2
+     </td>
+     <td>
+      4
+     </td>
+    </tr>
+    <tr>
+     <td>
+      3
+     </td>
+     <td>
+      8
+     </td>
+    </tr>
+    <tr>
+     <td>
+      10
+     </td>
+     <td>
+      1024
+     </td>
+    </tr>
+    <tr>
+     <td>
+      20
+     </td>
+     <td>
+      1,048,576
+     </td>
+    </tr>
+    <tr>
+     <td>
+      50
+     </td>
+     <td>
+      ~1.13 × 10
+      <sup>
+       15
+      </sup>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+</main>
+ </body>
+</html>

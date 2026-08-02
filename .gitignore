@@ -1,0 +1,32 @@
+# ── Python cache ──────────────────────────────────────────────────
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ── Environment / Secrets ─────────────────────────────────────────
+# Bug #5 Fix: old pattern was  */.env  which only matched .env inside
+# subdirectories. The ROOT .env (containing DB password, API keys,
+# SECRET_KEY) was NOT being ignored and could be committed to Git.
+.env
+.env.*
+!.env.example
+
+# ── Virtual environment ───────────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── Notebook artifacts ────────────────────────────────────────────
+saved_notebooks/
+*.ipynb_checkpoints/
+
+# ── Static generated files (circuit images) ───────────────────────
+static/circuit.png
+static/angle_encoding.png
+static/amplitude_encoding.png
+
+# ── OS artifacts ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

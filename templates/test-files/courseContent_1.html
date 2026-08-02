@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Course Content</title>
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Arial,Helvetica,sans-serif;
+
+}
+
+body{
+
+background:#f4f7fb;
+
+}
+
+.top{
+
+background:#2563eb;
+
+color:white;
+
+padding:20px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.top button{
+
+background:white;
+
+color:#2563eb;
+
+border:none;
+
+padding:10px 20px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.container{
+
+max-width:1200px;
+
+margin:40px auto;
+
+background:white;
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.container img{
+
+max-width:100%;
+
+}
+
+.container p{
+
+line-height:1.8;
+
+margin-bottom:15px;
+
+}
+
+.container h1,
+.container h2,
+.container h3{
+
+margin:20px 0;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+
+<h2 id="courseTitle"></h2>
+
+<button onclick="history.back()">
+
+← Back
+
+</button>
+
+</div>
+
+<div class="container" id="content">
+
+</div>
+
+<script>
+
+const course = JSON.parse(localStorage.getItem("currentCourse"));
+const token = JSON.parse(localStorage.getItem("token"));
+
+if(course == null){
+
+    window.location="/courses";
+
+}
+
+if(token == null){
+
+    window.location="/login";
+
+}
+
+document.getElementById("courseTitle").innerHTML = course.title;
+
+document.getElementById("content").innerHTML = course.html_content;
+
+const courseId = course.id;
+
+let lastProgress = -1;
+
+function updateProgress(progress){
+
+    fetch("/api/user-course/progress",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            user_id:token.id,
+
+            course_id:courseId,
+
+            progress:progress,
+
+            last_lesson:Math.ceil(progress/10)
+
+        })
+
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        console.log("Progress Updated :",data);
+
+    })
+
+    .catch(err=>{
+
+        console.log(err);
+
+    });
+
+}
+
+function trackProgress(){
+
+    const scrollTop = window.scrollY;
+
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if(docHeight<=0){
+
+        return;
+
+    }
+
+    let progress = Math.round((scrollTop/docHeight)*100);
+
+    if(progress>100){
+
+        progress=100;
+
+    }
+
+    if(progress<0){
+
+        progress=0;
+
+    }
+
+    if(progress-lastProgress>=5){
+
+        lastProgress=progress;
+
+        updateProgress(progress);
+
+    }
+
+}
+
+window.addEventListener("scroll",trackProgress);
+
+window.addEventListener("beforeunload",function(){
+
+    updateProgress(lastProgress);
+
+});
+
+setTimeout(function(){
+
+    updateProgress(0);
+
+},1000);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Quantum ML Academy</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+nav{
+
+width:100%;
+
+background:#2563eb;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 40px;
+
+color:white;
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
+
+}
+
+.logo{
+
+font-size:26px;
+
+font-weight:bold;
+
+}
+
+.menu{
+
+display:flex;
+
+gap:20px;
+
+align-items:center;
+
+}
+
+.menu a{
+
+color:white;
+
+text-decoration:none;
+
+font-size:16px;
+
+padding:10px 16px;
+
+border-radius:6px;
+
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+background:rgba(255,255,255,.15);
+
+}
+
+.logout{
+
+background:#dc2626;
+
+}
+
+.logout:hover{
+
+background:#b91c1c !important;
+
+}
+
+.container{
+
+max-width:1300px;
+
+margin:40px auto;
+
+padding:20px;
+
+}
+
+.welcome{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+margin-bottom:35px;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+}
+
+.user{
+
+display:flex;
+
+align-items:center;
+
+gap:25px;
+
+}
+
+.user img{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:5px solid #2563eb;
+
+}
+
+.user h1{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.user p{
+
+color:#666;
+
+margin:4px 0;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+text-align:center;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card h2{
+
+font-size:18px;
+
+color:#555;
+
+margin-bottom:20px;
+
+}
+
+.value{
+
+font-size:38px;
+
+font-weight:bold;
+
+color:#2563eb;
+
+}
+
+.actions{
+
+margin-top:40px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.action{
+
+background:white;
+
+padding:25px;
+
+border-radius:12px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+cursor:pointer;
+
+}
+
+.action:hover{
+
+transform:translateY(-6px);
+
+}
+
+.action h3{
+
+margin-bottom:10px;
+
+}
+
+.action p{
+
+color:#666;
+
+font-size:15px;
+
+}
+
+.loader{
+
+text-align:center;
+
+padding:120px;
+
+font-size:25px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+Quantum ML
+
+</div>
+
+<div class="menu">
+
+<a href="/profile">
+
+Profile
+
+</a>
+
+<a href="/courses">
+
+Courses
+
+</a>
+
+<a href="/complaints">
+
+Complaints
+
+</a>
+
+<a href="#" class="logout" onclick="logout()">
+
+Logout
+
+</a>
+
+</div>
+
+</nav>
+
+<div id="loader" class="loader">
+
+Loading Dashboard...
+
+</div>
+
+<div id="dashboard" style="display:none;">
+
+<div class="container">
+
+<div class="welcome">
+
+<div class="user">
+
+<img id="profileImage">
+
+<div>
+
+<h1 id="name"></h1>
+
+<p id="email"></p>
+
+<p id="role"></p>
+
+<p id="level"></p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+ <video width="640" height="360" controls>
+        <source src="{{ url_for('static', filename='/videos/dashboard.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+<h2>Experience Points</h2>
+
+<div class="value" id="xp"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Coins</h2>
+
+<div class="value" id="coins"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Learning Level</h2>
+
+<div class="value" id="learning"></div>
+
+</div>
+
+<div class="card">
+
+<h2>User Role</h2>
+
+<div class="value" id="userRole"></div>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<div class="action" onclick="location.href='/courses'">
+
+<h3>📚 Explore Courses</h3>
+
+<p>
+
+Browse all Quantum ML courses.
+
+</p>
+
+</div>
+
+<div class="action" onclick="location.href='/profile'">
+
+<h3>👤 My Profile</h3>
+
+<p>
+
+View and update your profile.
+
+</p>
+
+</div>
+
+<div class="action" onclick="location.href='/complaints'">
+
+<h3>📝 Complaints</h3>
+
+<p>
+
+Raise or track your complaints.
+
+</p>
+
+</div>
+
+<div class="action" onclick="logout()">
+
+<h3>🚪 Logout</h3>
+
+<p>
+
+Sign out from your account.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const token=JSON.parse(localStorage.getItem("token"));
+
+if(token==null){
+
+window.location="/login";
+
+}
+
+document.getElementById("loader").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+document.getElementById("profileImage").src=token.profile_image;
+
+document.getElementById("name").innerHTML="Welcome, "+token.full_name;
+
+document.getElementById("email").innerHTML="Email : "+token.email;
+
+document.getElementById("role").innerHTML="Role : "+token.role;
+
+document.getElementById("level").innerHTML="Learning Level : "+token.learning_level;
+
+document.getElementById("xp").innerHTML=token.xp;
+
+document.getElementById("coins").innerHTML=token.coins;
+
+document.getElementById("learning").innerHTML=token.learning_level;
+
+document.getElementById("userRole").innerHTML=token.role;
+
+function logout(){
+
+localStorage.removeItem("token");
+
+localStorage.removeItem("currentCourse");
+
+window.location="/login";
+
+}
+
+</script>
+
+</body>
+
+</html>

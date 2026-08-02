@@ -1,0 +1,29 @@
+recreate the same ui/ux given in the image.png , i need the same ui/ux and theme as given in the image ( highly specific ) given the requirement in my cuántica - the quantum machine learning webapp i want you to make the ui / ux design premium in  simple html , css , js ( dont use jsx or tsx structure of file extension ) so ( don't use the next structure highly recommended ) add fa icons from the library  from "fontawesome"; as required , do not use any kind of emoji ( highly prohibited as it make the file looks like ai generated ) , dont use the cheap colours , containers , handle the errors , heirarchy for the main text and then below the sub text , the ui / ux should be like the premiums streaming websites, add animations , hovering effects , use the different colour combinations you can use different shades,  all this in the light  theme only , return  index.html , index.css , index.js  only ( highly specific ) , make the required sections and then display the information in the respective section ( highly important ) , write the css of ( 1500 lines ) and js of ( 1000 lines ) at least
+
+
+
+HIGHLY SPECIFIC THEME : 
+
+
+
+colour pallete : 
+
+:root {
+  --bg: #F7FEFF;           /* Arctic White */
+  --surface: #FFFFFF;      /* Cards */
+  --surface-alt: #E0FAF4;  /* Section backgrounds */
+
+  --primary: #6CE5BF;      /* Main brand */
+  --primary-light: #83E9CA;
+  --primary-soft: #ADF1DD;
+
+  --secondary: #E3EDFE;
+
+  --text: #1E293B;
+  --text-muted: #64748B;
+
+  --border: #DCEEF2;
+}
+The design should be responsive and work properly on mobile, tablet, and desktop screens.
+
+

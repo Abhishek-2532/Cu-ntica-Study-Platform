@@ -1,0 +1,1710 @@
+<main>
+<h1>
+ Module 3 – Classical Machine Learning
+</h1>
+<h2>
+ Chapter 1: Supervised Learning
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ Supervised Learning is the most widely used type of Machine Learning where the model learns from
+ <strong>
+  labeled data
+ </strong>
+ .
+</p>
+<p>
+ A labeled dataset contains:
+</p>
+<ul>
+ <li>
+  Input Features (X)
+ </li>
+ <li>
+  Correct Output Labels (Y)
+ </li>
+</ul>
+<p>
+ The algorithm learns the relationship between X and Y so that it can predict outputs for unseen data.
+</p>
+<h3>
+ Example
+</h3>
+<p>
+ The algorithm learns:
+</p>
+<p>
+ Hours Studied → Marks
+</p>
+<p>
+ Later,
+</p>
+<p>
+ Input:
+ <br/>
+ 5 Hours
+</p>
+<p>
+ Prediction:
+ <br/>
+ 63 Marks
+</p>
+<h3>
+ Working Process
+</h3>
+<pre>Training Dataset
+       │
+       ▼
+ML Algorithm
+       │
+       ▼
+Learn Patterns
+       │
+       ▼
+Model
+       │
+       ▼
+New Data
+       │
+       ▼
+Prediction</pre>
+<h3>
+ Characteristics
+</h3>
+<ul>
+ <li>
+  Uses labeled data
+ </li>
+ <li>
+  Learns mapping function
+ </li>
+ <li>
+  Predicts future outputs
+ </li>
+ <li>
+  High accuracy with good data
+ </li>
+ <li>
+  Requires large labeled datasets
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Spam Detection
+ </li>
+ <li>
+  Email Classification
+ </li>
+ <li>
+  Disease Prediction
+ </li>
+ <li>
+  Stock Price Prediction
+ </li>
+ <li>
+  Face Recognition
+ </li>
+ <li>
+  Speech Recognition
+ </li>
+ <li>
+  Loan Approval
+ </li>
+</ul>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  Easy evaluation
+ </li>
+ <li>
+  Accurate
+ </li>
+ <li>
+  Well-understood algorithms
+ </li>
+ <li>
+  Excellent for prediction
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Requires labeled data
+ </li>
+ <li>
+  Labeling is expensive
+ </li>
+ <li>
+  Overfitting possible
+ </li>
+</ul>
+<h2>
+ Chapter 2: Unsupervised Learning
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ In Unsupervised Learning, the dataset contains only input data.
+</p>
+<p>
+ No output labels are provided.
+</p>
+<p>
+ The algorithm discovers hidden structures and patterns.
+</p>
+<pre>Input Data
+↓
+Find Similarities
+↓
+Groups (Clusters)</pre>
+<h3>
+ Example
+</h3>
+<p>
+ Customer shopping data
+</p>
+<p>
+ Algorithm automatically groups
+</p>
+<ul>
+ <li>
+  <strong>
+   Cluster 1
+  </strong>
+  <br/>
+  Young customers
+ </li>
+ <li>
+  <strong>
+   Cluster 2
+  </strong>
+  <br/>
+  High-income customers
+ </li>
+</ul>
+<h3>
+ Major Tasks
+</h3>
+<h4>
+ Clustering
+</h4>
+<p>
+ Grouping similar objects.
+</p>
+<p>
+ Examples
+</p>
+<ul>
+ <li>
+  K-Means
+ </li>
+ <li>
+  DBSCAN
+ </li>
+ <li>
+  Hierarchical Clustering
+ </li>
+</ul>
+<h4>
+ Association
+</h4>
+<p>
+ Finding relationships.
+</p>
+<p>
+ Example
+</p>
+<p>
+ People buying
+ <br/>
+ Bread
+ <br/>
+ also buy
+ <br/>
+ Butter
+</p>
+<h4>
+ Dimensionality Reduction
+</h4>
+<p>
+ Reducing features while preserving information.
+</p>
+<p>
+ Example
+</p>
+<pre>100 features
+↓
+10 features</pre>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Customer Segmentation
+ </li>
+ <li>
+  Recommendation Systems
+ </li>
+ <li>
+  Market Basket Analysis
+ </li>
+ <li>
+  Image Compression
+ </li>
+ <li>
+  Fraud Detection
+ </li>
+</ul>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  No labels required
+ </li>
+ <li>
+  Finds hidden patterns
+ </li>
+ <li>
+  Useful for exploration
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Hard to evaluate
+ </li>
+ <li>
+  Results may vary
+ </li>
+ <li>
+  Interpretation difficult
+ </li>
+</ul>
+<h2>
+ Chapter 3: Reinforcement Learning
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ Reinforcement Learning (RL) is learning through trial and error.
+</p>
+<p>
+ An Agent interacts with an Environment.
+</p>
+<pre>Agent
+↓
+Action
+↓
+Environment
+↓
+Reward
+↓
+Learning</pre>
+<h3>
+ Components
+</h3>
+<h4>
+ Agent
+</h4>
+<p>
+ Decision maker.
+</p>
+<p>
+ Example
+</p>
+<p>
+ Robot
+</p>
+<h4>
+ Environment
+</h4>
+<p>
+ World around the agent.
+</p>
+<p>
+ Example
+</p>
+<p>
+ Road
+</p>
+<h4>
+ State
+</h4>
+<p>
+ Current situation.
+</p>
+<p>
+ Example
+</p>
+<p>
+ Traffic signal is Red.
+</p>
+<h4>
+ Action
+</h4>
+<ul>
+ <li>
+  Move left
+ </li>
+ <li>
+  Move right
+ </li>
+ <li>
+  Stop
+ </li>
+ <li>
+  Accelerate
+ </li>
+</ul>
+<h4>
+ Reward
+</h4>
+<p>
+ Positive reward
+</p>
+<p>
+ Good decision
+</p>
+<p>
+ Negative reward
+</p>
+<p>
+ Wrong decision
+</p>
+<h3>
+ RL Cycle
+</h3>
+<pre>State
+↓
+Agent
+↓
+Action
+↓
+Environment
+↓
+Reward
+↓
+New State</pre>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Self-driving Cars
+ </li>
+ <li>
+  Robotics
+ </li>
+ <li>
+  Chess
+ </li>
+ <li>
+  Go
+ </li>
+ <li>
+  Video Games
+ </li>
+ <li>
+  Resource Management
+ </li>
+</ul>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  Learns continuously
+ </li>
+ <li>
+  No labeled data needed
+ </li>
+ <li>
+  Suitable for sequential decisions
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Slow training
+ </li>
+ <li>
+  Large computational cost
+ </li>
+ <li>
+  Needs many interactions
+ </li>
+</ul>
+<h2>
+ Chapter 4: Regression
+</h2>
+<h3>
+ Definition
+</h3>
+<p>
+ Regression predicts continuous numerical values.
+</p>
+<p>
+ Examples
+</p>
+<ul>
+ <li>
+  House Price
+ </li>
+ <li>
+  Temperature
+ </li>
+ <li>
+  Sales
+ </li>
+ <li>
+  Rainfall
+ </li>
+ <li>
+  Salary
+ </li>
+</ul>
+<h3>
+ Example
+</h3>
+<p>
+ Input
+ <br/>
+ Area = 1200 sq ft
+</p>
+<p>
+ Output
+ <br/>
+ ₹55 Lakhs
+</p>
+<h3>
+ Types
+</h3>
+<h4>
+ Linear Regression
+</h4>
+<p>
+ Straight-line relationship.
+</p>
+<p>
+ Equation
+</p>
+<h4>
+ Multiple Linear Regression
+</h4>
+<p>
+ Uses multiple inputs.
+</p>
+<p>
+ Price = Area + Bedrooms + Location
+</p>
+<h4>
+ Polynomial Regression
+</h4>
+<p>
+ Fits curves.
+</p>
+<p>
+ Useful for nonlinear data.
+</p>
+<h3>
+ Evaluation Metrics
+</h3>
+<h4>
+ MAE
+</h4>
+<p>
+ Mean Absolute Error
+</p>
+<h4>
+ MSE
+</h4>
+<p>
+ Mean Squared Error
+</p>
+<h4>
+ RMSE
+</h4>
+<p>
+ Root Mean Squared Error
+</p>
+<h4>
+ R² Score
+</h4>
+<p>
+ Measures goodness of fit.
+</p>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Weather Prediction
+ </li>
+ <li>
+  Demand Forecasting
+ </li>
+ <li>
+  Medical Prediction
+ </li>
+ <li>
+  Economics
+ </li>
+ <li>
+  Agriculture
+ </li>
+</ul>
+<h2>
+ Chapter 5: Classification
+</h2>
+<h3>
+ Definition
+</h3>
+<p>
+ Classification predicts categories.
+</p>
+<p>
+ Output is discrete.
+</p>
+<h3>
+ Examples
+</h3>
+<ul>
+ <li>
+  Spam or Not Spam
+ </li>
+ <li>
+  Yes or No
+ </li>
+ <li>
+  Cancer or Healthy
+ </li>
+ <li>
+  Dog or Cat
+ </li>
+ <li>
+  Pass or Fail
+ </li>
+</ul>
+<h4>
+ Binary Classification
+</h4>
+<p>
+ Only two classes.
+</p>
+<p>
+ Example
+</p>
+<ul>
+ <li>
+  0
+ </li>
+ <li>
+  1
+ </li>
+</ul>
+<h4>
+ Multi-class Classification
+</h4>
+<p>
+ More than two classes.
+</p>
+<p>
+ Example
+</p>
+<ul>
+ <li>
+  Apple
+ </li>
+ <li>
+  Banana
+ </li>
+ <li>
+  Orange
+ </li>
+</ul>
+<h4>
+ Multi-label Classification
+</h4>
+<p>
+ Multiple labels simultaneously.
+</p>
+<p>
+ Example
+</p>
+<pre>Image
+↓
+Dog
+Tree
+Car</pre>
+<h3>
+ Metrics
+</h3>
+<ul>
+ <li>
+  Accuracy
+ </li>
+ <li>
+  Precision
+ </li>
+ <li>
+  Recall
+ </li>
+ <li>
+  F1 Score
+ </li>
+ <li>
+  Confusion Matrix
+ </li>
+ <li>
+  ROC Curve
+ </li>
+ <li>
+  AUC
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Email Filtering
+ </li>
+ <li>
+  Face Recognition
+ </li>
+ <li>
+  Medical Diagnosis
+ </li>
+ <li>
+  Sentiment Analysis
+ </li>
+</ul>
+<h2>
+ Chapter 6: Decision Trees
+</h2>
+<h3>
+ Definition
+</h3>
+<p>
+ Decision Tree is a tree-based algorithm.
+</p>
+<p>
+ It makes decisions using conditions.
+</p>
+<h3>
+ Structure
+</h3>
+<pre>                Root
+               Age?
+             /      \
+         &lt;30        &gt;30
+        /             \
+ Student?           Income?
+   /   \             /     \
+Yes    No        High     Low</pre>
+<h3>
+ Components
+</h3>
+<h4>
+ Root Node
+</h4>
+<p>
+ Starting point.
+</p>
+<h4>
+ Internal Node
+</h4>
+<p>
+ Decision.
+</p>
+<h4>
+ Leaf Node
+</h4>
+<p>
+ Final prediction.
+</p>
+<h3>
+ Splitting Criteria
+</h3>
+<h4>
+ Gini Index
+</h4>
+<p>
+ Measures impurity.
+</p>
+<p>
+ Lower is better.
+</p>
+<h4>
+ Entropy
+</h4>
+<p>
+ Measures randomness.
+</p>
+<p>
+ Formula
+</p>
+<h4>
+ Information Gain
+</h4>
+<p>
+ Selects best split.
+</p>
+<p>
+ Higher is better.
+</p>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  Easy to understand
+ </li>
+ <li>
+  Handles numerical and categorical data
+ </li>
+ <li>
+  No normalization needed
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Overfitting
+ </li>
+ <li>
+  Sensitive to data changes
+ </li>
+ <li>
+  Less accurate than ensembles
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Credit Approval
+ </li>
+ <li>
+  Medical Diagnosis
+ </li>
+ <li>
+  Customer Segmentation
+ </li>
+</ul>
+<h2>
+ Chapter 7: Random Forest
+</h2>
+<h3>
+ Definition
+</h3>
+<p>
+ Random Forest is an ensemble of many Decision Trees.
+</p>
+<p>
+ Instead of one tree,
+</p>
+<p>
+ many trees vote.
+</p>
+<pre>Tree 1
+Tree 2
+Tree 3
+Tree 4
+↓
+Majority Voting
+↓
+Prediction</pre>
+<h3>
+ Working
+</h3>
+<ol>
+ <li>
+  Random sampling
+ </li>
+ <li>
+  Build many trees
+ </li>
+ <li>
+  Voting
+ </li>
+ <li>
+  Final Output
+ </li>
+</ol>
+<h3>
+ Regression
+</h3>
+<p>
+ Average prediction.
+</p>
+<h3>
+ Classification
+</h3>
+<p>
+ Majority voting.
+</p>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  High accuracy
+ </li>
+ <li>
+  Reduces overfitting
+ </li>
+ <li>
+  Robust
+ </li>
+ <li>
+  Handles missing values
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Slow
+ </li>
+ <li>
+  Large memory
+ </li>
+ <li>
+  Less interpretable
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Fraud Detection
+ </li>
+ <li>
+  Disease Prediction
+ </li>
+ <li>
+  Recommendation Systems
+ </li>
+ <li>
+  Finance
+ </li>
+</ul>
+<h2>
+ Chapter 8: Support Vector Machine (SVM)
+</h2>
+<h3>
+ Definition
+</h3>
+<p>
+ SVM finds the best boundary separating different classes.
+</p>
+<pre>○ ○ ○ ○
+------------ Best Hyperplane ------------
+▲ ▲ ▲ ▲</pre>
+<h3>
+ Key Concepts
+</h3>
+<h4>
+ Hyperplane
+</h4>
+<p>
+ Decision boundary.
+</p>
+<h4>
+ Margin
+</h4>
+<p>
+ Distance between boundary and nearest points.
+</p>
+<pre>Larger margin
+↓
+Better model</pre>
+<h4>
+ Support Vectors
+</h4>
+<p>
+ Critical points nearest to boundary.
+</p>
+<h3>
+ Kernels
+</h3>
+<h4>
+ Linear
+</h4>
+<p>
+ Simple data.
+</p>
+<h4>
+ Polynomial
+</h4>
+<p>
+ Curved boundary.
+</p>
+<h4>
+ RBF
+</h4>
+<p>
+ Most common.
+</p>
+<h4>
+ Sigmoid
+</h4>
+<p>
+ Neural network-like.
+</p>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  High accuracy
+ </li>
+ <li>
+  Effective for high-dimensional data
+ </li>
+ <li>
+  Works with small datasets
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Slow for huge datasets
+ </li>
+ <li>
+  Difficult parameter tuning
+ </li>
+ <li>
+  Less interpretable
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Image Recognition
+ </li>
+ <li>
+  Face Detection
+ </li>
+ <li>
+  Bioinformatics
+ </li>
+ <li>
+  Text Classification
+ </li>
+</ul>
+<h2>
+ Chapter 9: Neural Networks
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ Artificial Neural Networks (ANNs) imitate the human brain.
+</p>
+<h3>
+ Structure
+</h3>
+<pre>Input Layer
+↓
+Hidden Layer
+↓
+Hidden Layer
+↓
+Output Layer</pre>
+<h3>
+ Neuron
+</h3>
+<p>
+ Each neuron performs
+</p>
+<p>
+ where
+</p>
+<dl>
+ <dt>
+  W
+ </dt>
+ <dd>
+  Weights
+ </dd>
+ <dt>
+  X
+ </dt>
+ <dd>
+  Input
+ </dd>
+ <dt>
+  b
+ </dt>
+ <dd>
+  Bias
+ </dd>
+ <dt>
+  f
+ </dt>
+ <dd>
+  Activation Function
+ </dd>
+</dl>
+<h3>
+ Activation Functions
+</h3>
+<h4>
+ Sigmoid
+</h4>
+<p>
+ Output
+ <br/>
+ 0 to 1
+</p>
+<h4>
+ ReLU
+</h4>
+<p>
+ Most popular.
+</p>
+<p>
+ <code>
+  f(x)=max(0,x)
+ </code>
+</p>
+<h4>
+ Tanh
+</h4>
+<p>
+ Output
+ <br/>
+ -1 to 1
+</p>
+<h4>
+ Softmax
+</h4>
+<p>
+ Used in multiclass classification.
+</p>
+<h3>
+ Learning Process
+</h3>
+<pre>Forward Propagation
+↓
+Loss Calculation
+↓
+Backpropagation
+↓
+Weight Update
+↓
+Repeat</pre>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  Learns complex relationships
+ </li>
+ <li>
+  Highly accurate
+ </li>
+ <li>
+  Handles nonlinear problems
+ </li>
+</ul>
+<h3>
+ Disadvantages
+</h3>
+<ul>
+ <li>
+  Computationally expensive
+ </li>
+ <li>
+  Requires large datasets
+ </li>
+ <li>
+  Hard to interpret
+ </li>
+</ul>
+<h3>
+ Applications
+</h3>
+<ul>
+ <li>
+  Image Recognition
+ </li>
+ <li>
+  Speech Recognition
+ </li>
+ <li>
+  NLP
+ </li>
+ <li>
+  Healthcare
+ </li>
+</ul>
+<h2>
+ Chapter 10: Deep Learning
+</h2>
+<h3>
+ Introduction
+</h3>
+<p>
+ Deep Learning is a subset of Machine Learning that uses
+ <strong>
+  deep neural networks
+ </strong>
+ with multiple hidden layers to automatically learn complex patterns from large amounts of data.
+</p>
+<p>
+ Traditional ML often requires manual feature engineering, whereas Deep Learning learns features automatically.
+</p>
+<pre>Input Data
+     │
+     ▼
+Hidden Layer 1
+     │
+     ▼
+Hidden Layer 2
+     │
+     ▼
+Hidden Layer 3
+     │
+     ▼
+Output</pre>
+<h3>
+ Why "Deep"?
+</h3>
+<p>
+ A neural network with many hidden layers (typically more than 3) is called
+ <strong>
+  deep
+ </strong>
+ . More layers allow the model to learn increasingly abstract features:
+</p>
+<ol>
+ <li>
+  Layer 1: Edges
+ </li>
+ <li>
+  Layer 2: Shapes
+ </li>
+ <li>
+  Layer 3: Objects
+ </li>
+ <li>
+  Layer 4+: High-level concepts (e.g., faces, cars)
+ </li>
+</ol>
+<h3>
+ Popular Deep Learning Architectures
+</h3>
+<h4>
+ 1. Artificial Neural Networks (ANN)
+</h4>
+<p>
+ Used for structured/tabular data.
+</p>
+<h4>
+ 2. Convolutional Neural Networks (CNN)
+</h4>
+<p>
+ Designed for image and video processing.
+</p>
+<p>
+ Applications:
+</p>
+<ul>
+ <li>
+  Face recognition
+ </li>
+ <li>
+  Medical image analysis
+ </li>
+ <li>
+  Object detection
+ </li>
+</ul>
+<h4>
+ 3. Recurrent Neural Networks (RNN)
+</h4>
+<p>
+ Designed for sequential data.
+</p>
+<p>
+ Applications:
+</p>
+<ul>
+ <li>
+  Speech recognition
+ </li>
+ <li>
+  Language modeling
+ </li>
+ <li>
+  Time-series forecasting
+ </li>
+</ul>
+<h4>
+ 4. Long Short-Term Memory (LSTM)
+</h4>
+<p>
+ A type of RNN that can learn long-term dependencies.
+</p>
+<p>
+ Applications:
+</p>
+<ul>
+ <li>
+  Machine translation
+ </li>
+ <li>
+  Stock prediction
+ </li>
+ <li>
+  Text generation
+ </li>
+</ul>
+<h4>
+ 5. Transformers
+</h4>
+<p>
+ Modern architecture using attention mechanisms.
+</p>
+<p>
+ Applications:
+</p>
+<ul>
+ <li>
+  ChatGPT
+ </li>
+ <li>
+  BERT
+ </li>
+ <li>
+  GPT
+ </li>
+ <li>
+  Machine translation
+ </li>
+ <li>
+  Document summarization
+ </li>
+</ul>
+<h3>
+ Training Process
+</h3>
+<pre>Training Data
+      │
+      ▼
+Forward Propagation
+      │
+      ▼
+Loss Function
+      │
+      ▼
+Backpropagation
+      │
+      ▼
+Optimizer (SGD/Adam)
+      │
+      ▼
+Update Weights
+      │
+      ▼
+Repeat for Many Epochs</pre>
+<h3>
+ Common Optimizers
+</h3>
+<ul>
+ <li>
+  Stochastic Gradient Descent (SGD)
+ </li>
+ <li>
+  Adam
+ </li>
+ <li>
+  RMSProp
+ </li>
+ <li>
+  Adagrad
+ </li>
+</ul>
+<h3>
+ Common Loss Functions
+</h3>
+<ul>
+ <li>
+  Mean Squared Error (Regression)
+ </li>
+ <li>
+  Binary Cross-Entropy
+ </li>
+ <li>
+  Categorical Cross-Entropy
+ </li>
+</ul>
+<h3>
+ Advantages
+</h3>
+<ul>
+ <li>
+  Automatically learns features
+ </li>
+ <li>
+  Excellent performance on images, audio, and text
+ </li>
+ <li>
+  Highly scalable with large datasets
+ </li>
+ <li>
+  State-of-the-art accuracy in many AI applications
+ </li>
+</ul>
+<h3>
+ Limitations
+</h3>
+<ul>
+ <li>
+  Requires large datasets
+ </li>
+ <li>
+  High computational cost (GPU/TPU often needed)
+ </li>
+ <li>
+  Long training time
+ </li>
+ <li>
+  Difficult to interpret ("black box")
+ </li>
+</ul>
+<h3>
+ Real-World Applications
+</h3>
+<ul>
+ <li>
+  Self-driving cars
+ </li>
+ <li>
+  Medical diagnosis
+ </li>
+ <li>
+  Voice assistants (Siri, Alexa, Google Assistant)
+ </li>
+ <li>
+  Recommendation systems (Netflix, YouTube, Amazon)
+ </li>
+ <li>
+  Fraud detection
+ </li>
+ <li>
+  Natural Language Processing (ChatGPT, translation)
+ </li>
+ <li>
+  Image generation and recognition
+ </li>
+ <li>
+  Autonomous robots
+ </li>
+</ul>
+<h3>
+ Summary Table
+</h3>
+<p>
+ This set of notes covers the complete
+ <strong>
+  Module 3 – Classical Machine Learning
+ </strong>
+ in a chapter-wise format, suitable for university exams, interview preparation, and building a foundation for advanced topics such as Deep Learning, Quantum Machine Learning (QML), and AI applications.
+</p>
+<table>
+ <thead>
+  <tr>
+   <th>
+    Hours Studied
+   </th>
+   <th>
+    Marks
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>
+    2
+   </td>
+   <td>
+    35
+   </td>
+  </tr>
+  <tr>
+   <td>
+    4
+   </td>
+   <td>
+    55
+   </td>
+  </tr>
+  <tr>
+   <td>
+    6
+   </td>
+   <td>
+    70
+   </td>
+  </tr>
+  <tr>
+   <td>
+    8
+   </td>
+   <td>
+    90
+   </td>
+  </tr>
+ </tbody>
+</table>
+<table>
+ <thead>
+  <tr>
+   <th>
+    Customer
+   </th>
+   <th>
+    Age
+   </th>
+   <th>
+    Income
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>
+    A
+   </td>
+   <td>
+    22
+   </td>
+   <td>
+    20k
+   </td>
+  </tr>
+  <tr>
+   <td>
+    B
+   </td>
+   <td>
+    24
+   </td>
+   <td>
+    22k
+   </td>
+  </tr>
+  <tr>
+   <td>
+    C
+   </td>
+   <td>
+    45
+   </td>
+   <td>
+    80k
+   </td>
+  </tr>
+  <tr>
+   <td>
+    D
+   </td>
+   <td>
+    47
+   </td>
+   <td>
+    82k
+   </td>
+  </tr>
+ </tbody>
+</table>
+<table>
+ <thead>
+  <tr>
+   <th>
+    Topic
+   </th>
+   <th>
+    Main Purpose
+   </th>
+   <th>
+    Typical Output
+   </th>
+   <th>
+    Example Algorithms
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>
+    Supervised Learning
+   </td>
+   <td>
+    Learn from labeled data
+   </td>
+   <td>
+    Prediction
+   </td>
+   <td>
+    Linear Regression, SVM, Decision Tree
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Unsupervised Learning
+   </td>
+   <td>
+    Discover hidden patterns
+   </td>
+   <td>
+    Clusters/Associations
+   </td>
+   <td>
+    K-Means, DBSCAN
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Reinforcement Learning
+   </td>
+   <td>
+    Learn through rewards
+   </td>
+   <td>
+    Optimal actions
+   </td>
+   <td>
+    Q-Learning, Deep Q-Network (DQN)
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Regression
+   </td>
+   <td>
+    Predict continuous values
+   </td>
+   <td>
+    Numbers
+   </td>
+   <td>
+    Linear Regression
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Classification
+   </td>
+   <td>
+    Predict categories
+   </td>
+   <td>
+    Class labels
+   </td>
+   <td>
+    Logistic Regression, SVM, Random Forest
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Decision Trees
+   </td>
+   <td>
+    Rule-based decision making
+   </td>
+   <td>
+    Classification/Regression
+   </td>
+   <td>
+    CART, ID3, C4.5
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Random Forest
+   </td>
+   <td>
+    Ensemble of decision trees
+   </td>
+   <td>
+    Robust predictions
+   </td>
+   <td>
+    Random Forest
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Support Vector Machine
+   </td>
+   <td>
+    Find optimal separating boundary
+   </td>
+   <td>
+    Classification/Regression
+   </td>
+   <td>
+    Linear SVM, Kernel SVM
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Neural Networks
+   </td>
+   <td>
+    Learn nonlinear relationships
+   </td>
+   <td>
+    Predictions
+   </td>
+   <td>
+    ANN
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Deep Learning
+   </td>
+   <td>
+    Multi-layer neural networks
+   </td>
+   <td>
+    Complex feature learning
+   </td>
+   <td>
+    CNN, RNN, LSTM, Transformers
+   </td>
+  </tr>
+ </tbody>
+</table>
+</main>
