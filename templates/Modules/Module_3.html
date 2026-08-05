@@ -1,1710 +1,428 @@
 <main>
-<h1>
- Module 3 – Classical Machine Learning
-</h1>
-<h2>
- Chapter 1: Supervised Learning
-</h2>
-<h3>
- Introduction
-</h3>
-<p>
- Supervised Learning is the most widely used type of Machine Learning where the model learns from
- <strong>
-  labeled data
- </strong>
- .
-</p>
-<p>
- A labeled dataset contains:
-</p>
-<ul>
- <li>
-  Input Features (X)
- </li>
- <li>
-  Correct Output Labels (Y)
- </li>
-</ul>
-<p>
- The algorithm learns the relationship between X and Y so that it can predict outputs for unseen data.
-</p>
-<h3>
- Example
-</h3>
-<p>
- The algorithm learns:
-</p>
-<p>
- Hours Studied → Marks
-</p>
-<p>
- Later,
-</p>
-<p>
- Input:
- <br/>
- 5 Hours
-</p>
-<p>
- Prediction:
- <br/>
- 63 Marks
-</p>
-<h3>
- Working Process
-</h3>
-<pre>Training Dataset
-       │
-       ▼
-ML Algorithm
-       │
-       ▼
-Learn Patterns
-       │
-       ▼
-Model
-       │
-       ▼
-New Data
-       │
-       ▼
-Prediction</pre>
-<h3>
- Characteristics
-</h3>
-<ul>
- <li>
-  Uses labeled data
- </li>
- <li>
-  Learns mapping function
- </li>
- <li>
-  Predicts future outputs
- </li>
- <li>
-  High accuracy with good data
- </li>
- <li>
-  Requires large labeled datasets
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Spam Detection
- </li>
- <li>
-  Email Classification
- </li>
- <li>
-  Disease Prediction
- </li>
- <li>
-  Stock Price Prediction
- </li>
- <li>
-  Face Recognition
- </li>
- <li>
-  Speech Recognition
- </li>
- <li>
-  Loan Approval
- </li>
-</ul>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  Easy evaluation
- </li>
- <li>
-  Accurate
- </li>
- <li>
-  Well-understood algorithms
- </li>
- <li>
-  Excellent for prediction
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Requires labeled data
- </li>
- <li>
-  Labeling is expensive
- </li>
- <li>
-  Overfitting possible
- </li>
-</ul>
-<h2>
- Chapter 2: Unsupervised Learning
-</h2>
-<h3>
- Introduction
-</h3>
-<p>
- In Unsupervised Learning, the dataset contains only input data.
-</p>
-<p>
- No output labels are provided.
-</p>
-<p>
- The algorithm discovers hidden structures and patterns.
-</p>
-<pre>Input Data
-↓
-Find Similarities
-↓
-Groups (Clusters)</pre>
-<h3>
- Example
-</h3>
-<p>
- Customer shopping data
-</p>
-<p>
- Algorithm automatically groups
-</p>
-<ul>
- <li>
-  <strong>
-   Cluster 1
-  </strong>
-  <br/>
-  Young customers
- </li>
- <li>
-  <strong>
-   Cluster 2
-  </strong>
-  <br/>
-  High-income customers
- </li>
-</ul>
-<h3>
- Major Tasks
-</h3>
-<h4>
- Clustering
-</h4>
-<p>
- Grouping similar objects.
-</p>
-<p>
- Examples
-</p>
-<ul>
- <li>
-  K-Means
- </li>
- <li>
-  DBSCAN
- </li>
- <li>
-  Hierarchical Clustering
- </li>
-</ul>
-<h4>
- Association
-</h4>
-<p>
- Finding relationships.
-</p>
-<p>
- Example
-</p>
-<p>
- People buying
- <br/>
- Bread
- <br/>
- also buy
- <br/>
- Butter
-</p>
-<h4>
- Dimensionality Reduction
-</h4>
-<p>
- Reducing features while preserving information.
-</p>
-<p>
- Example
-</p>
-<pre>100 features
-↓
-10 features</pre>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Customer Segmentation
- </li>
- <li>
-  Recommendation Systems
- </li>
- <li>
-  Market Basket Analysis
- </li>
- <li>
-  Image Compression
- </li>
- <li>
-  Fraud Detection
- </li>
-</ul>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  No labels required
- </li>
- <li>
-  Finds hidden patterns
- </li>
- <li>
-  Useful for exploration
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Hard to evaluate
- </li>
- <li>
-  Results may vary
- </li>
- <li>
-  Interpretation difficult
- </li>
-</ul>
-<h2>
- Chapter 3: Reinforcement Learning
-</h2>
-<h3>
- Introduction
-</h3>
-<p>
- Reinforcement Learning (RL) is learning through trial and error.
-</p>
-<p>
- An Agent interacts with an Environment.
-</p>
-<pre>Agent
-↓
-Action
-↓
-Environment
-↓
-Reward
-↓
-Learning</pre>
-<h3>
- Components
-</h3>
-<h4>
- Agent
-</h4>
-<p>
- Decision maker.
-</p>
-<p>
- Example
-</p>
-<p>
- Robot
-</p>
-<h4>
- Environment
-</h4>
-<p>
- World around the agent.
-</p>
-<p>
- Example
-</p>
-<p>
- Road
-</p>
-<h4>
- State
-</h4>
-<p>
- Current situation.
-</p>
-<p>
- Example
-</p>
-<p>
- Traffic signal is Red.
-</p>
-<h4>
- Action
-</h4>
-<ul>
- <li>
-  Move left
- </li>
- <li>
-  Move right
- </li>
- <li>
-  Stop
- </li>
- <li>
-  Accelerate
- </li>
-</ul>
-<h4>
- Reward
-</h4>
-<p>
- Positive reward
-</p>
-<p>
- Good decision
-</p>
-<p>
- Negative reward
-</p>
-<p>
- Wrong decision
-</p>
-<h3>
- RL Cycle
-</h3>
-<pre>State
-↓
-Agent
-↓
-Action
-↓
-Environment
-↓
-Reward
-↓
-New State</pre>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Self-driving Cars
- </li>
- <li>
-  Robotics
- </li>
- <li>
-  Chess
- </li>
- <li>
-  Go
- </li>
- <li>
-  Video Games
- </li>
- <li>
-  Resource Management
- </li>
-</ul>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  Learns continuously
- </li>
- <li>
-  No labeled data needed
- </li>
- <li>
-  Suitable for sequential decisions
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Slow training
- </li>
- <li>
-  Large computational cost
- </li>
- <li>
-  Needs many interactions
- </li>
-</ul>
-<h2>
- Chapter 4: Regression
-</h2>
-<h3>
- Definition
-</h3>
-<p>
- Regression predicts continuous numerical values.
-</p>
-<p>
- Examples
-</p>
-<ul>
- <li>
-  House Price
- </li>
- <li>
-  Temperature
- </li>
- <li>
-  Sales
- </li>
- <li>
-  Rainfall
- </li>
- <li>
-  Salary
- </li>
-</ul>
-<h3>
- Example
-</h3>
-<p>
- Input
- <br/>
- Area = 1200 sq ft
-</p>
-<p>
- Output
- <br/>
- ₹55 Lakhs
-</p>
-<h3>
- Types
-</h3>
-<h4>
- Linear Regression
-</h4>
-<p>
- Straight-line relationship.
-</p>
-<p>
- Equation
-</p>
-<h4>
- Multiple Linear Regression
-</h4>
-<p>
- Uses multiple inputs.
-</p>
-<p>
- Price = Area + Bedrooms + Location
-</p>
-<h4>
- Polynomial Regression
-</h4>
-<p>
- Fits curves.
-</p>
-<p>
- Useful for nonlinear data.
-</p>
-<h3>
- Evaluation Metrics
-</h3>
-<h4>
- MAE
-</h4>
-<p>
- Mean Absolute Error
-</p>
-<h4>
- MSE
-</h4>
-<p>
- Mean Squared Error
-</p>
-<h4>
- RMSE
-</h4>
-<p>
- Root Mean Squared Error
-</p>
-<h4>
- R² Score
-</h4>
-<p>
- Measures goodness of fit.
-</p>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Weather Prediction
- </li>
- <li>
-  Demand Forecasting
- </li>
- <li>
-  Medical Prediction
- </li>
- <li>
-  Economics
- </li>
- <li>
-  Agriculture
- </li>
-</ul>
-<h2>
- Chapter 5: Classification
-</h2>
-<h3>
- Definition
-</h3>
-<p>
- Classification predicts categories.
-</p>
-<p>
- Output is discrete.
-</p>
-<h3>
- Examples
-</h3>
-<ul>
- <li>
-  Spam or Not Spam
- </li>
- <li>
-  Yes or No
- </li>
- <li>
-  Cancer or Healthy
- </li>
- <li>
-  Dog or Cat
- </li>
- <li>
-  Pass or Fail
- </li>
-</ul>
-<h4>
- Binary Classification
-</h4>
-<p>
- Only two classes.
-</p>
-<p>
- Example
-</p>
-<ul>
- <li>
-  0
- </li>
- <li>
-  1
- </li>
-</ul>
-<h4>
- Multi-class Classification
-</h4>
-<p>
- More than two classes.
-</p>
-<p>
- Example
-</p>
-<ul>
- <li>
-  Apple
- </li>
- <li>
-  Banana
- </li>
- <li>
-  Orange
- </li>
-</ul>
-<h4>
- Multi-label Classification
-</h4>
-<p>
- Multiple labels simultaneously.
-</p>
-<p>
- Example
-</p>
-<pre>Image
-↓
-Dog
-Tree
-Car</pre>
-<h3>
- Metrics
-</h3>
-<ul>
- <li>
-  Accuracy
- </li>
- <li>
-  Precision
- </li>
- <li>
-  Recall
- </li>
- <li>
-  F1 Score
- </li>
- <li>
-  Confusion Matrix
- </li>
- <li>
-  ROC Curve
- </li>
- <li>
-  AUC
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Email Filtering
- </li>
- <li>
-  Face Recognition
- </li>
- <li>
-  Medical Diagnosis
- </li>
- <li>
-  Sentiment Analysis
- </li>
-</ul>
-<h2>
- Chapter 6: Decision Trees
-</h2>
-<h3>
- Definition
-</h3>
-<p>
- Decision Tree is a tree-based algorithm.
-</p>
-<p>
- It makes decisions using conditions.
-</p>
-<h3>
- Structure
-</h3>
-<pre>                Root
-               Age?
-             /      \
-         &lt;30        &gt;30
-        /             \
- Student?           Income?
-   /   \             /     \
-Yes    No        High     Low</pre>
-<h3>
- Components
-</h3>
-<h4>
- Root Node
-</h4>
-<p>
- Starting point.
-</p>
-<h4>
- Internal Node
-</h4>
-<p>
- Decision.
-</p>
-<h4>
- Leaf Node
-</h4>
-<p>
- Final prediction.
-</p>
-<h3>
- Splitting Criteria
-</h3>
-<h4>
- Gini Index
-</h4>
-<p>
- Measures impurity.
-</p>
-<p>
- Lower is better.
-</p>
-<h4>
- Entropy
-</h4>
-<p>
- Measures randomness.
-</p>
-<p>
- Formula
-</p>
-<h4>
- Information Gain
-</h4>
-<p>
- Selects best split.
-</p>
-<p>
- Higher is better.
-</p>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  Easy to understand
- </li>
- <li>
-  Handles numerical and categorical data
- </li>
- <li>
-  No normalization needed
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Overfitting
- </li>
- <li>
-  Sensitive to data changes
- </li>
- <li>
-  Less accurate than ensembles
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Credit Approval
- </li>
- <li>
-  Medical Diagnosis
- </li>
- <li>
-  Customer Segmentation
- </li>
-</ul>
-<h2>
- Chapter 7: Random Forest
-</h2>
-<h3>
- Definition
-</h3>
-<p>
- Random Forest is an ensemble of many Decision Trees.
-</p>
-<p>
- Instead of one tree,
-</p>
-<p>
- many trees vote.
-</p>
-<pre>Tree 1
-Tree 2
-Tree 3
-Tree 4
-↓
-Majority Voting
-↓
-Prediction</pre>
-<h3>
- Working
-</h3>
-<ol>
- <li>
-  Random sampling
- </li>
- <li>
-  Build many trees
- </li>
- <li>
-  Voting
- </li>
- <li>
-  Final Output
- </li>
-</ol>
-<h3>
- Regression
-</h3>
-<p>
- Average prediction.
-</p>
-<h3>
- Classification
-</h3>
-<p>
- Majority voting.
-</p>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  High accuracy
- </li>
- <li>
-  Reduces overfitting
- </li>
- <li>
-  Robust
- </li>
- <li>
-  Handles missing values
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Slow
- </li>
- <li>
-  Large memory
- </li>
- <li>
-  Less interpretable
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Fraud Detection
- </li>
- <li>
-  Disease Prediction
- </li>
- <li>
-  Recommendation Systems
- </li>
- <li>
-  Finance
- </li>
-</ul>
-<h2>
- Chapter 8: Support Vector Machine (SVM)
-</h2>
-<h3>
- Definition
-</h3>
-<p>
- SVM finds the best boundary separating different classes.
-</p>
-<pre>○ ○ ○ ○
------------- Best Hyperplane ------------
-▲ ▲ ▲ ▲</pre>
-<h3>
- Key Concepts
-</h3>
-<h4>
- Hyperplane
-</h4>
-<p>
- Decision boundary.
-</p>
-<h4>
- Margin
-</h4>
-<p>
- Distance between boundary and nearest points.
-</p>
-<pre>Larger margin
-↓
-Better model</pre>
-<h4>
- Support Vectors
-</h4>
-<p>
- Critical points nearest to boundary.
-</p>
-<h3>
- Kernels
-</h3>
-<h4>
- Linear
-</h4>
-<p>
- Simple data.
-</p>
-<h4>
- Polynomial
-</h4>
-<p>
- Curved boundary.
-</p>
-<h4>
- RBF
-</h4>
-<p>
- Most common.
-</p>
-<h4>
- Sigmoid
-</h4>
-<p>
- Neural network-like.
-</p>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  High accuracy
- </li>
- <li>
-  Effective for high-dimensional data
- </li>
- <li>
-  Works with small datasets
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Slow for huge datasets
- </li>
- <li>
-  Difficult parameter tuning
- </li>
- <li>
-  Less interpretable
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Image Recognition
- </li>
- <li>
-  Face Detection
- </li>
- <li>
-  Bioinformatics
- </li>
- <li>
-  Text Classification
- </li>
-</ul>
-<h2>
- Chapter 9: Neural Networks
-</h2>
-<h3>
- Introduction
-</h3>
-<p>
- Artificial Neural Networks (ANNs) imitate the human brain.
-</p>
-<h3>
- Structure
-</h3>
-<pre>Input Layer
-↓
-Hidden Layer
-↓
-Hidden Layer
-↓
-Output Layer</pre>
-<h3>
- Neuron
-</h3>
-<p>
- Each neuron performs
-</p>
-<p>
- where
-</p>
-<dl>
- <dt>
-  W
- </dt>
- <dd>
-  Weights
- </dd>
- <dt>
-  X
- </dt>
- <dd>
-  Input
- </dd>
- <dt>
-  b
- </dt>
- <dd>
-  Bias
- </dd>
- <dt>
-  f
- </dt>
- <dd>
-  Activation Function
- </dd>
-</dl>
-<h3>
- Activation Functions
-</h3>
-<h4>
- Sigmoid
-</h4>
-<p>
- Output
- <br/>
- 0 to 1
-</p>
-<h4>
- ReLU
-</h4>
-<p>
- Most popular.
-</p>
-<p>
- <code>
-  f(x)=max(0,x)
- </code>
-</p>
-<h4>
- Tanh
-</h4>
-<p>
- Output
- <br/>
- -1 to 1
-</p>
-<h4>
- Softmax
-</h4>
-<p>
- Used in multiclass classification.
-</p>
-<h3>
- Learning Process
-</h3>
-<pre>Forward Propagation
-↓
-Loss Calculation
-↓
-Backpropagation
-↓
-Weight Update
-↓
-Repeat</pre>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  Learns complex relationships
- </li>
- <li>
-  Highly accurate
- </li>
- <li>
-  Handles nonlinear problems
- </li>
-</ul>
-<h3>
- Disadvantages
-</h3>
-<ul>
- <li>
-  Computationally expensive
- </li>
- <li>
-  Requires large datasets
- </li>
- <li>
-  Hard to interpret
- </li>
-</ul>
-<h3>
- Applications
-</h3>
-<ul>
- <li>
-  Image Recognition
- </li>
- <li>
-  Speech Recognition
- </li>
- <li>
-  NLP
- </li>
- <li>
-  Healthcare
- </li>
-</ul>
-<h2>
- Chapter 10: Deep Learning
-</h2>
-<h3>
- Introduction
-</h3>
-<p>
- Deep Learning is a subset of Machine Learning that uses
- <strong>
-  deep neural networks
- </strong>
- with multiple hidden layers to automatically learn complex patterns from large amounts of data.
-</p>
-<p>
- Traditional ML often requires manual feature engineering, whereas Deep Learning learns features automatically.
-</p>
-<pre>Input Data
-     │
-     ▼
-Hidden Layer 1
-     │
-     ▼
-Hidden Layer 2
-     │
-     ▼
-Hidden Layer 3
-     │
-     ▼
-Output</pre>
-<h3>
- Why "Deep"?
-</h3>
-<p>
- A neural network with many hidden layers (typically more than 3) is called
- <strong>
-  deep
- </strong>
- . More layers allow the model to learn increasingly abstract features:
-</p>
-<ol>
- <li>
-  Layer 1: Edges
- </li>
- <li>
-  Layer 2: Shapes
- </li>
- <li>
-  Layer 3: Objects
- </li>
- <li>
-  Layer 4+: High-level concepts (e.g., faces, cars)
- </li>
-</ol>
-<h3>
- Popular Deep Learning Architectures
-</h3>
-<h4>
- 1. Artificial Neural Networks (ANN)
-</h4>
-<p>
- Used for structured/tabular data.
-</p>
-<h4>
- 2. Convolutional Neural Networks (CNN)
-</h4>
-<p>
- Designed for image and video processing.
-</p>
-<p>
- Applications:
-</p>
-<ul>
- <li>
-  Face recognition
- </li>
- <li>
-  Medical image analysis
- </li>
- <li>
-  Object detection
- </li>
-</ul>
-<h4>
- 3. Recurrent Neural Networks (RNN)
-</h4>
-<p>
- Designed for sequential data.
-</p>
-<p>
- Applications:
-</p>
-<ul>
- <li>
-  Speech recognition
- </li>
- <li>
-  Language modeling
- </li>
- <li>
-  Time-series forecasting
- </li>
-</ul>
-<h4>
- 4. Long Short-Term Memory (LSTM)
-</h4>
-<p>
- A type of RNN that can learn long-term dependencies.
-</p>
-<p>
- Applications:
-</p>
-<ul>
- <li>
-  Machine translation
- </li>
- <li>
-  Stock prediction
- </li>
- <li>
-  Text generation
- </li>
-</ul>
-<h4>
- 5. Transformers
-</h4>
-<p>
- Modern architecture using attention mechanisms.
-</p>
-<p>
- Applications:
-</p>
-<ul>
- <li>
-  ChatGPT
- </li>
- <li>
-  BERT
- </li>
- <li>
-  GPT
- </li>
- <li>
-  Machine translation
- </li>
- <li>
-  Document summarization
- </li>
-</ul>
-<h3>
- Training Process
-</h3>
-<pre>Training Data
-      │
-      ▼
-Forward Propagation
-      │
-      ▼
-Loss Function
-      │
-      ▼
-Backpropagation
-      │
-      ▼
-Optimizer (SGD/Adam)
-      │
-      ▼
-Update Weights
-      │
-      ▼
-Repeat for Many Epochs</pre>
-<h3>
- Common Optimizers
-</h3>
-<ul>
- <li>
-  Stochastic Gradient Descent (SGD)
- </li>
- <li>
-  Adam
- </li>
- <li>
-  RMSProp
- </li>
- <li>
-  Adagrad
- </li>
-</ul>
-<h3>
- Common Loss Functions
-</h3>
-<ul>
- <li>
-  Mean Squared Error (Regression)
- </li>
- <li>
-  Binary Cross-Entropy
- </li>
- <li>
-  Categorical Cross-Entropy
- </li>
-</ul>
-<h3>
- Advantages
-</h3>
-<ul>
- <li>
-  Automatically learns features
- </li>
- <li>
-  Excellent performance on images, audio, and text
- </li>
- <li>
-  Highly scalable with large datasets
- </li>
- <li>
-  State-of-the-art accuracy in many AI applications
- </li>
-</ul>
-<h3>
- Limitations
-</h3>
-<ul>
- <li>
-  Requires large datasets
- </li>
- <li>
-  High computational cost (GPU/TPU often needed)
- </li>
- <li>
-  Long training time
- </li>
- <li>
-  Difficult to interpret ("black box")
- </li>
-</ul>
-<h3>
- Real-World Applications
-</h3>
-<ul>
- <li>
-  Self-driving cars
- </li>
- <li>
-  Medical diagnosis
- </li>
- <li>
-  Voice assistants (Siri, Alexa, Google Assistant)
- </li>
- <li>
-  Recommendation systems (Netflix, YouTube, Amazon)
- </li>
- <li>
-  Fraud detection
- </li>
- <li>
-  Natural Language Processing (ChatGPT, translation)
- </li>
- <li>
-  Image generation and recognition
- </li>
- <li>
-  Autonomous robots
- </li>
-</ul>
-<h3>
- Summary Table
-</h3>
-<p>
- This set of notes covers the complete
- <strong>
-  Module 3 – Classical Machine Learning
- </strong>
- in a chapter-wise format, suitable for university exams, interview preparation, and building a foundation for advanced topics such as Deep Learning, Quantum Machine Learning (QML), and AI applications.
-</p>
-<table>
- <thead>
-  <tr>
-   <th>
-    Hours Studied
-   </th>
-   <th>
-    Marks
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    2
-   </td>
-   <td>
-    35
-   </td>
-  </tr>
-  <tr>
-   <td>
-    4
-   </td>
-   <td>
-    55
-   </td>
-  </tr>
-  <tr>
-   <td>
-    6
-   </td>
-   <td>
-    70
-   </td>
-  </tr>
-  <tr>
-   <td>
-    8
-   </td>
-   <td>
-    90
-   </td>
-  </tr>
- </tbody>
-</table>
-<table>
- <thead>
-  <tr>
-   <th>
-    Customer
-   </th>
-   <th>
-    Age
-   </th>
-   <th>
-    Income
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    A
-   </td>
-   <td>
-    22
-   </td>
-   <td>
-    20k
-   </td>
-  </tr>
-  <tr>
-   <td>
-    B
-   </td>
-   <td>
-    24
-   </td>
-   <td>
-    22k
-   </td>
-  </tr>
-  <tr>
-   <td>
-    C
-   </td>
-   <td>
-    45
-   </td>
-   <td>
-    80k
-   </td>
-  </tr>
-  <tr>
-   <td>
-    D
-   </td>
-   <td>
-    47
-   </td>
-   <td>
-    82k
-   </td>
-  </tr>
- </tbody>
-</table>
-<table>
- <thead>
-  <tr>
-   <th>
-    Topic
-   </th>
-   <th>
-    Main Purpose
-   </th>
-   <th>
-    Typical Output
-   </th>
-   <th>
-    Example Algorithms
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    Supervised Learning
-   </td>
-   <td>
-    Learn from labeled data
-   </td>
-   <td>
-    Prediction
-   </td>
-   <td>
-    Linear Regression, SVM, Decision Tree
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Unsupervised Learning
-   </td>
-   <td>
-    Discover hidden patterns
-   </td>
-   <td>
-    Clusters/Associations
-   </td>
-   <td>
-    K-Means, DBSCAN
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Reinforcement Learning
-   </td>
-   <td>
-    Learn through rewards
-   </td>
-   <td>
-    Optimal actions
-   </td>
-   <td>
-    Q-Learning, Deep Q-Network (DQN)
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Regression
-   </td>
-   <td>
-    Predict continuous values
-   </td>
-   <td>
-    Numbers
-   </td>
-   <td>
-    Linear Regression
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Classification
-   </td>
-   <td>
-    Predict categories
-   </td>
-   <td>
-    Class labels
-   </td>
-   <td>
-    Logistic Regression, SVM, Random Forest
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Decision Trees
-   </td>
-   <td>
-    Rule-based decision making
-   </td>
-   <td>
-    Classification/Regression
-   </td>
-   <td>
-    CART, ID3, C4.5
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Random Forest
-   </td>
-   <td>
-    Ensemble of decision trees
-   </td>
-   <td>
-    Robust predictions
-   </td>
-   <td>
-    Random Forest
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Support Vector Machine
-   </td>
-   <td>
-    Find optimal separating boundary
-   </td>
-   <td>
-    Classification/Regression
-   </td>
-   <td>
-    Linear SVM, Kernel SVM
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Neural Networks
-   </td>
-   <td>
-    Learn nonlinear relationships
-   </td>
-   <td>
-    Predictions
-   </td>
-   <td>
-    ANN
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Deep Learning
-   </td>
-   <td>
-    Multi-layer neural networks
-   </td>
-   <td>
-    Complex feature learning
-   </td>
-   <td>
-    CNN, RNN, LSTM, Transformers
-   </td>
-  </tr>
- </tbody>
-</table>
+ <!-- VIDEO PLAYER -->
+ <video controls style="width:100%;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+  <source src="/static/videos/Module_3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+ </video>
+
+ <h1>Module 3 &ndash; Classical Machine Learning Algorithms</h1>
+ <h2>Comprehensive Chapter-wise Study Notes</h2>
+
+ <!-- CHAPTER NAVIGATOR -->
+ <nav class="chapter-nav">
+  <span class="nav-label">&#128218; Chapters</span>
+  <a href="#ch1">1. Supervised Learning</a>
+  <a href="#ch2">2. Unsupervised Learning</a>
+  <a href="#ch3">3. Reinforcement Learning</a>
+  <a href="#ch4">4. Regression</a>
+  <a href="#ch5">5. Classification</a>
+  <a href="#ch6">6. Decision Trees</a>
+  <a href="#ch7">7. Random Forest</a>
+  <a href="#ch8">8. Support Vector Machines</a>
+  <a href="#ch9">9. Neural Networks</a>
+  <a href="#ch10">10. Deep Learning</a>
+  <a href="#summary">Summary</a>
+  <a href="#quiz">&#9989; Quiz</a>
+ </nav>
+
+ <!-- ==================== CHAPTER 1 ==================== -->
+ <section id="ch1">
+  <span class="chapter-badge">Chapter 1</span>
+  <h2>Supervised Learning</h2>
+  
+  <section>
+   <h3>1.1 Introduction</h3>
+   <p>Supervised Learning is the most widely deployed paradigm of Machine Learning where algorithms learn from a <strong>labeled dataset</strong> consisting of input features $X$ and correct target outputs $Y$.</p>
+   
+   <div class="callout callout-info">
+    <span class="callout-icon">&#8505;&#65039;</span>
+    <div>
+     <strong>Labeled Dataset Structure</strong>
+     A labeled dataset contains paired examples $(X_i, Y_i)$ where $X_i$ represents the vector of input observations (e.g. Hours Studied) and $Y_i$ is the ground-truth target label (e.g. Exam Marks).
+    </div>
+   </div>
+
+   <h4>Working Process Pipeline</h4>
+   <div class="step-flow">
+    <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128201; Ingest Training Data</strong>Feed paired features $X$ and true targets $Y$.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>&#9881;&#65039; Learn Mapping Function</strong>Algorithm computes mapping function $Y = f(X)$.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-body"><strong>&#129302; Generate Model</strong>Save optimized parameters and decision boundary.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">4</div></div><div class="step-body"><strong>&#128640; Predict New Data</strong>Model predicts $Y_{new}$ for unseen input $X_{new}$.</div></div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.2 Characteristics, Applications &amp; Trade-Offs</h3>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#9989;</span><h5>Easy Evaluation</h5><p>Held-out ground truth targets allow exact accuracy measurement.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127919;</span><h5>High Precision</h5><p>Achieves state-of-the-art predictive performance when well-tuned.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9888;&#65039;</span><h5>Label Bottleneck</h5><p>Creating manual labels is time-consuming and expensive.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#129504;</span><h5>Overfitting Risk</h5><p>Models may memorize training noise if hyper-parameters are unconstrained.</p></div>
+   </div>
+
+   <h4>Primary Applications</h4>
+   <ul>
+    <li>Spam &amp; Phishing Email Filtering</li>
+    <li>Medical Disease &amp; Tumor Classification</li>
+    <li>Stock Market Price Trend Prediction</li>
+    <li>Facial Recognition &amp; Speech Identification</li>
+    <li>Credit Risk Scoring &amp; Loan Approval Systems</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 2 ==================== -->
+ <section id="ch2">
+  <span class="chapter-badge">Chapter 2</span>
+  <h2>Unsupervised Learning</h2>
+
+  <section>
+   <h3>2.1 Overview &amp; Key Concepts</h3>
+   <p>In <strong>Unsupervised Learning</strong>, datasets contain input features $X$ only, without any target labels $Y$. The model must autonomously explore and extract underlying patterns, clusters, and latent relationships.</p>
+
+   <div class="step-flow">
+    <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128201; Unlabeled Input Data</strong>Feed raw features $X$ without target answers.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>&#129504; Discover Similarity Metrics</strong>Calculate Euclidean/Cosine distances between data vectors.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">3</div></div><div class="step-body"><strong>&#128101; Form Clusters &amp; Patterns</strong>Group data points into distinct clusters or reduced dimensions.</div></div>
+   </div>
+  </section>
+
+  <section>
+   <h3>2.2 Three Major Unsupervised Tasks</h3>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128101;</span><h5>1. Clustering</h5><p>Grouping similar observations together (K-Means, DBSCAN, Agglomerative).</p><div class="example">e.g. Customer Market Segmentation</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128722;</span><h5>2. Association Rule Mining</h5><p>Discovering item co-occurrence relationships (Apriori Algorithm).</p><div class="example">e.g. Market Basket Analysis (Bread &rarr; Butter)</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128201;</span><h5>3. Dimensionality Reduction</h5><p>Compressing 100+ feature spaces into low dimensions (PCA, t-SNE, UMAP).</p><div class="example">e.g. Feature Compression &amp; Visualization</div></div>
+   </div>
+
+   <h4>Customer Segmentation Tabular Example</h4>
+   <table class="comparison-table">
+    <caption>Unlabeled Customer Profiling Data</caption>
+    <thead><tr><th>Customer ID</th><th>Age</th><th>Annual Income</th><th>Discovered Cluster</th></tr></thead>
+    <tbody>
+     <tr><td>Customer A</td><td>22</td><td>$20,000</td><td>Cluster 1: Young Budget Buyers</td></tr>
+     <tr><td>Customer B</td><td>24</td><td>$22,000</td><td>Cluster 1: Young Budget Buyers</td></tr>
+     <tr><td>Customer C</td><td>45</td><td>$80,000</td><td>Cluster 2: High-Income Executives</td></tr>
+     <tr><td>Customer D</td><td>47</td><td>$82,000</td><td>Cluster 2: High-Income Executives</td></tr>
+    </tbody>
+   </table>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 3 ==================== -->
+ <section id="ch3">
+  <span class="chapter-badge">Chapter 3</span>
+  <h2>Reinforcement Learning (RL)</h2>
+
+  <section>
+   <h3>3.1 Trial-and-Error Learning Mechanics</h3>
+   <p>In <strong>Reinforcement Learning (RL)</strong>, an autonomous <strong>Agent</strong> interacts with a dynamic <strong>Environment</strong>. The agent selects <strong>Actions</strong> to maximize cumulative numerical <strong>Rewards</strong> over time.</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#129302;</span><h5>Agent</h5><p>The active learner/decision-maker (e.g., Self-driving vehicle software).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127757;</span><h5>Environment</h5><p>The external world in which the agent operates (e.g., Roadway &amp; Traffic).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128205;</span><h5>State ($S_t$)</h5><p>Current snapshot observation of the environment (e.g., Red Traffic Light ahead).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9881;&#65039;</span><h5>Action ($A_t$)</h5><p>Set of possible moves available to the agent (Steer Left, Accelerate, Brake).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127881;</span><h5>Reward ($R_t$)</h5><p>Feedback signal (+1 for reaching goal safely, -100 for collision).</p></div>
+   </div>
+
+   <h4>Applications of Reinforcement Learning</h4>
+   <ul>
+    <li>Autonomous Vehicles &amp; Self-Driving Navigation</li>
+    <li>Industrial Robotics &amp; Warehouse Manipulators</li>
+    <li>Game Intelligence (AlphaGo, Chess, StarCraft II)</li>
+    <li>LLM Alignment via Reinforcement Learning from Human Feedback (RLHF)</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 4 ==================== -->
+ <section id="ch4">
+  <span class="chapter-badge">Chapter 4</span>
+  <h2>Regression Algorithms</h2>
+
+  <section>
+   <h3>4.1 Continuous Numerical Target Modeling</h3>
+   <p>Regression models predict continuous numerical quantities ($Y \in \mathbb{R}$) based on input feature vectors $X$.</p>
+
+   <h4>Types of Regression</h4>
+   <ul>
+    <li><strong>Simple Linear Regression:</strong> Fits a straight line $Y = eta_0 + eta_1 X + \epsilon$.</li>
+    <li><strong>Multiple Linear Regression:</strong> Models multiple predictor inputs $Y = eta_0 + eta_1 X_1 + eta_2 X_2 + ... + eta_n X_n$.</li>
+    <li><strong>Polynomial Regression:</strong> Fits non-linear curves $Y = eta_0 + eta_1 X + eta_2 X^2 + ...$.</li>
+   </ul>
+
+   <h4>Evaluation Metrics for Regression</h4>
+   <table class="comparison-table">
+    <caption>Regression Performance Metrics</caption>
+    <thead><tr><th>Metric</th><th>Full Name</th><th>Formula / Description</th></tr></thead>
+    <tbody>
+     <tr><td>MAE</td><td>Mean Absolute Error</td><td>Average absolute deviation $rac{1}{n}\sum |y_i - \hat{y}_i|$. Easy to interpret.</td></tr>
+     <tr><td>MSE</td><td>Mean Squared Error</td><td>Average squared difference $rac{1}{n}\sum (y_i - \hat{y}_i)^2$. Penalizes large errors.</td></tr>
+     <tr><td>RMSE</td><td>Root Mean Squared Error</td><td>$\sqrt{	ext{MSE}}$. Expressed in the exact same units as target $Y$.</td></tr>
+     <tr><td>$R^2$ Score</td><td>Coefficient of Determination</td><td>Proportion of target variance explained by model ($0.0 	o 1.0$).</td></tr>
+    </tbody>
+   </table>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 5 ==================== -->
+ <section id="ch5">
+  <span class="chapter-badge">Chapter 5</span>
+  <h2>Classification Algorithms</h2>
+
+  <section>
+   <h3>5.1 Categorical Target Modeling</h3>
+   <p>Classification algorithms assign observations into discrete class categories (e.g., $Y \in \{0, 1\}$ or $Y \in \{	ext{Cat}, 	ext{Dog}, 	ext{Bird}\}$).</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#9878;</span><h5>Binary Classification</h5><p>Two mutually exclusive classes (Spam vs Not Spam, Tumor vs Healthy).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127919;</span><h5>Multi-Class Classification</h5><p>Single target selected from three or more classes (Apple vs Banana vs Orange).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127991;</span><h5>Multi-Label Classification</h5><p>Multiple non-exclusive tags assigned simultaneously (e.g. Image contains Dog + Tree + Car).</p></div>
+   </div>
+
+   <h4>Classification Evaluation Metrics &amp; Confusion Matrix</h4>
+   <ul>
+    <li><strong>Accuracy:</strong> Ratio of total correct predictions $rac{TP + TN}{TP + TN + FP + FN}$.</li>
+    <li><strong>Precision:</strong> Exactness of positive predictions $rac{TP}{TP + FP}$.</li>
+    <li><strong>Recall (Sensitivity):</strong> Ability to find all true positive instances $rac{TP}{TP + FN}$.</li>
+    <li><strong>F1-Score:</strong> Harmonic mean of Precision and Recall $2 \cdot rac{	ext{Precision} \cdot 	ext{Recall}}{	ext{Precision} + 	ext{Recall}}$.</li>
+    <li><strong>ROC-AUC:</strong> Area under Receiver Operating Characteristic curve measuring trade-off between True Positive and False Positive rates.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 6 ==================== -->
+ <section id="ch6">
+  <span class="chapter-badge">Chapter 6</span>
+  <h2>Decision Tree Algorithms</h2>
+
+  <section>
+   <h3>6.1 Structure &amp; Splitting Mechanics</h3>
+   <p>A Decision Tree partitions data into hierarchical IF-ELSE decisions starting from a <strong>Root Node</strong>, passing internal decision nodes, and arriving at final <strong>Leaf Nodes</strong>.</p>
+
+   <div class="tree-block">
+    <span class="tree-root">[Root Node] Age &lt; 30?</span><br>
+    &#9474;<br>
+    &#9500;&#9472;&#9472; Yes &rarr; <span class="tree-l1">[Internal Node] Student Status?</span><br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; Yes &rarr; <span class="tree-l2">[Leaf Node] Output: Buy Computer</span><br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; No  &rarr; <span class="tree-l2">[Leaf Node] Output: No Purchase</span><br>
+    &#9474;<br>
+    &#9492;&#9472;&#9472; No  &rarr; <span class="tree-l1">[Internal Node] Income Level?</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; High &rarr; <span class="tree-l2">[Leaf Node] Output: Buy Computer</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; Low  &rarr; <span class="tree-l2">[Leaf Node] Output: No Purchase</span>
+   </div>
+
+   <h4>Splitting Criteria Formulas</h4>
+   <ul>
+    <li><strong>Gini Impurity:</strong> $	ext{Gini} = 1 - \sum_{i=1}^{C} p_i^2$ (Measures node impurity; lower is better).</li>
+    <li><strong>Entropy:</strong> $H(S) = -\sum_{i=1}^{C} p_i \log_2(p_i)$ (Measures randomness in information).</li>
+    <li><strong>Information Gain:</strong> $	ext{Gain}(S, A) = H(S) - \sum rac{|S_v|}{|S|} H(S_v)$ (Higher gain determines optimal split).</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 7 ==================== -->
+ <section id="ch7">
+  <span class="chapter-badge">Chapter 7</span>
+  <h2>Random Forest (Ensemble Learning)</h2>
+
+  <section>
+   <h3>7.1 Bagging &amp; Wisdom of the Crowd</h3>
+   <p>Random Forest is a powerful <strong>Ensemble Machine Learning</strong> algorithm that constructs a large collection of de-correlated Decision Trees using <strong>Bootstrap Aggregating (Bagging)</strong> and random feature subsets.</p>
+
+   <div class="step-flow">
+    <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>&#127922; Bootstrap Sampling</strong>Create $N$ random samples with replacement from training dataset.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>&#127795; Train Multiple Trees</strong>Build independent decision trees using random sub-features for each split.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">3</div></div><div class="step-body"><strong>&#128504; Aggregate Predictions</strong>Classification: Majority Vote; Regression: Average Prediction.</div></div>
+   </div>
+
+   <div class="callout callout-tip">
+    <span class="callout-icon">&#127775;</span>
+    <div>
+     <strong>Why Random Forests Excel</strong>
+     By averaging predictions across hundreds of individual decision trees, Random Forests dramatically reduce variance and overfitting without increasing bias.
+    </div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 8 ==================== -->
+ <section id="ch8">
+  <span class="chapter-badge">Chapter 8</span>
+  <h2>Support Vector Machines (SVM)</h2>
+
+  <section>
+   <h3>8.1 Maximum Margin Hyperplanes &amp; Kernel Trick</h3>
+   <p>Support Vector Machine (SVM) finds the optimal decision boundary (Hyperplane) that maximizes the <strong>Margin</strong> between classes in high-dimensional vector space.</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#9878;</span><h5>Hyperplane</h5><p>Decision boundary separating class vectors ($W^T X + b = 0$).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128207;</span><h5>Margin</h5><p>Perpendicular distance between boundary and closest data points. Maximum margin maximizes generalization.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128994;</span><h5>Support Vectors</h5><p>The critical boundary data points that uniquely determine the hyperplane's orientation.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9889;</span><h5>Kernel Trick</h5><p>Maps non-linearly separable inputs into higher-dimensional Hilbert space (Linear, Polynomial, RBF, Sigmoid).</p></div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 9 ==================== -->
+ <section id="ch9">
+  <span class="chapter-badge">Chapter 9</span>
+  <h2>Artificial Neural Networks (ANN)</h2>
+
+  <section>
+   <h3>9.1 Biological Motivation &amp; Mathematical Neuron</h3>
+   <p>Artificial Neural Networks mimic biological brain structures using interconnected layers of artificial neurons (perceptrons).</p>
+
+   <div class="callout callout-info">
+    <span class="callout-icon">&#128221;</span>
+    <div>
+     <strong>Mathematical Neuron Equation</strong>
+     $z = f\left(\sum_{i=1}^n w_i x_i + bight)$ where $w_i$ are learned weights, $b$ is bias, and $f$ is a non-linear activation function.
+    </div>
+   </div>
+
+   <h4>Common Activation Functions</h4>
+   <ul>
+    <li><strong>Sigmoid:</strong> $f(z) = rac{1}{1 + e^{-z}}$ (Scales output between 0 and 1; ideal for binary output).</li>
+    <li><strong>ReLU (Rectified Linear Unit):</strong> $f(z) = \max(0, z)$ (Most popular; prevents vanishing gradients).</li>
+    <li><strong>Tanh:</strong> $f(z) = 	anh(z)$ (Scales output between -1 and +1).</li>
+    <li><strong>Softmax:</strong> Converts final vector into probability distribution summing to 1.0 for multi-class targets.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 10 ==================== -->
+ <section id="ch10">
+  <span class="chapter-badge">Chapter 10</span>
+  <h2>Deep Learning Architectures</h2>
+
+  <section>
+   <h3>10.1 Why "Deep"? Automated Feature Hierarchy</h3>
+   <p>Deep Learning utilizes deep neural networks containing multiple hidden layers (often tens or hundreds) to learn increasingly complex hierarchical feature representations directly from raw data.</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128247;</span><h5>1. Convolutional Neural Networks (CNN)</h5><p>Uses spatial convolution filters for Computer Vision, Image Classification, and Object Detection.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128260;</span><h5>2. Recurrent Neural Networks (RNN &amp; LSTM)</h5><p>Uses recurrent loops and memory cells for Sequential Time-Series and Natural Language Processing.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9889;</span><h5>3. Transformer Architecture</h5><p>Uses Multi-Head Self-Attention mechanisms powering Large Language Models (LLMs) like GPT-4, Gemini, and Claude.</p></div>
+   </div>
+
+   <h4>Python Code Hands-On: Classical Machine Learning Model Comparison</h4>
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10 (scikit-learn)</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code><span class="code-cm"># Classical Machine Learning Model Comparison Script</span>
+<span class="code-kw">from</span> sklearn.datasets <span class="code-kw">import</span> load_iris
+<span class="code-kw">from</span> sklearn.model_selection <span class="code-kw">import</span> train_test_split
+<span class="code-kw">from</span> sklearn.tree <span class="code-kw">import</span> DecisionTreeClassifier
+<span class="code-kw">from</span> sklearn.ensemble <span class="code-kw">import</span> RandomForestClassifier
+<span class="code-kw">from</span> sklearn.svm <span class="code-kw">import</span> SVC
+<span class="code-kw">from</span> sklearn.metrics <span class="code-kw">import</span> accuracy_score
+
+<span class="code-cm"># Load Benchmark Dataset</span>
+iris = load_iris()
+X, y = iris.data, iris.target
+
+<span class="code-cm"># Train-Test Split</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="code-num">0.3</span>, random_state=<span class="code-num">42</span>)
+
+<span class="code-cm"># Initialize Classical Models</span>
+models = {
+    <span class="code-str">"Decision Tree"</span>: DecisionTreeClassifier(),
+    <span class="code-str">"Random Forest"</span>: RandomForestClassifier(n_estimators=<span class="code-num">50</span>),
+    <span class="code-str">"Support Vector Machine"</span>: SVC(kernel=<span class="code-str">'rbf'</span>)
+}
+
+<span class="code-cm"># Train & Evaluate Models</span>
+<span class="code-kw">for</span> name, model <span class="code-kw">in</span> models.items():
+    model.fit(X_train, y_train)
+    preds = model.predict(X_test)
+    acc = accuracy_score(y_test, preds)
+    <span class="code-nb">print</span>(f<span class="code-str">"{name} Test Accuracy: {acc * 100:.2f}%"</span>)</code></pre>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== SUMMARY ==================== -->
+ <section id="summary">
+  <span class="chapter-badge">Module Summary</span>
+  <h2>Module 3 Master Summary &amp; Comparison Table</h2>
+
+  <table class="comparison-table">
+   <caption>Classical Machine Learning Algorithm Summary Matrix</caption>
+   <thead><tr><th>Topic</th><th>Main Purpose</th><th>Typical Output</th><th>Key Exemplar Algorithms</th></tr></thead>
+   <tbody>
+    <tr><td>Supervised Learning</td><td>Learn from labeled ground-truth pairs $(X,Y)$</td><td>Prediction Label / Value</td><td>Linear Regression, SVM, Decision Tree</td></tr>
+    <tr><td>Unsupervised Learning</td><td>Discover latent structures in unlabeled data $X$</td><td>Clusters / Associations</td><td>K-Means, DBSCAN, PCA, Apriori</td></tr>
+    <tr><td>Reinforcement Learning</td><td>Optimize action policy via environment rewards</td><td>Optimal Action Sequence</td><td>Q-Learning, DQN, PPO, RLHF</td></tr>
+    <tr><td>Regression</td><td>Predict continuous target values</td><td>Real Number ($\mathbb{R}$)</td><td>Linear, Ridge, Lasso, Polynomial</td></tr>
+    <tr><td>Classification</td><td>Categorize inputs into discrete classes</td><td>Class Labels</td><td>Logistic Regression, SVM, Random Forest</td></tr>
+    <tr><td>Decision Trees</td><td>Rule-based hierarchical partitioning</td><td>Discrete / Continuous</td><td>CART, ID3, C4.5</td></tr>
+    <tr><td>Random Forests</td><td>Ensemble aggregation of de-correlated trees</td><td>Robust Predictions</td><td>Bagging Ensemble Trees</td></tr>
+    <tr><td>Support Vector Machines</td><td>Maximize separating hyperplane margin</td><td>Class Boundaries</td><td>Linear &amp; Kernel RBF SVM</td></tr>
+    <tr><td>Neural Networks</td><td>Learn non-linear multi-layer mappings</td><td>Vector Outputs</td><td>Artificial Neural Nets (ANN)</td></tr>
+    <tr><td>Deep Learning</td><td>Automate hierarchical feature extraction</td><td>Complex Representations</td><td>CNN, RNN, LSTM, Transformers</td></tr>
+   </tbody>
+  </table>
+
+  <div class="callout callout-info">
+   <span class="callout-icon">&#128218;</span>
+   <div>
+    <strong>Congratulations on Completing Module 3!</strong>
+    You have mastered Classical Machine Learning algorithms! You are now fully prepared to step into the Quantum domain in Module 4: <em>Why Quantum Computing?</em>
+   </div>
+  </div>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== QUIZ ==================== -->
+ <section id="quiz">
+  <div class="quiz-section">
+   <h3>&#9989; Practice Knowledge Verification &mdash; Module 3</h3>
+   <ol class="quiz-list">
+    <li>Compare Supervised, Unsupervised, and Reinforcement Learning paradigms with respect to data requirements and feedback loops.</li>
+    <li>What is the difference between Regression and Classification? Give two real-world examples and one evaluation metric for each.</li>
+    <li>Explain Gini Impurity and Entropy in Decision Trees. How does Information Gain guide root node selection?</li>
+    <li>How does Random Forest prevent overfitting compared to a single standalone Decision Tree? Explain the concept of Bootstrap Aggregating (Bagging).</li>
+    <li>What is the Margin in Support Vector Machines (SVM), and why is maximizing the margin beneficial for generalization?</li>
+    <li>Explain the Kernel Trick in SVM. Name three common kernel functions used for non-linearly separable data.</li>
+    <li>Describe the mathematical components of an artificial neuron: weights, bias, and activation functions.</li>
+    <li>Explain the difference between Forward Propagation and Backpropagation during Neural Network training.</li>
+    <li>What are Convolutional Neural Networks (CNN) and Transformers, and what specific data domains do they excel at?</li>
+    <li>Write a Python script using <code>scikit-learn</code> that trains and evaluates a Random Forest Classifier on a sample dataset.</li>
+   </ol>
+  </div>
+ </section>
+
+ <!-- NEXT MODULE NAVIGATION BANNER AT THE ABSOLUTE END -->
+ <div class="next-module-banner">
+  <h3>Ready for the Next Step?</h3>
+  <p>You have completed Module 3! Step into the future of computing and explore Quantum Mechanics.</p>
+  <a href="/course/content?id=why-quantum-computing" class="next-module-btn" id="nextModuleBtn">
+   <span>Proceed to Module 4: Why Quantum Computing? &rarr;</span>
+  </a>
+ </div>
 </main>

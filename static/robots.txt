@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Allow: /courses
+Allow: /module1
+Allow: /module2
+Allow: /module3
+Allow: /module4
+Allow: /module5
+Allow: /module6
+Allow: /module7
+Allow: /module8
+Allow: /module9
+Allow: /module10
+Allow: /simulation
+Allow: /visualizer
+Allow: /complaints
+
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /profile
+
+Sitemap: https://quantica-platform.com/sitemap.xml

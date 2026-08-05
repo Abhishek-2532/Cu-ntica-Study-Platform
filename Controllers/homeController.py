@@ -72,3 +72,15 @@ def quiz():
 @home_bp.route("/visualizer", methods=["GET"])
 def visualizer():
     return render_template("visualizer.html")
+
+
+@home_bp.route("/robots.txt")
+def robots_txt():
+    from flask import send_from_directory, current_app
+    return send_from_directory(current_app.config["STATIC_FOLDER"], "robots.txt")
+
+
+@home_bp.route("/sitemap.xml")
+def sitemap_xml():
+    from flask import send_from_directory, current_app
+    return send_from_directory(current_app.config["STATIC_FOLDER"], "sitemap.xml", mimetype="application/xml")

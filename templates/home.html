@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cuántica — The quantum machine learning platform. Train, benchmark, and deploy quantum-classical hybrid models at scale." />
+  <meta name="description" content="Cuántica — Master quantum computing, practice coding tutorials, build circuits in virtual labs, and track your progress with interactive courses." />
   <meta name="theme-color" content="#6CE5BF" />
-  <title>Cuántica &mdash; Quantum Machine Learning</title>
+  <title>Cuántica &mdash; Quantum Machine Learning & Study Platform</title>
+
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cuántica Study Platform" />
+  <meta property="og:title" content="Cuántica — Quantum Computing & Machine Learning Platform" />
+  <meta property="og:description" content="Master quantum computing, practice coding tutorials, build circuits in virtual labs, and track your progress with interactive courses." />
+  <meta property="og:url" content="https://quantica-platform.com/" />
+  <meta property="og:image" content="https://quantica-platform.com/static/circuit.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Cuántica Quantum Circuit Visualizer & Study Platform" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@QuanticaStudy" />
+  <meta name="twitter:title" content="Cuántica — Quantum Computing & Machine Learning Platform" />
+  <meta name="twitter:description" content="Master quantum computing, practice coding tutorials, build circuits in virtual labs, and track your progress with interactive courses." />
+  <meta name="twitter:image" content="https://quantica-platform.com/static/circuit.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -3099,19 +3118,30 @@ body::before {
     <div class="hero-content">
       <!-- Badge -->
       <div class="hero-badge" data-animate="fade-up" data-delay="0">
-        <i class="fa-solid fa-circle-check hero-badge-icon"></i>
-        <span>Trusted by 12,000+ researchers &amp; engineers</span>
+        <i class="fa-solid fa-graduation-cap hero-badge-icon"></i>
+        <span>Interactive Quantum Learning Platform for Students</span>
       </div>
 
       <!-- Heading -->
       <h1 class="hero-heading" data-animate="fade-up" data-delay="100">
-        Explore <em>all</em> of quantum<br />machine learning at once.
+        Study, Learn, Practice Quantum Computing and<br />Quantum Machine Learning Today.
       </h1>
 
       <!-- Subheading -->
       <p class="hero-subheading" data-animate="fade-up" data-delay="200">
-        Train, benchmark, and deploy quantum-classical hybrid models across 40+ quantum backends, 200+ algorithms, and every major dataset.
+        Learn quantum computing, practice coding tutorials, build circuits in virtual labs, and track your progress with interactive courses.
       </p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-actions" data-animate="fade-up" data-delay="250" style="margin-top: 24px; margin-bottom: 32px; display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <a href="/signup" class="btn-primary-lg" style="padding: 14px 32px; font-size: 1rem; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-user-plus"></i> Get Started
+        </a>
+        <a href="/courses" class="btn-outline-lg" style="padding: 14px 32px; font-size: 1rem; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.9); color: #1E293B; border: 1px solid #B8D9E4;">
+          <i class="fa-solid fa-book-open"></i> Explore Courses
+        </a>
+      </div>
+
 
       <!-- Tabbed Explore Bar -->
       <div class="explore-bar" data-animate="fade-up" data-delay="300">
@@ -3250,49 +3280,94 @@ body::before {
   </section>
 
   <!-- ============================================================
-       FEATURE STRIP (below hero, mirrors the 3-col strip in the image)
+       ABOUT SECTION
   ============================================================ -->
-  <section class="feature-strip" aria-label="Key platform benefits">
+  <section class="about-section" id="about" style="padding: 60px 0; background: #FFFFFF; border-bottom: 1px solid #DCEEF2;">
+    <div class="container" style="max-width: 900px; text-align: center;">
+      <div class="section-badge" style="margin: 0 auto 16px auto; display: inline-flex; align-items: center; gap: 8px; background: #E0FAF4; color: #1FA880; padding: 6px 16px; border-radius: 999px; font-weight: 600; font-size: 0.85rem;">
+        <i class="fa-solid fa-circle-info"></i> About Cuántica
+      </div>
+      <h2 style="font-family: 'Sora', sans-serif; font-size: 2.2rem; color: #1E293B; font-weight: 700; margin-bottom: 16px;">
+        Empowering Students in Quantum Computing
+      </h2>
+      <p style="font-size: 1.1rem; color: #475569; line-height: 1.8;">
+        Cuántica is an interactive learning platform designed for students to master quantum computing and quantum machine learning. We combine step-by-step courses, coding tutorials, and hands-on virtual labs to make complex quantum concepts simple and accessible. Start your quantum journey today with a structured learning roadmap and real-time progress tracking.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE THIS PLATFORM (Feature Cards)
+  ============================================================ -->
+  <section class="why-section" id="features" style="padding: 80px 0; background: #F7FEFF;">
     <div class="container">
-      <div class="feature-strip-grid">
+      <div class="section-header" style="text-align: center; margin-bottom: 48px;">
+        <div class="section-badge" style="margin: 0 auto 12px auto; display: inline-flex; align-items: center; gap: 8px; background: #E0FAF4; color: #1FA880; padding: 6px 16px; border-radius: 999px; font-weight: 600; font-size: 0.85rem;">
+          <i class="fa-solid fa-sparkles"></i> Platform Features
+        </div>
+        <h2 style="font-family: 'Sora', sans-serif; font-size: 2.2rem; color: #1E293B; font-weight: 700;">Why Choose This Platform</h2>
+        <p style="color: #64748B; font-size: 1rem; margin-top: 8px;">Everything you need to learn, build, and track your quantum skills.</p>
+      </div>
 
-        <div class="feature-strip-item">
-          <div class="feature-strip-icon">
-            <i class="fa-solid fa-layer-group"></i>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <!-- Card 1 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #E0FAF4; color: #1FA880; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-book-open"></i>
           </div>
-          <div class="feature-strip-text">
-            <strong>Everything in one place</strong>
-            <span>Access every quantum framework, backend, and dataset from a single unified workspace.</span>
-          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Interactive Learning Modules</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Study step-by-step lessons with structured chapters, code examples, and practice quizzes.</p>
         </div>
 
-        <div class="feature-strip-divider" aria-hidden="true"></div>
-
-        <div class="feature-strip-item">
-          <div class="feature-strip-icon">
-            <i class="fa-solid fa-sliders"></i>
+        <!-- Card 2 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #E3EDFE; color: #3B82F6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-flask"></i>
           </div>
-          <div class="feature-strip-text">
-            <strong>Filter for what you need</strong>
-            <span>Running VQE on a trapped-ion device? Instantly narrow results by qubit count, topology, and noise model.</span>
-          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Virtual Lab &amp; Visualizer</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Build, simulate, and inspect quantum circuits in real time with our Circuit Visualizer.</p>
         </div>
 
-        <div class="feature-strip-divider" aria-hidden="true"></div>
+        <!-- Card 3 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #FEF3C7; color: #D97706; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Structured Learning Roadmap</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Follow a clear path from quantum basics to advanced quantum machine learning algorithms.</p>
+        </div>
 
-        <div class="feature-strip-item">
-          <div class="feature-strip-icon">
-            <i class="fa-solid fa-lock-open"></i>
+        <!-- Card 4 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #F3E8FF; color: #8B5CF6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-chart-line"></i>
           </div>
-          <div class="feature-strip-text">
-            <strong>No vendor lock-in</strong>
-            <span>Export to Qiskit, Pennylane, Cirq, or raw OpenQASM. Your models, your rules.</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Course Progress Tracking</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Monitor your completed lessons, earn experience points, and view your learning stats.</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #E0FAF4; color: #1FA880; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-gauge-high"></i>
           </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Personalized Dashboard</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Access all your courses, bookmarks, badges, and learning history from one central hub.</p>
+        </div>
+
+        <!-- Card 6 -->
+        <div style="background: #FFFFFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; box-shadow: 0 4px 16px rgba(30,41,59,.04);">
+          <div style="width: 48px; height: 48px; background: #FFF1F2; color: #E11D48; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Search &amp; Quick Navigation</h3>
+          <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6;">Quickly search through courses, tutorials, and topics to find exactly what you want to learn.</p>
         </div>
 
       </div>
     </div>
   </section>
+
 
   <!-- ============================================================
        TRUSTED BY / LOGOS
@@ -3572,16 +3647,64 @@ body::before {
   <!-- ============================================================
        HOW IT WORKS
   ============================================================ -->
-  <section class="how-section" id="benchmarks" aria-label="How Cuántica works">
+  <!-- ============================================================
+       FEATURED LEARNING SECTION
+  ============================================================ -->
+  <section class="featured-learning-section" id="featured-learning" style="padding: 80px 0; background: #FFFFFF; border-top: 1px solid #DCEEF2;">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin-bottom: 48px;">
+        <div class="section-badge" style="margin: 0 auto 12px auto; display: inline-flex; align-items: center; gap: 8px; background: #E0FAF4; color: #1FA880; padding: 6px 16px; border-radius: 999px; font-weight: 600; font-size: 0.85rem;">
+          <i class="fa-solid fa-graduation-cap"></i> Curriculum Highlights
+        </div>
+        <h2 style="font-family: 'Sora', sans-serif; font-size: 2.2rem; color: #1E293B; font-weight: 700;">Featured Learning</h2>
+        <p style="color: #64748B; font-size: 1rem; margin-top: 8px;">Explore core areas designed for comprehensive quantum education.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+        <!-- 1. Quantum Computing -->
+        <div style="background: #F7FEFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; text-align: left;">
+          <div style="color: #1FA880; font-size: 1.6rem; margin-bottom: 14px;"><i class="fa-solid fa-atom"></i></div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Quantum Computing</h3>
+          <p style="color: #64748B; font-size: 0.92rem; line-height: 1.6;">Master qubits, superposition, entanglement, and essential quantum logic gates.</p>
+        </div>
+
+        <!-- 2. Quantum Machine Learning -->
+        <div style="background: #F7FEFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; text-align: left;">
+          <div style="color: #6366F1; font-size: 1.6rem; margin-bottom: 14px;"><i class="fa-solid fa-brain"></i></div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Quantum Machine Learning</h3>
+          <p style="color: #64748B; font-size: 0.92rem; line-height: 1.6;">Explore variational quantum circuits, QNNs, and hybrid algorithms.</p>
+        </div>
+
+        <!-- 3. Coding Tutorials -->
+        <div style="background: #F7FEFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; text-align: left;">
+          <div style="color: #D97706; font-size: 1.6rem; margin-bottom: 14px;"><i class="fa-solid fa-code"></i></div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Coding Tutorials</h3>
+          <p style="color: #64748B; font-size: 0.92rem; line-height: 1.6;">Practice with practical code snippets in Qiskit 1.0, PennyLane, and Python.</p>
+        </div>
+
+        <!-- 4. Virtual Lab -->
+        <div style="background: #F7FEFF; border: 1px solid #DCEEF2; border-radius: 16px; padding: 28px; text-align: left;">
+          <div style="color: #E11D48; font-size: 1.6rem; margin-bottom: 14px;"><i class="fa-solid fa-vial"></i></div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1E293B; margin-bottom: 8px;">Virtual Lab</h3>
+          <p style="color: #64748B; font-size: 0.92rem; line-height: 1.6;">Design quantum circuits, run simulations, and analyze measurement outputs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LEARNING PROCESS (HOW IT WORKS)
+  ============================================================ -->
+  <section class="how-section" id="process" aria-label="Learning Process">
     <div class="container">
 
-      <div class="section-header" data-animate="fade-up">
-        <div class="section-badge">
-          <i class="fa-solid fa-circle-nodes"></i>
-          How it works
+      <div class="section-header" data-animate="fade-up" style="text-align: center;">
+        <div class="section-badge" style="margin: 0 auto 12px auto; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-list-ol"></i>
+          Step-by-Step Guide
         </div>
-        <h2 class="section-title">From quantum circuit to<br />production in four steps.</h2>
-        <p class="section-sub">Cuántica abstracts away the complexity of quantum hardware so you can focus on building breakthroughs.</p>
+        <h2 class="section-title">How Learning Works</h2>
+        <p class="section-sub">Four simple steps to start mastering quantum computing today.</p>
       </div>
 
       <div class="how-steps">
@@ -3590,11 +3713,11 @@ body::before {
           <div class="how-step-number">01</div>
           <div class="how-step-content">
             <div class="how-step-icon">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i class="fa-solid fa-user-plus"></i>
             </div>
-            <h3>Discover</h3>
-            <p>Search 240+ quantum models, 1800+ datasets, and 42 hardware backends from one unified catalog with intelligent semantic search.</p>
-            <a href="#" class="how-step-link">Browse catalog <i class="fa-solid fa-arrow-right"></i></a>
+            <h3>Sign Up</h3>
+            <p>Create your free student account in seconds to access all learning modules.</p>
+            <a href="/signup" class="how-step-link">Register now <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -3602,11 +3725,11 @@ body::before {
           <div class="how-step-number">02</div>
           <div class="how-step-content">
             <div class="how-step-icon">
-              <i class="fa-solid fa-pen-ruler"></i>
+              <i class="fa-solid fa-book-open"></i>
             </div>
-            <h3>Design</h3>
-            <p>Build parametric quantum circuits in our visual drag-and-drop editor. Export to OpenQASM, Qiskit, or Pennylane in one click.</p>
-            <a href="#" class="how-step-link">Try the editor <i class="fa-solid fa-arrow-right"></i></a>
+            <h3>Choose a Course</h3>
+            <p>Select a module from our quantum computing and machine learning curriculum.</p>
+            <a href="/courses" class="how-step-link">Browse courses <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -3614,11 +3737,11 @@ body::before {
           <div class="how-step-number">03</div>
           <div class="how-step-content">
             <div class="how-step-icon">
-              <i class="fa-solid fa-bolt"></i>
+              <i class="fa-solid fa-laptop-code"></i>
             </div>
-            <h3>Train</h3>
-            <p>Launch hybrid training jobs across simulators and real quantum hardware. Automatic hyperparameter tuning and noise mitigation included.</p>
-            <a href="#" class="how-step-link">Start training <i class="fa-solid fa-arrow-right"></i></a>
+            <h3>Learn &amp; Practice</h3>
+            <p>Read interactive lessons, complete coding tutorials, and test circuits in the Virtual Lab.</p>
+            <a href="/courses" class="how-step-link">Start practicing <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -3626,17 +3749,18 @@ body::before {
           <div class="how-step-number">04</div>
           <div class="how-step-content">
             <div class="how-step-icon">
-              <i class="fa-solid fa-rocket"></i>
+              <i class="fa-solid fa-chart-line"></i>
             </div>
-            <h3>Deploy</h3>
-            <p>Serve predictions via REST API or WebSocket endpoint. Scale from research prototype to enterprise workload without rewriting a line of code.</p>
-            <a href="#" class="how-step-link">Deploy now <i class="fa-solid fa-arrow-right"></i></a>
+            <h3>Track Your Progress</h3>
+            <p>View your completed courses, earn XP and coins, and monitor your stats on your dashboard.</p>
+            <a href="/dashboard" class="how-step-link">View dashboard <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
       </div>
     </div>
   </section>
+
 
   <!-- ============================================================
        BENCHMARKS / PERFORMANCE
@@ -3896,18 +4020,15 @@ body::before {
             <i class="fa-solid fa-rocket"></i>
             Start building today
           </div>
-          <h2 class="cta-title">The quantum future<br />starts here.</h2>
-          <p class="cta-desc">Join 12,000+ researchers already using Cuántica to accelerate their quantum ML research. Free plan, no credit card required.</p>
+          <h2 class="cta-title">Ready to start your journey into quantum computing and machine learning?</h2>
+          <p class="cta-desc">Join thousands of students learning quantum algorithms with interactive courses, coding tutorials, and virtual labs.</p>
           <div class="cta-actions">
-            <a href="#" class="btn-primary-lg">
+            <a href="/courses" class="btn-primary-lg">
               <i class="fa-solid fa-rocket"></i>
-              Start for free
-            </a>
-            <a href="#" class="btn-outline-lg btn-outline-lg--dark">
-              <i class="fa-brands fa-github"></i>
-              View on GitHub
+              Start Learning
             </a>
           </div>
+
           <p class="cta-note"><i class="fa-solid fa-shield-halved"></i> SOC 2 Type II certified &mdash; enterprise-grade security.</p>
         </div>
         <div class="cta-visual" aria-hidden="true">
@@ -3926,27 +4047,27 @@ body::before {
       <div class="footer-top">
 
         <div class="footer-brand">
-          <a href="#" class="footer-logo" aria-label="Cuántica home">
+          <a href="/" class="footer-logo" aria-label="Cuántica home">
             <div class="logo-mark logo-mark--sm" style="background: transparent;">
               <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
             </div>
             <span class="logo-text">Cuántica</span>
           </a>
-          <p class="footer-tagline">The quantum machine learning platform for researchers, engineers, and enterprises pushing the boundaries of computation.</p>
+          <p class="footer-tagline">The quantum machine learning platform for researchers, engineers, and curious minds pushing the boundaries of computation.</p>
           <div class="footer-socials">
-            <a href="#" class="footer-social-btn" aria-label="GitHub">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub">
               <i class="fa-brands fa-github"></i>
             </a>
-            <a href="#" class="footer-social-btn" aria-label="Twitter / X">
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Twitter / X">
               <i class="fa-brands fa-x-twitter"></i>
             </a>
-            <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn">
               <i class="fa-brands fa-linkedin-in"></i>
             </a>
-            <a href="#" class="footer-social-btn" aria-label="Discord">
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Discord">
               <i class="fa-brands fa-discord"></i>
             </a>
-            <a href="#" class="footer-social-btn" aria-label="YouTube">
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube">
               <i class="fa-brands fa-youtube"></i>
             </a>
           </div>
@@ -3954,8 +4075,13 @@ body::before {
 
         <nav class="footer-nav-group" aria-label="Platform links">
           <h4 class="footer-nav-title">Platform</h4>
-          <a href="#" class="footer-nav-link">Model Library</a>
-          <a href="#" class="footer-nav-link">Circuit Builder</a>
+          <a href="/courses" class="footer-nav-link">Courses</a>
+          <a href="/visualizer" class="footer-nav-link">Circuit Visualizer</a>
+          <a href="/simulation" class="footer-nav-link">Virtual Lab</a>
+          <a href="/dashboard" class="footer-nav-link">Dashboard</a>
+          <a href="/complaints" class="footer-nav-link">Support Center</a>
+        </nav>
+
           <a href="#" class="footer-nav-link">Training Hub</a>
           <a href="#" class="footer-nav-link">Benchmarks</a>
           <a href="#" class="footer-nav-link">Dataset Catalog</a>

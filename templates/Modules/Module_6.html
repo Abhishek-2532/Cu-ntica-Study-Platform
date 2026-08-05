@@ -1,1454 +1,167 @@
 <main>
-<h1>
- Module 6 – Intersection Between Machine Learning and Quantum Computing
-</h1>
-<h2>
- Chapter 1: Evolution of AI and Quantum Computing
-</h2>
-<h3>
- Learning Objectives
-</h3>
-<p>
- After studying this chapter, you should be able to:
-</p>
-<ul>
- <li>
-  Understand the evolution of Artificial Intelligence.
- </li>
- <li>
-  Understand the development of Quantum Computing.
- </li>
- <li>
-  Learn how both technologies have evolved independently.
- </li>
- <li>
-  Understand why these two technologies are now merging.
- </li>
-</ul>
-<h3>
- 1.1 Introduction
-</h3>
-<p>
- Artificial Intelligence (AI) and Quantum Computing (QC) are two of the most revolutionary technologies of the 21st century.
-</p>
-<p>
- Artificial Intelligence focuses on making machines intelligent.
-</p>
-<p>
- Quantum Computing focuses on solving computational problems much faster than classical computers by exploiting quantum mechanics.
-</p>
-<p>
- Initially, both fields developed separately, but today researchers are combining them to build Quantum Machine Learning (QML).
-</p>
-<h3>
- 1.2 Evolution of Artificial Intelligence
-</h3>
-<h4>
- 1950 – Birth of AI
-</h4>
-<p>
- Alan Turing proposed the famous question:
-</p>
-<p>
- "Can Machines Think?"
-</p>
-<p>
- He proposed the Turing Test.
-</p>
-<h4>
- 1956 – Dartmouth Conference
-</h4>
-<p>
- The term Artificial Intelligence was officially introduced.
-</p>
-<p>
- Researchers believed machines could imitate human intelligence.
-</p>
-<h4>
- 1960–1980
-</h4>
-<p>
- Development of
-</p>
-<ul>
- <li>
-  Expert Systems
- </li>
- <li>
-  Rule-Based AI
- </li>
- <li>
-  Search Algorithms
- </li>
-</ul>
-<p>
- Limitations:
-</p>
-<ul>
- <li>
-  Required manually written rules
- </li>
- <li>
-  Could not learn from data
- </li>
-</ul>
-<h4>
- 1980–2000
-</h4>
-<p>
- Rise of Machine Learning
-</p>
-<p>
- Instead of writing rules,
-</p>
-<p>
- Computers began learning patterns from data.
-</p>
-<p>
- Algorithms:
-</p>
-<ul>
- <li>
-  Decision Trees
- </li>
- <li>
-  Support Vector Machines
- </li>
- <li>
-  Bayesian Learning
- </li>
- <li>
-  KNN
- </li>
-</ul>
-<h4>
- 2010–Present
-</h4>
-<p>
- Deep Learning Revolution
-</p>
-<ul>
- <li>
-  Powerful GPUs
- </li>
- <li>
-  Large datasets
- </li>
- <li>
-  Neural Networks
- </li>
-</ul>
-<p>
- Applications:
-</p>
-<ul>
- <li>
-  ChatGPT
- </li>
- <li>
-  Self-driving cars
- </li>
- <li>
-  Google Translate
- </li>
- <li>
-  AlphaGo
- </li>
- <li>
-  Medical Diagnosis
- </li>
-</ul>
-<h4>
- AI Timeline
-</h4>
-<table>
- <thead>
-  <tr>
-   <th>
-    Year
-   </th>
-   <th>
-    Development
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    1950
-   </td>
-   <td>
-    Turing Test
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1956
-   </td>
-   <td>
-    AI Introduced
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1970
-   </td>
-   <td>
-    Expert Systems
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1997
-   </td>
-   <td>
-    IBM Deep Blue
-   </td>
-  </tr>
-  <tr>
-   <td>
-    2012
-   </td>
-   <td>
-    Deep Learning Boom
-   </td>
-  </tr>
-  <tr>
-   <td>
-    2020
-   </td>
-   <td>
-    Generative AI
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Present
-   </td>
-   <td>
-    Quantum Machine Learning
-   </td>
-  </tr>
- </tbody>
-</table>
-<h3>
- 1.3 Evolution of Quantum Computing
-</h3>
-<p>
- Quantum Computing emerged from quantum mechanics.
-</p>
-<p>
- Instead of bits,
-</p>
-<p>
- Quantum computers use Qubits.
-</p>
-<h4>
- Important Milestones
-</h4>
-<ul>
- <li>
-  <strong>
-   1980:
-  </strong>
-  Paul Benioff - First quantum computer model
- </li>
- <li>
-  <strong>
-   1982:
-  </strong>
-  Richard Feynman - Suggested quantum computers for simulating quantum systems.
- </li>
- <li>
-  <strong>
-   1985:
-  </strong>
-  David Deutsch - Universal Quantum Computer
- </li>
- <li>
-  <strong>
-   1994:
-  </strong>
-  Peter Shor - Shor's Algorithm - Can factor large numbers exponentially faster.
- </li>
- <li>
-  <strong>
-   1996:
-  </strong>
-  Lov Grover - Grover's Search Algorithm - Quadratic speedup.
- </li>
-</ul>
-<h4>
- 2000–2015
-</h4>
-<p>
- Development of
-</p>
-<ul>
- <li>
-  Superconducting Qubits
- </li>
- <li>
-  Ion Traps
- </li>
- <li>
-  Quantum Gates
- </li>
-</ul>
-<h4>
- 2019
-</h4>
-<p>
- Google announced Quantum Supremacy.
-</p>
-<h4>
- Today
-</h4>
-<p>
- Companies working on Quantum Computing:
-</p>
-<ul>
- <li>
-  IBM
- </li>
- <li>
-  Google
- </li>
- <li>
-  Microsoft
- </li>
- <li>
-  Amazon
- </li>
- <li>
-  Intel
- </li>
- <li>
-  IonQ
- </li>
- <li>
-  Rigetti
- </li>
- <li>
-  Xanadu
- </li>
-</ul>
-<h4>
- Quantum Computing Timeline
-</h4>
-<table>
- <thead>
-  <tr>
-   <th>
-    Year
-   </th>
-   <th>
-    Milestone
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    1982
-   </td>
-   <td>
-    Feynman Proposal
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1985
-   </td>
-   <td>
-    Deutsch Model
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1994
-   </td>
-   <td>
-    Shor Algorithm
-   </td>
-  </tr>
-  <tr>
-   <td>
-    1996
-   </td>
-   <td>
-    Grover Algorithm
-   </td>
-  </tr>
-  <tr>
-   <td>
-    2019
-   </td>
-   <td>
-    Quantum Supremacy
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Present
-   </td>
-   <td>
-    Fault-tolerant QC Research
-   </td>
-  </tr>
- </tbody>
-</table>
-<h3>
- 1.4 AI vs Quantum Computing
-</h3>
-<table>
- <thead>
-  <tr>
-   <th>
-    Artificial Intelligence
-   </th>
-   <th>
-    Quantum Computing
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>
-    Learns from data
-   </td>
-   <td>
-    Processes information using quantum mechanics
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Uses Neural Networks
-   </td>
-   <td>
-    Uses Quantum Circuits
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Focus on intelligence
-   </td>
-   <td>
-    Focus on computational power
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Classical hardware
-   </td>
-   <td>
-    Quantum hardware
-   </td>
-  </tr>
-  <tr>
-   <td>
-    Works on CPUs/GPUs
-   </td>
-   <td>
-    Works on Quantum Processors
-   </td>
-  </tr>
- </tbody>
-</table>
-<h3>
- 1.5 Why They Are Converging
-</h3>
-<p>
- Modern AI requires
-</p>
-<ul>
- <li>
-  Huge datasets
- </li>
- <li>
-  Massive computation
- </li>
- <li>
-  Large optimization problems
- </li>
-</ul>
-<p>
- Quantum Computing may help by
-</p>
-<ul>
- <li>
-  Faster optimization
- </li>
- <li>
-  Better search
- </li>
- <li>
-  Efficient linear algebra
- </li>
- <li>
-  High-dimensional computation
- </li>
-</ul>
-<p>
- Thus,
-</p>
-<p>
- AI + Quantum = Quantum Machine Learning.
-</p>
-<h3>
- Chapter Summary
-</h3>
-<p>
- Artificial Intelligence evolved from rule-based systems to deep learning.
-</p>
-<p>
- Quantum Computing evolved from quantum mechanics to real quantum hardware.
-</p>
-<p>
- Today both technologies are merging.
-</p>
-<h2>
- Chapter 2: Why Combine Machine Learning and Quantum Computing?
-</h2>
-<h3>
- Learning Objectives
-</h3>
-<p>
- Understand:
-</p>
-<ul>
- <li>
-  Why classical ML struggles
- </li>
- <li>
-  How Quantum Computing helps
- </li>
- <li>
-  Benefits of Quantum Machine Learning
- </li>
-</ul>
-<h3>
- 2.1 Motivation
-</h3>
-<p>
- Machine Learning models are becoming larger every year.
-</p>
-<p>
- Examples
-</p>
-<ul>
- <li>
-  GPT
- </li>
- <li>
-  BERT
- </li>
- <li>
-  Vision Transformers
- </li>
- <li>
-  Recommendation Systems
- </li>
-</ul>
-<p>
- Training requires:
-</p>
-<ul>
- <li>
-  Huge memory
- </li>
- <li>
-  Huge computation
- </li>
- <li>
-  Huge electricity
- </li>
-</ul>
-<p>
- Quantum Computing may reduce computational complexity.
-</p>
-<h3>
- 2.2 Problems in Classical Machine Learning
-</h3>
-<h4>
- Problem 1
-</h4>
-<p>
- Very large datasets
-</p>
-<p>
- Millions to billions of samples
-</p>
-<h4>
- Problem 2
-</h4>
-<p>
- High-dimensional features
-</p>
-<p>
- Example
-</p>
-<ul>
- <li>
-  Images
- </li>
- <li>
-  Videos
- </li>
- <li>
-  DNA
- </li>
- <li>
-  Financial Data
- </li>
-</ul>
-<h4>
- Problem 3
-</h4>
-<p>
- Optimization
-</p>
-<p>
- Training Neural Networks involves solving large optimization problems.
-</p>
-<h4>
- Problem 4
-</h4>
-<p>
- Matrix Operations
-</p>
-<p>
- Machine Learning performs billions of matrix multiplications.
-</p>
-<p>
- These are computationally expensive.
-</p>
-<h4>
- Problem 5
-</h4>
-<p>
- Feature Space Explosion
-</p>
-<p>
- Kernel methods require huge computations.
-</p>
-<h3>
- 2.3 How Quantum Computing Helps
-</h3>
-<p>
- Quantum computers offer
-</p>
-<h4>
- Parallel State Representation
-</h4>
-<p>
- One quantum state stores many amplitudes simultaneously.
-</p>
-<h4>
- Faster Search
-</h4>
-<p>
- Grover Algorithm
-</p>
-<p>
- Quadratic speedup.
-</p>
-<h4>
- Faster Linear Algebra
-</h4>
-<p>
- Quantum algorithms
-</p>
-<ul>
- <li>
-  HHL
- </li>
- <li>
-  Quantum Matrix Inversion
- </li>
-</ul>
-<h4>
- Better Optimization
-</h4>
-<p>
- Variational Quantum Algorithms
-</p>
-<ul>
- <li>
-  QAOA
- </li>
- <li>
-  VQE
- </li>
-</ul>
-<h4>
- Quantum Feature Spaces
-</h4>
-<p>
- Quantum kernels map data into higher-dimensional spaces.
-</p>
-<h3>
- 2.4 Advantages of Combining ML and QC
-</h3>
-<p>
- Possible benefits:
-</p>
-<ul>
- <li>
-  Faster optimization
- </li>
- <li>
-  Faster search
- </li>
- <li>
-  Better feature representation
- </li>
- <li>
-  Improved kernel methods
- </li>
- <li>
-  Efficient simulation
- </li>
- <li>
-  Reduced computational complexity
- </li>
-</ul>
-<h3>
- 2.5 Real Examples
-</h3>
-<ul>
- <li>
-  Drug Discovery
- </li>
- <li>
-  Quantum Chemistry
- </li>
- <li>
-  Finance
- </li>
- <li>
-  Material Science
- </li>
- <li>
-  Medical Imaging
- </li>
- <li>
-  Recommendation Systems
- </li>
- <li>
-  Climate Modeling
- </li>
- <li>
-  Robotics
- </li>
- <li>
-  Cybersecurity
- </li>
-</ul>
-<h3>
- 2.6 Limitations
-</h3>
-<p>
- Quantum hardware is still
-</p>
-<ul>
- <li>
-  Noisy
- </li>
- <li>
-  Small
- </li>
- <li>
-  Expensive
- </li>
- <li>
-  Difficult to program
- </li>
-</ul>
-<h3>
- Chapter Summary
-</h3>
-<p>
- Machine Learning has computational bottlenecks.
-</p>
-<p>
- Quantum Computing may accelerate several important ML operations.
-</p>
-<h2>
- Chapter 3: Hybrid Quantum-Classical Computing
-</h2>
-<h3>
- Learning Objectives
-</h3>
-<p>
- Understand
-</p>
-<ul>
- <li>
-  Hybrid Computing
- </li>
- <li>
-  Why current quantum computers need classical computers
- </li>
- <li>
-  Hybrid ML architectures
- </li>
-</ul>
-<h3>
- 3.1 What is Hybrid Computing?
-</h3>
-<p>
- Hybrid Computing combines
-</p>
-<ul>
- <li>
-  Classical Computer
- </li>
- <li>
-  Quantum Computer
- </li>
-</ul>
-<p>
- Each performs what it does best.
-</p>
-<h4>
- Architecture
-</h4>
-<pre>Dataset
-     │
-     ▼
-Classical Preprocessing
-     │
-     ▼
-Quantum Circuit
-     │
-     ▼
-Measurement
-     │
-     ▼
-Classical Optimizer
-     │
-     ▼
-Update Parameters
-     │
-     ▼
-Repeat</pre>
-<h3>
- 3.2 Why Hybrid?
-</h3>
-<p>
- Current quantum computers cannot
-</p>
-<ul>
- <li>
-  Store large datasets
- </li>
- <li>
-  Replace CPUs
- </li>
- <li>
-  Replace GPUs
- </li>
-</ul>
-<p>
- Therefore
-</p>
-<p>
- Classical computer
-</p>
-<p>
- handles
-</p>
-<ul>
- <li>
-  Data loading
- </li>
- <li>
-  Optimization
- </li>
- <li>
-  Visualization
- </li>
-</ul>
-<p>
- Quantum computer handles
-</p>
-<ul>
- <li>
-  Quantum feature mapping
- </li>
- <li>
-  Variational circuits
- </li>
- <li>
-  Quantum kernels
- </li>
-</ul>
-<h3>
- 3.3 Variational Quantum Algorithms
-</h3>
-<pre>Parameterized Quantum Circuit
-↓
-Measure
-↓
-Loss Function
-↓
-Classical Optimizer
-↓
-Update Parameters
-↓
-Repeat</pre>
-<p>
- This loop is called the Hybrid Optimization Loop.
-</p>
-<h3>
- 3.4 Classical Components
-</h3>
-<p>
- Include
-</p>
-<ul>
- <li>
-  NumPy
- </li>
- <li>
-  TensorFlow
- </li>
- <li>
-  PyTorch
- </li>
- <li>
-  Scikit-Learn
- </li>
-</ul>
-<h4>
- Quantum Components
-</h4>
-<ul>
- <li>
-  Qiskit
- </li>
- <li>
-  PennyLane
- </li>
- <li>
-  Cirq
- </li>
- <li>
-  Braket
- </li>
-</ul>
-<h3>
- 3.5 Advantages
-</h3>
-<ul>
- <li>
-  Uses today's quantum hardware
- </li>
- <li>
-  Noise tolerant
- </li>
- <li>
-  Scalable
- </li>
- <li>
-  Flexible
- </li>
- <li>
-  Most practical approach
- </li>
-</ul>
-<h3>
- Chapter Summary
-</h3>
-<p>
- Hybrid Quantum-Classical Computing is the most practical approach to Quantum Machine Learning with current hardware.
-</p>
-<h2>
- Chapter 4: Current Research Landscape
-</h2>
-<h3>
- Learning Objectives
-</h3>
-<p>
- Learn
-</p>
-<ul>
- <li>
-  Current research areas
- </li>
- <li>
-  Companies
- </li>
- <li>
-  Universities
- </li>
- <li>
-  Active topics
- </li>
-</ul>
-<h3>
- 4.1 Major Research Areas
-</h3>
-<ul>
- <li>
-  Quantum Neural Networks
- </li>
- <li>
-  Quantum Kernels
- </li>
- <li>
-  Quantum Reinforcement Learning
- </li>
- <li>
-  Quantum Optimization
- </li>
- <li>
-  Quantum Generative Models
- </li>
- <li>
-  Quantum Autoencoders
- </li>
- <li>
-  Quantum Chemistry
- </li>
- <li>
-  Quantum Drug Discovery
- </li>
- <li>
-  Quantum Finance
- </li>
- <li>
-  Quantum Robotics
- </li>
-</ul>
-<h3>
- 4.2 Leading Companies
-</h3>
-<ul>
- <li>
-  IBM Quantum
- </li>
- <li>
-  Google Quantum AI
- </li>
- <li>
-  Microsoft Azure Quantum
- </li>
- <li>
-  Amazon Braket
- </li>
- <li>
-  IonQ
- </li>
- <li>
-  Rigetti
- </li>
- <li>
-  D-Wave
- </li>
- <li>
-  Xanadu
- </li>
-</ul>
-<h3>
- 4.3 Leading Universities
-</h3>
-<ul>
- <li>
-  MIT
- </li>
- <li>
-  Harvard
- </li>
- <li>
-  Stanford
- </li>
- <li>
-  Oxford
- </li>
- <li>
-  Cambridge
- </li>
- <li>
-  ETH Zurich
- </li>
- <li>
-  University of Waterloo
- </li>
- <li>
-  IISc Bangalore
- </li>
- <li>
-  IIT Madras
- </li>
- <li>
-  IIT Bombay
- </li>
- <li>
-  IIT Delhi
- </li>
-</ul>
-<h3>
- 4.4 Open Source Frameworks
-</h3>
-<ul>
- <li>
-  Qiskit
- </li>
- <li>
-  PennyLane
- </li>
- <li>
-  TensorFlow Quantum
- </li>
- <li>
-  Cirq
- </li>
- <li>
-  TorchQuantum
- </li>
- <li>
-  MindQuantum
- </li>
- <li>
-  Ocean SDK
- </li>
-</ul>
-<h3>
- 4.5 Current Research Topics
-</h3>
-<ul>
- <li>
-  Quantum Support Vector Machines
- </li>
- <li>
-  Quantum GANs
- </li>
- <li>
-  Quantum CNNs
- </li>
- <li>
-  Quantum Transformers
- </li>
- <li>
-  Quantum Reinforcement Learning
- </li>
- <li>
-  Quantum Federated Learning
- </li>
- <li>
-  Quantum Explainable AI
- </li>
- <li>
-  Quantum Data Encoding
- </li>
- <li>
-  Error Mitigation
- </li>
- <li>
-  Fault-Tolerant Quantum ML
- </li>
-</ul>
-<h3>
- 4.6 Industrial Applications
-</h3>
-<ul>
- <li>
-  Healthcare
- </li>
- <li>
-  Finance
- </li>
- <li>
-  Telecommunications
- </li>
- <li>
-  Supply Chain
- </li>
- <li>
-  Logistics
- </li>
- <li>
-  Manufacturing
- </li>
- <li>
-  Cybersecurity
- </li>
- <li>
-  Energy
- </li>
- <li>
-  Climate Science
- </li>
-</ul>
-<h3>
- Chapter Summary
-</h3>
-<p>
- Quantum Machine Learning is a rapidly growing field with active contributions from academia, industry, and open-source communities.
-</p>
-<h2>
- Chapter 5: Opportunities and Challenges
-</h2>
-<h3>
- Learning Objectives
-</h3>
-<p>
- Understand
-</p>
-<ul>
- <li>
-  Career opportunities
- </li>
- <li>
-  Research directions
- </li>
- <li>
-  Technical challenges
- </li>
- <li>
-  Future scope
- </li>
-</ul>
-<h3>
- 5.1 Opportunities
-</h3>
-<h4>
- Research
-</h4>
-<ul>
- <li>
-  Quantum Algorithms
- </li>
- <li>
-  Quantum AI
- </li>
- <li>
-  Quantum Robotics
- </li>
- <li>
-  Quantum Finance
- </li>
- <li>
-  Quantum Chemistry
- </li>
- <li>
-  Quantum Biology
- </li>
-</ul>
-<h4>
- Industry
-</h4>
-<ul>
- <li>
-  Quantum Software Engineer
- </li>
- <li>
-  Quantum Research Scientist
- </li>
- <li>
-  Quantum ML Engineer
- </li>
- <li>
-  Quantum Data Scientist
- </li>
- <li>
-  Quantum Consultant
- </li>
- <li>
-  Quantum Hardware Engineer
- </li>
- <li>
-  Quantum Cloud Developer
- </li>
-</ul>
-<h4>
- Startups
-</h4>
-<p>
- Growing areas
-</p>
-<ul>
- <li>
-  Quantum Security
- </li>
- <li>
-  Quantum Drug Discovery
- </li>
- <li>
-  Quantum Optimization
- </li>
- <li>
-  Quantum Cloud Services
- </li>
- <li>
-  Quantum Simulation
- </li>
-</ul>
-<h3>
- 5.2 Technical Challenges
-</h3>
-<h4>
- Hardware Limitations
-</h4>
-<ul>
- <li>
-  Few qubits
- </li>
- <li>
-  Noise
- </li>
- <li>
-  Short coherence time
- </li>
-</ul>
-<h4>
- Data Encoding
-</h4>
-<p>
- Encoding classical data into qubits is expensive.
-</p>
-<h4>
- Error Correction
-</h4>
-<p>
- Quantum computers require sophisticated error-correction techniques.
-</p>
-<h4>
- Scalability
-</h4>
-<p>
- Large QML models require many logical qubits, which are not yet available.
-</p>
-<h4>
- Benchmarking
-</h4>
-<p>
- It is difficult to prove a practical quantum advantage over optimized classical ML methods.
-</p>
-<h4>
- Lack of Skilled Professionals
-</h4>
-<p>
- Quantum Machine Learning requires knowledge of:
-</p>
-<ul>
- <li>
-  Physics
- </li>
- <li>
-  Mathematics
- </li>
- <li>
-  Computer Science
- </li>
- <li>
-  Machine Learning
- </li>
-</ul>
-<p>
- Experts in all these domains are still relatively few.
-</p>
-<h3>
- 5.3 Future Trends
-</h3>
-<p>
- Researchers are working on:
-</p>
-<ul>
- <li>
-  Fault-Tolerant Quantum Computers
- </li>
- <li>
-  Quantum Internet
- </li>
- <li>
-  Quantum Cloud Computing
- </li>
- <li>
-  Large-Scale Quantum AI
- </li>
- <li>
-  Quantum Large Language Models (QLLMs)
- </li>
- <li>
-  Quantum Edge Computing
- </li>
- <li>
-  AI-assisted Quantum Circuit Design
- </li>
-</ul>
-<h3>
- 5.4 Future Career Skills
-</h3>
-<p>
- To build a career in Quantum Machine Learning, students should develop expertise in:
-</p>
-<ul>
- <li>
-  Linear Algebra
- </li>
- <li>
-  Probability and Statistics
- </li>
- <li>
-  Quantum Mechanics
- </li>
- <li>
-  Machine Learning Algorithms
- </li>
- <li>
-  Deep Learning
- </li>
- <li>
-  Optimization Techniques
- </li>
- <li>
-  Python Programming
- </li>
- <li>
-  Qiskit
- </li>
- <li>
-  PennyLane
- </li>
- <li>
-  Cirq
- </li>
- <li>
-  TensorFlow/PyTorch
- </li>
- <li>
-  Quantum Algorithms (Shor, Grover, VQE, QAOA)
- </li>
- <li>
-  Research Methodology
- </li>
-</ul>
-<h3>
- Overall Module Summary
-</h3>
-<p>
- Module 6 explains why
- <strong>
-  Artificial Intelligence
- </strong>
- and
- <strong>
-  Quantum Computing
- </strong>
- are natural complements. AI has evolved from rule-based systems to deep learning, while Quantum Computing has progressed from theoretical models to cloud-accessible quantum processors. Their intersection has given rise to
- <strong>
-  Quantum Machine Learning (QML)
- </strong>
- , where quantum algorithms are used to enhance or accelerate machine learning tasks.
-</p>
-<p>
- At present,
- <strong>
-  hybrid quantum-classical computing
- </strong>
- is the dominant approach because today's quantum hardware is limited by noise and qubit count. Research in QML is expanding rapidly across universities, technology companies, and startups, with applications in healthcare, finance, chemistry, optimization, cybersecurity, and materials science. Although significant challenges remain—such as error correction, data encoding, and hardware scalability—the field offers exciting opportunities for research, innovation, and careers. As quantum hardware matures, the integration of AI and quantum technologies is expected to play a major role in solving computational problems that are difficult or impossible for classical computers alone.
-</p>
+ <!-- VIDEO PLAYER -->
+ <video controls style="width:100%;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+  <source src="/static/videos/Module_6.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+ </video>
+
+ <h1>Module 6 &ndash; Intersection Between Machine Learning &amp; Quantum Computing</h1>
+ <h2>Evolution of AI &amp; Quantum Technologies, Hybrid Architectures &amp; Global Ecosystem</h2>
+
+ <!-- CHAPTER NAVIGATOR -->
+ <nav class="chapter-nav">
+  <span class="nav-label">&#128218; Chapters</span>
+  <a href="#ch1">1. Evolution of AI &amp; Quantum Tech</a>
+  <a href="#ch2">2. Quantum Meets Machine Learning</a>
+  <a href="#ch3">3. Hybrid Quantum-Classical Systems</a>
+  <a href="#ch4">4. Global Ecosystem &amp; Frameworks</a>
+  <a href="#ch5">5. Opportunities &amp; Challenges</a>
+  <a href="#summary">Summary</a>
+  <a href="#quiz">&#9989; Practice Quiz</a>
+ </nav>
+
+ <!-- ==================== CHAPTER 1 ==================== -->
+ <section id="ch1">
+  <span class="chapter-badge">Chapter 1</span>
+  <h2>Evolution of AI and Quantum Computing</h2>
+
+  <section>
+   <h3>1.1 Parallel Historical Trajectories</h3>
+   <p>Artificial Intelligence (AI) and Quantum Computing (QC) represent two of the most revolutionary technological paradigms of modern science. AI focuses on making machines intelligent through data-driven learning, whereas Quantum Computing exploits subatomic physical phenomena to execute complex computations exponentially faster.</p>
+   <p>Historically, AI evolved from 1950 symbolic expert systems through statistical machine learning into modern GPU-accelerated Deep Learning. Concurrently, Quantum Computing evolved from Richard Feynman's 1981 vision into NISQ-era quantum processors deployed on cloud platforms.</p>
+
+   <table class="comparison-table">
+    <caption>Historical Timeline Comparison: AI vs Quantum Computing</caption>
+    <thead><tr><th>Era</th><th>Artificial Intelligence Breakthroughs</th><th>Quantum Computing Milestones</th></tr></thead>
+    <tbody>
+     <tr><td>1950s</td><td>Turing Test (1950) &amp; Dartmouth Conference (1956)</td><td>McCulloch-Pitts Neuron &amp; Quantum Mechanics Foundations</td></tr>
+     <tr><td>1980s</td><td>Expert Systems &amp; Backpropagation Resurgence</td><td>Feynman's Quantum Simulator Proposal (1981) &amp; Deutsch Gate (1985)</td></tr>
+     <tr><td>1990s</td><td>Support Vector Machines &amp; IBM Deep Blue Victory (1997)</td><td>Shor's Factoring Algorithm (1994) &amp; Grover's Search (1996)</td></tr>
+     <tr><td>2010s</td><td>Deep Learning AlexNet (2012) &amp; AlphaGo Triumph (2016)</td><td>Google Quantum Supremacy (2019) &amp; Cloud Quantum Access</td></tr>
+     <tr><td>2020s+</td><td>Generative AI (ChatGPT, Gemini, Claude)</td><td>Hybrid Quantum-Classical Algorithms (VQE, QAOA, QNN)</td></tr>
+    </tbody>
+   </table>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 2 ==================== -->
+ <section id="ch2">
+  <span class="chapter-badge">Chapter 2</span>
+  <h2>Quantum Meets Machine Learning (The QML Paradigm)</h2>
+
+  <section>
+   <h3>2.1 Four Fundamental Combinations of QML</h3>
+   <p>The intersection of Machine Learning and Quantum Computing is categorized into four distinct quadrants based on whether the data and processing devices are classical or quantum:</p>
+
+   <div class="info-cards">
+    <div class="info-card"><h5>CC (Classical Data &amp; Classical Device)</h5><p>Standard classical Machine Learning and Deep Learning algorithms running on CPUs/GPUs.</p></div>
+    <div class="info-card"><h5>QC (Quantum Data &amp; Classical Device)</h5><p>Using classical ML to analyze quantum experimental data, tomographic states, or particle physics.</p></div>
+    <div class="info-card"><h5>CQ (Classical Data &amp; Quantum Device)</h5><p>Encoding classical datasets into qubits to process via Quantum Machine Learning algorithms on QPUs.</p></div>
+    <div class="info-card"><h5>QQ (Quantum Data &amp; Quantum Device)</h5><p>Processing quantum states directly on quantum computers (Quantum Sensing &amp; Quantum Networks).</p></div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 3 ==================== -->
+ <section id="ch3">
+  <span class="chapter-badge">Chapter 3</span>
+  <h2>Hybrid Quantum-Classical Computing Architectures</h2>
+
+  <section>
+   <h3>3.1 Variational Quantum Algorithms (VQE &amp; QAOA)</h3>
+   <p>In the current Noisy Intermediate-Scale Quantum (NISQ) era, pure quantum algorithms are limited by noise. <strong>Hybrid Quantum-Classical Systems</strong> combine classical processors (CPUs/GPUs) with quantum coprocessors (QPUs).</p>
+
+   <div class="step-flow">
+    <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>1. Parameterized Quantum Circuit</strong>QPU executes quantum circuit $U(	heta)$ with trainable parameters $	heta$.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>2. Expectation Value Measurement</strong>QPU measures expectation value $\langle H angle_	heta$ representing cost function loss.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-body"><strong>3. Classical Optimizer Update</strong>Classical optimizer (Adam, COBYLA) calculates gradients and updates weights $	heta$.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">4</div></div><div class="step-body"><strong>4. Convergence Loop</strong>Repeat loop until quantum cost function reaches global minimum.</div></div>
+   </div>
+
+   <h4>Python Code Hands-On: PennyLane Hybrid Circuit</h4>
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10 (PennyLane)</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code>import pennylane as qml
+from pennylane import numpy as np
+
+# Initialize 2-qubit device
+dev = qml.device("default.qubit", wires=2)
+
+@qml.qnode(dev)
+def hybrid_circuit(weights, data):
+    qml.AngleEmbedding(data, wires=[0, 1])
+    qml.BasicEntanglerLayers(weights, wires=[0, 1])
+    return qml.expval(qml.PauliZ(0))
+
+weights = np.random.random(qml.BasicEntanglerLayers.shape(n_layers=2, n_wires=2))
+data = np.array([0.5, 1.2], requires_grad=False)
+result = hybrid_circuit(weights, data)
+print("Hybrid Expectation Value:", result)</code></pre>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 4 ==================== -->
+ <section id="ch4">
+  <span class="chapter-badge">Chapter 4</span>
+  <h2>Global Ecosystem, Industry Leaders &amp; Open Source SDKs</h2>
+
+  <section>
+   <h3>4.1 Open Source Frameworks &amp; Industrial Applications</h3>
+   <ul>
+    <li><strong>Qiskit (IBM):</strong> Premier open-source SDK for quantum circuits, pulse control, and Qiskit Machine Learning.</li>
+    <li><strong>PennyLane (Xanadu):</strong> Leading framework for Quantum Machine Learning, differentiable quantum programming, and QNNs.</li>
+    <li><strong>Cirq &amp; TensorFlow Quantum (Google):</strong> Optimized for NISQ circuits and hybrid TensorFlow neural networks.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== SUMMARY ==================== -->
+ <section id="summary">
+  <span class="chapter-badge">Module Summary</span>
+  <h2>Module 6 Complete Summary</h2>
+  <div class="key-takeaway">
+   <h4>&#129504; Key Takeaways</h4>
+   <ul>
+    <li>AI and Quantum Computing converge to form Quantum Machine Learning (QML).</li>
+    <li>NISQ era computing relies heavily on Hybrid Quantum-Classical Variational Circuits (VQE, QAOA).</li>
+    <li>Leading SDKs include Qiskit, PennyLane, Cirq, and TensorFlow Quantum.</li>
+   </ul>
+  </div>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== QUIZ ==================== -->
+ <section id="quiz">
+  <div class="quiz-section">
+   <h3>&#9989; Practice Knowledge Verification &mdash; Module 6</h3>
+   <ol class="quiz-list">
+    <li>Explain the four combinations of Quantum Machine Learning (CC, QC, CQ, QQ).</li>
+    <li>What is a Variational Quantum Algorithm (VQA), and how do classical optimizers assist quantum circuits?</li>
+    <li>Describe the roles of QPU and CPU/GPU in a hybrid computing architecture.</li>
+    <li>List three major open-source quantum software SDKs and their primary strengths.</li>
+   </ol>
+  </div>
+ </section>
+
+ <!-- NEXT MODULE NAVIGATION BANNER AT THE ABSOLUTE END -->
+ <div class="next-module-banner">
+  <h3>Ready for the Next Step?</h3>
+  <p>You have completed Module 6! Explore why Quantum Machine Learning provides mathematical speedups.</p>
+  <a href="/course/content?id=why-quantum-machine-learning" class="next-module-btn" id="nextModuleBtn">
+   <span>Proceed to Module 7: Why Quantum Machine Learning? &rarr;</span>
+  </a>
+ </div>
 </main>

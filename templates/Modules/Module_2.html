@@ -1,1903 +1,554 @@
 <main>
-<h1>
- Module 2 – Why Machine Learning?
-</h1>
-<h2>
- Detailed Chapter-wise Notes
-</h2>
-<section>
- <h2>
-  Chapter 1: Limitations of Traditional Programming
- </h2>
- <section>
-  <h3>
-   Introduction
-  </h3>
-  <p>
-   Before understanding
-   <strong>
-    Machine Learning (ML)
-   </strong>
-   , it is important to know
-   <strong>
-    why it became necessary
-   </strong>
-   .
-  </p>
-  <p>
-   Traditional computer programming has been successfully solving problems for decades. However, today's world generates huge amounts of data every second. Many problems have become so complex that writing explicit rules for every situation is almost impossible.
-  </p>
-  <p>
-   Machine Learning was developed to overcome these limitations.
-  </p>
+ <!-- VIDEO PLAYER -->
+ <video controls style="width:100%;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+  <source src="/static/videos/Module_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+ </video>
+
+ <h1>Module 2 &ndash; Why Machine Learning?</h1>
+ <h2>Detailed Chapter-wise Notes</h2>
+
+ <!-- CHAPTER NAVIGATOR -->
+ <nav class="chapter-nav">
+  <span class="nav-label">&#128218; Chapters</span>
+  <a href="#ch1">1. Limitations of Traditional Prog.</a>
+  <a href="#ch2">2. What is Machine Learning?</a>
+  <a href="#ch3">3. Types of ML</a>
+  <a href="#ch4">4. ML Workflow</a>
+  <a href="#ch5">5. Real-World Applications</a>
+  <a href="#summary">Summary</a>
+  <a href="#quiz">&#9989; Practice Quiz</a>
+ </nav>
+
+ <!-- ==================== CHAPTER 1 ==================== -->
+ <section id="ch1">
+  <span class="chapter-badge">Chapter 1</span>
+  <h2>Limitations of Traditional Programming</h2>
+
+  <section>
+   <h3>1.1 Introduction</h3>
+   <p>Before understanding <strong>Machine Learning (ML)</strong>, it is essential to know <strong>why it became necessary</strong>.</p>
+   <p>Traditional computer programming has been successfully solving problems for decades. However, today's digital world generates huge amounts of data every second. Many modern problems have become so complex that writing explicit, manual rules for every possible situation is virtually impossible.</p>
+   
+   <div class="callout callout-info">
+    <span class="callout-icon">&#8505;&#65039;</span>
+    <div>
+     <strong>Core Problem</strong>
+     Traditional programming requires humans to manually craft every rule. As data volume, complexity, and variance increase, manual rule creation becomes an impossible bottleneck. Machine Learning was developed specifically to overcome these limitations.
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.2 What is Traditional Programming?</h3>
+   <p>Traditional programming follows a fixed set of logic and rules explicitly coded by software engineers.</p>
+
+   <div class="step-flow">
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128201; Input Data</strong>Raw numbers, strings, or records passed into the program.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#9881;&#65039; Manually Written Program (Rules)</strong>Explicit IF-ELSE conditions crafted by human programmers.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">3</div></div>
+     <div class="step-body"><strong>&#127942; Deterministic Output</strong>Calculated answer or decision.</div>
+    </div>
+   </div>
+
+   <h4>Practical Example: Grade Calculation</h4>
+   <p>Suppose you want a traditional program to calculate student grades:</p>
+   <ul>
+    <li>If marks &ge; 90 &rarr; Grade A</li>
+    <li>Else if marks &ge; 80 &rarr; Grade B</li>
+    <li>Else if marks &ge; 70 &rarr; Grade C</li>
+    <li>Else &rarr; Grade D</li>
+   </ul>
+   <p>The programmer must write every condition manually.</p>
+  </section>
+
+  <section>
+   <h3>1.3 Characteristics of Traditional Programming</h3>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128221;</span><h5>Rule-Based</h5><p>Relies strictly on hardcoded conditional logic.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127919;</span><h5>Deterministic</h5><p>Same input guarantees identical output every time.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128104;&#8205;&#128187;</span><h5>Human-Crafted Logic</h5><p>Programmers must foresee all possible scenarios.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128197;</span><h5>Static Execution</h5><p>Never improves automatically unless code is rewritten.</p></div>
+   </div>
+
+   <h4>Common Traditional Software Examples</h4>
+   <ul>
+    <li>Calculators &amp; Accounting spreadsheets</li>
+    <li>Core Banking &amp; Transaction processing systems</li>
+    <li>Payroll &amp; Employee tax calculators</li>
+    <li>Railway &amp; Flight reservation engines</li>
+    <li>Inventory control software</li>
+   </ul>
+  </section>
+
+  <section>
+   <h3>1.4 Detailed Breakdown of Traditional Programming Limitations</h3>
+   <ol>
+    <li>
+     <h4>Impossible to Write Every Rule</h4>
+     <p>Some real-world problems contain millions of subtle variations. For instance, in <strong>Spam Email Detection</strong>, spammers constantly alter text, misspellings, and domains. A programmer cannot manually write IF-ELSE conditions for millions of spam variations.</p>
+    </li>
+    <li>
+     <h4>Cannot Handle Unstructured Data</h4>
+     <p>Traditional programs excel at structured numbers and database tables, but fail on unstructured data like <strong>Images, Audio, Video streams, and Natural Language</strong>.</p>
+     <div class="callout callout-warning">
+      <span class="callout-icon">&#9888;&#65039;</span>
+      <div>
+       <strong>Example &mdash; Cat Detection in Images</strong>
+       You cannot write manual rules like <code>if (ear == triangle && tail == long)</code> to identify a cat because camera angles, lighting, breeds, and postures vary infinitely.
+      </div>
+     </div>
+    </li>
+    <li>
+     <h4>Poor Performance on High-Dimensional Complex Problems</h4>
+     <p>Complex tasks like <strong>Weather Forecasting</strong> or <strong>Stock Market Prediction</strong> depend on hundreds of interacting variables (humidity, pressure, wind velocity, ocean currents, global sentiment). Manual logic breaks down completely.</p>
+    </li>
+    <li>
+     <h4>Cannot Learn from Experience</h4>
+     <p>Traditional software remains static. A traditional chess algorithm cannot improve its strategy unless a human engineer manually edits the source code.</p>
+    </li>
+    <li>
+     <h4>High Maintenance Cost</h4>
+     <p>Changing environments (tax law updates, evolving banking policies) require endless human code refactoring, resulting in exorbitant maintenance costs.</p>
+    </li>
+    <li>
+     <h4>Does Not Improve with More Data</h4>
+     <p>Doubling the database size does not make a traditional program smarter. Machine Learning algorithms, in contrast, gain accuracy as data increases.</p>
+    </li>
+    <li>
+     <h4>Difficult to Scale</h4>
+     <p>Manual rule systems cannot scale to process millions of unstructured customer reviews or live video security feeds in real time.</p>
+    </li>
+   </ol>
+  </section>
+
+  <section>
+   <h3>1.5 Comparison: Traditional Programming vs Machine Learning</h3>
+   <table class="comparison-table">
+    <caption>Traditional Programming vs Machine Learning Architectural Shift</caption>
+    <thead>
+     <tr>
+      <th>Dimension</th>
+      <th>Traditional Programming</th>
+      <th>Machine Learning</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>Rule Creation</td>
+      <td>Programmer manually writes all rules.</td>
+      <td>Algorithm automatically discovers rules from data.</td>
+     </tr>
+     <tr>
+      <td>Adaptability</td>
+      <td>Static; requires manual code updates.</td>
+      <td>Dynamic; continuously adapts to new data.</td>
+     </tr>
+     <tr>
+      <td>Improvement Curve</td>
+      <td>Does not improve with more data.</td>
+      <td>Accuracy increases as data volume grows.</td>
+     </tr>
+     <tr>
+      <td>Best Suited For</td>
+      <td>Fixed, well-defined mathematical logic.</td>
+      <td>Complex, perceptual, and pattern-recognition tasks.</td>
+     </tr>
+     <tr>
+      <td>Data Type</td>
+      <td>Structured relational tables &amp; numbers.</td>
+      <td>Unstructured text, images, audio, sensors, &amp; multi-modal data.</td>
+     </tr>
+     <tr>
+      <td>Paradigm Flow</td>
+      <td>Input Data + Rules &rarr; Output</td>
+      <td>Input Data + Correct Answers &rarr; Discovered Rules / Model</td>
+     </tr>
+    </tbody>
+   </table>
+  </section>
+
+  <section>
+   <h3>1.6 Why Traditional Programming Fails in AI Problems</h3>
+   <p>AI problems (Voice Recognition, Computer Vision, Translation, Fraud Detection, Medical Triage) are fundamentally pattern-recognition tasks, not fixed calculation tasks. Rule-based systems fail because patterns are non-linear, fuzzy, and contextual.</p>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 1 Summary &amp; Key Takeaways</h4>
+   <ul>
+    <li>Traditional programming is rule-driven and fails when problems become non-linear or unstructured.</li>
+    <li>Machine Learning shifts the paradigm: data and answers are provided, and the computer computes the rules.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h3>
-   What is Traditional Programming?
-  </h3>
-  <p>
-   Traditional programming follows a fixed set of rules written by programmers.
-  </p>
-  <h4>
-   Formula
-  </h4>
-  <p>
-   Input Data + Program (Rules)
-   <br/>
-   ↓
-   <br/>
-   Output
-  </p>
-  <p>
-   Example:
-  </p>
-  <p>
-   Suppose you want a program to calculate grades.
-  </p>
-  <p>
-   Rules:
-  </p>
-  <ul>
-   <li>
-    If marks ≥ 90 → Grade A
-   </li>
-   <li>
-    Else if marks ≥ 80 → Grade B
-   </li>
-   <li>
-    Else if marks ≥ 70 → Grade C
-   </li>
-   <li>
-    Else → Grade D
-   </li>
-  </ul>
-  <p>
-   Programmer writes every condition manually.
-  </p>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 2 ==================== -->
+ <section id="ch2">
+  <span class="chapter-badge">Chapter 2</span>
+  <h2>What is Machine Learning?</h2>
+
+  <section>
+   <h3>2.1 Formal Definitions</h3>
+   <p>Machine Learning (ML) is a core branch of Artificial Intelligence that focuses on building mathematical models capable of extracting underlying patterns from data to perform predictions and decisions without explicit instruction.</p>
+
+   <div class="callout callout-info">
+    <span class="callout-icon">&#128218;</span>
+    <div>
+     <strong>Arthur Samuel (1959) Definition</strong>
+     "Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed."
+    </div>
+   </div>
+
+   <div class="callout callout-info">
+    <span class="callout-icon">&#128218;</span>
+    <div>
+     <strong>Tom Mitchell (1997) Engineering Definition</strong>
+     "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E."
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>2.2 Core Components of Machine Learning Systems</h3>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128201;</span><h5>1. Dataset (Experience E)</h5><p>Historical training examples providing ground truth knowledge.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128207;</span><h5>2. Features (Variables X)</h5><p>Input attributes used to make predictions (e.g. Age, Income, Square Feet).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127919;</span><h5>3. Labels (Target Y)</h5><p>True output value or class label in supervised learning scenarios.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#129302;</span><h5>4. Model (Hypothesis Function)</h5><p>Mathematical equation mapping features to target output.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#127947;</span><h5>5. Training Algorithm</h5><p>Optimization process adjusting model weights to minimize prediction error.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128202;</span><h5>6. Evaluation Metrics (Measure P)</h5><p>Quantitative benchmarks measuring accuracy (Loss, MSE, Accuracy Score).</p></div>
+   </div>
+
+   <h4>Tabular Example: House Price Prediction</h4>
+   <table class="comparison-table">
+    <caption>Feature &amp; Label Mapping</caption>
+    <thead><tr><th>Feature: Area (Sq Ft)</th><th>Feature: Bedrooms</th><th>Label: Price (Target Output)</th></tr></thead>
+    <tbody>
+     <tr><td>1000</td><td>2</td><td>40 Lakhs</td></tr>
+     <tr><td>1200</td><td>3</td><td>48 Lakhs</td></tr>
+     <tr><td>1500</td><td>3</td><td>60 Lakhs</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <section>
+   <h3>2.3 How Machine Learning Learns (Step-by-Step Cycle)</h3>
+   <div class="step-flow">
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128209; Ingest Data</strong>Feed features X and historical answers Y into the algorithm.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#129504; Pattern Extraction</strong>Algorithm analyzes mathematical correlations and variance between variables.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#9881;&#65039; Weight Optimization</strong>Loss function evaluates errors; gradient descent adjusts model weights.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">4</div></div>
+     <div class="step-body"><strong>&#128640; Generalization &amp; Inference</strong>Trained model makes accurate predictions on unseen new input data.</div>
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>2.4 Comprehensive Advantages &amp; Disadvantages</h3>
+   <table class="comparison-table">
+    <caption>Pros &amp; Cons of Machine Learning</caption>
+    <thead><tr><th>&#9989; Advantages</th><th>&#9888; Disadvantages &amp; Challenges</th></tr></thead>
+    <tbody>
+     <tr><td>Automatic pattern discovery in massive data</td><td>Requires massive, high-quality labeled datasets</td></tr>
+     <tr><td>Handles unstructured data (Images, Audio, Text)</td><td>High computational resource requirement (GPUs/TPUs)</td></tr>
+     <tr><td>Scales efficiently across cloud architectures</td><td>Black-box nature (lack of interpretability in Deep Nets)</td></tr>
+     <tr><td>Continuous improvement with streaming data</td><td>Risk of inheriting historical human biases from data</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 2 Summary &amp; Key Takeaways</h4>
+   <ul>
+    <li>ML replaces hand-coded logic with statistical models that learn from Experience E (data).</li>
+    <li>Core components: Features, Labels, Model, Training Algorithm, Loss Function, and Evaluation Metric.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h3>
-   Characteristics of Traditional Programming
-  </h3>
-  <ul>
-   <li>
-    Rule-based
-   </li>
-   <li>
-    Deterministic
-   </li>
-   <li>
-    Human writes all logic
-   </li>
-   <li>
-    Same input always gives same output
-   </li>
-   <li>
-    Works well for structured problems
-   </li>
-  </ul>
-  <h4>
-   Examples
-  </h4>
-  <ul>
-   <li>
-    Calculator
-   </li>
-   <li>
-    Banking software
-   </li>
-   <li>
-    Payroll systems
-   </li>
-   <li>
-    Railway reservation
-   </li>
-   <li>
-    Inventory systems
-   </li>
-  </ul>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 3 ==================== -->
+ <section id="ch3">
+  <span class="chapter-badge">Chapter 3</span>
+  <h2>Taxonomy &amp; Four Main Types of Machine Learning</h2>
+
+  <p>Machine Learning is categorized into four primary paradigms based on how data and feedback are structured during training.</p>
+
+  <section>
+   <h3>3.1 Supervised Learning</h3>
+   <p>In <strong>Supervised Learning</strong>, the algorithm is trained on a labeled dataset consisting of input features X along with ground-truth target labels Y.</p>
+   
+   <div class="info-cards">
+    <div class="info-card">
+     <span class="info-card-icon">&#128202;</span>
+     <h5>Regression (Continuous Target)</h5>
+     <p>Predicting continuous numerical quantities.</p>
+     <div class="example">Examples: House Price, Stock Price, Salary, Temperature</div>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#127919;</span>
+     <h5>Classification (Discrete Target)</h5>
+     <p>Assigning inputs to discrete categories/classes.</p>
+     <div class="example">Examples: Spam/Not Spam, Disease/Healthy, Cat/Dog</div>
+    </div>
+   </div>
+
+   <h4>Key Supervised Algorithms</h4>
+   <ul>
+    <li>Linear Regression &amp; Logistic Regression</li>
+    <li>Decision Trees &amp; Random Forests</li>
+    <li>Support Vector Machines (SVM)</li>
+    <li>Gradient Boosted Trees (XGBoost, LightGBM)</li>
+    <li>Supervised Artificial Neural Networks</li>
+   </ul>
+  </section>
+
+  <section>
+   <h3>3.2 Unsupervised Learning</h3>
+   <p>In <strong>Unsupervised Learning</strong>, the model receives unlabeled input data X and must independently discover inherent structures, clusters, or distributions without human guidance.</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128101;</span><h5>Clustering</h5><p>Grouping similar data points together (K-Means, DBSCAN, Hierarchical).</p><div class="example">e.g. Customer Market Segmentation</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128201;</span><h5>Dimensionality Reduction</h5><p>Compressing feature space while preserving variance (PCA, t-SNE, UMAP).</p><div class="example">e.g. Data Compression &amp; Visualization</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128274;</span><h5>Anomaly Detection</h5><p>Identifying unusual patterns differing from normal behavior (Isolation Forest).</p><div class="example">e.g. Fraud Detection &amp; Intrusion SIEM</div></div>
+   </div>
+  </section>
+
+  <section>
+   <h3>3.3 Semi-Supervised Learning</h3>
+   <p>Combines a small amount of labeled data with a large volume of unlabeled data. Ideal when labeling data is expensive or requires specialized human experts (e.g. Oncologist radiologists labeling tumors).</p>
+  </section>
+
+  <section>
+   <h3>3.4 Reinforcement Learning (RL)</h3>
+   <p>An autonomous <strong>Agent</strong> learns to achieve a goal in an interactive <strong>Environment</strong> by taking <strong>Actions</strong> and receiving <strong>Rewards</strong> or <strong>Penalties</strong>.</p>
+   
+   <div class="step-flow">
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#129302; Agent Observes State</strong>Agent reads environment state $S_t$.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#9881;&#65039; Agent Takes Action</strong>Executes action $A_t$ based on policy.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">3</div></div>
+     <div class="step-body"><strong>&#127881; Environment Provides Reward &amp; Next State</strong>Environment returns reward $R_{t+1}$ and new state $S_{t+1}$.</div>
+    </div>
+   </div>
+
+   <h4>Key RL Algorithms &amp; Applications</h4>
+   <ul>
+    <li>Q-Learning, Deep Q-Networks (DQN), PPO, Actor-Critic</li>
+    <li>Robotics control, Autonomous Driving, AlphaGo, LLM Alignment via RLHF</li>
+   </ul>
+  </section>
+
+  <section>
+   <h3>3.5 Master Comparison Table of ML Types</h3>
+   <table class="comparison-table">
+    <caption>Paradigm Comparison</caption>
+    <thead><tr><th>Type</th><th>Input Data</th><th>Primary Goal</th><th>Classic Example</th></tr></thead>
+    <tbody>
+     <tr><td>Supervised</td><td>Labeled $(X, Y)$</td><td>Predict output target for new inputs</td><td>Spam Filter, House Price</td></tr>
+     <tr><td>Unsupervised</td><td>Unlabeled $(X)$</td><td>Discover latent patterns &amp; groupings</td><td>Customer Segmentation</td></tr>
+     <tr><td>Semi-Supervised</td><td>Small $(X, Y)$ + Large $(X)$</td><td>Maximize learning accuracy with cheap unlabeled data</td><td>Medical Image Screening</td></tr>
+     <tr><td>Reinforcement</td><td>State, Action, Reward</td><td>Learn optimal policy for max cumulative reward</td><td>Robotics, AlphaGo, RLHF</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 3 Summary &amp; Key Takeaways</h4>
+   <ul>
+    <li>Supervised = Labeled Data; Unsupervised = Pattern Discovery; Semi-Supervised = Hybrid; Reinforcement = Reward Policy.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h3>
-   Limitations of Traditional Programming
-  </h3>
-  <ol>
-   <li>
-    <h4>
-     Impossible to Write Every Rule
-    </h4>
-    <p>
-     Some problems have millions of possible situations.
-    </p>
-    <p>
-     Example
-    </p>
-    <p>
-     Spam Email Detection
-    </p>
-    <p>
-     How many spam emails exist?
-    </p>
-    <p>
-     Millions.
-    </p>
-    <p>
-     Can a programmer write rules for all?
-    </p>
-    <p>
-     No.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Cannot Handle Unstructured Data
-    </h4>
-    <p>
-     Traditional programming works well with numbers and tables.
-    </p>
-    <p>
-     It struggles with
-    </p>
-    <ul>
-     <li>
-      Images
-     </li>
-     <li>
-      Audio
-     </li>
-     <li>
-      Videos
-     </li>
-     <li>
-      Human language
-     </li>
-    </ul>
-    <p>
-     Example
-    </p>
-    <p>
-     Identify a cat in an image.
-    </p>
-    <p>
-     Can you write rules like
-    </p>
-    <p>
-     If ear = triangle
-     <br/>
-     AND eyes = round
-     <br/>
-     AND tail = long
-    </p>
-    <p>
-     No.
-    </p>
-    <p>
-     Cats appear differently.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Poor Performance on Complex Problems
-    </h4>
-    <p>
-     Complex real-world problems have too many variables.
-    </p>
-    <p>
-     Example
-    </p>
-    <p>
-     Weather prediction
-    </p>
-    <p>
-     Depends on
-    </p>
-    <ul>
-     <li>
-      Humidity
-     </li>
-     <li>
-      Temperature
-     </li>
-     <li>
-      Pressure
-     </li>
-     <li>
-      Wind
-     </li>
-     <li>
-      Clouds
-     </li>
-     <li>
-      Ocean currents
-     </li>
-    </ul>
-    <p>
-     Writing rules manually is impossible.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Cannot Learn from Experience
-    </h4>
-    <p>
-     Traditional software never improves automatically.
-    </p>
-    <p>
-     Example
-    </p>
-    <p>
-     Chess Program
-    </p>
-    <p>
-     If a better strategy appears tomorrow,
-     <br/>
-     The programmer must rewrite the code.
-    </p>
-   </li>
-   <li>
-    <h4>
-     High Maintenance Cost
-    </h4>
-    <p>
-     Rules continuously change.
-    </p>
-    <p>
-     Examples
-    </p>
-    <ul>
-     <li>
-      Tax rules
-     </li>
-     <li>
-      Banking policies
-     </li>
-     <li>
-      Government regulations
-     </li>
-    </ul>
-    <p>
-     Every update requires programmers.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Doesn't Improve with More Data
-    </h4>
-    <p>
-     If data doubles,
-     <br/>
-     Traditional programs do not become smarter.
-    </p>
-    <p>
-     Machine Learning becomes smarter.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Difficult to Scale
-    </h4>
-    <p>
-     Suppose Amazon receives
-     <br/>
-     10 million customer reviews.
-    </p>
-    <p>
-     Can humans write rules to classify them?
-    </p>
-    <p>
-     Impossible.
-    </p>
-   </li>
-  </ol>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 4 ==================== -->
+ <section id="ch4">
+  <span class="chapter-badge">Chapter 4</span>
+  <h2>The Complete End-to-End Machine Learning Workflow</h2>
+
+  <p>Building a robust production ML system requires adhering to a structured 12-step engineering lifecycle:</p>
+
+  <div class="step-flow">
+   <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>&#127919; 1. Problem Definition</strong>Define business metrics, project goals, and determine if ML is required.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128209; 2. Data Collection</strong>Gather raw data from SQL databases, web scrapers, IoT sensors, APIs, and public repositories (Kaggle, UCI).</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-body"><strong>&#129529; 3. Data Preprocessing</strong>Handle missing values, remove duplicates, filter outliers, scale numerical features, and encode categorical labels.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128202; 4. Exploratory Data Analysis (EDA)</strong>Visualize distributions, correlation matrices, histograms, and box plots to detect hidden data trends.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">5</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128736; 5. Feature Engineering</strong>Create domain-specific ratios, polynomial features, and select top attributes to maximize model signal.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">6</div><div class="step-connector"></div></div><div class="step-body"><strong>&#9988; 6. Train-Test Split</strong>Partition dataset into Training Set (80%) for parameter learning and Test Set (20%) for holdout validation.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">7</div><div class="step-connector"></div></div><div class="step-body"><strong>&#129302; 7. Model Selection</strong>Select suitable candidate algorithms (Linear, Tree-based, Ensembles, Neural Networks) matching problem characteristics.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">8</div><div class="step-connector"></div></div><div class="step-body"><strong>&#127947; 8. Model Training</strong>Fit candidate algorithms on training split by optimizing loss functions via mathematical optimization.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">9</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128203; 9. Model Evaluation</strong>Evaluate holdout performance using MAE, RMSE, R² for Regression; Precision, Recall, F1, ROC-AUC for Classification.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">10</div><div class="step-connector"></div></div><div class="step-body"><strong>&#127919; 10. Hyperparameter Tuning</strong>Optimize model architecture parameters using Grid Search, Random Search, or Bayesian Optimization.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">11</div><div class="step-connector"></div></div><div class="step-body"><strong>&#128640; 11. Deployment (MLOps)</strong>Serve trained models as REST/gRPC endpoints using Docker containerization and cloud infrastructure.</div></div>
+   <div class="step-item"><div class="step-arrow"><div class="step-num">12</div></div><div class="step-body"><strong>&#128260; 12. Monitoring &amp; Maintenance</strong>Track data drift, model decay, and system latency to trigger automated pipeline retraining.</div></div>
+  </div>
+
+  <section>
+   <h3>Python Hands-On: Complete End-to-End Machine Learning Pipeline</h3>
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10 (scikit-learn)</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code><span class="code-cm"># Complete Supervised ML Pipeline Demonstration</span>
+<span class="code-kw">import</span> numpy <span class="code-kw">as</span> np
+<span class="code-kw">from</span> sklearn.model_selection <span class="code-kw">import</span> train_test_split
+<span class="code-kw">from</span> sklearn.preprocessing <span class="code-kw">import</span> StandardScaler
+<span class="code-kw">from</span> sklearn.ensemble <span class="code-kw">import</span> RandomForestClassifier
+<span class="code-kw">from</span> sklearn.metrics <span class="code-kw">import</span> accuracy_score, classification_report
+
+<span class="code-cm"># Step 1: Generate Synthetic Training Data</span>
+X = np.random.rand(<span class="code-num">1000</span>, <span class="code-num">5</span>)  <span class="code-cm"># 1000 samples, 5 features</span>
+y = (X[:, <span class="code-num">0</span>] + X[:, <span class="code-num">1</span>] > <span class="code-num">1.0</span>).astype(<span class="code-nb">int</span>)  <span class="code-cm"># Target classification label</span>
+
+<span class="code-cm"># Step 2: Train-Test Split (80% Train, 20% Test)</span>
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="code-num">0.2</span>, random_state=<span class="code-num">42</span>)
+
+<span class="code-cm"># Step 3: Feature Scaling</span>
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+<span class="code-cm"># Step 4: Model Instantiation & Training</span>
+model = RandomForestClassifier(n_estimators=<span class="code-num">100</span>, random_state=<span class="code-num">42</span>)
+model.fit(X_train_scaled, y_train)
+
+<span class="code-cm"># Step 5: Model Inference & Evaluation</span>
+y_pred = model.predict(X_test_scaled)
+acc = accuracy_score(y_test, y_pred)
+
+<span class="code-nb">print</span>(f<span class="code-str">"Model Test Accuracy: {acc * 100:.2f}%"</span>)
+<span class="code-nb">print</span>(classification_report(y_test, y_pred))</code></pre>
+   </div>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 4 Summary &amp; Key Takeaways</h4>
+   <ul>
+    <li>ML Workflow: Problem Definition &rarr; Collection &rarr; Preprocessing &rarr; EDA &rarr; Feature Engineering &rarr; Split &rarr; Training &rarr; Evaluation &rarr; Tuning &rarr; Deployment &rarr; Monitoring.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h3>
-   Traditional Programming vs Machine Learning
-  </h3>
-  <table>
-   <thead>
-    <tr>
-     <th>
-      Traditional Programming
-     </th>
-     <th>
-      Machine Learning
-     </th>
-    </tr>
-   </thead>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 5 ==================== -->
+ <section id="ch5">
+  <span class="chapter-badge">Chapter 5</span>
+  <h2>Real-World Industry Applications of Machine Learning</h2>
+
+  <table class="comparison-table">
+   <caption>Cross-Industry Machine Learning Applications</caption>
+   <thead><tr><th>Industry Sector</th><th>Key ML Applications</th><th>Primary Algorithms &amp; Models Used</th></tr></thead>
    <tbody>
-    <tr>
-     <td>
-      Programmer writes rules
-     </td>
-     <td>
-      Computer learns rules
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Static
-     </td>
-     <td>
-      Dynamic
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Doesn't improve
-     </td>
-     <td>
-      Improves with data
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Best for fixed problems
-     </td>
-     <td>
-      Best for complex problems
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Needs human updates
-     </td>
-     <td>
-      Learns automatically
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Rule-based
-     </td>
-     <td>
-      Data-driven
-     </td>
-    </tr>
+    <tr><td>&#127973; Healthcare</td><td>Medical imaging diagnosis, disease risk prediction, genomic alignment, drug discovery.</td><td>CNNs, Random Forests, XGBoost, AlphaFold</td></tr>
+    <tr><td>&#128184; Financial Services</td><td>Real-time credit card fraud detection, algorithmic stock trading, credit scoring, AML.</td><td>Isolation Forest, LSTMs, Gradient Boosted Trees</td></tr>
+    <tr><td>&#128717; E-Commerce</td><td>Product recommendation engines, dynamic surge pricing, inventory demand forecasting.</td><td>Collaborative Filtering, Matrix Factorization, ARIMAX</td></tr>
+    <tr><td>&#127918; Entertainment &amp; Media</td><td>Personalized content feeds, automated thumbnail selection, music recommendation.</td><td>Deep Neural Collaborative Filtering, Vector Search</td></tr>
+    <tr><td>&#128241; Social Networks</td><td>Facial recognition tagging, abusive content filtering, news feed ranking.</td><td>Vision Transformers, BERT, Graph Neural Networks</td></tr>
+    <tr><td>&#128664; Transportation</td><td>Autonomous vehicle perception, traffic congestion prediction, route optimization.</td><td>Deep Reinforcement Learning, Sensor Fusion, YOLO</td></tr>
+    <tr><td>&#127807; Agriculture</td><td>Plant disease detection from leaf photos, precision drone spraying, yield forecasting.</td><td>Edge Computer Vision CNNs, Regression Trees</td></tr>
+    <tr><td>&#127981; Manufacturing</td><td>Industrial robot arm control, predictive equipment maintenance, visual quality control.</td><td>Time-Series Anomaly Detection, Vibration Autoencoders</td></tr>
+    <tr><td>&#128274; Cybersecurity</td><td>Automated malware detection, SIEM log anomaly detection, zero-day threat prevention.</td><td>Unsupervised Clustering, Random Forests</td></tr>
+    <tr><td>&#127979; Education</td><td>Adaptive personalized learning paths, student dropout risk prediction, automated grading.</td><td>Item Response Theory, Classification Models</td></tr>
+    <tr><td>&#127750; Smart Cities</td><td>Grid energy optimization, smart traffic light management, automated waste routing.</td><td>Reinforcement Learning, Optimization Algorithms</td></tr>
+    <tr><td>&#128172; Natural Language (NLP)</td><td>Conversational AI chatbots, real-time speech translation, sentiment analysis.</td><td>Transformers (GPT-4, Gemini, Claude, Llama)</td></tr>
    </tbody>
   </table>
-  <h4>
-   Example
-  </h4>
-  <p>
-   Traditional Programming
-   <br/>
-   Rules
-   <br/>
-   +
-   <br/>
-   Data
-   <br/>
-   ↓
-   <br/>
-   Prediction
-  </p>
-  <p>
-   Machine Learning
-   <br/>
-   Data
-   <br/>
-   +
-   <br/>
-   Correct Answers
-   <br/>
-   ↓
-   <br/>
-   Machine learns rules
-   <br/>
-   ↓
-   <br/>
-   Prediction
-  </p>
- </section>
- <section>
-  <h3>
-   Why Traditional Programming Fails in AI Problems?
-  </h3>
-  <p>
-   AI problems involve
-  </p>
-  <ul>
-   <li>
-    Voice Recognition
-   </li>
-   <li>
-    Image Recognition
-   </li>
-   <li>
-    Language Translation
-   </li>
-   <li>
-    Fraud Detection
-   </li>
-   <li>
-    Medical Diagnosis
-   </li>
-  </ul>
-  <p>
-   These require pattern recognition rather than fixed rules.
-  </p>
- </section>
- <section>
-  <h3>
-   Summary
-  </h3>
-  <p>
-   Traditional programming is excellent for clearly defined tasks but struggles with dynamic, data-rich, and unstructured problems. These limitations motivated the development of Machine Learning.
-  </p>
- </section>
-</section>
-<section>
- <h2>
-  Chapter 2: What is Machine Learning?
- </h2>
- <section>
-  <h3>
-   Definition
-  </h3>
-  <p>
-   Machine Learning is a branch of Artificial Intelligence that enables computers to learn patterns from data and make predictions or decisions without being explicitly programmed.
-  </p>
-  <blockquote>
-   <p>
-    Arthur Samuel (1959):
-    <br/>
-    "Machine Learning is the field of study that gives computers the ability to learn without being explicitly programmed."
-   </p>
-  </blockquote>
-  <blockquote>
-   <p>
-    Tom Mitchell (1997):
-    <br/>
-    "A computer program learns from experience E with respect to some task T and performance measure P if its performance improves with experience."
-   </p>
-  </blockquote>
- </section>
- <section>
-  <h3>
-   Basic Idea
-  </h3>
-  <p>
-   Instead of writing rules,
-   <br/>
-   We provide
-  </p>
-  <ul>
-   <li>
-    Data
-   </li>
-   <li>
-    Examples
-   </li>
-  </ul>
-  <p>
-   The computer discovers the rules.
-  </p>
- </section>
- <section>
-  <h3>
-   Traditional Programming
-  </h3>
-  <p>
-   Input
-   <br/>
-   +
-   <br/>
-   Rules
-   <br/>
-   ↓
-   <br/>
-   Output
-  </p>
-  <p>
-   Machine Learning
-   <br/>
-   Input Data
-   <br/>
-   +
-   <br/>
-   Correct Output
-   <br/>
-   ↓
-   <br/>
-   Learning Algorithm
-   <br/>
-   ↓
-   <br/>
-   Model
-   <br/>
-   ↓
-   <br/>
-   Predictions
-  </p>
- </section>
- <section>
-  <h3>
-   Components of Machine Learning
-  </h3>
-  <ol>
-   <li>
-    <h4>
-     Data
-    </h4>
-    <p>
-     Learning material.
-    </p>
-    <p>
-     Example
-     <br/>
-     House prices
-    </p>
-   </li>
-   <li>
-    <h4>
-     Features
-    </h4>
-    <p>
-     Input variables.
-    </p>
-    <p>
-     Examples
-    </p>
-    <ul>
-     <li>
-      Age
-     </li>
-     <li>
-      Height
-     </li>
-     <li>
-      Salary
-     </li>
-     <li>
-      Temperature
-     </li>
-    </ul>
-   </li>
-   <li>
-    <h4>
-     Labels
-    </h4>
-    <p>
-     Correct answers.
-    </p>
-    <p>
-     Example
-     <br/>
-     House Price Prediction
-    </p>
-    <p>
-     Feature:
-     <br/>
-     Area
-    </p>
-    <p>
-     Label:
-     <br/>
-     Price
-    </p>
-    <table>
-     <thead>
-      <tr>
-       <th>
-        Area
-       </th>
-       <th>
-        Price
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>
-        1000
-       </td>
-       <td>
-        40 lakh
-       </td>
-      </tr>
-      <tr>
-       <td>
-        1500
-       </td>
-       <td>
-        60 lakh
-       </td>
-      </tr>
-     </tbody>
-    </table>
-    <p>
-     Another Example:
-    </p>
-    <table>
-     <thead>
-      <tr>
-       <th>
-        Area
-       </th>
-       <th>
-        Price
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>
-        1000
-       </td>
-       <td>
-        40 lakh
-       </td>
-      </tr>
-      <tr>
-       <td>
-        1200
-       </td>
-       <td>
-        48 lakh
-       </td>
-      </tr>
-     </tbody>
-    </table>
-   </li>
-   <li>
-    <h4>
-     Model
-    </h4>
-    <p>
-     Mathematical representation learned from data.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Training
-    </h4>
-    <p>
-     Learning process.
-    </p>
-   </li>
-   <li>
-    <h4>
-     Prediction
-    </h4>
-    <p>
-     Using the trained model on new data.
-    </p>
-   </li>
-  </ol>
- </section>
- <section>
-  <h3>
-   How Machine Learning Learns
-  </h3>
-  <p>
-   Step 1
-   <br/>
-   Collect data
-   <br/>
-   ↓
-   <br/>
-   Step 2
-   <br/>
-   Find patterns
-   <br/>
-   ↓
-   <br/>
-   Step 3
-   <br/>
-   Create mathematical model
-   <br/>
-   ↓
-   <br/>
-   Step 4
-   <br/>
-   Predict future outcomes
-  </p>
- </section>
- <section>
-  <h3>
-   Advantages of Machine Learning
-  </h3>
-  <ul>
-   <li>
-    Learns automatically
-   </li>
-   <li>
-    Handles large datasets
-   </li>
-   <li>
-    Finds hidden patterns
-   </li>
-   <li>
-    Improves over time
-   </li>
-   <li>
-    Automates decision making
-   </li>
-   <li>
-    High accuracy
-   </li>
-   <li>
-    Scalable
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Disadvantages
-  </h3>
-  <ul>
-   <li>
-    Requires large datasets
-   </li>
-   <li>
-    Computationally expensive
-   </li>
-   <li>
-    Difficult to interpret (black-box models)
-   </li>
-   <li>
-    May inherit bias from data
-   </li>
-   <li>
-    Needs quality data
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Applications
-  </h3>
-  <ul>
-   <li>
-    Netflix recommendations
-   </li>
-   <li>
-    Google Search
-   </li>
-   <li>
-    Face Unlock
-   </li>
-   <li>
-    Siri / Alexa
-   </li>
-   <li>
-    Medical diagnosis
-   </li>
-   <li>
-    Fraud detection
-   </li>
-   <li>
-    Self-driving cars
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Summary
-  </h3>
-  <p>
-   Machine Learning learns from data rather than explicit rules, making it suitable for complex prediction and decision-making tasks.
-  </p>
- </section>
-</section>
-<section>
- <h2>
-  Chapter 3: Types of Machine Learning
- </h2>
- <p>
-  Machine Learning is classified into four main types.
- </p>
- <ol>
-  <li>
-   <h3>
-    Supervised Learning
-   </h3>
-   <h4>
-    Definition
-   </h4>
-   <p>
-    Learns using labeled data.
-    <br/>
-    Input + Correct Output.
-   </p>
-   <p>
-    Example
-    <br/>
-    Predict house price.
-    <br/>
-    The model learns the relationship.
-   </p>
-   <h4>
-    Tasks
-   </h4>
+
+  <section>
+   <h3>5.1 Core Business Benefits Across Industries</h3>
    <ul>
-    <li>
-     Classification
-    </li>
-    <li>
-     Regression
-    </li>
+    <li>&#9989; <strong>Accelerated Decision-Making:</strong> Real-time processing of high-frequency streaming data.</li>
+    <li>&#9989; <strong>Cost Reduction:</strong> Automation of repetitive operational workflows.</li>
+    <li>&#9989; <strong>Enhanced Customer Personalization:</strong> Tailored experiences for millions of users simultaneously.</li>
+    <li>&#9989; <strong>Discovery of Hidden Insights:</strong> Uncovering non-linear correlations invisible to human analysts.</li>
    </ul>
-   <h4>
-    Algorithms
-   </h4>
-   <ul>
-    <li>
-     Linear Regression
-    </li>
-    <li>
-     Logistic Regression
-    </li>
-    <li>
-     Decision Tree
-    </li>
-    <li>
-     Random Forest
-    </li>
-    <li>
-     SVM
-    </li>
-    <li>
-     Neural Networks
-    </li>
-   </ul>
-   <h4>
-    Applications
-   </h4>
-   <ul>
-    <li>
-     Spam detection
-    </li>
-    <li>
-     Disease prediction
-    </li>
-    <li>
-     Credit scoring
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Unsupervised Learning
-   </h3>
-   <h4>
-    Definition
-   </h4>
-   <p>
-    Uses unlabeled data.
-    <br/>
-    Goal:
-    <br/>
-    Find hidden patterns.
-   </p>
-   <p>
-    Example
-    <br/>
-    Customer segmentation.
-   </p>
-   <h4>
-    Algorithms
-   </h4>
-   <ul>
-    <li>
-     K-Means
-    </li>
-    <li>
-     Hierarchical Clustering
-    </li>
-    <li>
-     DBSCAN
-    </li>
-    <li>
-     PCA
-    </li>
-   </ul>
-   <h4>
-    Applications
-   </h4>
-   <ul>
-    <li>
-     Recommendation systems
-    </li>
-    <li>
-     Market segmentation
-    </li>
-    <li>
-     Anomaly detection
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Semi-Supervised Learning
-   </h3>
-   <p>
-    Mix of labeled and unlabeled data.
-   </p>
-   <p>
-    Example
-    <br/>
-    Medical images
-    <br/>
-    100 labeled
-    <br/>
-    10,000 unlabeled
-   </p>
-   <p>
-    The model uses both.
-   </p>
-   <h4>
-    Applications
-   </h4>
-   <ul>
-    <li>
-     Healthcare
-    </li>
-    <li>
-     Speech recognition
-    </li>
-    <li>
-     Image classification
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Reinforcement Learning
-   </h3>
-   <p>
-    Learns by trial and error.
-   </p>
-   <p>
-    Agent
-    <br/>
-    ↓
-    <br/>
-    Action
-    <br/>
-    ↓
-    <br/>
-    Reward
-    <br/>
-    ↓
-    <br/>
-    Learning
-   </p>
-   <p>
-    Example
-    <br/>
-    Robot learning to walk.
-   </p>
-   <h4>
-    Algorithms
-   </h4>
-   <ul>
-    <li>
-     Q-Learning
-    </li>
-    <li>
-     Deep Q Networks (DQN)
-    </li>
-    <li>
-     Policy Gradient
-    </li>
-    <li>
-     PPO
-    </li>
-   </ul>
-   <h4>
-    Applications
-   </h4>
-   <ul>
-    <li>
-     Robotics
-    </li>
-    <li>
-     Games (AlphaGo)
-    </li>
-    <li>
-     Self-driving cars
-    </li>
-    <li>
-     Resource optimization
-    </li>
-   </ul>
-  </li>
- </ol>
- <section>
-  <h3>
-   Comparison
-  </h3>
-  <table>
-   <thead>
-    <tr>
-     <th>
-      Type
-     </th>
-     <th>
-      Data
-     </th>
-     <th>
-      Goal
-     </th>
-     <th>
-      Example
-     </th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr>
-     <td>
-      Supervised
-     </td>
-     <td>
-      Labeled
-     </td>
-     <td>
-      Prediction
-     </td>
-     <td>
-      Spam detection
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Unsupervised
-     </td>
-     <td>
-      Unlabeled
-     </td>
-     <td>
-      Pattern discovery
-     </td>
-     <td>
-      Customer segmentation
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Semi-Supervised
-     </td>
-     <td>
-      Mixed
-     </td>
-     <td>
-      Improve learning with few labels
-     </td>
-     <td>
-      Medical imaging
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Reinforcement
-     </td>
-     <td>
-      Reward-based
-     </td>
-     <td>
-      Optimal decisions
-     </td>
-     <td>
-      Game playing
-     </td>
-    </tr>
-   </tbody>
-  </table>
+  </section>
  </section>
- <section>
-  <h3>
-   Summary
-  </h3>
-  <p>
-   Different ML paradigms suit different data availability and problem settings. Choosing the right type depends on whether labels or feedback are available.
-  </p>
+
+ <hr class="section-divider">
+
+ <!-- ==================== SUMMARY ==================== -->
+ <section id="summary">
+  <span class="chapter-badge">Module Summary</span>
+  <h2>Module 2 Complete Summary</h2>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Comprehensive Module 2 Mastery Points</h4>
+   <ul>
+    <li>Traditional programming relies on manual hardcoded rules and breaks down on high-dimensional, unstructured data.</li>
+    <li>Machine Learning enables computers to discover patterns from Experience (data) without being explicitly programmed.</li>
+    <li>The four main ML paradigms are Supervised, Unsupervised, Semi-Supervised, and Reinforcement Learning.</li>
+    <li>A complete ML project requires a systematic 12-step workflow spanning data collection to deployment and drift monitoring.</li>
+    <li>Machine Learning powers critical infrastructure across healthcare, finance, transport, e-commerce, and cybersecurity.</li>
+   </ul>
+  </div>
+
+  <div class="callout callout-info">
+   <span class="callout-icon">&#128218;</span>
+   <div>
+    <strong>Congratulations on Completing Module 2!</strong>
+    You have mastered why Machine Learning is essential and how its core workflow is structured. You are now ready to advance to Module 3 to explore <em>Classical Machine Learning Algorithms</em> in depth!
+   </div>
+  </div>
  </section>
-</section>
-<section>
- <h2>
-  Chapter 4: Machine Learning Workflow
- </h2>
- <p>
-  The Machine Learning workflow describes the end-to-end process of building an ML solution.
- </p>
- <section>
-  <h3>
-   Step 1: Problem Definition
-  </h3>
-  <p>
-   Understand the business or research objective.
-  </p>
-  <p>
-   Example
-   <br/>
-   Predict student performance.
-  </p>
+
+ <hr class="section-divider">
+
+ <!-- ==================== QUIZ ==================== -->
+ <section id="quiz">
+  <div class="quiz-section">
+   <h3>&#9989; Practice Knowledge Verification &mdash; Module 2</h3>
+   <ol class="quiz-list">
+    <li>Explain three major limitations of traditional programming when applied to modern complex data problems.</li>
+    <li>State Arthur Samuel's and Tom Mitchell's definitions of Machine Learning. Identify Task T, Performance P, and Experience E in a spam filter.</li>
+    <li>What is the fundamental architectural difference between traditional programming and machine learning input/output flow?</li>
+    <li>Differentiate between Supervised and Unsupervised Learning. Give two algorithm examples and two real-world use cases for each.</li>
+    <li>Explain the concept of Reinforcement Learning using the terms Agent, Environment, State, Action, and Reward.</li>
+    <li>List the 12 steps of the end-to-end Machine Learning Workflow. Why is Feature Engineering often more important than choosing a complex model?</li>
+    <li>What is the difference between Feature and Label in a dataset? Give an example using a housing dataset.</li>
+    <li>What is the difference between Regression and Classification in Supervised Learning? Give one example of each.</li>
+    <li>Explain why model evaluation on a holdout test dataset is necessary instead of evaluating on training data alone.</li>
+    <li>Write a basic Python script using <code>scikit-learn</code> that performs train-test split, feature scaling, model fitting, and evaluation.</li>
+   </ol>
+  </div>
  </section>
- <section>
-  <h3>
-   Step 2: Data Collection
-  </h3>
-  <p>
-   Sources:
-  </p>
-  <ul>
-   <li>
-    Databases
-   </li>
-   <li>
-    Sensors
-   </li>
-   <li>
-    APIs
-   </li>
-   <li>
-    Surveys
-   </li>
-   <li>
-    IoT devices
-   </li>
-   <li>
-    Public datasets (Kaggle, UCI)
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 3: Data Preprocessing
-  </h3>
-  <p>
-   Tasks include:
-  </p>
-  <ul>
-   <li>
-    Remove missing values
-   </li>
-   <li>
-    Remove duplicates
-   </li>
-   <li>
-    Handle outliers
-   </li>
-   <li>
-    Encode categorical variables
-   </li>
-   <li>
-    Normalize/standardize features
-   </li>
-  </ul>
-  <p>
-   Clean data is essential for good models.
-  </p>
- </section>
- <section>
-  <h3>
-   Step 4: Exploratory Data Analysis (EDA)
-  </h3>
-  <p>
-   Analyze the dataset to discover trends.
-  </p>
-  <p>
-   Examples:
-  </p>
-  <ul>
-   <li>
-    Histograms
-   </li>
-   <li>
-    Scatter plots
-   </li>
-   <li>
-    Correlation matrices
-   </li>
-   <li>
-    Box plots
-   </li>
-  </ul>
-  <p>
-   Purpose:
-  </p>
-  <ul>
-   <li>
-    Understand distributions
-   </li>
-   <li>
-    Detect anomalies
-   </li>
-   <li>
-    Identify relationships
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 5: Feature Engineering
-  </h3>
-  <p>
-   Create or select useful features.
-  </p>
-  <p>
-   Examples:
-  </p>
-  <ul>
-   <li>
-    Extract day/month from a date
-   </li>
-   <li>
-    Create age groups
-   </li>
-   <li>
-    Combine multiple variables
-   </li>
-  </ul>
-  <p>
-   Good features often improve performance more than changing algorithms.
-  </p>
- </section>
- <section>
-  <h3>
-   Step 6: Train-Test Split
-  </h3>
-  <p>
-   Typical split:
-  </p>
-  <ul>
-   <li>
-    Training: 80%
-   </li>
-   <li>
-    Testing: 20%
-   </li>
-  </ul>
-  <p>
-   Training data teaches the model; testing data evaluates generalization.
-  </p>
- </section>
- <section>
-  <h3>
-   Step 7: Model Selection
-  </h3>
-  <p>
-   Choose an algorithm based on the problem.
-  </p>
-  <p>
-   Examples:
-  </p>
-  <ul>
-   <li>
-    Linear Regression
-   </li>
-   <li>
-    Decision Tree
-   </li>
-   <li>
-    Random Forest
-   </li>
-   <li>
-    Support Vector Machine
-   </li>
-   <li>
-    Neural Network
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 8: Model Training
-  </h3>
-  <p>
-   The algorithm learns patterns from the training data by optimizing its parameters.
-  </p>
- </section>
- <section>
-  <h3>
-   Step 9: Model Evaluation
-  </h3>
-  <p>
-   Common metrics:
-  </p>
-  <p>
-   For Classification:
-  </p>
-  <ul>
-   <li>
-    Accuracy
-   </li>
-   <li>
-    Precision
-   </li>
-   <li>
-    Recall
-   </li>
-   <li>
-    F1-Score
-   </li>
-   <li>
-    ROC-AUC
-   </li>
-  </ul>
-  <p>
-   For Regression:
-  </p>
-  <ul>
-   <li>
-    Mean Absolute Error (MAE)
-   </li>
-   <li>
-    Mean Squared Error (MSE)
-   </li>
-   <li>
-    Root Mean Squared Error (RMSE)
-   </li>
-   <li>
-    R² Score
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 10: Hyperparameter Tuning
-  </h3>
-  <p>
-   Improve performance using methods such as:
-  </p>
-  <ul>
-   <li>
-    Grid Search
-   </li>
-   <li>
-    Random Search
-   </li>
-   <li>
-    Bayesian Optimization
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 11: Deployment
-  </h3>
-  <p>
-   Deploy the trained model to production.
-  </p>
-  <p>
-   Examples:
-  </p>
-  <ul>
-   <li>
-    Web applications
-   </li>
-   <li>
-    Mobile apps
-   </li>
-   <li>
-    Cloud services
-   </li>
-   <li>
-    Embedded devices
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Step 12: Monitoring and Maintenance
-  </h3>
-  <p>
-   Monitor:
-  </p>
-  <ul>
-   <li>
-    Accuracy over time
-   </li>
-   <li>
-    Data drift
-   </li>
-   <li>
-    Model drift
-   </li>
-   <li>
-    System performance
-   </li>
-  </ul>
-  <p>
-   Retrain the model periodically when new data becomes available.
-  </p>
- </section>
- <section>
-  <h3>
-   Complete ML Workflow
-  </h3>
-  <ol>
-   <li>
-    Problem Definition
-   </li>
-   <li>
-    Data Collection
-   </li>
-   <li>
-    Data Preprocessing
-   </li>
-   <li>
-    Exploratory Data Analysis
-   </li>
-   <li>
-    Feature Engineering
-   </li>
-   <li>
-    Train-Test Split
-   </li>
-   <li>
-    Model Selection
-   </li>
-   <li>
-    Model Training
-   </li>
-   <li>
-    Model Evaluation
-   </li>
-   <li>
-    Hyperparameter Tuning
-   </li>
-   <li>
-    Deployment
-   </li>
-   <li>
-    Monitoring &amp; Maintenance
-   </li>
-  </ol>
- </section>
- <section>
-  <h3>
-   Summary
-  </h3>
-  <p>
-   A structured workflow ensures reliable, reproducible, and maintainable ML solutions from idea to deployment.
-  </p>
- </section>
-</section>
-<section>
- <h2>
-  Chapter 5: Real-World Applications of Machine Learning
- </h2>
- <p>
-  Machine Learning is transforming almost every industry by enabling intelligent predictions and automation.
- </p>
- <ol>
-  <li>
-   <h3>
-    Healthcare
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Disease diagnosis
-    </li>
-    <li>
-     Medical image analysis
-    </li>
-    <li>
-     Drug discovery
-    </li>
-    <li>
-     Personalized treatment
-    </li>
-    <li>
-     Patient risk prediction
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     Detecting cancer from X-rays and MRI scans
-    </li>
-    <li>
-     Predicting diabetes from health records
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Finance
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Fraud detection
-    </li>
-    <li>
-     Credit scoring
-    </li>
-    <li>
-     Algorithmic trading
-    </li>
-    <li>
-     Loan approval
-    </li>
-    <li>
-     Risk assessment
-    </li>
-   </ul>
-   <h4>
-    Example:
-   </h4>
-   <p>
-    Banks detect suspicious credit card transactions in real time.
-   </p>
-  </li>
-  <li>
-   <h3>
-    E-commerce
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Product recommendations
-    </li>
-    <li>
-     Demand forecasting
-    </li>
-    <li>
-     Customer segmentation
-    </li>
-    <li>
-     Dynamic pricing
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     Amazon recommends products.
-    </li>
-    <li>
-     Flipkart predicts future demand.
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Entertainment
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Movie recommendations
-    </li>
-    <li>
-     Music recommendations
-    </li>
-    <li>
-     Personalized content ranking
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     Netflix
-    </li>
-    <li>
-     Spotify
-    </li>
-    <li>
-     YouTube
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Social Media
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Face recognition
-    </li>
-    <li>
-     Feed personalization
-    </li>
-    <li>
-     Content moderation
-    </li>
-    <li>
-     Spam filtering
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     Instagram
-    </li>
-    <li>
-     Facebook
-    </li>
-    <li>
-     X (formerly Twitter)
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Transportation
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Self-driving cars
-    </li>
-    <li>
-     Traffic prediction
-    </li>
-    <li>
-     Route optimization
-    </li>
-    <li>
-     Predictive maintenance
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     Tesla's Autopilot
-    </li>
-    <li>
-     Google Maps traffic estimation
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Agriculture
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Crop disease detection
-    </li>
-    <li>
-     Yield prediction
-    </li>
-    <li>
-     Precision farming
-    </li>
-    <li>
-     Smart irrigation
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Manufacturing
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Quality inspection
-    </li>
-    <li>
-     Predictive maintenance
-    </li>
-    <li>
-     Defect detection
-    </li>
-    <li>
-     Supply chain optimization
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Cybersecurity
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Intrusion detection
-    </li>
-    <li>
-     Malware classification
-    </li>
-    <li>
-     Phishing detection
-    </li>
-    <li>
-     Network anomaly detection
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Education
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Personalized learning
-    </li>
-    <li>
-     Student performance prediction
-    </li>
-    <li>
-     Automated grading
-    </li>
-    <li>
-     Intelligent tutoring systems
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Smart Cities
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Energy optimization
-    </li>
-    <li>
-     Waste management
-    </li>
-    <li>
-     Traffic control
-    </li>
-    <li>
-     Public safety
-    </li>
-   </ul>
-  </li>
-  <li>
-   <h3>
-    Natural Language Processing (NLP)
-   </h3>
-   <h4>
-    Applications:
-   </h4>
-   <ul>
-    <li>
-     Chatbots
-    </li>
-    <li>
-     Language translation
-    </li>
-    <li>
-     Sentiment analysis
-    </li>
-    <li>
-     Speech recognition
-    </li>
-   </ul>
-   <h4>
-    Examples:
-   </h4>
-   <ul>
-    <li>
-     ChatGPT
-    </li>
-    <li>
-     Google Translate
-    </li>
-    <li>
-     Voice assistants
-    </li>
-   </ul>
-  </li>
- </ol>
- <section>
-  <h3>
-   Benefits Across Industries
-  </h3>
-  <ul>
-   <li>
-    Faster decision-making
-   </li>
-   <li>
-    Improved accuracy
-   </li>
-   <li>
-    Reduced costs
-   </li>
-   <li>
-    Better customer experiences
-   </li>
-   <li>
-    Automation of repetitive tasks
-   </li>
-   <li>
-    Discovery of hidden insights
-   </li>
-  </ul>
- </section>
- <section>
-  <h3>
-   Module 2 – Key Takeaways
-  </h3>
-  <ul>
-   <li>
-    Traditional programming relies on manually written rules and struggles with complex, data-rich problems.
-   </li>
-   <li>
-    Machine Learning enables systems to learn patterns from data and improve performance over time.
-   </li>
-   <li>
-    The four main types of ML are
-    <strong>
-     Supervised
-    </strong>
-    ,
-    <strong>
-     Unsupervised
-    </strong>
-    ,
-    <strong>
-     Semi-Supervised
-    </strong>
-    , and
-    <strong>
-     Reinforcement Learning
-    </strong>
-    .
-   </li>
-   <li>
-    A standard ML workflow includes problem definition, data collection, preprocessing, feature engineering, model training, evaluation, deployment, and monitoring.
-   </li>
-   <li>
-    Machine Learning powers modern applications in healthcare, finance, transportation, e-commerce, education, cybersecurity, and many other domains.
-   </li>
-  </ul>
-  <p>
-   These notes provide a comprehensive foundation for understanding why Machine Learning is essential, how it works, and how it is applied in real-world systems.
-  </p>
- </section>
-</section>
+
+ <!-- NEXT MODULE NAVIGATION BANNER AT THE ABSOLUTE END -->
+ <div class="next-module-banner">
+  <h3>Ready for the Next Step?</h3>
+  <p>You have completed Module 2! Continue your journey into Classical Machine Learning Algorithms.</p>
+  <a href="/course/content?id=classical-machine-learning" class="next-module-btn" id="nextModuleBtn">
+   <span>Proceed to Module 3: Classical Machine Learning &rarr;</span>
+  </a>
+ </div>
 </main>

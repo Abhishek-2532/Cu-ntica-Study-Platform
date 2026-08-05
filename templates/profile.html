@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <style>
     /* =============================================================
    CUÁNTICA — Profile Page
@@ -2347,21 +2349,124 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   /* ============================================================
-     G. ACHIEVEMENT CHIP FACTORY
+     G. CERTIFICATE PDF GENERATOR & ACHIEVEMENT CHIP FACTORY
   ============================================================= */
-  function createChip(text, isCert) {
+  function generateQuanticaCertificatePDF(studentName, courseTitle, issueDate, certId) {
+    var certContainer = document.createElement("div");
+    certContainer.style.cssText = "position: absolute; left: 0; top: 0; width: 1000px; height: 700px; background: #FFFFFF; color: #1E293B; font-family: 'Sora', 'Inter', sans-serif; box-sizing: border-box; padding: 30px; z-index: -9999; opacity: 1;";
+
+    var dateStr = issueDate ? new Date(issueDate).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+    var serialId = certId ? "CERT-QU-" + String(certId).slice(-6).toUpperCase() : "CERT-QU-" + Math.floor(100000 + Math.random() * 900000);
+
+    certContainer.innerHTML = `
+      <div style="width: 100%; height: 100%; border: 10px solid #1FA880; outline: 3px solid #6CE5BF; outline-offset: -6px; border-radius: 12px; padding: 30px 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; position: relative; background: #FFFFFF;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #DCEEF2; padding-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 44px; height: 44px; background: #1FA880; color: #FFFFFF; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.4rem;">Q</div>
+            <div>
+              <h2 style="margin: 0; font-size: 1.5rem; color: #1FA880; font-weight: 800; letter-spacing: 1px;">CUÁNTICA</h2>
+              <span style="font-size: 0.78rem; color: #64748B; font-weight: 600;">QUANTUM COMPUTING STUDY PLATFORM</span>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #1FA880; background: #E0FAF4; padding: 4px 12px; border-radius: 999px; border: 1px solid #ADF1DD;">VERIFIED CREDENTIAL</span>
+            <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94A3B8; font-family: monospace;">${serialId}</p>
+          </div>
+        </div>
+        <div style="text-align: center; margin: 15px 0;">
+          <p style="font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; color: #64748B; text-transform: uppercase; margin-bottom: 10px;">Certificate of Completion</p>
+          <p style="font-size: 0.95rem; color: #475569; margin-bottom: 14px;">This is proudly presented to</p>
+          <h1 style="font-size: 2.5rem; color: #1E293B; font-weight: 800; margin: 0 0 14px 0; border-bottom: 2px solid #6CE5BF; display: inline-block; padding-bottom: 4px;">${studentName || "Quantum Learner"}</h1>
+          <p style="font-size: 1rem; color: #475569; max-width: 700px; margin: 0 auto 14px auto; line-height: 1.5;">for successfully demonstrating mastery in theoretical concepts, interactive simulations, and coding implementations in the course</p>
+          <h3 style="font-size: 1.5rem; color: #1FA880; font-weight: 700; margin: 0;">${courseTitle || "Quantum Computing"}</h3>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 2px solid #DCEEF2; padding-top: 16px;">
+          <div style="text-align: left;">
+            <p style="margin: 0 0 4px 0; font-size: 0.8rem; color: #64748B;">Date of Issuance:</p>
+            <strong style="font-size: 0.9rem; color: #1E293B;">${dateStr}</strong>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 56px; height: 56px; background: #E0FAF4; border: 2px dashed #1FA880; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px auto; color: #1FA880; font-size: 1.2rem; font-weight: 800;">★</div>
+            <span style="font-size: 0.7rem; font-weight: 700; color: #1FA880; letter-spacing: 1px;">OFFICIAL SEAL</span>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-family: Georgia, serif; font-style: italic; font-size: 1.4rem; color: #1FA880; margin-bottom: 2px;">Cuántica Academic Board</div>
+            <div style="border-top: 1px solid #94A3B8; width: 170px; margin-left: auto; padding-top: 4px;">
+              <span style="font-size: 0.75rem; font-weight: 600; color: #64748B;">Authorized Signature</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(certContainer);
+
+    var cleanFilename = (courseTitle || "Quantica_Course").replace(/[^a-zA-Z0-9]/g, "_") + "_Certificate.pdf";
+    var opt = {
+      margin: 0,
+      filename: cleanFilename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false, scrollX: 0, scrollY: 0, windowWidth: 1000, windowHeight: 700 },
+      jsPDF: { unit: 'pt', format: [1000, 700], orientation: 'landscape' }
+    };
+
+    if (window.html2pdf) {
+      html2pdf().set(opt).from(certContainer).save().then(function() {
+        certContainer.remove();
+      }).catch(function(err) {
+        console.error("PDF export error:", err);
+        certContainer.remove();
+      });
+    } else {
+      alert("PDF generator library is loading. Please try again in a moment.");
+      certContainer.remove();
+    }
+  }
+
+
+  function createChip(item, isCert) {
     var chip = document.createElement("span");
     chip.className = "achievement-chip" + (isCert ? " achievement-chip--cert" : "");
     chip.setAttribute("role", "listitem");
 
+    var titleText = typeof item === "object" ? (item.title || item.name || "Achievement") : item;
+    var descriptionText = typeof item === "object" ? (item.description || "") : "";
+    var iconClass = isCert ? "fa-solid fa-certificate" : "fa-solid fa-award";
+
+    if (typeof item === "object" && item.icon) {
+      iconClass = item.icon;
+    }
+
     var icon = document.createElement("i");
-    icon.className = isCert ? "fa-solid fa-certificate" : "fa-solid fa-shield-halved";
+    icon.className = iconClass;
     icon.setAttribute("aria-hidden", "true");
 
     chip.appendChild(icon);
-    chip.appendChild(document.createTextNode(" " + text));
+    chip.appendChild(document.createTextNode(" " + titleText));
+
+    if (descriptionText) {
+      chip.setAttribute("title", descriptionText);
+    }
+
+    if (isCert) {
+      var btn = document.createElement("button");
+      btn.style.cssText = "margin-left: 8px; background: #1FA880; color: #FFFFFF; border: none; padding: 3px 10px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;";
+      btn.innerHTML = '<i class="fa-solid fa-file-arrow-down"></i> PDF';
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        var token = JSON.parse(localStorage.getItem("token")) || {};
+        var studentName = token.full_name || "Quantum Learner";
+        var issueDate = typeof item === "object" ? item.issued_at : null;
+        var certId = typeof item === "object" ? (item.course_id || item.id) : null;
+        generateQuanticaCertificatePDF(studentName, titleText, issueDate, certId);
+      };
+      chip.appendChild(btn);
+    }
+
     return chip;
   }
+
+
 
   function emptyState(message) {
     var wrap = document.createElement("div");

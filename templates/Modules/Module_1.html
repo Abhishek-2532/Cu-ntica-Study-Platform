@@ -1,1770 +1,524 @@
 <main>
- <h1>
-  Module 1 – Introduction to Artificial Intelligence
- </h1>
- <section>
-  <h2>
-   Chapter 1: What is Artificial Intelligence (AI)?
-  </h2>
-  <section>
-   <h3>
-    1.1 Definition of Artificial Intelligence
-   </h3>
-   <p>
-    Artificial Intelligence (AI) is a branch of Computer Science that focuses on creating machines and software capable of performing tasks that normally require human intelligence.
-   </p>
-   <p>
-    These tasks include:
-   </p>
-   <ul>
-    <li>
-     Learning
-    </li>
-    <li>
-     Reasoning
-    </li>
-    <li>
-     Problem Solving
-    </li>
-    <li>
-     Decision Making
-    </li>
-    <li>
-     Understanding Language
-    </li>
-    <li>
-     Recognizing Images
-    </li>
-    <li>
-     Planning
-    </li>
-    <li>
-     Creativity (Generative AI)
-    </li>
-   </ul>
-   <h4>
-    Simple Definition
-   </h4>
-   <p>
-    Artificial Intelligence is the ability of a computer or machine to think, learn, and make decisions like a human.
-   </p>
-  </section>
-  <section>
-   <h3>
-    1.2 Human Intelligence vs Artificial Intelligence
-   </h3>
-   <!-- Table for comparison is at the end, will be included there. -->
-  </section>
-  <section>
-   <h3>
-    1.3 Why AI is Important
-   </h3>
-   <p>
-    AI helps automate difficult and repetitive tasks.
-   </p>
-   <p>
-    Benefits include:
-   </p>
-   <ul>
-    <li>
-     Faster decision-making
-    </li>
-    <li>
-     Reduced human errors
-    </li>
-    <li>
-     Works 24/7
-    </li>
-    <li>
-     Handles huge amounts of data
-    </li>
-    <li>
-     Improves productivity
-    </li>
-    <li>
-     Saves time
-    </li>
-    <li>
-     Saves cost
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    1.4 Characteristics of AI
-   </h3>
-   <p>
-    An intelligent system should have:
-   </p>
-   <ul>
-    <li>
-     <h5>
-      Learning
-     </h5>
-     <p>
-      Ability to improve using experience.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       Netflix recommends better movies over time.
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h5>
-      Reasoning
-     </h5>
-     <p>
-      Ability to make logical decisions.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       Chess-playing AI.
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h5>
-      Problem Solving
-     </h5>
-     <p>
-      Finding the best solution among many possibilities.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       Google Maps finding shortest path.
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h5>
-      Perception
-     </h5>
-     <p>
-      Understanding surroundings using sensors.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       Camera
-      </li>
-      <li>
-       Microphone
-      </li>
-      <li>
-       Radar
-      </li>
-      <li>
-       LIDAR
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h5>
-      Language Understanding
-     </h5>
-     <p>
-      Understanding human language.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       ChatGPT
-      </li>
-      <li>
-       Siri
-      </li>
-      <li>
-       Alexa
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h5>
-      Planning
-     </h5>
-     <p>
-      Making future decisions.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       Self-driving car planning next turn.
-      </li>
-     </ul>
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    1.5 AI vs Machine Learning vs Deep Learning
-   </h3>
-   <pre>
-Artificial Intelligence
-│
-├── Machine Learning
-│     │
-│     ├── Supervised Learning
-│     ├── Unsupervised Learning
-│     └── Reinforcement Learning
-│
-└── Deep Learning
-      │
-      ├── CNN
-      ├── RNN
-      └── Transformers
-</pre>
-   <h4>
-    Artificial Intelligence
-   </h4>
-   <p>
-    Broad field.
-   </p>
-   <p>
-    Goal:
-   </p>
-   <ul>
-    <li>
-     Make machines intelligent.
-    </li>
-   </ul>
-   <h4>
-    Machine Learning
-   </h4>
-   <p>
-    Subset of AI.
-   </p>
-   <p>
-    Machine learns patterns from data.
-   </p>
-   <h4>
-    Deep Learning
-   </h4>
-   <p>
-    Subset of Machine Learning.
-   </p>
-   <p>
-    Uses Artificial Neural Networks with many layers.
-   </p>
-  </section>
-  <section>
-   <h3>
-    1.6 Components of AI
-   </h3>
-   <p>
-    AI consists of:
-   </p>
-   <ul>
-    <li>
-     Data
-    </li>
-    <li>
-     Algorithms
-    </li>
-    <li>
-     Models
-    </li>
-    <li>
-     Computing Power
-    </li>
-    <li>
-     Sensors
-    </li>
-    <li>
-     Memory
-    </li>
-    <li>
-     Decision Engine
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    1.7 AI Workflow
-   </h3>
-   <p>
-    Collect Data
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Clean Data
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Train Model
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Test Model
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Deploy
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Predict
-   </p>
-   <p>
-    ↓
-   </p>
-   <p>
-    Improve Model
-   </p>
-  </section>
-  <section>
-   <h3>
-    1.8 Real-Life Examples
-   </h3>
-   <ul>
-    <li>
-     <h4>
-      Healthcare
-     </h4>
-     <ul>
-      <li>
-       Disease prediction
-      </li>
-      <li>
-       MRI analysis
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Finance
-     </h4>
-     <ul>
-      <li>
-       Fraud detection
-      </li>
-      <li>
-       Credit scoring
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Education
-     </h4>
-     <ul>
-      <li>
-       Personalized learning
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Agriculture
-     </h4>
-     <ul>
-      <li>
-       Crop monitoring
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Manufacturing
-     </h4>
-     <ul>
-      <li>
-       Robot automation
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Transportation
-     </h4>
-     <ul>
-      <li>
-       Self-driving cars
-      </li>
-     </ul>
-    </li>
-    <li>
-     <h4>
-      Retail
-     </h4>
-     <ul>
-      <li>
-       Product recommendations
-      </li>
-     </ul>
-    </li>
-   </ul>
-  </section>
- </section>
- <section>
-  <h2>
-   Chapter 2: History and Evolution of AI
-  </h2>
-  <section>
-   <h3>
-    2.1 Early Dreams of Intelligent Machines
-   </h3>
-   <p>
-    Humans have imagined intelligent machines for centuries.
-   </p>
-   <p>
-    Examples:
-   </p>
-   <ul>
-    <li>
-     Ancient Greek automata
-    </li>
-    <li>
-     Mechanical dolls
-    </li>
-    <li>
-     Charles Babbage's Analytical Engine
-    </li>
-    <li>
-     Ada Lovelace's programming ideas
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    2.2 Birth of AI (1956)
-   </h3>
-   <p>
-    Artificial Intelligence officially began in 1956.
-   </p>
-   <p>
-    The Dartmouth Conference is considered the birth of AI.
-   </p>
-   <p>
-    Researchers included:
-   </p>
-   <ul>
-    <li>
-     John McCarthy
-    </li>
-    <li>
-     Marvin Minsky
-    </li>
-    <li>
-     Claude Shannon
-    </li>
-    <li>
-     Allen Newell
-    </li>
-    <li>
-     Herbert Simon
-    </li>
-   </ul>
-   <p>
-    John McCarthy coined the term:
-   </p>
-   <p>
-    <strong>
-     Artificial Intelligence
-    </strong>
-   </p>
-  </section>
-  <section>
-   <h3>
-    2.3 Timeline of AI
-   </h3>
-   <dl>
-    <dt>
-     <h4>
-      1943
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      McCulloch &amp; Pitts developed first artificial neuron.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      1950
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Alan Turing proposed
-     </p>
-     <p>
-      <strong>
-       The Turing Test
-      </strong>
-     </p>
-     <p>
-      Question:
-     </p>
-     <ul>
-      <li>
-       Can machines think?
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      1956
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Dartmouth Conference
-     </p>
-     <p>
-      Birth of AI.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      1960s
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Rule-based AI systems
-     </p>
-     <p>
-      Examples:
-     </p>
-     <ul>
-      <li>
-       ELIZA
-      </li>
-      <li>
-       SHRDLU
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      1970s
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Expert Systems
-     </p>
-     <p>
-      Knowledge-based decision systems.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      AI Winter (1974–1980)
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Funding decreased.
-     </p>
-     <p>
-      Progress slowed.
-     </p>
-     <p>
-      Reasons:
-     </p>
-     <ul>
-      <li>
-       Limited computing power
-      </li>
-      <li>
-       Lack of data
-      </li>
-      <li>
-       Over-promising
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      1980s
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Expert Systems became popular.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       MYCIN
-      </li>
-     </ul>
-     <p>
-      Medical diagnosis.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Second AI Winter
-     </h4>
-{% include "Simulation/basic_encoding.html" %}
+ <!-- VIDEO PLAYER -->
+ <video controls style="width:100%;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+  <source src="/static/videos/Module_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+ </video>
 
-    </dt>
-    <dd>
-     <p>
-      Late 1980s
-     </p>
-     <p>
-      Again due to unrealistic expectations.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      1997
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      IBM Deep Blue defeated Chess World Champion Garry Kasparov.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      2011
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      IBM Watson won Jeopardy.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      2012
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Deep Learning revolution.
-     </p>
-     <p>
-      AlexNet won ImageNet.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      2016
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Google DeepMind AlphaGo defeated Lee Sedol.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      2022
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Generative AI revolution.
-     </p>
-     <p>
-      Examples:
-     </p>
-     <ul>
-      <li>
-       ChatGPT
-      </li>
-      <li>
-       DALL·E
-      </li>
-      <li>
-       Stable Diffusion
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      2023–Present
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Large Language Models
-     </p>
-     <p>
-      Examples:
-     </p>
-     <ul>
-      <li>
-       GPT
-      </li>
-      <li>
-       Gemini
-      </li>
-      <li>
-       Claude
-      </li>
-      <li>
-       Llama
-      </li>
-     </ul>
-    </dd>
-   </dl>
-  </section>
+ <h1>Module 1 &ndash; Introduction to Artificial Intelligence</h1>
+
+ <!-- CHAPTER NAVIGATOR -->
+ <nav class="chapter-nav">
+  <span class="nav-label">&#128218; Chapters</span>
+  <a href="#ch1">1. What is AI?</a>
+  <a href="#ch2">2. History of AI</a>
+  <a href="#ch3">3. Types of AI</a>
+  <a href="#ch4">4. AI Applications</a>
+  <a href="#ch5">5. Future of AI &amp; QML</a>
+  <a href="#summary">Summary</a>
+  <a href="#quiz">&#9989; Practice Quiz</a>
+ </nav>
+
+ <!-- ==================== CHAPTER 1 ==================== -->
+ <section id="ch1">
+  <span class="chapter-badge">Chapter 1</span>
+  <h2>What is Artificial Intelligence (AI)?</h2>
+
   <section>
-   <h3>
-    2.4 AI Generations
-   </h3>
-   <dl>
-    <dt>
-     <h4>
-      First Generation
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Rule-Based Systems
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Second Generation
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Machine Learning
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Third Generation
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Deep Learning
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Fourth Generation
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Generative AI
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Fifth Generation (Emerging)
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Artificial General Intelligence (AGI)
-     </p>
-    </dd>
-   </dl>
+   <h3>1.1 Comprehensive Definition of Artificial Intelligence</h3>
+   <p>Artificial Intelligence (AI) is a multidisciplinary branch of Computer Science dedicated to engineering smart systems and machines capable of executing complex intellectual tasks that historically required human cognition, reasoning, and domain expertise.</p>
+
+   <div class="callout callout-info">
+    <span class="callout-icon">&#8505;&#65039;</span>
+    <div>
+     <strong>Core Definition &amp; Core Essence</strong>
+     Artificial Intelligence is the science and engineering of building software algorithms and computational models that enable machines to perceive their environment, learn from experience, reason logically, and make autonomous decisions to achieve specific goals.
+    </div>
+   </div>
+
+   <p>Key cognitive processes simulated by AI systems include:</p>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#129504;</span><h5>Continuous Learning</h5><p>Extracting patterns from vast datasets to improve accuracy over time without explicit re-programming.</p><div class="example">e.g. Netflix &amp; Spotify recommendation algorithms</div></div>
+    <div class="info-card"><span class="info-card-icon">&#9881;&#65039;</span><h5>Logical Reasoning</h5><p>Using deductive, inductive, and statistical logic to solve complex strategic puzzles.</p><div class="example">e.g. Chess &amp; Go grandmaster AI engines</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128301;</span><h5>Problem Solving</h5><p>Navigating massive search spaces to calculate optimal routes and solutions under constraints.</p><div class="example">e.g. Google Maps real-time route optimization</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128172;</span><h5>Natural Language</h5><p>Understanding, interpreting, translating, and generating human language contextually.</p><div class="example">e.g. ChatGPT, Claude, Siri, Google Gemini</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128247;</span><h5>Perception &amp; Vision</h5><p>Processing visual inputs from digital images and multi-modal sensory streams.</p><div class="example">e.g. Computer Vision in autonomous LIDAR</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128161;</span><h5>Autonomous Planning</h5><p>Formulating sequential action plans to achieve long-term objectives under uncertainty.</p><div class="example">e.g. Self-driving vehicles navigating traffic</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128202;</span><h5>Automated Decision</h5><p>Analyzing probabilistic outcomes to execute optimal decisions rapidly.</p><div class="example">e.g. Medical diagnosis &amp; triage assistants</div></div>
+    <div class="info-card"><span class="info-card-icon">&#127775;</span><h5>Generative Creativity</h5><p>Synthesizing novel realistic text, high-resolution imagery, audio, and code assets.</p><div class="example">e.g. DALL-E, Midjourney, Stable Diffusion</div></div>
+   </div>
   </section>
+
+  <section>
+   <h3>1.2 Deep Dive: Human Intelligence vs Artificial Intelligence</h3>
+   <p>While AI has achieved superhuman performance in specialized domains, human intelligence remains vastly superior in generalizability, emotional depth, and physical adaptability.</p>
+   
+   <table class="comparison-table">
+    <caption>In-depth Comparison: Human Cognition vs Artificial Systems</caption>
+    <thead>
+     <tr>
+      <th>Dimension</th>
+      <th>Human Intelligence</th>
+      <th>Artificial Intelligence</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>Learning Mechanism</td>
+      <td>Biological synaptic plasticity; learns efficiently from few examples.</td>
+      <td>Backpropagation and gradient descent over massive datasets.</td>
+     </tr>
+     <tr>
+      <td>Energy Efficiency</td>
+      <td>Operates on approximately 20 Watts of biological power.</td>
+      <td>Requires megawatts for training massive server clusters (GPUs/TPUs).</td>
+     </tr>
+     <tr>
+      <td>Emotional &amp; Moral Context</td>
+      <td>Deep emotional awareness, empathy, intrinsic morality, and intuition.</td>
+      <td>Lacks real consciousness; simulates empathy using pattern matching.</td>
+     </tr>
+     <tr>
+      <td>Adaptability (Transfer)</td>
+      <td>Effortlessly transfers knowledge across completely different domains.</td>
+      <td>Requires retraining (fine-tuning) for new task domains.</td>
+     </tr>
+     <tr>
+      <td>Speed &amp; Computation</td>
+      <td>Slower neuron firing (~100 Hz), but massive biological parallelism.</td>
+      <td>Ultrafast electronic execution (~GHz clock speeds) per core.</td>
+     </tr>
+     <tr>
+      <td>Operational Availability</td>
+      <td>Requires sleep, rest, emotional regulation, and nourishment.</td>
+      <td>Operates 24/7/365 without fatigue or downtime.</td>
+     </tr>
+    </tbody>
+   </table>
+  </section>
+
+  <section>
+   <h3>1.3 Strategic Importance &amp; Industry Impact</h3>
+   <p>AI is considered the foundational utility of the 4th Industrial Revolution, automating repetitive labor while enabling breakthroughs in science and engineering.</p>
+   <ul>
+    <li>&#9989; <strong>Accelerated Decision-Making:</strong> Processes terabytes of live streaming telemetry in milliseconds.</li>
+    <li>&#9989; <strong>Elimination of Human Error:</strong> Executes precise repetitive tasks with extreme consistency.</li>
+    <li>&#9989; <strong>Continuous Operation:</strong> Powers mission-critical infrastructure around the clock.</li>
+    <li>&#9989; <strong>Unlocking Complex Data:</strong> Extracts non-linear correlations from unstructured text, audio, and video.</li>
+    <li>&#9989; <strong>Economic Efficiency:</strong> Drastically lowers marginal cost of production across industries.</li>
+   </ul>
+
+   <div class="callout callout-tip">
+    <span class="callout-icon">&#128161;</span>
+    <div>
+     <strong>Key Takeaway for Learners</strong>
+     AI is not designed to replace human intellect, but to amplify human potential. The future belongs to individuals and organizations that effectively combine Human Expertise with AI Capabilities.
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.4 Key Characteristics of Intelligent Systems</h3>
+   <p>For any artificial system to be classified as truly "intelligent," it must exhibit the following structural capabilities:</p>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#129504;</span><h5>Adaptability</h5><p>Ability to adjust behavior dynamically when environmental variables shift.</p><div class="example">Adaptive cruise control in dynamic weather</div></div>
+    <div class="info-card"><span class="info-card-icon">&#9881;&#65039;</span><h5>Generalization</h5><p>Correctly processing input scenarios never encountered during training.</p><div class="example">Recognizing a new species of animal</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128301;</span><h5>Knowledge Representation</h5><p>Structuring internal memory to represent entities, relations, and world concepts.</p><div class="example">Knowledge Graphs &amp; Vector Embeddings</div></div>
+    <div class="info-card"><span class="info-card-icon">&#128247;</span><h5>Environmental Interaction</h5><p>Sensing inputs via transducers and acting via physical or digital actuators.</p><div class="example">Robotics manipulators &amp; drones</div></div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.5 Clarifying the Hierarchy: AI vs Machine Learning vs Deep Learning</h3>
+
+   <div class="tree-block">
+    <span class="tree-root">Artificial Intelligence (Broad Discipline)</span><br>
+    &#9474;<br>
+    &#9500;&#9472;&#9472; <span class="tree-l1">Machine Learning (Statistical Learning from Data)</span><br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9474;<br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="tree-l2">Supervised Learning (Regression, Classification)</span><br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="tree-l2">Unsupervised Learning (Clustering, Dimensionality Reduction)</span><br>
+    &#9474;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="tree-l2">Reinforcement Learning (Reward-based Policy Search)</span><br>
+    &#9474;<br>
+    &#9492;&#9472;&#9472; <span class="tree-l1">Deep Learning (Multi-layer Neural Network Architectures)</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9474;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="tree-l2">Convolutional Neural Networks (CNNs for Vision)</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span class="tree-l2">Recurrent Networks (RNNs / LSTMs for Time-Series)</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span class="tree-l2">Transformers (Attention Mechanism for LLMs &amp; GenAI)</span>
+   </div>
+
+   <table class="comparison-table">
+    <caption>Detailed Conceptual Distinction</caption>
+    <thead><tr><th>Subfield</th><th>Primary Mechanism</th><th>Human Intervention Required</th><th>Data Volume Needed</th></tr></thead>
+    <tbody>
+     <tr><td>Artificial Intelligence</td><td>Symbolic logic, rules, search trees, and heuristics.</td><td>High (Manual rule definition).</td><td>Can work with zero data (pure logic).</td></tr>
+     <tr><td>Machine Learning</td><td>Statistical models learning feature weights from data.</td><td>Medium (Manual feature engineering).</td><td>Moderate (Thousands of records).</td></tr>
+     <tr><td>Deep Learning</td><td>Deep Artificial Neural Networks with automated feature extraction.</td><td>Low (End-to-end representation learning).</td><td>Massive (Millions/Billions of records).</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <section>
+   <h3>1.6 Essential Components of AI Systems</h3>
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128209;</span><h5>Data Pipelines</h5><p>High-quality ingested data streams serving as ground truth.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128296;</span><h5>Mathematical Algorithms</h5><p>Optimization routines (SGD, Adam) minimizing loss functions.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#129302;</span><h5>Model Parameters</h5><p>Trained weights and biases representing learned knowledge.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9889;</span><h5>Hardware Accelerators</h5><p>High-throughput hardware (NVIDIA GPUs, Google TPUs, Quantum QPUs).</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128267;</span><h5>Sensors &amp; Actuators</h5><p>Transducers capturing physical metrics and executing actions.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#129302;</span><h5>Inference Engine</h5><p>Runtime execution layer serving predictions to users.</p></div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.7 The Complete End-to-End AI Development Lifecycle</h3>
+   <div class="step-flow">
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128209; Data Acquisition &amp; Collection</strong>Gathering heterogeneous data from databases, web scraping, IoT sensors, and public repositories.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#129529; Preprocessing &amp; Feature Engineering</strong>Cleansing noisy entries, imputing missing values, normalizing ranges, and selecting informative attributes.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#127947; Model Architecture Selection &amp; Training</strong>Selecting baseline algorithms (e.g., Random Forest vs Neural Nets) and optimizing loss metrics on training sets.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">4</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128203; Rigorous Testing &amp; Validation</strong>Evaluating model performance against holdout test datasets using Metrics like Precision, Recall, and F1-Score.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">5</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128640; Production Deployment (MLOps)</strong>Containerizing models using Docker/Kubernetes and deploying scalable microservices via REST or gRPC APIs.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">6</div><div class="step-connector"></div></div>
+     <div class="step-body"><strong>&#128202; Real-Time Inference &amp; Serving</strong>Generating predictions for live user queries with low-latency execution.</div>
+    </div>
+    <div class="step-item">
+     <div class="step-arrow"><div class="step-num">7</div></div>
+     <div class="step-body"><strong>&#128260; Continuous Monitoring &amp; Drift Adaptation</strong>Tracking concept drift, data drift, and accuracy decay to trigger automated retraining pipelines.</div>
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>1.8 Code Hands-On: Building Your First Rule-Based AI Engine</h3>
+   <p>To solidify your understanding, examine this Python implementation of a knowledge-driven decision system:</p>
+
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code><span class="code-cm"># Complete Expert System Implementation (Symbolic AI)</span>
+<span class="code-kw">class</span> <span class="code-fn">AIDiagnosticEngine</span>:
+    <span class="code-kw">def</span> <span class="code-fn">__init__</span>(self):
+        <span class="code-cm"># Knowledge Base containing decision rules</span>
+        self.knowledge_base = {
+            (<span class="code-str">"fever"</span>, <span class="code-str">"cough"</span>): <span class="code-str">"High probability of Viral Upper Respiratory Infection."</span>,
+            (<span class="code-str">"fever"</span>, <span class="code-str">"rash"</span>): <span class="code-str">"Possible Measles or allergic reaction. Consult specialist."</span>,
+            (<span class="code-str">"fatigue"</span>, <span class="code-str">"headache"</span>): <span class="code-str">"Mild dehydration or tension headache. Increase fluid intake."</span>
+        }
+
+    <span class="code-kw">def</span> <span class="code-fn">diagnose</span>(self, symptoms: list[str]) -> str:
+        symptom_key = tuple(sorted(symptoms))
+        <span class="code-kw">return</span> self.knowledge_base.get(
+            symptom_key, 
+            <span class="code-str">"Diagnosis inconclusive. Further clinical tests required."</span>
+        )
+
+<span class="code-cm"># Instantiate AI Engine</span>
+ai_doctor = <span class="code-fn">AIDiagnosticEngine</span>()
+patient_symptoms = [<span class="code-str">"cough"</span>, <span class="code-str">"fever"</span>]
+result = ai_doctor.<span class="code-fn">diagnose</span>(patient_symptoms)
+
+<span class="code-nb">print</span>(f<span class="code-str">"AI Diagnosis Output: {result}"</span>)
+<span class="code-cm"># Output: AI Diagnosis Output: High probability of Viral Upper Respiratory Infection.</span></code></pre>
+   </div>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 1 Summary &amp; Key Takeaways</h4>
+   <ul>
+    <li>AI is the umbrella discipline; Machine Learning and Deep Learning are specialized operational subsets.</li>
+    <li>Core AI pillars: Quality Data, Algorithms, Parameters, Compute Acceleration, and Sensors.</li>
+    <li>The AI Lifecycle requires continuous data engineering, training, deployment, and drift monitoring.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h2>
-   Chapter 3: Types of Artificial Intelligence
-  </h2>
-  <p>
-   AI can be classified in two major ways:
-  </p>
-  <ul>
-   <li>
-    Based on Capability
-   </li>
-   <li>
-    Based on Functionality
-   </li>
-  </ul>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 2 ==================== -->
+ <section id="ch2">
+  <span class="chapter-badge">Chapter 2</span>
+  <h2>History and Historical Evolution of AI</h2>
+
   <section>
-   <h3>
-    3.1 Based on Capability
-   </h3>
-   <dl>
-    <dt>
-     <h4>
-      Narrow AI (Weak AI)
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Designed for one specific task.
-     </p>
-     <p>
-      Examples:
-     </p>
-     <ul>
-      <li>
-       Siri
-      </li>
-      <li>
-       Alexa
-      </li>
-      <li>
-       Face Recognition
-      </li>
-      <li>
-       ChatGPT (current systems are specialized despite broad abilities)
-      </li>
-     </ul>
-     <p>
-      Advantages:
-     </p>
-     <ul>
-      <li>
-       Fast
-      </li>
-      <li>
-       Accurate
-      </li>
-      <li>
-       Practical
-      </li>
-     </ul>
-     <p>
-      Disadvantages:
-     </p>
-     <ul>
-      <li>
-       Cannot perform all human tasks.
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      General AI (AGI)
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Machine capable of performing any intellectual task that humans can perform.
-     </p>
-     <p>
-      Current Status:
-     </p>
-     <ul>
-      <li>
-       Not yet achieved.
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      Super AI
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Hypothetical.
-     </p>
-     <p>
-      Machine smarter than humans.
-     </p>
-     <p>
-      Exists only in theory.
-     </p>
-    </dd>
-   </dl>
+   <h3>2.1 Early Dreams &amp; Theoretical Foundations</h3>
+   <p>Long before microprocessors existed, philosophers, mathematicians, and inventors envisioned mechanical reasoning:</p>
+   <ul>
+    <li><strong>Ancient Mythologies:</strong> Greek myths of Talos (an bronze automaton protecting Crete).</li>
+    <li><strong>17th Century Calculators:</strong> Blaise Pascal and Gottfried Wilhelm Leibniz built mechanical calculators that executed arithmetic logic.</li>
+    <li><strong>19th Century Computing:</strong> Charles Babbage designed the Mechanical Analytical Engine, while Ada Lovelace authored the first algorithm, noting machines could manipulate non-numerical symbols.</li>
+   </ul>
   </section>
+
   <section>
-   <h3>
-    3.2 Based on Functionality
-   </h3>
-   <dl>
-    <dt>
-     <h4>
-      Reactive Machines
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      No memory.
-     </p>
-     <p>
-      Only reacts.
-     </p>
-     <p>
-      Example:
-     </p>
-     <ul>
-      <li>
-       IBM Deep Blue.
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      Limited Memory AI
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Uses previous information.
-     </p>
-     <p>
-      Examples:
-     </p>
-     <ul>
-      <li>
-       Self-driving cars
-      </li>
-      <li>
-       Recommendation systems
-      </li>
-     </ul>
-    </dd>
-    <dt>
-     <h4>
-      Theory of Mind AI
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Would understand:
-     </p>
-     <ul>
-      <li>
-       Emotions
-      </li>
-      <li>
-       Intentions
-      </li>
-      <li>
-       Beliefs
-      </li>
-     </ul>
-     <p>
-      Still under research.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Self-Aware AI
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Future concept.
-     </p>
-     <p>
-      Machine has consciousness.
-     </p>
-     <p>
-      Does not exist today.
-     </p>
-    </dd>
-   </dl>
-   <h4>
-    Comparison Table
-   </h4>
-   <!-- Table for comparison is at the end, will be included there. -->
+   <h3>2.2 The Birth of AI at the Dartmouth Workshop (1956)</h3>
+   <p>Modern Artificial Intelligence was formally established during the summer of <strong>1956</strong> at the historic <strong>Dartmouth Summer Research Project on Artificial Intelligence</strong> organized by four pioneers:</p>
+   <ul>
+    <li>&#127970; <strong>John McCarthy:</strong> Coined the term "Artificial Intelligence" and created the LISP programming language.</li>
+    <li>&#127970; <strong>Marvin Minsky:</strong> Co-founded MIT AI Lab and made seminal contributions to perceptual networks.</li>
+    <li>&#127970; <strong>Claude Shannon:</strong> Founder of Information Theory and digital circuit design theory.</li>
+    <li>&#127970; <strong>Allen Newell &amp; Herbert Simon:</strong> Created the Logic Theorist, proving mathematical theorems automatically.</li>
+   </ul>
   </section>
+
+  <section>
+   <h3>2.3 Chronological Timeline: The Breakthroughs &amp; AI Winters</h3>
+   <div class="timeline">
+    <div class="timeline-item">
+     <div class="timeline-year">1943</div>
+     <div class="timeline-content"><strong>First Artificial Neuron Model:</strong> Warren McCulloch and Walter Pitts proposed the threshold logic unit model for artificial neural networks.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1950</div>
+     <div class="timeline-content"><strong>The Turing Test &amp; Imitation Game:</strong> Alan Turing published "Computing Machinery and Intelligence," introducing the ultimate test for machine intelligence.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1956</div>
+     <div class="timeline-content"><strong>Formal Birth of AI:</strong> The Dartmouth Workshop defined AI as an independent academic research domain.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1966</div>
+     <div class="timeline-content"><strong>ELIZA Chatbot:</strong> Joseph Weizenbaum created ELIZA, simulating a Rogerian psychotherapist via pattern matching.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1974&ndash;1980</div>
+     <div class="timeline-content"><strong>First AI Winter &#10052;:</strong> Severe cuts in DARPA funding following the Lighthill Report due to unfulfilled claims and hardware limits.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1980s</div>
+     <div class="timeline-content"><strong>Expert Systems Commercial Era:</strong> Commercial adoption of rule-based systems (e.g., XCON) and resurgence of Backpropagation training for Neural Networks.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1987&ndash;1993</div>
+     <div class="timeline-content"><strong>Second AI Winter &#10052;:</strong> Collapse of specialized LISP machine hardware vendors as desktop PCs surpassed specialized workstations.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">1997</div>
+     <div class="timeline-content"><strong>IBM Deep Blue Victory:</strong> Deep Blue defeated World Chess Champion Garry Kasparov using custom hardware and alpha-beta search.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">2012</div>
+     <div class="timeline-content"><strong>Deep Learning Era (AlexNet):</strong> Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton won ImageNet using GPUs, launching modern Deep Learning.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">2016</div>
+     <div class="timeline-content"><strong>AlphaGo Triumph:</strong> Google DeepMind's AlphaGo defeated 18-time world champion Lee Sedol in the game of Go using Deep Q-Learning &amp; MCTS.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">2017</div>
+     <div class="timeline-content"><strong>Transformer Architecture Introduced:</strong> Google researchers published "Attention Is All You Need," laying the foundation for modern LLMs.</div>
+    </div>
+    <div class="timeline-item">
+     <div class="timeline-year">2022&ndash;Present</div>
+     <div class="timeline-content"><strong>Generative AI &amp; LLM Explosion:</strong> Launch of ChatGPT, GPT-4, Gemini, Claude, and open-weight models (Llama, Mistral).</div>
+    </div>
+   </div>
+  </section>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 2 Key Takeaways</h4>
+   <ul>
+    <li>AI was officially founded in 1956 at the Dartmouth Workshop.</li>
+    <li>The field experienced two major funding collapses ("AI Winters") due to hardware bottlenecks and overhyped promises.</li>
+    <li>The 2012 Deep Learning breakthrough powered by GPU hardware transformed AI from rule-based systems into data-driven learning models.</li>
+   </ul>
+  </div>
  </section>
- <section>
-  <h2>
-   Chapter 4: AI Applications
-  </h2>
-  <p>
-   AI is transforming nearly every industry.
-  </p>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 3 ==================== -->
+ <section id="ch3">
+  <span class="chapter-badge">Chapter 3</span>
+  <h2>Taxonomy &amp; Classification of AI Systems</h2>
+
   <section>
-   <h3>
-    4.1 Healthcare
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Disease prediction
-    </li>
-    <li>
-     Cancer detection
-    </li>
-    <li>
-     Drug discovery
-    </li>
-    <li>
-     Medical imaging
-    </li>
-    <li>
-     Robot surgery
-    </li>
-    <li>
-     Virtual assistants
-    </li>
-   </ul>
-   <p>
-    Example:
-   </p>
-   <p>
-    AI detects tumors in X-rays.
-   </p>
+   <h3>3.1 Classification by Capability Level</h3>
+   <div class="info-cards">
+    <div class="info-card">
+     <span class="info-card-icon">&#128270;</span>
+     <h5>Narrow AI (Weak AI)</h5>
+     <p>Optimized for a highly specialized singular task. Incapable of operating outside its programmed domain.</p>
+     <div class="example">Examples: Siri, AlphaGo, Spam Filters, Medical Imaging Models</div>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#129504;</span>
+     <h5>General AI (AGI)</h5>
+     <p>Hypothetical system possessing human-level cognitive flexibility across all intellectual domains.</p>
+     <div class="example">Status: Active research milestone (Not achieved yet)</div>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#129302;</span>
+     <h5>Artificial Superintelligence (ASI)</h5>
+     <p>Hypothetical future state where machine intelligence surpasses cumulative human intellect across all fields.</p>
+     <div class="example">Status: Theoretical &amp; speculative concept</div>
+    </div>
+   </div>
+
+   <div class="callout callout-warning">
+    <span class="callout-icon">&#9888;&#65039;</span>
+    <div>
+     <strong>Crucial Technical Reality Check</strong>
+     All existing state-of-the-art models (including GPT-4, Gemini, and Claude) remain classified as <strong>Narrow AI</strong> systems because their underlying mechanism relies on statistical pattern prediction rather than true independent conscious understanding.
+    </div>
+   </div>
   </section>
+
   <section>
-   <h3>
-    4.2 Education
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Personalized learning
-    </li>
-    <li>
-     Automated grading
-    </li>
-    <li>
-     AI tutors
-    </li>
-    <li>
-     Question generation
-    </li>
-    <li>
-     Language translation
-    </li>
-   </ul>
+   <h3>3.2 Classification by Functional Architecture</h3>
+   <table class="comparison-table">
+    <caption>Functional Classification Matrix</caption>
+    <thead><tr><th>Category</th><th>Memory State</th><th>Learning Ability</th><th>Commercial Existence</th><th>Real-World Example</th></tr></thead>
+    <tbody>
+     <tr><td>Reactive Machines</td><td class="badge-no">No Memory</td><td class="badge-no">Static Logic</td><td class="badge-yes">Operational</td><td>IBM Deep Blue, Basic Thermostats</td></tr>
+     <tr><td>Limited Memory Systems</td><td class="badge-yes">Transient Memory</td><td class="badge-yes">Dynamic Retraining</td><td class="badge-yes">Operational</td><td>Self-Driving Cars, LLM Context Windows</td></tr>
+     <tr><td>Theory of Mind AI</td><td>Social &amp; Emotional Memory</td><td>Interpersonal Adaptation</td><td class="badge-future">Research Phase</td><td>Social Companion Robotics Experiments</td></tr>
+     <tr><td>Self-Aware AI</td><td>Conscious Self-State</td><td>Autonomous Will</td><td class="badge-no">Theoretical</td><td>Science Fiction Concept</td></tr>
+    </tbody>
+   </table>
   </section>
-  <section>
-   <h3>
-    4.3 Finance
-   </h3>
-   <p>
-    Applications:
-   </p>
+
+  <div class="key-takeaway">
+   <h4>&#129504; Chapter 3 Key Takeaways</h4>
    <ul>
-    <li>
-     Fraud detection
-    </li>
-    <li>
-     Stock prediction
-    </li>
-    <li>
-     Credit scoring
-    </li>
-    <li>
-     Loan approval
-    </li>
-    <li>
-     Risk analysis
-    </li>
+    <li>AI systems are categorized by Capability (Narrow, AGI, ASI) and Functionality (Reactive, Limited Memory, Theory of Mind, Self-Aware).</li>
+    <li>Today's entire global AI ecosystem consists exclusively of Narrow, Limited-Memory AI architectures.</li>
    </ul>
-  </section>
-  <section>
-   <h3>
-    4.4 Agriculture
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Smart irrigation
-    </li>
-    <li>
-     Pest detection
-    </li>
-    <li>
-     Crop disease prediction
-    </li>
-    <li>
-     Yield prediction
-    </li>
-    <li>
-     Precision farming
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.5 Transportation
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Autonomous vehicles
-    </li>
-    <li>
-     Route optimization
-    </li>
-    <li>
-     Traffic prediction
-    </li>
-    <li>
-     Fleet management
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.6 Manufacturing
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Industrial robots
-    </li>
-    <li>
-     Predictive maintenance
-    </li>
-    <li>
-     Quality inspection
-    </li>
-    <li>
-     Supply chain optimization
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.7 Retail &amp; E-commerce
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Recommendation systems
-    </li>
-    <li>
-     Dynamic pricing
-    </li>
-    <li>
-     Customer support chatbots
-    </li>
-    <li>
-     Inventory management
-    </li>
-   </ul>
-   <p>
-    Examples:
-   </p>
-   <ul>
-    <li>
-     Amazon recommendations
-    </li>
-    <li>
-     Flipkart suggestions
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.8 Entertainment
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Movie recommendations
-    </li>
-    <li>
-     Music recommendations
-    </li>
-    <li>
-     AI-generated art
-    </li>
-    <li>
-     Video generation
-    </li>
-    <li>
-     Gaming AI
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.9 Cybersecurity
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Intrusion detection
-    </li>
-    <li>
-     Malware analysis
-    </li>
-    <li>
-     Spam filtering
-    </li>
-    <li>
-     Threat detection
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.10 Space Exploration
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Mars rovers
-    </li>
-    <li>
-     Satellite image analysis
-    </li>
-    <li>
-     Autonomous spacecraft
-    </li>
-    <li>
-     Astronomy research
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.11 Smart Cities
-   </h3>
-   <p>
-    Applications:
-   </p>
-   <ul>
-    <li>
-     Smart traffic lights
-    </li>
-    <li>
-     Waste management
-    </li>
-    <li>
-     Water management
-    </li>
-    <li>
-     Smart surveillance
-    </li>
-    <li>
-     Energy optimization
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    4.12 Everyday AI
-   </h3>
-   <p>
-    Examples:
-   </p>
-   <ul>
-    <li>
-     Google Maps
-    </li>
-    <li>
-     Gmail spam filter
-    </li>
-    <li>
-     Face Unlock
-    </li>
-    <li>
-     YouTube recommendations
-    </li>
-    <li>
-     Voice assistants
-    </li>
-    <li>
-     ChatGPT
-    </li>
-    <li>
-     Translation tools
-    </li>
-   </ul>
-  </section>
+  </div>
  </section>
- <section>
-  <h2>
-   Chapter 5: Future of Artificial Intelligence
-  </h2>
-  <section>
-   <h3>
-    5.1 Future Trends
-   </h3>
-   <p>
-    The next decade of AI is expected to include:
-   </p>
-   <ul>
-    <li>
-     More powerful Large Language Models
-    </li>
-    <li>
-     Better robotics
-    </li>
-    <li>
-     Autonomous transportation
-    </li>
-    <li>
-     AI-assisted scientific discovery
-    </li>
-    <li>
-     AI in personalized medicine
-    </li>
-    <li>
-     Human-AI collaboration
-    </li>
-    <li>
-     AI-powered education
-    </li>
-    <li>
-     Edge AI (AI running on local devices)
-    </li>
-    <li>
-     Multimodal AI (text, image, audio, video together)
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    5.2 Artificial General Intelligence (AGI)
-   </h3>
-   <p>
-    Researchers aim to develop AI that can:
-   </p>
-   <ul>
-    <li>
-     Learn any task
-    </li>
-    <li>
-     Adapt like humans
-    </li>
-    <li>
-     Solve unfamiliar problems
-    </li>
-    <li>
-     Transfer knowledge across domains
-    </li>
-   </ul>
-   <p>
-    Challenges include safety, reliability, and alignment with human values.
-   </p>
-  </section>
-  <section>
-   <h3>
-    5.3 AI in Quantum Computing
-   </h3>
-   <p>
-    Quantum AI combines:
-   </p>
-   <ul>
-    <li>
-     Quantum Computing
-    </li>
-    <li>
-     Machine Learning
-    </li>
-    <li>
-     Optimization
-    </li>
-   </ul>
-   <p>
-    Potential applications:
-   </p>
-   <ul>
-    <li>
-     Faster drug discovery
-    </li>
-    <li>
-     Financial optimization
-    </li>
-    <li>
-     Climate modeling
-    </li>
-    <li>
-     Cryptography
-    </li>
-    <li>
-     Quantum Machine Learning (QML)
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    5.4 Ethical Issues
-   </h3>
-   <p>
-    Important concerns include:
-   </p>
-   <dl>
-    <dt>
-     <h4>
-      Bias
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      AI may inherit biases from training data.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Privacy
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      AI systems require large amounts of personal data.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Transparency
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Some AI models are difficult to interpret ("black boxes").
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Job Displacement
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Automation may replace certain repetitive jobs while creating new roles.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Security
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      AI can be misused for cyberattacks, misinformation, or deepfakes.
-     </p>
-    </dd>
-    <dt>
-     <h4>
-      Accountability
-     </h4>
-    </dt>
-    <dd>
-     <p>
-      Who is responsible when an AI system causes harm?
-     </p>
-    </dd>
-   </dl>
-  </section>
-  <section>
-   <h3>
-    5.5 Responsible AI Principles
-   </h3>
-   <ul>
-    <li>
-     Fairness
-    </li>
-    <li>
-     Transparency
-    </li>
-    <li>
-     Accountability
-    </li>
-    <li>
-     Privacy
-    </li>
-    <li>
-     Security
-    </li>
-    <li>
-     Reliability
-    </li>
-    <li>
-     Human oversight
-    </li>
-    <li>
-     Sustainability
-    </li>
-   </ul>
-  </section>
-  <section>
-   <h3>
-    5.6 Opportunities and Challenges
-   </h3>
-   <!-- Table for comparison is at the end, will be included there. -->
-  </section>
- </section>
- <section>
-  <h2>
-   Module 1 Summary
-  </h2>
-  <p>
-   By completing this module, you should understand:
-  </p>
-  <ul>
-   <li>
-    What Artificial Intelligence is and how it differs from Machine Learning and Deep Learning.
-   </li>
-   <li>
-    The historical evolution of AI, from early concepts to modern Generative AI.
-   </li>
-   <li>
-    The major types of AI based on capability and functionality.
-   </li>
-   <li>
-    Real-world AI applications across healthcare, education, finance, agriculture, transportation, manufacturing, cybersecurity, entertainment, and smart cities.
-   </li>
-   <li>
-    Emerging trends such as AGI, Quantum AI, Edge AI, and Multimodal AI.
-   </li>
-   <li>
-    The ethical, social, and technical challenges associated with AI, along with the principles of Responsible AI.
-   </li>
-  </ul>
-  <p>
-   This chapter-wise guide provides a solid foundation for further study in advanced topics such as Machine Learning, Deep Learning, Natural Language Processing (NLP), Computer Vision, Reinforcement Learning, and Generative AI.
-  </p>
- </section>
- <section>
-  <h2>
-   Tables
-  </h2>
-  <table>
-   <caption>
-    Human Intelligence vs Artificial Intelligence
-   </caption>
-   <thead>
-    <tr>
-     <th>
-      Human Intelligence
-     </th>
-     <th>
-      Artificial Intelligence
-     </th>
-    </tr>
-   </thead>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 4 ==================== -->
+ <section id="ch4">
+  <span class="chapter-badge">Chapter 4</span>
+  <h2>Real-World Industry Applications of AI</h2>
+
+  <table class="comparison-table">
+   <caption>Cross-Sector Industrial AI Implementations</caption>
+   <thead><tr><th>Sector</th><th>Core AI Use Cases</th><th>Primary Models &amp; Technologies Used</th></tr></thead>
    <tbody>
-    <tr>
-     <td>
-      Learns naturally
-     </td>
-     <td>
-      Learns from data
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Has emotions
-     </td>
-     <td>
-      No emotions
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Creative
-     </td>
-     <td>
-      Limited creativity (except Generative AI)
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Can understand context
-     </td>
-     <td>
-      Needs training
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Makes intuitive decisions
-     </td>
-     <td>
-      Uses algorithms
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Can adapt easily
-     </td>
-     <td>
-      Needs retraining
-     </td>
-    </tr>
-   </tbody>
-  </table>
-  <table>
-   <caption>
-    AI Types by Functionality Comparison
-   </caption>
-   <thead>
-    <tr>
-     <th>
-      Type
-     </th>
-     <th>
-      Memory
-     </th>
-     <th>
-      Learning
-     </th>
-     <th>
-      Exists
-     </th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr>
-     <td>
-      Reactive
-     </td>
-     <td>
-      No
-     </td>
-     <td>
-      No
-     </td>
-     <td>
-      Yes
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Limited Memory
-     </td>
-     <td>
-      Yes
-     </td>
-     <td>
-      Yes
-     </td>
-     <td>
-      Yes
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Theory of Mind
-     </td>
-     <td>
-      Yes
-     </td>
-     <td>
-      Advanced
-     </td>
-     <td>
-      No
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Self-Aware
-     </td>
-     <td>
-      Full
-     </td>
-     <td>
-      Human-level
-     </td>
-     <td>
-      No
-     </td>
-    </tr>
-   </tbody>
-  </table>
-  <table>
-   <caption>
-    Opportunities and Challenges of AI
-   </caption>
-   <thead>
-    <tr>
-     <th>
-      Opportunities
-     </th>
-     <th>
-      Challenges
-     </th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr>
-     <td>
-      Faster healthcare
-     </td>
-     <td>
-      Data privacy
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Better education
-     </td>
-     <td>
-      Bias
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Scientific discoveries
-     </td>
-     <td>
-      Ethical concerns
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Smarter cities
-     </td>
-     <td>
-      Security threats
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Automation
-     </td>
-     <td>
-      Job displacement
-     </td>
-    </tr>
-    <tr>
-     <td>
-      Personalized services
-     </td>
-     <td>
-      Regulatory issues
-     </td>
-    </tr>
+    <tr><td>&#127973; Healthcare</td><td>Oncology screening, drug molecular docking, genomic sequence alignment.</td><td>CNNs, Vision Transformers, AlphaFold</td></tr>
+    <tr><td>&#128184; Financial Services</td><td>Real-time algorithmic trading, credit default scoring, anti-money laundering (AML).</td><td>Gradient Boosted Trees, LSTMs, Graph Neural Nets</td></tr>
+    <tr><td>&#128664; Transportation</td><td>Autonomous vehicle perception, path planning, predictive maintenance of aircraft.</td><td>Computer Vision, Reinforcement Learning, Sensor Fusion</td></tr>
+    <tr><td>&#127807; Agriculture</td><td>Satellite crop yield prediction, precision drone spraying, soil analysis.</td><td>Multispectral Image CNNs, Edge AI Processors</td></tr>
+    <tr><td>&#128274; Cybersecurity</td><td>Automated zero-day exploit detection, SIEM log anomaly identification.</td><td>Unsupervised Autoencoders, Isolation Forests</td></tr>
+    <tr><td>&#127918; Entertainment</td><td>Hyper-personalized media feeds, real-time procedural game asset generation.</td><td>Collaborative Filtering, Diffusion Models, LLMs</td></tr>
    </tbody>
   </table>
  </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 5 ==================== -->
+ <section id="ch5">
+  <span class="chapter-badge">Chapter 5</span>
+  <h2>The Next Frontier: Quantum AI &amp; Responsible AI</h2>
+
+  <section>
+   <h3>5.1 The Fusion of Quantum Computing &amp; Machine Learning (QML)</h3>
+   <p>As classical silicon hardware approaches physical atomic limits (Moore's Law slowdown), <strong>Quantum Machine Learning (QML)</strong> emerges as the ultimate acceleration paradigm.</p>
+
+   <div class="info-cards">
+    <div class="info-card"><span class="info-card-icon">&#128138;</span><h5>Quantum Molecular Simulation</h5><p>Simulating complex chemical reactions in seconds for instant drug discovery.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#128184;</span><h5>Exponential Optimization</h5><p>Solving NP-hard global supply chain and portfolio optimization problems.</p></div>
+    <div class="info-card"><span class="info-card-icon">&#9881;&#65039;</span><h5>Quantum State Vector Learning</h5><p>Encoding exponentially vast feature spaces into N qubits (2<sup>N</sup> Hilbert space).</p></div>
+   </div>
+
+   <div class="callout callout-tip">
+    <span class="callout-icon">&#127775;</span>
+    <div>
+     <strong>Why You Are Learning Cuántica Platform</strong>
+     This study platform is purposefully constructed to guide you from foundational classical AI into the groundbreaking domain of <strong>Quantum Machine Learning (QML)</strong>!
+    </div>
+   </div>
+  </section>
+
+  <section>
+   <h3>5.2 Ethical AI &amp; Responsible AI Governance</h3>
+   <p>Deploying powerful AI systems requires strict compliance with Responsible AI principles:</p>
+   <ul>
+    <li>&#9878; <strong>Algorithmic Fairness:</strong> Eliminating demographic and historical data biases.</li>
+    <li>&#128301; <strong>Explainability (XAI):</strong> Ensuring complex model decisions can be audited and understood by humans.</li>
+    <li>&#128274; <strong>Data Privacy:</strong> Protecting user data using techniques like Differential Privacy and Federated Learning.</li>
+    <li>&#128203; <strong>Accountability &amp; Governance:</strong> Establishing clear legal responsibility for automated outcomes.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== SUMMARY ==================== -->
+ <section id="summary">
+  <span class="chapter-badge">Module Summary</span>
+  <h2>Module 1 Complete Summary</h2>
+  
+  <div class="key-takeaway">
+   <h4>&#129504; Comprehensive Module 1 Mastery Points</h4>
+   <ul>
+    <li>Artificial Intelligence is the overarching scientific discipline focused on creating autonomous, intelligent systems.</li>
+    <li>Machine Learning and Deep Learning are specialized nested subsets of AI relying on statistical learning and multi-layer neural networks.</li>
+    <li>AI evolution spans from early symbolic logic (1956) through hardware-induced AI Winters to the modern Deep Learning (2012) and Generative AI (2022) revolutions.</li>
+    <li>Current commercial deployment consists entirely of Narrow, Limited-Memory AI systems.</li>
+    <li>Quantum Machine Learning (QML) represents the future frontier of computing, combining quantum Hilbert spaces with Machine Learning.</li>
+   </ul>
+  </div>
+
+  <div class="callout callout-info">
+   <span class="callout-icon">&#128218;</span>
+   <div>
+    <strong>Congratulations on Completing Module 1!</strong>
+    You have mastered the foundational concepts of Artificial Intelligence. You are now fully prepared to advance to Module 2 to explore <em>Why Machine Learning?</em>
+   </div>
+  </div>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== QUIZ ==================== -->
+ <section id="quiz">
+  <div class="quiz-section">
+   <h3>&#9989; Practice Knowledge Verification &mdash; Module 1</h3>
+   <ol class="quiz-list">
+    <li>Define Artificial Intelligence in your own words and explain how it differs from traditional deterministic programming.</li>
+    <li>Draw and explain the nested relationship between Artificial Intelligence, Machine Learning, and Deep Learning.</li>
+    <li>What was the Dartmouth Workshop of 1956, and why is it considered the founding moment of AI?</li>
+    <li>What were the "AI Winters," what factors caused them, and how did modern GPU computing help resolve them?</li>
+    <li>Explain the distinction between Narrow AI (Weak AI) and General AI (AGI). Which type powers current systems like ChatGPT?</li>
+    <li>List the 7 stages of the end-to-end AI Development Lifecycle. Why is drift monitoring essential after deployment?</li>
+    <li>What is Quantum Machine Learning (QML), and what mathematical advantage does it offer over classical neural networks?</li>
+    <li>Explain the concept of Explainable AI (XAI) and why black-box models pose risks in healthcare and finance.</li>
+    <li>Describe three major ethical challenges associated with modern AI deployment and how Responsible AI principles address them.</li>
+    <li>Write a basic Python function demonstrating symbolic, rule-based decision logic.</li>
+   </ol>
+  </div>
+ </section>
+
+ <!-- NEXT MODULE NAVIGATION BANNER AT THE ABSOLUTE END -->
+ <div class="next-module-banner">
+  <h3>Ready for the Next Step?</h3>
+  <p>You have completed Module 1! Continue your journey into Machine Learning fundamentals and algorithms.</p>
+  <a href="/course/content?id=why-machine-learning" class="next-module-btn" id="nextModuleBtn">
+   <span>Proceed to Module 2: Why Machine Learning?</span>
+   <span class="arrow">&rarr;</span>
+  </a>
+ </div>
+
 </main>

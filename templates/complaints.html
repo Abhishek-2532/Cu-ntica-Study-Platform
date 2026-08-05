@@ -1669,7 +1669,7 @@ a:focus-visible {
                 <div class="logo-mark" style="background: transparent;">
                     <img src="/static/Logo/Main_Logo.png" alt="Cuántica Logo" style="width: 100%; height: 100%; object-fit: contain;" />
                 </div>
-                <span class="logo-text">Quantum ML</span>
+                <span class="logo-text"> Cuántica </span>
             </a>
 
             <div class="panel-hero">
@@ -1882,7 +1882,17 @@ a:focus-visible {
 
             </form>
 
-            <div id="message"></div>
+            <div id="message" style="margin-top: 15px; display: none;"></div>
+
+            <!-- My Complaints History -->
+            <div style="margin-top: 40px; border-top: 1px solid #DCEEF2; padding-top: 24px;">
+                <h3 style="font-family: 'Sora', sans-serif; font-size: 1.15rem; color: #1E293B; margin-bottom: 16px;">
+                    <i class="fa-solid fa-list-check" style="color: #1FA880; margin-right: 8px;"></i> My Submitted Complaints
+                </h3>
+                <div id="myComplaintsList">
+                    <p style="color: #64748B; font-size: 0.9rem;">Loading your complaints...</p>
+                </div>
+            </div>
 
         </div>
 
@@ -1890,100 +1900,120 @@ a:focus-visible {
 
 </div>
 
-</body>
-
 <script>
+const token = JSON.parse(localStorage.getItem("token"));
 
-const token=JSON.parse(localStorage.getItem("token"));
-
-if(!token){
-
-window.location="/login";
-
+if (!token) {
+    window.location = "/login";
 }
 
-document.getElementById("name").value=token.full_name;
+document.getElementById("name").value = token.full_name || "";
+document.getElementById("email").value = token.email || "";
 
-document.getElementById("email").value=token.email;
+function loadUserComplaints() {
+    const listEl = document.getElementById("myComplaintsList");
+    fetch("/api/complaints/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: token.id })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success || !data.complaints || data.complaints.length === 0) {
+            listEl.innerHTML = '<p style="color: #64748B; font-size: 0.9rem; font-style: italic;">No complaints submitted yet.</p>';
+            return;
+        }
 
-document.getElementById("complaintForm").addEventListener("submit",function(e){
+        let html = '';
+        data.complaints.forEach(c => {
+            const dateStr = new Date(c.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            const statusColor = c.status === 'Resolved' ? '#10B981' : (c.status === 'In Progress' ? '#3B82F6' : '#F59E0B');
+            
+            html += `
+                <div style="background: #F7FEFF; border: 1px solid #DCEEF2; border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <strong style="color: #1E293B; font-size: 0.98rem;">${c.title}</strong>
+                        <span style="background: ${statusColor}15; color: ${statusColor}; border: 1px solid ${statusColor}40; padding: 2px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;">
+                            ${c.status}
+                        </span>
+                    </div>
+                    <p style="color: #475569; font-size: 0.88rem; margin-bottom: 8px;">${c.description}</p>
+                    <div style="display: flex; gap: 16px; color: #94A3B8; font-size: 0.78rem;">
+                        <span><i class="fa-solid fa-folder"></i> ${c.category}</span>
+                        <span><i class="fa-solid fa-flag"></i> ${c.priority} Priority</span>
+                        <span><i class="fa-regular fa-clock"></i> ${dateStr}</span>
+                    </div>
+                </div>
+            `;
+        });
+        listEl.innerHTML = html;
+    })
+    .catch(err => {
+        console.error("Failed to load complaints:", err);
+        listEl.innerHTML = '<p style="color: #E11D48; font-size: 0.88rem;">Unable to load complaints history.</p>';
+    });
+}
 
-e.preventDefault();
+// Load existing complaints on load
+loadUserComplaints();
 
-const complaint={
+document.getElementById("complaintForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-user_id:token.id,
+    const category = document.getElementById("category").value;
+    const priority = document.getElementById("priority").value;
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
 
-name:token.full_name,
+    const msg = document.getElementById("message");
+    msg.style.display = "none";
 
-email:token.email,
+    if (!category || !title || !description) {
+        msg.style.display = "block";
+        msg.style.color = "#E11D48";
+        msg.innerHTML = "Please fill in Category, Title, and Description.";
+        return;
+    }
 
-category:document.getElementById("category").value,
+    const complaint = {
+        user_id: token.id,
+        name: token.full_name,
+        email: token.email,
+        category: category,
+        priority: priority,
+        title: title,
+        description: description
+    };
 
-priority:document.getElementById("priority").value,
-
-title:document.getElementById("title").value,
-
-description:document.getElementById("description").value,
-
-status:"Pending",
-
-created_at:new Date().toISOString()
-
-};
-
-fetch("/api/complaints/create",{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify(complaint)
-
-})
-
-.then(res=>res.json())
-
-.then(data=>{
-
-const msg=document.getElementById("message");
-
-msg.style.display="block";
-
-msg.className="success";
-
-msg.innerHTML=data.message || "Complaint submitted successfully.";
-
-document.getElementById("complaintForm").reset();
-
-document.getElementById("name").value=token.full_name;
-
-document.getElementById("email").value=token.email;
-
-})
-
-.catch(()=>{
-
-const msg=document.getElementById("message");
-
-msg.style.display="block";
-
-msg.className="error";
-
-msg.innerHTML="Backend not available. Fake request sent successfully for testing.";
-
-console.log(complaint);
-
+    fetch("/api/complaints/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(complaint)
+    })
+    .then(res => res.json())
+    .then(data => {
+        msg.style.display = "block";
+        if (data.success) {
+            msg.style.color = "#10B981";
+            msg.style.fontWeight = "600";
+            msg.innerHTML = "✓ " + (data.message || "Complaint submitted successfully.");
+            document.getElementById("complaintForm").reset();
+            document.getElementById("name").value = token.full_name || "";
+            document.getElementById("email").value = token.email || "";
+            // Reload user complaints list
+            loadUserComplaints();
+        } else {
+            msg.style.color = "#E11D48";
+            msg.innerHTML = "✕ " + (data.message || "Failed to submit complaint.");
+        }
+    })
+    .catch(err => {
+        msg.style.display = "block";
+        msg.style.color = "#E11D48";
+        msg.innerHTML = "✕ Connection error. Please try again.";
+        console.error(err);
+    });
 });
-
-});
-
 </script>
-
 </body>
-
 </html>

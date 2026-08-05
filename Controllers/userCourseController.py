@@ -68,7 +68,7 @@ def update_course_progress():
     # the model raises bson.errors.InvalidId — previously unhandled.
     try:
 
-        success, message = UserCourseModel.update_course_progress(
+        success, message, rewards = UserCourseModel.update_course_progress(
             user_id,
             course_id,
             progress,
@@ -88,6 +88,8 @@ def update_course_progress():
     return jsonify({
 
         "success": success,
-        "message": message
+        "message": message,
+        "rewards": rewards if success else {}
 
-    })
+    })
+

@@ -13,6 +13,8 @@
 
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
   <style>
     /* =============================================================
@@ -2179,12 +2181,13 @@ h1, h2, h3, h4, h5, h6 {
     <footer class="db-footer">
       <div class="db-container">
         <div class="db-footer-inner">
-          <span class="db-footer-copy">&copy; 2025 Cuántica. All rights reserved.</span>
+          <span class="db-footer-copy">&copy; 2026 Cuántica. All rights reserved.</span>
           <div class="db-footer-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Support</a>
+            <a href="/courses">Courses</a>
+            <a href="/complaints">Support</a>
+            <a href="/profile">Profile</a>
           </div>
+
         </div>
       </div>
     </footer>
@@ -2258,7 +2261,7 @@ function logout() {
 }
 
 /* ============================================================
-   ORIGINAL DOM POPULATION — UNTOUCHED
+   ORIGINAL DOM POPULATION — NOW WITH LIVE API FETCH
 ============================================================= */
 function populateDashboard() {
   // Profile image (all three instances)
@@ -2277,19 +2280,68 @@ function populateDashboard() {
   document.getElementById("dropdownName").textContent  = token.full_name  || "";
   document.getElementById("dropdownEmail").textContent = token.email       || "";
 
-  // Stat cards
-  document.getElementById("xp").innerHTML       = token.xp;
-  document.getElementById("coins").innerHTML    = token.coins;
+  // Stat cards — set initial from token (will be overwritten by live fetch)
+  document.getElementById("xp").innerHTML       = token.xp || 0;
+  document.getElementById("coins").innerHTML    = token.coins || 0;
   document.getElementById("learning").innerHTML = token.learning_level;
   document.getElementById("userRole").innerHTML = token.role;
+}
+
+/* ============================================================
+   FETCH LIVE STATS — updates XP, Coins from server
+============================================================= */
+function fetchLiveStats() {
+  fetch("/api/profile/get", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: token.id, email: token.email })
+  })
+  .then(function (res) { return res.json(); })
+  .then(function (data) {
+    if (data.success && data.profile) {
+      var p = data.profile;
+
+      // Update token in localStorage with fresh data
+      token.xp = p.xp || 0;
+      token.coins = p.coins || 0;
+      token.badges = p.badges || [];
+      token.certificates = p.certificates || [];
+      localStorage.setItem("token", JSON.stringify(token));
+
+      // Update stat cards with live values
+      document.getElementById("xp").innerHTML    = p.xp || 0;
+      document.getElementById("coins").innerHTML = p.coins || 0;
+
+      // Re-animate counters with fresh values
+      animateStatCard("xp",    p.xp || 0);
+      animateStatCard("coins", p.coins || 0);
+
+      // Re-init progress bar with fresh XP
+      var fill = document.getElementById("progressFill");
+      var pct  = document.getElementById("progressPct");
+      if (fill) {
+        var xpVal = parseInt(p.xp) || 0;
+        var percent = Math.min(100, Math.round(xpVal / 10));
+        fill.style.width = percent + "%";
+        fill.parentElement.setAttribute("aria-valuenow", percent);
+        if (pct) pct.textContent = percent + "%";
+      }
+    }
+  })
+  .catch(function (err) {
+    console.warn("[Cuántica] Live stats fetch failed:", err);
+  });
 }
 
 /* ============================================================
    BOOT — show dashboard, hide loader
 ============================================================= */
 (function boot() {
-  // Populate data first
+  // Populate data first (from localStorage as fallback)
   try { populateDashboard(); } catch (e) { /* safe */ }
+
+  // Fetch live stats from server
+  fetchLiveStats();
 
   // Fade out loader then show dashboard
   const loader    = document.getElementById("loader");
@@ -2318,6 +2370,7 @@ function populateDashboard() {
     initStatCounters();
   });
 })();
+
 
 /* ============================================================
    1. NAVBAR SCROLL SHADOW
@@ -2740,31 +2793,29 @@ async function loadCompletedCourses(){
 
         data.completed_courses.forEach(course=>{
 
+            const safeTitle = (course.title || "Quantum Course").replace(/'/g, "\\'");
+            const safeCourseId = course.course_id || "";
+
             container.innerHTML+=`
 
-            <div class="db-next-item">
+            <div class="db-next-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;">
 
-                <div class="db-next-thumb">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="db-next-thumb" style="width: 38px; height: 38px; background: #E0FAF4; color: #1FA880; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
 
-                    <i class="fa-solid fa-circle-check"></i>
-
+                    <div class="db-next-info">
+                        <strong style="color: #1E293B; font-size: 0.95rem;">${course.title}</strong>
+                        <small style="color: #64748B; display: block;">
+                            ${(course.description || "").split(" ").slice(0,8).join(" ")}...
+                        </small>
+                    </div>
                 </div>
 
-                <div class="db-next-info">
-
-                    <strong>${course.title}</strong>
-
-                   <small>
-    ${course.description.split(" ").slice(0,8).join(" ")}...
-</small>
-
-                </div>
-
-                <span class="db-next-badge">
-
-                    Completed
-
-                </span>
+                <button class="db-next-badge" onclick="downloadDashboardCertificate('${safeTitle}', '${safeCourseId}')" style="background: #1FA880; color: #FFFFFF; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(31,168,128,0.25);">
+                    <i class="fa-solid fa-file-arrow-down"></i> Certificate PDF
+                </button>
 
             </div>
 
@@ -2782,8 +2833,88 @@ async function loadCompletedCourses(){
 
 }
 
+function downloadDashboardCertificate(courseTitle, courseId) {
+    var userToken = JSON.parse(localStorage.getItem("token")) || {};
+    var studentName = userToken.full_name || "Quantum Learner";
+    generateQuanticaCertificatePDF(studentName, courseTitle, new Date().toISOString(), courseId);
+}
+
+function generateQuanticaCertificatePDF(studentName, courseTitle, issueDate, certId) {
+  var certContainer = document.createElement("div");
+  certContainer.style.cssText = "position: absolute; left: 0; top: 0; width: 1000px; height: 700px; background: #FFFFFF; color: #1E293B; font-family: 'Sora', 'Inter', sans-serif; box-sizing: border-box; padding: 30px; z-index: -9999; opacity: 1;";
+
+  var dateStr = issueDate ? new Date(issueDate).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) : new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+  var serialId = certId ? "CERT-QU-" + String(certId).slice(-6).toUpperCase() : "CERT-QU-" + Math.floor(100000 + Math.random() * 900000);
+
+  certContainer.innerHTML = `
+    <div style="width: 100%; height: 100%; border: 10px solid #1FA880; outline: 3px solid #6CE5BF; outline-offset: -6px; border-radius: 12px; padding: 30px 40px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; position: relative; background: #FFFFFF;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #DCEEF2; padding-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; background: #1FA880; color: #FFFFFF; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.4rem;">Q</div>
+          <div>
+            <h2 style="margin: 0; font-size: 1.5rem; color: #1FA880; font-weight: 800; letter-spacing: 1px;">CUÁNTICA</h2>
+            <span style="font-size: 0.78rem; color: #64748B; font-weight: 600;">QUANTUM COMPUTING STUDY PLATFORM</span>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: #1FA880; background: #E0FAF4; padding: 4px 12px; border-radius: 999px; border: 1px solid #ADF1DD;">VERIFIED CREDENTIAL</span>
+          <p style="margin: 4px 0 0 0; font-size: 0.75rem; color: #94A3B8; font-family: monospace;">${serialId}</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 15px 0;">
+        <p style="font-size: 0.9rem; font-weight: 700; letter-spacing: 3px; color: #64748B; text-transform: uppercase; margin-bottom: 10px;">Certificate of Completion</p>
+        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 14px;">This is proudly presented to</p>
+        <h1 style="font-size: 2.5rem; color: #1E293B; font-weight: 800; margin: 0 0 14px 0; border-bottom: 2px solid #6CE5BF; display: inline-block; padding-bottom: 4px;">${studentName || "Quantum Learner"}</h1>
+        <p style="font-size: 1rem; color: #475569; max-width: 700px; margin: 0 auto 14px auto; line-height: 1.5;">for successfully demonstrating mastery in theoretical concepts, interactive simulations, and coding implementations in the course</p>
+        <h3 style="font-size: 1.5rem; color: #1FA880; font-weight: 700; margin: 0;">${courseTitle || "Quantum Computing"}</h3>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 2px solid #DCEEF2; padding-top: 16px;">
+        <div style="text-align: left;">
+          <p style="margin: 0 0 4px 0; font-size: 0.8rem; color: #64748B;">Date of Issuance:</p>
+          <strong style="font-size: 0.9rem; color: #1E293B;">${dateStr}</strong>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 56px; height: 56px; background: #E0FAF4; border: 2px dashed #1FA880; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px auto; color: #1FA880; font-size: 1.2rem; font-weight: 800;">★</div>
+          <span style="font-size: 0.7rem; font-weight: 700; color: #1FA880; letter-spacing: 1px;">OFFICIAL SEAL</span>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-family: Georgia, serif; font-style: italic; font-size: 1.4rem; color: #1FA880; margin-bottom: 2px;">Cuántica Academic Board</div>
+          <div style="border-top: 1px solid #94A3B8; width: 170px; margin-left: auto; padding-top: 4px;">
+            <span style="font-size: 0.75rem; font-weight: 600; color: #64748B;">Authorized Signature</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(certContainer);
+
+  var cleanFilename = (courseTitle || "Quantica_Course").replace(/[^a-zA-Z0-9]/g, "_") + "_Certificate.pdf";
+  var opt = {
+    margin: 0,
+    filename: cleanFilename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false, scrollX: 0, scrollY: 0, windowWidth: 1000, windowHeight: 700 },
+    jsPDF: { unit: 'pt', format: [1000, 700], orientation: 'landscape' }
+  };
+
+  if (window.html2pdf) {
+    html2pdf().set(opt).from(certContainer).save().then(function() {
+      certContainer.remove();
+    }).catch(function(err) {
+      console.error("PDF export error:", err);
+      certContainer.remove();
+    });
+  } else {
+    alert("PDF generator library is loading. Please try again in a moment.");
+    certContainer.remove();
+  }
+}
+
+
 loadCompletedCourses();
 
 </script>
+
 </body>
 </html>

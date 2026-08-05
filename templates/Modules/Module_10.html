@@ -1,641 +1,443 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Module 10 – Quantum Machine Learning Capstone Projects
-  </title>
- </head>
- <body>
-  <header>
-   
-  </header>
-  <main>
-    <h1>
-    Module 10 – Quantum Machine Learning Capstone Projects
-   </h1>
-   <section>
-    <h2>
-     Purpose:
-    </h2>
-    <p>
-     Enable learners to build complete Quantum Machine Learning applications using all the concepts learned throughout the course, from AI fundamentals to quantum algorithms.
-    </p>
-   </section>
-   <section>
-    <h2>
-     Short Description
-    </h2>
-    <p>
-     Build real-world Quantum Machine Learning applications using Qiskit and PennyLane by combining all concepts learned in Modules 1–9.
-    </p>
-   </section>
-   <section>
-    <h2>
-     Description
-    </h2>
-    <p>
-     This capstone module transforms theoretical knowledge into practical experience. Learners will design, implement, and evaluate complete Quantum Machine Learning projects using modern quantum frameworks such as Qiskit and PennyLane.
-    </p>
-    <p>
-     The module guides students through the complete project lifecycle, including problem identification, dataset selection, preprocessing, quantum data encoding, quantum circuit design, model training, evaluation, optimization, visualization, deployment, and documentation.
-    </p>
-    <p>
-     By the end of this module, learners will have developed portfolio-ready projects demonstrating proficiency in Quantum Computing, Machine Learning, and Quantum Machine Learning.
-    </p>
-   </section>
-   <section>
-    <h2>
-     Learning Objectives
-    </h2>
-    <p>
-     Students will learn to:
-    </p>
-    <ul>
-     <li>
-      Select suitable problems for Quantum Machine Learning.
-     </li>
-     <li>
-      Prepare and preprocess classical datasets.
-     </li>
-     <li>
-      Encode classical data into quantum states.
-     </li>
-     <li>
-      Build hybrid quantum-classical models.
-     </li>
-     <li>
-      Train Quantum Neural Networks.
-     </li>
-     <li>
-      Optimize variational quantum circuits.
-     </li>
-     <li>
-      Compare classical and quantum models.
-     </li>
-     <li>
-      Visualize model performance.
-     </li>
-     <li>
-      Deploy QML applications.
-     </li>
-     <li>
-      Document research-grade projects.
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 1 – Introduction to Capstone Projects
-    </h2>
-    <ul>
-     <li>
-      What is a Capstone Project?
-     </li>
-     <li>
-      Project-based learning
-     </li>
-     <li>
-      Industry expectations
-     </li>
-     <li>
-      Research workflow
-     </li>
-     <li>
-      Portfolio building
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 2 – Choosing a Quantum ML Problem
-    </h2>
-    <ul>
-     <li>
-      Classification
-     </li>
-     <li>
-      Regression
-     </li>
-     <li>
-      Clustering
-     </li>
-     <li>
-      Optimization
-     </li>
-     <li>
-      Image Recognition
-     </li>
-     <li>
-      NLP
-     </li>
-     <li>
-      Recommendation Systems
-     </li>
-     <li>
-      Healthcare
-     </li>
-     <li>
-      Finance
-     </li>
-     <li>
-      Cybersecurity
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 3 – Project Planning
-    </h2>
-    <ul>
-     <li>
-      Defining objectives
-     </li>
-     <li>
-      Scope
-     </li>
-     <li>
-      Dataset selection
-     </li>
-     <li>
-      Expected outcomes
-     </li>
-     <li>
-      Timeline
-     </li>
-     <li>
-      Milestones
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 4 – Dataset Collection
-    </h2>
-    <ul>
-     <li>
-      Public datasets
-     </li>
-     <li>
-      Kaggle
-     </li>
-     <li>
-      UCI Repository
-     </li>
-     <li>
-      Scikit-learn datasets
-     </li>
-     <li>
-      IBM datasets
-     </li>
-     <li>
-      Data licensing
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 5 – Data Preprocessing
-    </h2>
-    <ul>
-     <li>
-      Cleaning
-     </li>
-     <li>
-      Feature selection
-     </li>
-     <li>
-      Feature scaling
-     </li>
-     <li>
-      Normalization
-     </li>
-     <li>
-      PCA
-     </li>
-     <li>
-      Train/Test split
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 6 – Quantum Data Encoding
-    </h2>
-    <p>
-     Apply concepts from Module 8:
-    </p>
-    <ul>
-     <li>
-      Basis Encoding
-     </li>
-     <li>
-      Angle Encoding
-     </li>
-     <li>
-      Amplitude Encoding
-     </li>
-     <li>
-      IQP Encoding
-     </li>
-     <li>
-      Hamiltonian Encoding
-     </li>
-     <li>
-      Feature Maps
-     </li>
-    </ul>
-    <p>
-     Comparison of encoding techniques for the chosen dataset.
-    </p>
-   </section>
-   <section>
-    <h2>
-     Chapter 7 – Designing Quantum Circuits
-    </h2>
-    <ul>
-     <li>
-      Qubits
-     </li>
-     <li>
-      Quantum Gates
-     </li>
-     <li>
-      Circuit depth
-     </li>
-     <li>
-      Entanglement
-     </li>
-     <li>
-      Measurements
-     </li>
-     <li>
-      Circuit optimization
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 8 – Building Quantum ML Models
-    </h2>
-    <p>
-     Projects using:
-    </p>
-    <ul>
-     <li>
-      Variational Quantum Classifier (VQC)
-     </li>
-     <li>
-      Quantum Neural Networks (QNN)
-     </li>
-     <li>
-      QSVM
-     </li>
-     <li>
-      Quantum Kernel Methods
-     </li>
-     <li>
-      QAOA
-     </li>
-     <li>
-      VQE (optional)
-     </li>
-     <li>
-      Hybrid Models
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 9 – Model Training
-    </h2>
-    <ul>
-     <li>
-      Cost functions
-     </li>
-     <li>
-      Optimizers
-     </li>
-     <li>
-      Parameter tuning
-     </li>
-     <li>
-      Training loops
-     </li>
-     <li>
-      Noise considerations
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 10 – Performance Evaluation
-    </h2>
-    <ul>
-     <li>
-      Accuracy
-     </li>
-     <li>
-      Precision
-     </li>
-     <li>
-      Recall
-     </li>
-     <li>
-      F1 Score
-     </li>
-     <li>
-      ROC Curve
-     </li>
-     <li>
-      Confusion Matrix
-     </li>
-     <li>
-      Quantum resource usage
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 11 – Classical vs Quantum Comparison
-    </h2>
-    <p>
-     Compare:
-    </p>
-    <ul>
-     <li>
-      Accuracy
-     </li>
-     <li>
-      Runtime
-     </li>
-     <li>
-      Circuit depth
-     </li>
-     <li>
-      Number of qubits
-     </li>
-     <li>
-      Scalability
-     </li>
-     <li>
-      Resource requirements
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 12 – Visualization
-    </h2>
-    <ul>
-     <li>
-      Bloch Sphere
-     </li>
-     <li>
-      Circuit diagrams
-     </li>
-     <li>
-      Decision boundaries
-     </li>
-     <li>
-      Training curves
-     </li>
-     <li>
-      Loss graphs
-     </li>
-     <li>
-      Feature maps
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 13 – Running on Real Quantum Hardware
-    </h2>
-    <ul>
-     <li>
-      IBM Quantum
-     </li>
-     <li>
-      Backend selection
-     </li>
-     <li>
-      Noise mitigation
-     </li>
-     <li>
-      Job execution
-     </li>
-     <li>
-      Result analysis
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 14 – Deployment
-    </h2>
-    <ul>
-     <li>
-      Flask
-     </li>
-     <li>
-      FastAPI
-     </li>
-     <li>
-      Streamlit
-     </li>
-     <li>
-      Docker
-     </li>
-     <li>
-      GitHub
-     </li>
-     <li>
-      Portfolio integration
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 15 – Documentation
-    </h2>
-    <ul>
-     <li>
-      README
-     </li>
-     <li>
-      Architecture diagrams
-     </li>
-     <li>
-      Code documentation
-     </li>
-     <li>
-      Research report
-     </li>
-     <li>
-      Presentation slides
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 16 – Capstone Project Showcase
-    </h2>
-    <p>
-     Students complete one or more full projects.
-    </p>
-    <p>
-     Suggested projects include:
-    </p>
-    <h3>
-     Beginner
-    </h3>
-    <ul>
-     <li>
-      Iris Classification using VQC
-     </li>
-     <li>
-      Wine Classification using QSVM
-     </li>
-     <li>
-      Breast Cancer Classification
-     </li>
-     <li>
-      MNIST (2-class subset)
-     </li>
-     <li>
-      XOR Classification
-     </li>
-    </ul>
-    <h3>
-     Intermediate
-    </h3>
-    <ul>
-     <li>
-      Quantum Image Classification
-     </li>
-     <li>
-      Quantum Fraud Detection
-     </li>
-     <li>
-      Customer Churn Prediction
-     </li>
-     <li>
-      Heart Disease Prediction
-     </li>
-     <li>
-      Quantum Recommendation System
-     </li>
-    </ul>
-    <h3>
-     Advanced
-    </h3>
-    <ul>
-     <li>
-      Quantum Reinforcement Learning
-     </li>
-     <li>
-      Hybrid CNN + Quantum Layer
-     </li>
-     <li>
-      Quantum NLP Sentiment Analysis
-     </li>
-     <li>
-      Financial Portfolio Optimization using QAOA
-     </li>
-     <li>
-      Quantum Generative Models
-     </li>
-     <li>
-      Quantum Time Series Forecasting
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 17 – Best Practices
-    </h2>
-    <ul>
-     <li>
-      Code organization
-     </li>
-     <li>
-      Experiment tracking
-     </li>
-     <li>
-      Version control
-     </li>
-     <li>
-      Reproducibility
-     </li>
-     <li>
-      Testing
-     </li>
-     <li>
-      Performance optimization
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Chapter 18 – Research and Future Directions
-    </h2>
-    <ul>
-     <li>
-      Current QML research
-     </li>
-     <li>
-      Open problems
-     </li>
-     <li>
-      NISQ limitations
-     </li>
-     <li>
-      Fault-tolerant quantum computing
-     </li>
-     <li>
-      Quantum advantage in ML
-     </li>
-     <li>
-      Career paths in QML
-     </li>
-    </ul>
-   </section>
-   <section>
-    <h2>
-     Final Deliverables
-    </h2>
-    <p>
-     By the end of Module 10, each learner should have:
-    </p>
-    <ul>
-     <li>
-      1–3 complete Quantum Machine Learning projects
-     </li>
-     <li>
-      Well-documented GitHub repositories
-     </li>
-     <li>
-      A polished portfolio showcasing their work
-     </li>
-     <li>
-      Presentation slides for each project
-     </li>
-     <li>
-      Technical documentation and reports
-     </li>
-     <li>
-      Experience running experiments on IBM Quantum hardware
-     </li>
-     <li>
-      A strong foundation for internships, research, or graduate studies
-     </li>
-    </ul>
-    <p>
-     This capstone module serves as the culmination of the Wiser learning journey, ensuring learners can confidently transition from theoretical understanding to practical Quantum Machine Learning development.
-    </p>
-   </section>
-  </main>
- </body>
-</html>
+<main>
+ <!-- VIDEO PLAYER -->
+ <video controls style="width:100%;border-radius:12px;margin-bottom:1.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.4);">
+  <source src="/static/videos/Module_10.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+ </video>
+
+ <h1>Module 10 &ndash; Quantum Machine Learning Capstone Projects</h1>
+ <h2>End-to-End Implementation, Real Quantum Hardware (IBM Q), Hybrid Architectures &amp; Portfolio Showcase</h2>
+
+ <!-- CHAPTER NAVIGATOR -->
+ <nav class="chapter-nav">
+  <span class="nav-label">&#128218; Chapters</span>
+  <a href="#ch1">1. Intro to Capstones</a>
+  <a href="#ch2">2. Choosing QML Problem</a>
+  <a href="#ch3">3. Project Planning</a>
+  <a href="#ch4">4. Dataset Collection</a>
+  <a href="#ch5">5. Data Preprocessing</a>
+  <a href="#ch6">6. Quantum Encoding</a>
+  <a href="#ch7">7. Model Architecture</a>
+  <a href="#ch8">8. Circuit Design</a>
+  <a href="#ch9">9. Model Training</a>
+  <a href="#ch10">10. Optimization</a>
+  <a href="#ch11">11. Evaluation</a>
+  <a href="#ch12">12. Visualization</a>
+  <a href="#ch13">13. IBM Hardware</a>
+  <a href="#ch14">14. Deployment</a>
+  <a href="#ch15">15. Documentation</a>
+  <a href="#ch16">16. Project Showcase</a>
+  <a href="#ch17">17. Best Practices</a>
+  <a href="#ch18">18. Research &amp; Careers</a>
+  <a href="#summary">Summary</a>
+  <a href="#quiz">&#9989; Practice Quiz</a>
+ </nav>
+
+ <!-- ==================== CHAPTER 1 ==================== -->
+ <section id="ch1">
+  <span class="chapter-badge">Chapter 1</span>
+  <h2>Introduction to Capstone Projects &amp; Workflow</h2>
+
+  <section>
+   <h3>1.1 Purpose of the Capstone Module</h3>
+   <p>This capstone module transforms theoretical knowledge into practical, research-grade experience. Learners will design, implement, evaluate, and deploy complete Quantum Machine Learning (QML) applications using modern quantum software frameworks including <strong>Qiskit 1.0</strong> and <strong>PennyLane</strong>.</p>
+   <p>By synthesizing all concepts learned across Modules 1 through 9—from classical machine learning algorithms to quantum state encoding and variational neural networks—you will build portfolio-ready applications demonstrating mastery in QML.</p>
+
+   <div class="callout callout-info">
+    <span class="callout-icon">&#8505;&#65039;</span>
+    <div>
+     <strong>Complete QML Project Lifecycle</strong>
+     Problem Formulation $	o$ Dataset Preprocessing $	o$ Quantum Data Encoding $	o$ Circuit Architecture Synthesis $	o$ Hybrid Training (QPU+CPU) $	o$ Model Evaluation $	o$ Hardware Deployment (IBM Q) $	o$ Documentation &amp; Portfolio.
+    </div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 2 ==================== -->
+ <section id="ch2">
+  <span class="chapter-badge">Chapter 2</span>
+  <h2>Choosing a Quantum ML Problem</h2>
+
+  <section>
+   <h3>2.1 Selecting Quantum-Advantaged Application Domains</h3>
+   <div class="info-cards">
+    <div class="info-card">
+     <span class="info-card-icon">&#128302;</span>
+     <h5>1. Quantum Classification</h5>
+     <p>Variational Quantum Classifiers (VQC) and Quantum Support Vector Machines (QSVM) applied to medical diagnosis (breast cancer, MRI tumor detection) and credit card fraud detection.</p>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#128200;</span>
+     <h5>2. Quantum Optimization (QAOA)</h5>
+     <p>Solving NP-hard combinatorial problems in financial portfolio optimization, supply chain vehicle routing, and energy grid allocation.</p>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#128444;&#65039;</span>
+     <h5>3. Quantum Image Recognition</h5>
+     <p>Hybrid Convolutional Neural Networks (CNNs) with parameterized quantum layers for MNIST digit classification and satellite image segmentation.</p>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#129514;</span>
+     <h5>4. Quantum Chemistry &amp; Generative AI</h5>
+     <p>Simulating molecular ground states (VQE) and training Quantum Autoencoders (QAE) for drug discovery compression.</p>
+    </div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 3 ==================== -->
+ <section id="ch3">
+  <span class="chapter-badge">Chapter 3</span>
+  <h2>Project Planning &amp; Milestones</h2>
+
+  <section>
+   <h3>3.1 Structuring Your QML Research Workflow</h3>
+   <div class="step-flow">
+    <div class="step-item"><div class="step-arrow"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-body"><strong>1. Objective &amp; Scope Definition</strong>Define clear research questions, target accuracy metrics, and baseline classical models (SVM, Random Forest, PyTorch MLP).</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-body"><strong>2. Dataset Selection &amp; Reduction</strong>Obtain datasets (UCI, Kaggle, Scikit-learn), clean missing values, and apply PCA/Autoencoders to match NISQ qubit limits ($2	ext{--}8$ qubits).</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-body"><strong>3. Quantum Feature Encoding</strong>Choose optimal encoding: Angle Embedding (shallow circuits) vs Amplitude Embedding (high feature density).</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-body"><strong>4. Hybrid Circuit Synthesis</strong>Design Parameterized Quantum Circuits (PQC) using <code>qml.StronglyEntanglingLayers</code> or Qiskit's <code>RealAmplitudes</code>.</div></div>
+    <div class="step-item"><div class="step-arrow"><div class="step-num">5</div></div><div class="step-body"><strong>5. Optimization &amp; Hardware Execution</strong>Train via Adam/COBYLA, evaluate confusion matrix, run on IBM Quantum hardware, and document findings.</div></div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 4 ==================== -->
+ <section id="ch4">
+  <span class="chapter-badge">Chapter 4</span>
+  <h2>Dataset Collection &amp; Benchmark Selection</h2>
+
+  <section>
+   <h3>4.1 Standard Benchmark Datasets for QML</h3>
+   <ul>
+    <li><strong>Iris Dataset:</strong> 4 features, 3 classes &mdash; Ideal for 2-qubit to 4-qubit VQC and QSVM binary classification.</li>
+    <li><strong>Breast Cancer Wisconsin Dataset:</strong> 30 features &mdash; Dimensionality reduced via PCA to 4 principal components for quantum classification.</li>
+    <li><strong>MNIST Binary Subset (0 vs 1, or 3 vs 6):</strong> $28 	imes 28$ image pixels compressed to $4 	imes 4$ via hybrid CNN or PCA for Quantum Image Recognition.</li>
+    <li><strong>Wine Quality &amp; Fraud Detection Datasets:</strong> Tabular features used for Quantum Kernel matrix evaluation.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 5 ==================== -->
+ <section id="ch5">
+  <span class="chapter-badge">Chapter 5</span>
+  <h2>Classical Preprocessing for Quantum Encoding</h2>
+
+  <section>
+   <h3>5.1 Dimensionality Reduction &amp; Normalization</h3>
+   <p>Because NISQ hardware has a limited number of physical qubits ($N \le 10$ for clean simulation), classical preprocessing is mandatory. Input feature vectors must be normalized to $[0, \pi]$ for Angle Embedding or unit norm $\|x\| = 1$ for Amplitude Embedding.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 6 ==================== -->
+ <section id="ch6">
+  <span class="chapter-badge">Chapter 6</span>
+  <h2>Quantum Data Encoding Implementation</h2>
+
+  <section>
+   <h3>6.1 Hands-On Code: Data Encoding Pipeline in PennyLane &amp; Qiskit</h3>
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10 (PennyLane)</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code>import pennylane as qml
+from pennylane import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.decomposition import PCA
+
+# 1. Load & Preprocess Iris Dataset
+data = load_iris()
+X, y = data.data, data.target
+X_binary = X[y != 2] # Filter for binary classification (0 vs 1)
+y_binary = y[y != 2] * 2 - 1 # Convert labels to {-1, +1}
+
+# 2. PCA Reduction to 2 features for 2-qubit circuit
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_binary)
+
+# 3. MinMax Scaling to [0, pi] for Angle Embedding
+scaler = MinMaxScaler(feature_range=(0, np.pi))
+X_scaled = scaler.fit_transform(X_pca)
+
+print("Preprocessed Sample Features (Angles):", X_scaled[0])</code></pre>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 7 ==================== -->
+ <section id="ch7">
+  <span class="chapter-badge">Chapter 7</span>
+  <h2>Hybrid Quantum-Classical Model Architectures</h2>
+
+  <section>
+   <h3>7.1 TorchQuantum &amp; PennyLane QNN Integration</h3>
+   <p>Integrating Quantum Neural Networks into PyTorch allows building <strong>Hybrid Neural Networks</strong> where classical convolutional/dense layers perform feature extraction, followed by a Parameterized Quantum Layer for high-dimensional quantum pattern classification.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 8 ==================== -->
+ <section id="ch8">
+  <span class="chapter-badge">Chapter 8</span>
+  <h2>Variational Quantum Circuit Design</h2>
+
+  <section>
+   <h3>8.1 Entangling Ans&auml;tze Selection</h3>
+   <p>Choosing the right circuit ansatz balances expressivity and trainability. Common choices include <strong>Strongly Entangling Layers</strong>, <strong>RealAmplitudes</strong>, and <strong>Hardware-Efficient Ans&auml;tze</strong> (CZ/CNOT entanglers with single-qubit $R_y(	heta)$ and $R_z(\phi)$ rotation gates).</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 9 ==================== -->
+ <section id="ch9">
+  <span class="chapter-badge">Chapter 9</span>
+  <h2>Model Training &amp; Parameter Optimization</h2>
+
+  <section>
+   <h3>9.1 Optimization Algorithms</h3>
+   <p>Training variational parameters $	heta$ involves evaluating cost function loss gradients. Optimizers include <strong>Gradient-Based Adam / Nesterov</strong> (via Parameter Shifts) and <strong>Gradient-Free COBYLA / SPSA</strong> (ideal for noisy physical hardware).</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 10 ==================== -->
+ <section id="ch10">
+  <span class="chapter-badge">Chapter 10</span>
+  <h2>Mitigating Barren Plateaus &amp; Optimization Traps</h2>
+
+  <section>
+   <h3>10.1 Gradient Vanishing Solutions</h3>
+   <p>Avoid Barren Plateaus by initializing variational weights near zero ($	heta pprox 0$), employing shallow circuit depths ($L \le 3$), and using local cost functions (measuring individual qubit Pauli-Z operators instead of global operators).</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 11 ==================== -->
+ <section id="ch11">
+  <span class="chapter-badge">Chapter 11</span>
+  <h2>Model Evaluation &amp; Classical Benchmarking</h2>
+
+  <section>
+   <h3>11.1 Comparative Performance Metrics</h3>
+   <table class="comparison-table">
+    <caption>Model Evaluation Summary: Quantum vs Classical Baseline</caption>
+    <thead><tr><th>Metric</th><th>Classical Model (SVM / PyTorch MLP)</th><th>Quantum Model (VQC / QSVM)</th></tr></thead>
+    <tbody>
+     <tr><td>Classification Accuracy</td><td>Evaluated on test set split</td><td>Evaluated on test set split</td></tr>
+     <tr><td>Trainable Parameter Count</td><td>$100	ext{--}10,000$ weights</td><td>$8	ext{--}32$ variational parameters (Highly compact)</td></tr>
+     <tr><td>Feature Map Dimension</td><td>Standard Euclidean space $\mathbb{R}^D$</td><td>Exponential Hilbert space $\mathbb{C}^{2^N}$</td></tr>
+     <tr><td>Robustness to Noise</td><td>N/A (Deterministic digital)</td><td>Tested with shot noise &amp; IBM Q Hardware noise</td></tr>
+    </tbody>
+   </table>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 12 ==================== -->
+ <section id="ch12">
+  <span class="chapter-badge">Chapter 12</span>
+  <h2>Visualization of Quantum Circuits &amp; Results</h2>
+
+  <section>
+   <h3>12.1 Circuit &amp; Loss Landscape Rendering</h3>
+   <p>Visualize quantum circuit diagrams via Matplotlib/Qiskit <code>qc.draw('mpl')</code>, plot training loss curves, construct confusion matrices, and render 2D quantum decision boundaries.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 13 ==================== -->
+ <section id="ch13">
+  <span class="chapter-badge">Chapter 13</span>
+  <h2>Running on Real Quantum Hardware (IBM Quantum)</h2>
+
+  <section>
+   <h3>13.1 Deployment to Physical QPUs via Qiskit Runtime</h3>
+   <p>Execute trained variational circuits on real IBM Quantum superconducting processors (e.g. <code>ibm_brisbane</code>, <code>ibm_kyoto</code>) using Qiskit Runtime Service and Error Mitigation (ZNE / Twirled Readout Error Mitigation).</p>
+
+   <h4>Python Code Hands-On: Qiskit 1.0 IBM Hardware Execution</h4>
+   <div class="code-block">
+    <div class="code-header">
+     <span class="lang-badge">Python 3.10 (Qiskit 1.0)</span>
+     <div class="code-dots"><span></span><span></span><span></span></div>
+    </div>
+    <pre><code>from qiskit import QuantumCircuit
+from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
+
+# 1. Initialize IBM Quantum Service
+# service = QiskitRuntimeService(channel="ibm_quantum", token="YOUR_IBM_API_KEY")
+# backend = service.least_busy(operational=True, simulator=False)
+
+# 2. Construct 2-qubit Bell Circuit
+qc = QuantumCircuit(2)
+qc.h(0)
+qc.cx(0, 1)
+qc.measure_all()
+
+print("Circuit Ready for QPU Execution:")
+print(qc.draw())</code></pre>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 14 ==================== -->
+ <section id="ch14">
+  <span class="chapter-badge">Chapter 14</span>
+  <h2>Deployment (Streamlit, Flask &amp; Docker)</h2>
+
+  <section>
+   <h3>14.1 Interactive Web App Deployment</h3>
+   <p>Wrap trained QML models inside Streamlit or FastAPI web applications, package with Docker containers, and host on GitHub / cloud services for interactive user demonstrations.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 15 ==================== -->
+ <section id="ch15">
+  <span class="chapter-badge">Chapter 15</span>
+  <h2>Documentation &amp; Research Reporting</h2>
+
+  <section>
+   <h3>15.1 Industry &amp; Academic Presentation Standards</h3>
+   <p>Create professional GitHub repositories with comprehensive <code>README.md</code> files, LaTeX mathematical derivations, architectural block diagrams, step-by-step installation guides, and research presentation slides.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 16 ==================== -->
+ <section id="ch16">
+  <span class="chapter-badge">Chapter 16</span>
+  <h2>Capstone Project Showcase &amp; Implementations</h2>
+
+  <section>
+   <h3>16.1 Selected Portfolio Capstone Projects</h3>
+   <div class="info-cards">
+    <div class="info-card">
+     <span class="info-card-icon">&#127793;</span>
+     <h5>Project A (Beginner): Iris VQC Classification</h5>
+     <p>Build a Variational Quantum Classifier in PennyLane to categorize Iris flowers using 2 qubits and Angle Embedding with 98%+ accuracy.</p>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#127973;</span>
+     <h5>Project B (Intermediate): Breast Cancer QSVM</h5>
+     <p>Implement a Quantum Support Vector Machine using Qiskit Quantum Kernel Estimation to diagnose breast cancer tumors from PCA-reduced features.</p>
+    </div>
+    <div class="info-card">
+     <span class="info-card-icon">&#129302;</span>
+     <h5>Project C (Advanced): Hybrid CNN-QNN Digit Classifier</h5>
+     <p>Combine PyTorch Convolutional layers with a Parameterized Quantum Layer in TorchQuantum to classify handwritten MNIST images.</p>
+    </div>
+   </div>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 17 ==================== -->
+ <section id="ch17">
+  <span class="chapter-badge">Chapter 17</span>
+  <h2>Best Practices &amp; Code Reproducibility</h2>
+
+  <section>
+   <h3>17.1 Engineering Rigor for QML</h3>
+   <ul>
+    <li>Fix random seed generators across NumPy, PyTorch, and Qiskit simulator seeds.</li>
+    <li>Track experiments using MLflow or Weights &amp; Biases.</li>
+    <li>Modularize quantum circuit construction separately from classical data loaders.</li>
+   </ul>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== CHAPTER 18 ==================== -->
+ <section id="ch18">
+  <span class="chapter-badge">Chapter 18</span>
+  <h2>Research Frontiers &amp; QML Career Pathways</h2>
+
+  <section>
+   <h3>18.1 Career Opportunities in Quantum AI</h3>
+   <p>Position yourself for high-impact roles including <strong>Quantum ML Research Scientist</strong>, <strong>Quantum Software Engineer</strong>, and <strong>Quantum AI Application Developer</strong> across IBM, Google Quantum AI, Xanadu, Rigetti, and leading academic labs.</p>
+  </section>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== SUMMARY ==================== -->
+ <section id="summary">
+  <span class="chapter-badge">Module Summary</span>
+  <h2>Module 10 &amp; Full Course Completion Summary</h2>
+  <div class="key-takeaway">
+   <h4>&#127881; Course Milestone Achieved!</h4>
+   <p>Congratulations! You have completed the entire 10-module learning journey from Artificial Intelligence foundations to advanced Quantum Machine Learning Capstone Projects.</p>
+   <ul>
+    <li>Mastered AI, Machine Learning, and Classical Algorithm limitations (Modules 1&text{--}3).</li>
+    <li>Understood Quantum Mechanics, Qubits, Bloch Sphere, Dirac Notation, and Unitary Gate Algebra (Modules 4&text{--}5).</li>
+    <li>Explored the intersection of AI &amp; Quantum Computing, Hybrid Architectures, and QML Paradigms (Modules 6&text{--}7).</li>
+    <li>Implemented Quantum Data Encoding, Quantum Kernels, VQCs, QSVMs, QNNs, and QAEs (Modules 8&text{--}9).</li>
+    <li>Designed, trained, evaluated, and deployed real-world Quantum Machine Learning Capstone Applications (Module 10).</li>
+   </ul>
+  </div>
+
+  <div class="callout callout-info">
+   <span class="callout-icon">&#127891;</span>
+   <div>
+    <strong>Course Certificate &amp; Portfolio Ready!</strong>
+    You are now equipped to build, publish, and present research-grade Quantum Machine Learning projects to industry and academia!
+   </div>
+  </div>
+ </section>
+
+ <hr class="section-divider">
+
+ <!-- ==================== QUIZ ==================== -->
+ <section id="quiz">
+  <div class="quiz-section">
+   <h3>&#9989; Practice Knowledge Verification &mdash; Module 10</h3>
+   <ol class="quiz-list">
+    <li>What are the key steps in an end-to-end Quantum Machine Learning project lifecycle?</li>
+    <li>Why is classical PCA dimensionality reduction essential before encoding tabular datasets onto NISQ quantum hardware?</li>
+    <li>Compare Angle Embedding and Amplitude Embedding in terms of qubit count and circuit depth.</li>
+    <li>How does a Hybrid Neural Network combine PyTorch convolutional layers with a Parameterized Quantum Layer?</li>
+    <li>Explain the difference between gradient-based Adam (using Parameter Shifts) and gradient-free COBYLA optimizers.</li>
+    <li>What strategy helps mitigate Barren Plateaus in deep variational quantum circuits?</li>
+    <li>How do you execute a trained Qiskit 1.0 quantum circuit on physical IBM Quantum superconducting hardware?</li>
+    <li>Describe the architecture of a Quantum Support Vector Machine (QSVM) utilizing Quantum Kernel Estimation.</li>
+    <li>What frameworks are recommended for deploying QML web apps (e.g. Streamlit, FastAPI, Docker)?</li>
+    <li>Write a Python script that loads the Iris dataset, applies PCA, scales features, and constructs a 2-qubit VQC in PennyLane.</li>
+   </ol>
+  </div>
+ </section>
+
+ <!-- COURSE COMPLETION CELEBRATION BANNER -->
+ <div class="next-module-banner" style="background:linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));border:1px solid rgba(16, 185, 129, 0.4);">
+  <h3 style="color:#10b981;">&#127881; Congratulations! You Have Completed All 10 Modules!</h3>
+  <p>You have successfully mastered the entire Quantum Machine Learning curriculum. Showcase your capstone projects in your portfolio!</p>
+  <a href="/courses" class="next-module-btn" style="background:linear-gradient(135deg, #10b981, #059669);">
+   <span>Return to Course Dashboard &rarr;</span>
+  </a>
+ </div>
+</main>

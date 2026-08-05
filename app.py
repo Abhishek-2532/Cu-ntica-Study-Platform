@@ -14,6 +14,7 @@ from Routes.tutorRoutes import tutor_bp
 from Routes.notebookRoutes import notebook_bp
 from Routes.quizCreatorRoutes import quiz_bp
 from Routes.circuitRoutes import circuit_bp
+from Routes.complaintRoutes import complaint_bp
 
 # Load environment variables (.env for local development)
 load_dotenv()
@@ -94,6 +95,8 @@ app.register_blueprint(notebook_bp)
 app.register_blueprint(tutor_bp)
 app.register_blueprint(quiz_bp)
 app.register_blueprint(circuit_bp)
+app.register_blueprint(complaint_bp)
+
 
 # ============================================================
 # RUN APPLICATION
@@ -104,5 +107,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=port,
-        debug=False
+        debug=True
     )

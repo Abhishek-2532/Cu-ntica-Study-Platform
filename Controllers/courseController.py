@@ -28,6 +28,7 @@ def all_courses():
         data.append({
 
             "id":            str(course["_id"]),
+            "slug":          course.get("slug"),
             "title":         course.get("title"),
             "description":   course.get("description"),
             "main_image":    course.get("main_image"),

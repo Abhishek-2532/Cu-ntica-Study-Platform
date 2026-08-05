@@ -20,10 +20,6 @@ matplotlib.use("Agg")
 
 app = Flask(__name__)
 
-# ── Bug #5 Fix: SECRET_KEY validation ──────────────────────────────────────
-# The old key was "123456" — trivially weak and easy to forge session cookies.
-# This block validates the key at startup and refuses to run if it is unsafe.
-
 _WEAK_KEYS = {"123456", "secret", "password", "dev", "test", "flask", "change_me"}
 
 _secret_key = os.getenv("SECRET_KEY", "")
