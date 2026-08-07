@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚛️ WISER – Quantum Education Platform
+# ⚛️ Cuántica – Quantum Education Platform
 ### *Democratizing Quantum Computing & Quantum Machine Learning for the Next Generation*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -15,7 +15,7 @@
 
 <br />
 
-[🌐 Live Website](#3-demo) • [🎥 Video Demo](#20-video-demo) • [📄 API Docs](#13-api-documentation) • [💬 Report Bug](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/issues) • [✨ Request Feature](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/issues)
+[🌐 Live Website](https://cu-ntica-study-platform.onrender.com/) • [🎥 Video Demo](#20-video-demo) • [📄 API Docs](#13-api-documentation) • [💬 Report Bug](https://github.com/Abhishek-2532/Cu-ntica-Study-Platform/issues) • [✨ Request Feature](https://github.com/Abhishek-2532/Cu-ntica-Study-Platform/issues)
 
 </div>
 
@@ -91,10 +91,10 @@ To create an accessible, scalable, end-to-end interactive educational platform t
 
 ## 3. Demo
 
-*   🌐 **Live Website**: [https://quantica-platform.com](https://quantica-platform.com) *(or https://your-project.onrender.com)*
-*   🎥 **Demo Video**: [https://youtube.com/watch?v=your-demo-video](https://youtube.com/watch?v=your-demo-video)
-*   📄 **Project Documentation**: [https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/wiki](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/wiki)
-*   📑 **Presentation Slides**: [https://drive.google.com/file/d/your-presentation-slides/view](https://drive.google.com/file/d/your-presentation-slides/view)
+*   🌐 **Live Website**: [https://cu-ntica-study-platform.onrender.com](https://cu-ntica-study-platform.onrender.com)*
+*   🎥 **Demo Video**: [https://youtu.be/pLeudy1iiVQ](https://youtu.be/pLeudy1iiVQ)
+*   📄 **Project Documentation**: [https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing](https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing)
+*   📑 **Presentation Slides**: [https://docs.google.com/presentation/d/1uyWFSBJF-r95dn1-XvRgb7DQJac1w9FI/edit?usp=sharing&ouid=118102072767514092776&rtpof=true&sd=true](https://docs.google.com/presentation/d/1uyWFSBJF-r95dn1-XvRgb7DQJac1w9FI/edit?usp=sharing&ouid=118102072767514092776&rtpof=true&sd=true)
 
 ---
 
@@ -118,9 +118,6 @@ To create an accessible, scalable, end-to-end interactive educational platform t
 ---
 
 ## 5. Screenshots
-
-### Home Page
-![Home Page](https://raw.githubusercontent.com/Abhishek-2532/Quantum-ML-Learning-Platform/main/static/circuit.png)
 
 ### Dashboard
 *Placeholder: Student Command Center, XP/Coins, Completed Courses, and Recent Activity*
@@ -194,8 +191,7 @@ Follow these step-by-step instructions to run WISER on your local environment:
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform.git
-cd Quantum-ML-Learning-Platform
+git clone https://github.com/Abhishek-2532/Cu-ntica-Study-Platform.git
 ```
 
 ### Step 2: Set Up Virtual Environment (Recommended)
@@ -402,7 +398,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 
 ## 19. Documentation
 
-- 📄 **Full Wiki Documentation**: [https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/wiki](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/wiki)
+- 📄 **Full Wiki Documentation**: [https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing](https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing)
 - 🔌 **API Reference Manual**: Section 13 of this README.
 - 📖 **Student User Guide**: Section 10 of this README.
 
@@ -410,7 +406,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 
 ## 20. Video Demo
 
-🎥 **Watch Full Platform Walkthrough**: [https://youtube.com/watch?v=your-demo-video](https://youtube.com/watch?v=your-demo-video)
+🎥 **Watch Full Platform Walkthrough**: [https://youtu.be/pLeudy1iiVQ](https://youtu.be/pLeudy1iiVQ)
 
 ### Video Timestamps:
 - `00:00 - 01:00`: Project Overview & Problem Statement
@@ -550,23 +546,23 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 👤 **Abhishek Kumar**
 - **Role**: Lead Developer & Researcher (Sole Contributor)
 - **GitHub**: [@Abhishek-2532](https://github.com/Abhishek-2532)
-- **LinkedIn**: [Abhishek Kumar](https://linkedin.com/in/your-profile)
-- **Email**: relatedinformation05@gmail.com
+- **LinkedIn**: [Abhishek Kumar](https://www.linkedin.com/in/abhishek565)
+- **Email**: abhishek5605raj@gmail.com
 
 ---
 
 ## 27. Support
 
 If you find this project helpful or educational, please consider giving it a ⭐ on GitHub!  
-For questions or support, feel free to open a [GitHub Issue](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform/issues) or contact the author directly via email.
+For questions or support, feel free to open a [GitHub Issue](https://github.com/Abhishek-2532/Cu-ntica-Study-Platform) or contact the author directly via email.
 
 ---
 
 ## 28. Star the Repository
 
-If you like **WISER**, please give this repository a ⭐ to show your support!
+If you like **CUÁNTICA**, please give this repository a ⭐ to show your support!
 
-[![Star on GitHub](https://img.shields.io/github/stars/Abhishek-2532/Quantum-ML-Learning-Platform?style=for-the-badge&logo=github&color=brightgreen)](https://github.com/Abhishek-2532/Quantum-ML-Learning-Platform)
+[![Star on GitHub](https://img.shields.io/github/stars/Abhishek-2532/Cu-ntica-Study-Platform?style=for-the-badge&logo=github&color=brightgreen)](https://github.com/Abhishek-2532/Cu-ntica-Study-Platform)
 
 ---
 
@@ -577,6 +573,6 @@ If you like **WISER**, please give this repository a ⭐ to show your support!
 **Made with ❤️ by Abhishek Kumar**  
 *Empowering Future Quantum Machine Learning Researchers*
 
-© 2026 Cuántica / WISER Study Platform. All rights reserved.
+© 2026 Cuántica / CUÁNTICA Study Platform. All rights reserved.
 
 </div>
