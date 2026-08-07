@@ -91,7 +91,7 @@ To create an accessible, scalable, end-to-end interactive educational platform t
 
 ## 3. Demo
 
-*   🌐 **Live Website**: [https://cu-ntica-study-platform.onrender.com](https://cu-ntica-study-platform.onrender.com)*
+*   🌐 **Live Website**: [https://cu-ntica-study-platform.onrender.com](https://cu-ntica-study-platform.onrender.com)
 *   🎥 **Demo Video**: [https://youtu.be/pLeudy1iiVQ](https://youtu.be/pLeudy1iiVQ)
 *   📄 **Project Documentation**: [https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing](https://drive.google.com/file/d/1CZ3oVLoOlnYxMm1XROMDcc7_QTheM5WB/view?usp=sharing)
 *   📑 **Presentation Slides**: [https://docs.google.com/presentation/d/1uyWFSBJF-r95dn1-XvRgb7DQJac1w9FI/edit?usp=sharing&ouid=118102072767514092776&rtpof=true&sd=true](https://docs.google.com/presentation/d/1uyWFSBJF-r95dn1-XvRgb7DQJac1w9FI/edit?usp=sharing&ouid=118102072767514092776&rtpof=true&sd=true)
